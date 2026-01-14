@@ -1,0 +1,85 @@
+# =============================================================================
+# NODE INSTANCES - Pre-configured nodes for YC F25 enrichment
+# =============================================================================
+# These are "ready-to-use" versions of node types with parameters filled in.
+# Node instances are like objects - specific configurations of a class.
+#
+# Use instances when:
+#   - Same configuration is used in multiple workflows
+#   - You want to name a specific use case (e.g., "claude_code_check")
+#   - You want to hide complexity from workflow authors
+# =============================================================================
+
+version: "1.0"
+
+# Reference to node types
+node_types_file: node_types.yaml
+
+instances:
+  # ---------------------------------------------------------------------------
+  # YC Founder Lookup
+  # ---------------------------------------------------------------------------
+  yc_founder:
+    type: yc_founder_lookup
+    description: Extract founder info from YC company page
+    parameters:
+      output_prefix: ""
+
+  # ---------------------------------------------------------------------------
+  # LinkedIn Posts Scraping
+  # ---------------------------------------------------------------------------
+  founder_posts:
+    type: linkedin_posts_scraper
+    description: Fetch and analyze founder's recent 10 LinkedIn posts
+    parameters:
+      max_posts: 10
+      output_prefix: ""
+
+  founder_posts_deep:
+    type: linkedin_posts_scraper
+    description: Deep scan of founder's recent 50 LinkedIn posts
+    parameters:
+      max_posts: 50
+      output_prefix: ""
+
+  founder_posts_quick:
+    type: linkedin_posts_scraper
+    description: Quick check of founder's latest 5 LinkedIn posts
+    parameters:
+      max_posts: 5
+      output_prefix: ""
+
+  # ---------------------------------------------------------------------------
+  # Claude Code Detection
+  # ---------------------------------------------------------------------------
+  claude_code_check:
+    type: claude_code_detector
+    description: Check if YC founder mentions Claude Code
+    parameters:
+      keywords:
+        - "claude code"
+        - "claude-code"
+        - "claudecode"
+        - "@anthropic claude code"
+      max_posts: 50
+      output_prefix: ""
+
+  founder_claude_code_check:
+    type: claude_code_detector
+    description: Check founder's Claude Code usage (with "founder_" prefix)
+    parameters:
+      keywords:
+        - "claude code"
+        - "claude-code"
+        - "claudecode"
+      max_posts: 50
+      output_prefix: "founder"
+
+  # ---------------------------------------------------------------------------
+  # B2B Classification
+  # ---------------------------------------------------------------------------
+  b2b_classifier:
+    type: b2b_classifier
+    description: Classify YC company as B2B or B2C
+    parameters:
+      output_prefix: ""

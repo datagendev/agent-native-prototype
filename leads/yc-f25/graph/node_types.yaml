@@ -1,0 +1,167 @@
+# =============================================================================
+# NODE TYPES - Base definitions for YC F25 enrichment
+# =============================================================================
+
+version: "1.0"
+
+node_types:
+  # ---------------------------------------------------------------------------
+  # Founder Lookup from YC Company
+  # ---------------------------------------------------------------------------
+  yc_founder_lookup:
+    description: Find founder/CEO info from YC company page
+    file: nodes/yc_founder_lookup.py
+    class: YCFounderLookup
+
+    inputs:
+      name:
+        type: string
+        required: true
+        description: Company name
+        example: "Stripe"
+      yc_url:
+        type: string
+        required: true
+        description: YC company page URL
+        example: "https://www.ycombinator.com/companies/stripe"
+
+    outputs:
+      founder_name:
+        type: string
+        description: Founder/CEO full name
+      founder_linkedin_url:
+        type: string
+        description: Founder LinkedIn profile URL
+      founder_title:
+        type: string
+        description: Founder title (CEO, Co-founder, etc.)
+      company_domain:
+        type: string
+        description: Company website domain
+
+    parameters:
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names
+
+  # ---------------------------------------------------------------------------
+  # LinkedIn Posts Scraper
+  # ---------------------------------------------------------------------------
+  linkedin_posts_scraper:
+    description: Fetch and analyze recent LinkedIn posts from a profile
+    file: nodes/linkedin_posts_scraper.py
+    class: LinkedInPostsScraper
+
+    inputs:
+      founder_linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to scrape posts from
+        example: "https://linkedin.com/in/patrickcollison"
+
+    outputs:
+      recent_posts_count:
+        type: integer
+        description: Number of recent posts found
+      latest_post_text:
+        type: string
+        description: Text content of the most recent post (truncated to 500 chars)
+      latest_post_date:
+        type: string
+        description: Date of the most recent post
+      posts_summary:
+        type: string
+        description: AI-generated summary of key themes and topics across all posts
+
+    parameters:
+      max_posts:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 100
+        description: Maximum number of posts to fetch and analyze
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names (e.g., "founder" -> "founder_recent_posts_count")
+
+  # ---------------------------------------------------------------------------
+  # Claude Code Keyword Detector
+  # ---------------------------------------------------------------------------
+  claude_code_detector:
+    description: Scan LinkedIn profile for Claude Code mentions
+    file: nodes/claude_code_detector.py
+    class: ClaudeCodeDetector
+
+    inputs:
+      founder_linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to scan for posts
+        example: "https://linkedin.com/in/johndoe"
+
+    outputs:
+      claude_code_mentions:
+        type: integer
+        description: Number of posts mentioning Claude Code
+      claude_code_urls:
+        type: string
+        description: URLs of posts mentioning Claude Code (comma-separated, max 5)
+      uses_claude_code:
+        type: boolean
+        description: Whether the founder mentions Claude Code
+
+    parameters:
+      keywords:
+        type: array
+        items: string
+        default: ["claude code", "claude-code", "claudecode"]
+        description: Keywords to search for in posts (OR logic)
+      max_posts:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 500
+        description: Maximum posts to scan
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names (e.g., "founder" -> "founder_claude_code_mentions")
+
+  # ---------------------------------------------------------------------------
+  # B2B Classifier
+  # ---------------------------------------------------------------------------
+  b2b_classifier:
+    description: Classify companies as B2B or B2C based on description and industry
+    file: nodes/b2b_classifier.py
+    class: B2BClassifier
+
+    inputs:
+      description:
+        type: string
+        required: true
+        description: Company description or one-liner
+        example: "API platform for developers"
+      industry:
+        type: string
+        required: false
+        description: Company industry or category
+        example: "Developer Tools"
+
+    outputs:
+      is_b2b:
+        type: boolean
+        description: True if company is B2B, False if B2C
+      b2b_confidence:
+        type: number
+        description: Confidence score (0.0 to 1.0)
+      classification_reason:
+        type: string
+        description: Brief explanation of classification
+
+    parameters:
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names

@@ -1,0 +1,174 @@
+# =============================================================================
+# WORKFLOWS - YC F25 Lead Enrichment Pipelines
+# =============================================================================
+
+version: "1.0"
+node_types_file: node_types.yaml
+instances_file: instances.yaml
+
+table:
+  name: yc-f25
+  description: YC Fall 2025 batch companies
+  source: table.csv
+  inputs:
+    name:
+      type: string
+      description: Company name
+    location:
+      type: string
+      description: Company location
+    description:
+      type: string
+      description: Company one-liner description
+    batch:
+      type: string
+      description: YC batch (e.g., "FALL 2025")
+    industry:
+      type: string
+      description: Company industry/vertical
+    yc_url:
+      type: string
+      description: YC company profile URL
+
+workflows:
+  # ---------------------------------------------------------------------------
+  # B2B CLASSIFICATION ONLY - First step
+  # ---------------------------------------------------------------------------
+  b2b_only:
+    description: "Classify companies as B2B or B2C (run this first)"
+    nodes:
+      - b2b_classifier
+    connections:
+      - from: $input.description
+        to: b2b_classifier.description
+      - from: $input.industry
+        to: b2b_classifier.industry
+
+  # ---------------------------------------------------------------------------
+  # FOUNDER + LINKEDIN - For B2B companies only
+  # ---------------------------------------------------------------------------
+  founder_linkedin:
+    description: "Find founder and analyze LinkedIn activity (for B2B companies)"
+    conditions:
+      where: "is_b2b = '1'"
+    nodes:
+      - yc_founder
+      - founder_posts
+      - claude_code_check
+    connections:
+      # Get founder info
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+      # Fetch posts
+      - from: yc_founder.founder_linkedin_url
+        to: founder_posts.founder_linkedin_url
+
+      # Check Claude Code
+      - from: yc_founder.founder_linkedin_url
+        to: claude_code_check.founder_linkedin_url
+
+  # ---------------------------------------------------------------------------
+  # FULL ENRICHMENT - All signals
+  # ---------------------------------------------------------------------------
+  full_enrichment:
+    description: "Find founder, analyze posts, detect Claude Code usage, classify B2B"
+    nodes:
+      - yc_founder
+      - founder_posts
+      - claude_code_check
+      - b2b_classifier
+    connections:
+      # Step 1: Extract founder info from YC page
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+      # Step 2: Fetch founder's recent posts
+      - from: yc_founder.founder_linkedin_url
+        to: founder_posts.founder_linkedin_url
+
+      # Step 3: Check for Claude Code mentions (parallel with posts)
+      - from: yc_founder.founder_linkedin_url
+        to: claude_code_check.founder_linkedin_url
+
+      # Step 4: Classify as B2B/B2C (parallel, uses source data)
+      - from: $input.description
+        to: b2b_classifier.description
+      - from: $input.industry
+        to: b2b_classifier.industry
+
+  # ---------------------------------------------------------------------------
+  # FOUNDER ONLY - Just founder info
+  # ---------------------------------------------------------------------------
+  founder_only:
+    description: "Extract founder info and LinkedIn URL from YC page"
+    nodes:
+      - yc_founder
+    connections:
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+  # ---------------------------------------------------------------------------
+  # CLAUDE CODE FOCUSED - Founder + Claude detection
+  # ---------------------------------------------------------------------------
+  claude_code_focused:
+    description: "Find founder and check if they use Claude Code"
+    nodes:
+      - yc_founder
+      - claude_code_check
+    connections:
+      # Get founder LinkedIn
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+      # Check Claude Code usage
+      - from: yc_founder.founder_linkedin_url
+        to: claude_code_check.founder_linkedin_url
+
+  # ---------------------------------------------------------------------------
+  # B2B QUALIFICATION - B2B check + founder info
+  # ---------------------------------------------------------------------------
+  b2b_qualification:
+    description: "Classify B2B and find founder for B2B companies"
+    nodes:
+      - b2b_classifier
+      - yc_founder
+    connections:
+      # Classify B2B (runs first, parallel independent)
+      - from: $input.description
+        to: b2b_classifier.description
+      - from: $input.industry
+        to: b2b_classifier.industry
+
+      # Get founder info (runs in parallel)
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+  # ---------------------------------------------------------------------------
+  # POSTS ANALYSIS - Founder + recent activity
+  # ---------------------------------------------------------------------------
+  posts_analysis:
+    description: "Find founder and analyze their recent LinkedIn activity"
+    nodes:
+      - yc_founder
+      - founder_posts_deep
+    connections:
+      # Get founder
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+      # Deep scan of posts (50 posts)
+      - from: yc_founder.founder_linkedin_url
+        to: founder_posts_deep.founder_linkedin_url

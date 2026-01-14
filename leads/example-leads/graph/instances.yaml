@@ -1,0 +1,153 @@
+# =============================================================================
+# NODE INSTANCES - Pre-configured nodes (reusable configurations)
+# =============================================================================
+# These are "ready-to-use" versions of node types with parameters filled in.
+# Node instances are like objects - specific configurations of a class.
+#
+# Use instances when:
+#   - Same configuration is used in multiple workflows
+#   - You want to name a specific use case (e.g., "claude_mentions")
+#   - You want to hide complexity from workflow authors
+#
+# Instances inherit from node_types and can override any parameter.
+# =============================================================================
+
+version: "1.0"
+
+# Reference to node types (can be in same file or separate)
+node_types_file: node_types.yaml
+
+instances:
+  # ---------------------------------------------------------------------------
+  # Keyword Mention Scanners
+  # ---------------------------------------------------------------------------
+  claude_mentions:
+    type: keyword_mentions
+    description: Find posts mentioning Claude Code or Anthropic Claude
+    parameters:
+      keywords:
+        - "claude code"
+        - "claude-code"
+        - "claudecode"
+        - "@anthropic"
+        - "anthropic claude"
+      output_prefix: "claude"
+      max_posts: 200
+      date_range_days: 90
+
+  datagen_mentions:
+    type: keyword_mentions
+    description: Find posts mentioning DataGen
+    parameters:
+      keywords:
+        - "datagen"
+        - "datagen.dev"
+        - "data gen"
+        - "@databorgs"
+      output_prefix: "datagen"
+      max_posts: 200
+
+  cursor_mentions:
+    type: keyword_mentions
+    description: Find posts mentioning Cursor IDE
+    parameters:
+      keywords:
+        - "cursor ai"
+        - "cursor ide"
+        - "@cursor_ai"
+        - "cursor editor"
+      output_prefix: "cursor"
+      max_posts: 200
+
+  copilot_mentions:
+    type: keyword_mentions
+    description: Find posts mentioning GitHub Copilot
+    parameters:
+      keywords:
+        - "github copilot"
+        - "copilot"
+        - "@GitHubCopilot"
+      output_prefix: "copilot"
+      max_posts: 200
+
+  ai_coding_mentions:
+    type: keyword_mentions
+    description: Find posts mentioning AI coding tools generally
+    parameters:
+      keywords:
+        - "ai coding"
+        - "ai programmer"
+        - "coding assistant"
+        - "vibe coding"
+        - "vibe-coding"
+      output_prefix: "ai_coding"
+      max_posts: 300
+      date_range_days: 180
+
+  # ---------------------------------------------------------------------------
+  # Executive Lookups
+  # ---------------------------------------------------------------------------
+  ceo_lookup:
+    type: find_executive
+    description: Find CEO from company domain
+    parameters:
+      role: "CEO"
+      output_prefix: "ceo"
+      include_founders: true
+
+  cto_lookup:
+    type: find_executive
+    description: Find CTO from company domain
+    parameters:
+      role: "CTO"
+      output_prefix: "cto"
+      include_founders: true
+
+  founder_lookup:
+    type: find_executive
+    description: Find Founder from company domain
+    parameters:
+      role: "Founder"
+      output_prefix: "founder"
+      include_founders: true
+
+  vp_eng_lookup:
+    type: find_executive
+    description: Find VP Engineering from company domain
+    parameters:
+      role: "VP Engineering"
+      output_prefix: "vp_eng"
+      include_founders: false
+
+  # ---------------------------------------------------------------------------
+  # Profile Enrichment Variants
+  # ---------------------------------------------------------------------------
+  basic_profile:
+    type: profile_enrichment
+    description: Basic profile enrichment (all fields)
+    parameters:
+      output_prefix: ""
+      fields:
+        - headline
+        - current_company
+        - location
+        - follower_count
+
+  ceo_profile:
+    type: profile_enrichment
+    description: Enrich CEO's LinkedIn profile
+    parameters:
+      output_prefix: "ceo"
+      fields:
+        - headline
+        - current_company
+        - location
+        - follower_count
+
+  minimal_profile:
+    type: profile_enrichment
+    description: Minimal profile (headline only)
+    parameters:
+      output_prefix: ""
+      fields:
+        - headline

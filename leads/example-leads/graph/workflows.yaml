@@ -1,0 +1,329 @@
+# =============================================================================
+# WORKFLOWS - Compositions of nodes with explicit connections
+# =============================================================================
+# Workflows define HOW nodes are connected and executed together.
+#
+# Key concepts:
+#   - nodes: List of node instances (by name) or inline definitions
+#   - connections: Explicit data flow between nodes
+#   - outputs: Final columns produced by this workflow
+#   - $input: Reference to input columns from the source table
+#
+# Connection syntax:
+#   - from: source.field  (or $input.column)
+#   - to: target.field
+# =============================================================================
+
+version: "1.0"
+
+# Reference files
+node_types_file: node_types.yaml
+instances_file: instances.yaml
+
+# Table metadata
+table:
+  name: example-leads
+  description: Example lead table with LinkedIn profiles and company domains
+  source: table.csv
+
+  # Input columns (from source CSV)
+  inputs:
+    linkedin_url:
+      type: string
+      description: LinkedIn profile URL
+      example: "https://linkedin.com/in/satyanadella"
+    company_domain:
+      type: string
+      description: Company website domain
+      example: "microsoft.com"
+
+# =============================================================================
+# WORKFLOWS
+# =============================================================================
+
+workflows:
+  # ---------------------------------------------------------------------------
+  # Simple: Single node workflows
+  # ---------------------------------------------------------------------------
+  profile_only:
+    description: Basic profile enrichment (headline, company, followers)
+    nodes:
+      - basic_profile
+    connections:
+      - from: $input.linkedin_url
+        to: basic_profile.linkedin_url
+    outputs:
+      - headline
+      - current_company
+      - location
+      - follower_count
+
+  claude_mentions:
+    description: Find posts mentioning Claude Code
+    nodes:
+      - claude_mentions
+    connections:
+      - from: $input.linkedin_url
+        to: claude_mentions.linkedin_url
+    outputs:
+      - claude_mentions_count
+      - claude_mention_urls
+      - claude_first_mention_date
+
+  ceo_lookup:
+    description: Find CEO name and LinkedIn from company domain
+    nodes:
+      - ceo_lookup
+    connections:
+      - from: $input.company_domain
+        to: ceo_lookup.company_domain
+    outputs:
+      - ceo_name
+      - ceo_linkedin_url
+      - ceo_title
+
+  # ---------------------------------------------------------------------------
+  # Parallel: Multiple nodes running on same input
+  # ---------------------------------------------------------------------------
+  competitor_scan:
+    description: Scan for mentions of Claude, Cursor, and Copilot
+    nodes:
+      - claude_mentions
+      - cursor_mentions
+      - copilot_mentions
+    connections:
+      - from: $input.linkedin_url
+        to: claude_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: cursor_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: copilot_mentions.linkedin_url
+    outputs:
+      # Claude
+      - claude_mentions_count
+      - claude_mention_urls
+      - claude_first_mention_date
+      # Cursor
+      - cursor_mentions_count
+      - cursor_mention_urls
+      - cursor_first_mention_date
+      # Copilot
+      - copilot_mentions_count
+      - copilot_mention_urls
+      - copilot_first_mention_date
+
+  all_mentions:
+    description: Scan for all tracked keyword sets
+    nodes:
+      - claude_mentions
+      - datagen_mentions
+      - cursor_mentions
+      - copilot_mentions
+      - ai_coding_mentions
+    connections:
+      - from: $input.linkedin_url
+        to: claude_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: datagen_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: cursor_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: copilot_mentions.linkedin_url
+      - from: $input.linkedin_url
+        to: ai_coding_mentions.linkedin_url
+    outputs:
+      # Claude
+      - claude_mentions_count
+      - claude_mention_urls
+      - claude_first_mention_date
+      # DataGen
+      - datagen_mentions_count
+      - datagen_mention_urls
+      - datagen_first_mention_date
+      # Cursor
+      - cursor_mentions_count
+      - cursor_mention_urls
+      - cursor_first_mention_date
+      # Copilot
+      - copilot_mentions_count
+      - copilot_mention_urls
+      - copilot_first_mention_date
+      # AI Coding
+      - ai_coding_mentions_count
+      - ai_coding_mention_urls
+      - ai_coding_first_mention_date
+
+  # ---------------------------------------------------------------------------
+  # Sequential: Chained nodes (output of one feeds input of next)
+  # ---------------------------------------------------------------------------
+  ceo_profile:
+    description: Find CEO and enrich their LinkedIn profile
+    nodes:
+      - ceo_lookup
+      - ceo_profile
+    connections:
+      - from: $input.company_domain
+        to: ceo_lookup.company_domain
+      - from: ceo_lookup.linkedin_url
+        to: ceo_profile.linkedin_url
+    outputs:
+      # From ceo_lookup
+      - ceo_name
+      - ceo_linkedin_url
+      - ceo_title
+      # From ceo_profile
+      - ceo_headline
+      - ceo_current_company
+      - ceo_location
+      - ceo_follower_count
+
+  cto_profile:
+    description: Find CTO and enrich their LinkedIn profile
+    nodes:
+      - cto_lookup
+      - id: cto_profile_enrich
+        type: profile_enrichment
+        parameters:
+          output_prefix: "cto"
+    connections:
+      - from: $input.company_domain
+        to: cto_lookup.company_domain
+      - from: cto_lookup.linkedin_url
+        to: cto_profile_enrich.linkedin_url
+    outputs:
+      # From cto_lookup
+      - cto_name
+      - cto_linkedin_url
+      - cto_title
+      # From cto_profile_enrich
+      - cto_headline
+      - cto_current_company
+      - cto_location
+      - cto_follower_count
+
+  # ---------------------------------------------------------------------------
+  # Complex: Mixed parallel and sequential
+  # ---------------------------------------------------------------------------
+  full_enrichment:
+    description: Complete enrichment - profile, mentions, and CEO lookup
+    nodes:
+      - basic_profile
+      - claude_mentions
+      - ceo_lookup
+    connections:
+      - from: $input.linkedin_url
+        to: basic_profile.linkedin_url
+      - from: $input.linkedin_url
+        to: claude_mentions.linkedin_url
+      - from: $input.company_domain
+        to: ceo_lookup.company_domain
+    outputs:
+      # From basic_profile
+      - headline
+      - current_company
+      - location
+      - follower_count
+      # From claude_mentions
+      - claude_mentions_count
+      - claude_mention_urls
+      - claude_first_mention_date
+      # From ceo_lookup
+      - ceo_name
+      - ceo_linkedin_url
+      - ceo_title
+
+  executive_team:
+    description: Find CEO and CTO from company domain
+    nodes:
+      - ceo_lookup
+      - cto_lookup
+    connections:
+      - from: $input.company_domain
+        to: ceo_lookup.company_domain
+      - from: $input.company_domain
+        to: cto_lookup.company_domain
+    outputs:
+      # CEO
+      - ceo_name
+      - ceo_linkedin_url
+      - ceo_title
+      # CTO
+      - cto_name
+      - cto_linkedin_url
+      - cto_title
+
+  executive_profiles:
+    description: Find CEO and CTO, then enrich their profiles
+    nodes:
+      - ceo_lookup
+      - cto_lookup
+      - ceo_profile
+      - id: cto_profile_enrich
+        type: profile_enrichment
+        parameters:
+          output_prefix: "cto"
+    connections:
+      - from: $input.company_domain
+        to: ceo_lookup.company_domain
+      - from: $input.company_domain
+        to: cto_lookup.company_domain
+      - from: ceo_lookup.linkedin_url
+        to: ceo_profile.linkedin_url
+      - from: cto_lookup.linkedin_url
+        to: cto_profile_enrich.linkedin_url
+    outputs:
+      # CEO lookup + profile
+      - ceo_name
+      - ceo_linkedin_url
+      - ceo_title
+      - ceo_headline
+      - ceo_current_company
+      - ceo_location
+      - ceo_follower_count
+      # CTO lookup + profile
+      - cto_name
+      - cto_linkedin_url
+      - cto_title
+      - cto_headline
+      - cto_current_company
+      - cto_location
+      - cto_follower_count
+
+  # ---------------------------------------------------------------------------
+  # Inline: One-off configurations (not reusable)
+  # ---------------------------------------------------------------------------
+  custom_keyword_scan:
+    description: Example of inline node definition
+    nodes:
+      - id: windsurf_scan
+        type: keyword_mentions
+        parameters:
+          keywords: ["windsurf", "codeium", "windsurf ide"]
+          output_prefix: "windsurf"
+          max_posts: 150
+    connections:
+      - from: $input.linkedin_url
+        to: windsurf_scan.linkedin_url
+    outputs:
+      - windsurf_mentions_count
+      - windsurf_mention_urls
+      - windsurf_first_mention_date
+
+  # ---------------------------------------------------------------------------
+  # Override: Start from instance, override parameters
+  # ---------------------------------------------------------------------------
+  deep_claude_scan:
+    description: Extended Claude scan with more history
+    nodes:
+      - id: claude_deep
+        instance: claude_mentions
+        parameters:
+          max_posts: 500
+          date_range_days: 365
+    connections:
+      - from: $input.linkedin_url
+        to: claude_deep.linkedin_url
+    outputs:
+      - claude_mentions_count
+      - claude_mention_urls
+      - claude_first_mention_date

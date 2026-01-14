@@ -1,0 +1,40 @@
+# SQLite databases
+leads/**/table.db
+leads/**/table.db-shm
+leads/**/table.db-wal
+
+# Enriched CSV exports (intermediate artifacts)
+leads/**/table_enriched_*.csv
+lead-list/*_enriched.csv
+
+# Keep source CSVs (use ! to negate ignore patterns)
+!leads/**/table.csv
+!lead-list/*.csv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables (sensitive data)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

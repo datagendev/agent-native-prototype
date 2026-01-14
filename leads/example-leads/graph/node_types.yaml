@@ -1,0 +1,214 @@
+# =============================================================================
+# NODE TYPES - Base definitions (the "library")
+# =============================================================================
+# These define the capabilities and contracts of each node type.
+# Node types are like classes - they define what a node CAN do.
+#
+# Structure:
+#   - inputs: Data received from connections (runtime)
+#   - outputs: Data produced for downstream nodes (runtime)
+#   - parameters: Configuration affecting behavior (design-time)
+# =============================================================================
+
+version: "1.0"
+
+node_types:
+  # ---------------------------------------------------------------------------
+  # Profile Enrichment
+  # ---------------------------------------------------------------------------
+  profile_enrichment:
+    description: Fetch LinkedIn profile data (headline, company, followers)
+    file: nodes/profile_enrichment.py
+    class: ProfileEnrichment
+
+    inputs:
+      linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to enrich
+        example: "https://linkedin.com/in/satyanadella"
+
+    outputs:
+      headline:
+        type: string
+        description: LinkedIn profile headline
+      current_company:
+        type: string
+        description: Current company name
+      location:
+        type: string
+        description: Location from profile
+      follower_count:
+        type: integer
+        description: Number of LinkedIn followers
+
+    parameters:
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names (e.g., "ceo" -> "ceo_headline")
+      fields:
+        type: array
+        items: string
+        default: ["headline", "current_company", "location", "follower_count"]
+        description: Which fields to extract
+
+  # ---------------------------------------------------------------------------
+  # Keyword Mentions
+  # ---------------------------------------------------------------------------
+  keyword_mentions:
+    description: Find posts mentioning specific keywords
+    file: nodes/keyword_mentions.py
+    class: KeywordMentions
+
+    inputs:
+      linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to scan for posts
+
+    outputs:
+      mentions_count:
+        type: integer
+        description: Number of posts mentioning keywords
+      mention_urls:
+        type: string
+        description: URLs of posts mentioning keywords (comma-separated)
+      first_mention_date:
+        type: string
+        format: date
+        description: Date of first keyword mention
+
+    parameters:
+      keywords:
+        type: array
+        items: string
+        required: true
+        description: Keywords to search for in posts
+        example: ["claude code", "claude-code"]
+      output_prefix:
+        type: string
+        required: true
+        description: Prefix for output columns (e.g., "claude" -> "claude_mentions_count")
+      max_posts:
+        type: integer
+        default: 100
+        minimum: 1
+        maximum: 500
+        description: Maximum posts to scan
+      date_range_days:
+        type: integer
+        default: 90
+        minimum: 1
+        maximum: 365
+        description: How far back to search (days)
+
+  # ---------------------------------------------------------------------------
+  # Find Executive
+  # ---------------------------------------------------------------------------
+  find_executive:
+    description: Find executive (CEO, CTO, etc.) from company domain
+    file: nodes/find_executive.py
+    class: FindExecutive
+
+    inputs:
+      company_domain:
+        type: string
+        required: true
+        description: Company website domain
+        example: "microsoft.com"
+
+    outputs:
+      name:
+        type: string
+        description: Executive full name
+      linkedin_url:
+        type: string
+        description: Executive LinkedIn profile URL
+      title:
+        type: string
+        description: Executive job title
+
+    parameters:
+      role:
+        type: string
+        required: true
+        enum: ["CEO", "CTO", "CFO", "COO", "CMO", "VP Engineering", "Founder"]
+        description: Executive role to find
+      output_prefix:
+        type: string
+        required: true
+        description: Prefix for output columns (e.g., "ceo" -> "ceo_name")
+      include_founders:
+        type: boolean
+        default: true
+        description: Include founders in search results
+
+  # ---------------------------------------------------------------------------
+  # HTTP Request (Generic)
+  # ---------------------------------------------------------------------------
+  http_request:
+    description: Make HTTP API calls
+    file: nodes/http_request.py
+    class: HttpRequest
+
+    inputs:
+      url:
+        type: string
+        required: false
+        description: URL (can override base_url parameter)
+      body:
+        type: object
+        required: false
+        description: Request body for POST/PUT
+      path_params:
+        type: object
+        required: false
+        description: URL path parameters
+
+    outputs:
+      response:
+        type: object
+        description: Parsed JSON response
+      status_code:
+        type: integer
+        description: HTTP status code
+      raw_body:
+        type: string
+        description: Raw response body
+
+    parameters:
+      method:
+        type: string
+        enum: [GET, POST, PUT, DELETE, PATCH]
+        default: GET
+      base_url:
+        type: string
+        description: Base URL for requests
+      headers:
+        type: object
+        additionalProperties: string
+        default: {}
+        description: HTTP headers to include
+      timeout_seconds:
+        type: integer
+        default: 30
+        minimum: 1
+        maximum: 300
+      retry_count:
+        type: integer
+        default: 3
+        minimum: 0
+        maximum: 10
+      auth_type:
+        type: string
+        enum: [none, bearer, api_key, basic]
+        default: none
+      auth_credential:
+        type: string
+        secret: true
+        description: Credential reference (from secrets store)
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output columns

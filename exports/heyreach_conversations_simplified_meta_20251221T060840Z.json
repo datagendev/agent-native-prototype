@@ -1,0 +1,11 @@
+{
+  "input": "exports/heyreach_conversations_raw_20251221T060840Z.jsonl",
+  "output_jsonl": "exports/heyreach_conversations_simplified_20251221T060840Z.jsonl",
+  "output_json": "exports/heyreach_conversations_simplified_20251221T060840Z.json",
+  "total_input_lines": 47,
+  "total_output_rows": 47,
+  "skipped_lines": 0,
+  "message_entries_total": 844,
+  "message_entries_missing_text": 798,
+  "note": "This source export does not include per-message bodies; only lastMessageText is attached to the latest message when possible."
+}

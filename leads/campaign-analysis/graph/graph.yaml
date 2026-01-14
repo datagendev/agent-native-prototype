@@ -1,0 +1,44 @@
+name: campaign-analysis
+description: HeyReach campaign reply rate analysis
+source: table.csv
+
+columns:
+  inputs:
+    campaign_name:
+      type: string
+      description: HeyReach campaign name
+      example: "Claude-code"
+
+  outputs:
+    heyreach_campaign_id:
+      type: integer
+      source: campaign_stats
+      description: Campaign ID from HeyReach
+
+    heyreach_message_reply_rate:
+      type: number
+      source: campaign_stats
+      description: Message reply rate (%)
+
+    heyreach_inmail_reply_rate:
+      type: number
+      source: campaign_stats
+      description: InMail reply rate (%)
+
+    heyreach_total_message_replies:
+      type: integer
+      source: campaign_stats
+      description: Total message replies count
+
+    heyreach_total_inmail_replies:
+      type: integer
+      source: campaign_stats
+      description: Total InMail replies count
+
+workflows:
+  campaign_stats:
+    description: Get HeyReach campaign reply rate statistics
+    steps:
+      - integration: heyreach_campaign_stats
+        inputs: [campaign_name]
+        outputs: [heyreach_campaign_id, heyreach_message_reply_rate, heyreach_inmail_reply_rate, heyreach_total_message_replies, heyreach_total_inmail_replies]
