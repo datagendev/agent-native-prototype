@@ -21,6 +21,7 @@ Available Primitives:
     - linkedin_posts: Fetch posts from LinkedIn profile
     - filter_by: Filter array by keywords
     - aggregate: Aggregate array into metrics
+    - firecrawl_scrape: Scrape web page content using Firecrawl
 """
 
 from .base import Primitive, Graph, PRIMITIVES, register_primitive, get_client
@@ -33,6 +34,7 @@ from .linkedin_posts import linkedin_posts, LinkedInPosts
 from .linkedin_search import linkedin_search, LinkedInSearch
 from .filter_by import filter_by, FilterBy
 from .aggregate import aggregate, Aggregate
+from .firecrawl_scrape import firecrawl_scrape, FirecrawlScrape
 
 __all__ = [
     # Base classes
@@ -50,6 +52,7 @@ __all__ = [
     "linkedin_search",
     "filter_by",
     "aggregate",
+    "firecrawl_scrape",
 
     # Primitive classes (for subclassing)
     "WebResearch",
@@ -59,6 +62,7 @@ __all__ = [
     "LinkedInSearch",
     "FilterBy",
     "Aggregate",
+    "FirecrawlScrape",
 ]
 
 
