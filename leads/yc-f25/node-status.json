@@ -1,0 +1,10 @@
+{
+  "user_intent": "Enrich B2B companies with founder LinkedIn URLs",
+  "nodes": [
+    {
+      "name": "yc_founder_lookup",
+      "purpose": "Extract founder name, title, and LinkedIn URL from YC company page",
+      "ready": true
+    }
+  ]
+}

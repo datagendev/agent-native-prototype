@@ -12,6 +12,77 @@ Execute lead enrichment workflows using SQLite database backend.
 - User wants to enrich leads from CSV or existing lead list
 - Needs durable, resumable enrichment with database tracking
 
+---
+
+## Getting Up to Speed Protocol
+
+**IMPORTANT**: Before starting any enrichment work, check for existing progress.
+
+A PreToolUse hook automatically injects progress context when this skill runs.
+If you see "=== Active Enrichment Context ===" in the output, READ IT FIRST.
+
+### Manual Check (if hook didn't run)
+
+```bash
+# Check for progress files
+ls leads/*/enrichment-progress.txt 2>/dev/null
+ls leads/*/node-status.json 2>/dev/null
+
+# Read progress if exists
+cat leads/{name}/enrichment-progress.txt
+cat leads/{name}/node-status.json
+```
+
+### Before Continuing Work
+
+1. Read the progress log to understand current state
+2. Run validation to check for broken state:
+   ```bash
+   python3 scripts/graph_validate.py --lead {name}
+   ```
+3. Fix any issues before introducing new changes
+4. Only then continue with the next task
+
+---
+
+## Progress Tracking Files
+
+### `enrichment-progress.txt` - Session Log
+
+Create/update after each phase:
+
+```
+## Session 2026-01-14 10:00
+Phase: 2 - Configure Workflow
+- User intent: Find Claude Code users in YC batch
+- Scouted 3 nodes needed: profile, company_info, keyword_posts
+- Created node: company_info (delegated to enrichment-node-creator)
+- Next: Create keyword_posts node
+
+## Session 2026-01-14 11:00
+Phase: 2 - Configure Workflow (continued)
+- Created node: keyword_posts
+- Composed workflow: claude_user_detection
+- Next: Preview with 5 rows
+```
+
+### `node-status.json` - Node Tracking
+
+Track node readiness (only modify `ready` field):
+
+```json
+{
+  "user_intent": "Find Claude Code users in YC batch",
+  "nodes": [
+    {"name": "profile_enrichment", "purpose": "LinkedIn profile data", "ready": true},
+    {"name": "company_info", "purpose": "Company lookup", "ready": false},
+    {"name": "keyword_posts", "purpose": "Post keyword search", "ready": false}
+  ]
+}
+```
+
+---
+
 ## Architecture
 
 ```
@@ -85,48 +156,76 @@ Present matching options and confirm with user.
 
 ## Phase 2: Configure Workflow
 
-Based on user's selection:
+### Step 1: Scout Required Nodes
 
-1. Check if workflow already exists:
-   ```bash
-   python3 scripts/graph_enrich.py --lead {name} --list
+**Before creating anything, scout ALL nodes needed first.**
+
+Based on user's intent, analyze and list all nodes:
+
+| # | Node Purpose | MCP Tool | Exists? | Status |
+|---|--------------|----------|---------|--------|
+| 1 | LinkedIn profile | mcp_Proxycurl_get_profile | Check node_types.yaml | ? |
+| 2 | Company info | mcp_Proxycurl_get_company | Check node_types.yaml | ? |
+| 3 | Keyword search | mcp_Proxycurl_search_posts | Check node_types.yaml | ? |
+
+Check existing nodes:
+```bash
+python3 scripts/graph_enrich.py --lead {name} --list
+```
+
+**Create `node-status.json`** with all required nodes:
+```bash
+cat > leads/{name}/node-status.json << 'EOF'
+{
+  "user_intent": "{user's enrichment request}",
+  "nodes": [
+    {"name": "profile_enrichment", "purpose": "LinkedIn profile data", "ready": true},
+    {"name": "company_info", "purpose": "Company lookup", "ready": false}
+  ]
+}
+EOF
+```
+
+### Step 2: Create Missing Nodes (ONE AT A TIME)
+
+**IMPORTANT**: Create ONE node at a time. Verify before creating next.
+
+For each node where `ready: false`:
+
+1. **Delegate to enrichment-node-creator**:
+   ```
+   Task(subagent_type="enrichment-node-creator", prompt="Create {node_name} node for {purpose}. Lead: {name}. MCP tool: {tool_name}")
    ```
 
-2. If nodes need to be created, **delegate to enrichment-node-creator agent**.
+2. **Verify creation**:
+   ```bash
+   ls leads/{name}/graph/nodes/{node_name}.py
+   python3 scripts/graph_validate.py --lead {name}
+   ```
 
-### Creating Nodes with Agent
+3. **Update node-status.json**: Set `ready: true` for this node
 
-For **single node**:
-```
-Task(subagent_type="enrichment-node-creator", prompt="Create a keyword_mentions node for scanning LinkedIn posts for 'claude code' mentions. Lead: {name}")
-```
+4. **Update enrichment-progress.txt**: Log what was created
 
-For **multiple nodes in parallel** (spawn agents concurrently in a single message):
-```
-Task(subagent_type="enrichment-node-creator", prompt="Create profile_enrichment node for {name}")
-Task(subagent_type="enrichment-node-creator", prompt="Create keyword_mentions node for Claude mentions in {name}")
-Task(subagent_type="enrichment-node-creator", prompt="Create find_executive node for CEO lookup in {name}")
-```
+5. **Repeat** for next node
 
-The agent will:
-- Create node type definition in `node_types.yaml`
-- Create instance in `instances.yaml`
-- Implement Python class in `nodes/`
-- Register in `nodes/__init__.py`
+### Step 3: Compose Workflow
 
-See [examples/node_templates.md](examples/node_templates.md) for patterns.
+Once ALL nodes are ready (`ready: true`):
 
-3. Once nodes exist, compose workflow in `workflows.yaml`:
+1. Compose workflow in `workflows.yaml`:
    - Reference nodes from instances
    - Define connections between nodes
    - See [examples/workflow_examples.md](examples/workflow_examples.md)
 
-4. Validate the graph:
+2. Validate the complete graph:
    ```bash
    python3 scripts/graph_validate.py --lead {name}
    python3 scripts/graph_validate.py --lead {name} --verbose  # Show warnings
    python3 scripts/graph_validate.py --lead {name} --workflow {workflow}  # Specific workflow
    ```
+
+3. Update progress log with workflow completion
 
 ---
 
@@ -146,35 +245,69 @@ python3 scripts/graph_enrich.py --lead {name} --workflow {workflow} --preview --
 
 ## Phase 4: Review Results (MANDATORY STOP)
 
-After preview completes:
+After preview completes, **ALWAYS show what columns were added and results:**
 
-1. **Show summary first:**
-   ```bash
-   sqlite3 leads/{name}/table.db "SELECT _status, COUNT(*) FROM leads GROUP BY _status"
-   ```
+### Step 1: Show Column Changes
 
-2. **Launch table viewer:**
-   ```bash
-   # Kill any existing viewer, start new one, open browser
-   lsof -ti:3002 | xargs kill 2>/dev/null || true
-   ~/.bun/bin/bun scripts/viewer/server.ts --port 3002 &
-   open http://localhost:3002
-   ```
+Display a clear summary of what the workflow added:
 
-   The viewer reads from both:
-   - `leads/` - SQLite databases (shows as "name (SQLite)")
-   - `lead-list/` - CSV files
+```
+## Preview Results for {workflow}
 
-3. **STOP and ask user** with `AskUserQuestion`:
-   - "Preview complete. Proceed with full enrichment?"
-   - Options: "Yes, run full batch" / "Adjust and re-preview" / "Cancel"
+### Columns Added by This Workflow:
+| New Column | Type | Source Node | Description |
+|------------|------|-------------|-------------|
+| is_b2b | boolean | B2BClassifier | True if B2B company |
+| b2b_confidence | number | B2BClassifier | 0.0-1.0 confidence |
+| classification_reason | string | B2BClassifier | Why classified |
+
+### Pipeline Summary:
+1. B2BClassifier
+   - Reads: description, industry
+   - Outputs: is_b2b, b2b_confidence, classification_reason
+   - Method: AI classification using company description
+```
+
+### Step 2: Show Preview Statistics
+
+```bash
+sqlite3 leads/{name}/table.db "SELECT _status, COUNT(*) FROM leads GROUP BY _status"
+```
+
+### Step 3: Show Sample Results
+
+Display actual enriched values from preview rows:
+
+```bash
+sqlite3 leads/{name}/table.db "SELECT name, {new_columns} FROM leads WHERE _status='completed' LIMIT 5" -header -column
+```
+
+### Step 4: Launch Table Viewer (Optional)
+
+```bash
+# Kill any existing viewer, start new one, open browser
+lsof -ti:3002 | xargs kill 2>/dev/null || true
+~/.bun/bin/bun scripts/viewer/server.ts --port 3002 &
+open http://localhost:3002
+```
+
+The viewer reads from both:
+- `leads/` - SQLite databases (shows as "name (SQLite)")
+- `lead-list/` - CSV files
+
+### Step 5: Confirm with User
+
+**STOP and ask user** with `AskUserQuestion`:
+- "Preview added {N} new columns to {M} rows. Proceed with full enrichment?"
+- Options: "Yes, run full batch" / "Adjust and re-preview" / "Cancel"
 
 **Do NOT proceed without explicit user confirmation.**
 
-4. **Stop viewer when done:**
-   ```bash
-   lsof -ti:3002 | xargs kill 2>/dev/null || true
-   ```
+### Step 6: Stop Viewer When Done
+
+```bash
+lsof -ti:3002 | xargs kill 2>/dev/null || true
+```
 
 ---
 

@@ -804,14 +804,44 @@ def run_workflow_preview(lead_name: str, workflow_name: str, limit: int = 10):
     # Load workflow (list of nodes)
     nodes = load_workflow(lead_name, workflow_name)
 
-    # Get rows from database (pending only, limited)
-    rows, err = db.get_rows(status='pending', limit=limit)
+    # Get workflow conditions (if any)
+    try:
+        from importlib import import_module
+        graph_module = import_module(f"{lead_name}.graph")
+        get_conditions_fn = getattr(graph_module, "get_workflow_conditions", None)
+        conditions = get_conditions_fn(workflow_name) if get_conditions_fn else None
+    except Exception:
+        conditions = None
+
+    # Get rows from database
+    rows, err = db.get_rows()
     if err:
         if RICH_AVAILABLE:
             console.print(f"[red]Error loading rows: {err}[/red]")
         else:
             print(f"Error loading rows: {err}")
         return False
+
+    # Apply workflow conditions (WHERE clause filtering)
+    if conditions and "where" in conditions:
+        where_clause = conditions["where"]
+        filtered_rows, filter_err = db.filter_rows(where_clause)
+        if filter_err:
+            if RICH_AVAILABLE:
+                console.print(f"[yellow]Warning: Failed to apply WHERE filter '{where_clause}': {filter_err}[/yellow]")
+                console.print("[yellow]Proceeding with all rows[/yellow]")
+            else:
+                print(f"Warning: Failed to apply WHERE filter '{where_clause}': {filter_err}")
+                print("Proceeding with all rows")
+        else:
+            rows = filtered_rows
+            if RICH_AVAILABLE:
+                console.print(f"[cyan]Applied WHERE filter: {where_clause} ({len(rows)} rows matched)[/cyan]")
+            else:
+                print(f"Applied WHERE filter: {where_clause} ({len(rows)} rows matched)")
+
+    # Limit to preview size
+    rows = rows[:limit]
 
     total_in_db, _ = db.get_rows()
     total_count = len(total_in_db) if total_in_db else 0

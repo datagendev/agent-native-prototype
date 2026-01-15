@@ -14,15 +14,15 @@ table:
     name:
       type: string
       description: Company name
-    location:
-      type: string
-      description: Company location
     description:
       type: string
       description: Company one-liner description
     batch:
       type: string
       description: YC batch (e.g., "FALL 2025")
+    market_type:
+      type: string
+      description: Company market type (B2B, B2C, etc)
     industry:
       type: string
       description: Company industry/vertical
@@ -172,3 +172,18 @@ workflows:
       # Deep scan of posts (50 posts)
       - from: yc_founder.founder_linkedin_url
         to: founder_posts_deep.founder_linkedin_url
+
+  # ---------------------------------------------------------------------------
+  # B2B FOUNDER ONLY - Founder info for B2B companies only
+  # ---------------------------------------------------------------------------
+  b2b_founder_only:
+    description: "Extract founder info and LinkedIn URL for B2B companies only"
+    conditions:
+      where: "is_b2b = 1"
+    nodes:
+      - yc_founder
+    connections:
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url

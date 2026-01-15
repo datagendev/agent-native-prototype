@@ -1,0 +1,62 @@
+## Session 2026-01-14
+Phase: 1 - User Intent Capture
+- User intent: Enrich YC F25 companies with LinkedIn presence & posts
+- Lead list: yc-f25 (156 companies)
+- Columns: name, location, description, batch, industry, yc_url
+- Enrichment goal: Find LinkedIn profiles and recent posts for each company
+
+## Phase 2 - Configure Workflow (UPDATED)
+- User refined goal: First classify B2B vs B2C
+- Workflow selected: b2b_only
+- Purpose: Classify companies as B2B or B2C using description and industry
+- Nodes: b2b_classifier (already exists)
+- Status: Ready to preview
+- Next: Preview with sample rows to see classification quality
+
+## Phase 3 - Run Enrichment
+- CSV fixed: Corrected header to match actual data structure
+- Workflow: b2b_only (B2B classification)
+- Results: 154 successful, 2 errors
+- B2B Companies: 57 (avg confidence 0.88)
+- B2C/Mixed: 97 (avg confidence 0.57)
+- Time: 44.6 seconds
+- Database: leads/yc-f25/table.db
+
+## Summary
+Enrichment complete! YC F25 batch now segmented by market focus.
+
+Next options:
+- Explore results (view in table viewer)
+- Export results to CSV
+- Enrich B2B companies with founder/LinkedIn data
+
+## Session 2026-01-14 (continued)
+Phase: 1 - New User Intent
+- User intent: Enrich B2B companies with founder LinkedIn URLs
+- Filter: Only companies where is_b2b = true (57 companies)
+- Goal: Find LinkedIn profile URLs for founders of B2B companies
+- Next: Scout required nodes
+
+
+## Phase 2 - Configure Workflow
+- Scouted required nodes: yc_founder_lookup (already exists)
+- Node status: All ready
+- Created workflow: b2b_founder_only
+  - Purpose: Extract founder LinkedIn URLs for B2B companies only
+  - Filter: WHERE is_b2b = '1' (57 companies)
+  - Nodes: yc_founder
+  - Outputs: founder_name, founder_linkedin_url, founder_title
+- Validation: Passed
+- Next: Preview with sample rows
+
+
+## Phase 3 - Preview Results
+- Preview completed: 3/59 B2B companies
+- All 3 rows successful (100% success rate)
+- Columns added: founder_name, founder_linkedin_url, founder_title, company_domain
+- Sample results:
+  * JSX Tool: David Khourshid (https://www.linkedin.com/in/davidkpiano)
+  * Mayflower: David Rodriguez (https://www.linkedin.com/in/davidvrodriguez)
+  * Bear Tax: Shuo Wang (https://www.linkedin.com/in/shuooo)
+- Next: User decision on full batch run
+

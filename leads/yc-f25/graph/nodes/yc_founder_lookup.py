@@ -11,7 +11,7 @@ from pathlib import Path
 # Add scripts to path for primitive imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "scripts"))
 
-from primitives import web_research, extract_structured, linkedin_search
+from primitives import firecrawl_scrape, extract_structured, linkedin_search
 from primitives.base import Graph
 
 
@@ -46,29 +46,32 @@ class YCFounderLookup(Graph):
         company_name = row["name"]
         yc_url = row["yc_url"]
 
-        # Step 1: Web research for founder info
-        query = f"From {yc_url}, who is the founder or CEO? Include their full name, title, LinkedIn profile URL, and company website domain."
-        research, err = web_research(query=query)
+        # Step 1: Scrape YC company page directly with Firecrawl
+        scrape_result, err = firecrawl_scrape(
+            url=yc_url,
+            onlyMainContent=True,
+            maxAge=172800000  # 48h cache
+        )
         if err:
             return {
                 f"{prefix}founder_name": "",
                 f"{prefix}founder_linkedin_url": "",
                 f"{prefix}founder_title": "",
                 f"{prefix}company_domain": ""
-            }, f"research failed: {err}"
+            }, f"scrape failed: {err}"
 
-        result_text = research.get("result", "")
-        if not result_text:
+        markdown_content = scrape_result.get("markdown", "")
+        if not markdown_content:
             return {
                 f"{prefix}founder_name": "",
                 f"{prefix}founder_linkedin_url": "",
                 f"{prefix}founder_title": "",
                 f"{prefix}company_domain": ""
-            }, "empty research result"
+            }, "empty scrape result"
 
-        # Step 2: Extract basic info (name, title, domain)
+        # Step 2: Extract structured data (founder info + company website)
         extracted, err = extract_structured(
-            text=result_text,
+            text=markdown_content,
             schema={
                 "founder_name": {
                     "type": "string",
@@ -78,12 +81,12 @@ class YCFounderLookup(Graph):
                     "type": "string",
                     "description": "Title (CEO, Co-founder, Founder, etc.)"
                 },
-                "company_domain": {
+                "company_website": {
                     "type": "string",
-                    "description": "Company website domain (e.g., stripe.com)"
+                    "description": "Company website URL (the actual company domain, not the YC page)"
                 }
             },
-            context=f"Looking for founder/CEO of {company_name} from YC page {yc_url}"
+            context=f"Extract founder/CEO info and company website for {company_name} from their YC company page"
         )
         if err:
             return {
@@ -97,11 +100,16 @@ class YCFounderLookup(Graph):
         founder_name = data.get("founder_name") or ""
         founder_title = data.get("founder_title") or ""
 
-        # Clean up company domain (remove http/https, www, trailing slashes)
-        domain = data.get("company_domain") or ""
-        if domain:
-            domain = domain.replace("https://", "").replace("http://", "")
+        # Clean up company website URL to get just the domain
+        website_url = data.get("company_website") or ""
+        domain = ""
+        if website_url:
+            # Remove protocol (http://, https://)
+            domain = website_url.replace("https://", "").replace("http://", "")
+            # Remove www.
             domain = domain.replace("www.", "")
+            # Remove trailing slashes and paths
+            domain = domain.split("/")[0]
             domain = domain.rstrip("/")
 
         # Step 3: Search for LinkedIn URL using Parallel Search

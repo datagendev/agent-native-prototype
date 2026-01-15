@@ -1,4 +1,37 @@
-# CLAUDE.md - 
+# CLAUDE.md - Agent-Native Prototype
+
+## Setup
+
+**CRITICAL: Complete first-time setup before running any enrichment commands.**
+
+### First-Time Setup
+
+**→ [Complete Setup Guide](docs/setup/first-time-setup.md)**
+
+The setup guide covers:
+- Installing UV (recommended) or traditional Python
+- Creating virtual environment
+- Installing dependencies
+- DataGen CLI installation and authentication
+- MCP server configuration
+- Verification and troubleshooting
+
+### Quick Start (If Already Set Up)
+
+```bash
+# Activate virtual environment
+source .venv/bin/activate
+
+# Verify setup
+python scripts/graph_enrich.py --lead example-leads --list
+```
+
+### Environment Variables
+
+Required in `.env` file:
+```bash
+DATAGEN_API_KEY=your_api_key_here
+```
 
 ## Agent-Native Architecture Principles
 

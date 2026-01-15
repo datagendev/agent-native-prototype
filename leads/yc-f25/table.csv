@@ -1,4 +1,4 @@
-name,location,description,batch,industry,yc_url
+name,description,batch,market_type,industry,yc_url
 JSX Tool,AI-First In-Browser IDE for React Development,FALL 2025,B2B,"ENGINEERING, PRODUCT AND DESIGN",https://www.ycombinator.com/companies/jsx-tool
 "Zephyr FusionSan Diego, CA, USA",Powering tomorrow's industrial revolution in space,FALL 2025,INDUSTRIALS,ENERGY,https://www.ycombinator.com/companies/zephyr-fusion
 "MayflowerSan Francisco, CA, USA",AI plug-in that automates HR immigration screening and compliance,FALL 2025,GOVERNMENT,Unknown,https://www.ycombinator.com/companies/mayflower

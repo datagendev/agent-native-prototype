@@ -12,6 +12,10 @@ import os
 from pydantic import BaseModel, Field, create_model
 from openai import OpenAI
 import instructor
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 from .base import Primitive, register_primitive
 
