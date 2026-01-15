@@ -60,3 +60,15 @@ Phase: 1 - New User Intent
   * Bear Tax: Shuo Wang (https://www.linkedin.com/in/shuooo)
 - Next: User decision on full batch run
 
+
+## Improvements - Company Domain Extraction
+- Problem: web_research was unreliable for extracting company websites
+- Solution: Replaced with firecrawl_scrape + extract_structured
+- Method:
+  1. Scrape YC company page directly with Firecrawl (48h cache)
+  2. Extract founder info + company website from markdown
+  3. Clean domain (remove protocol, www, paths)
+- Test: Telemetron AI → telemetron.ai ✓
+- Benefits: Faster, cheaper, more reliable domain extraction
+- Next: Re-run enrichment to get accurate domains for all B2B companies
+
