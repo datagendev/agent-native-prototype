@@ -1,10 +1,42 @@
 {
-  "user_intent": "Enrich B2B companies with founder LinkedIn URLs",
+  "context_source": "who_we_are/how_to_use_dg_build_agentic_claude_code.md",
+  "who_we_are": "DataGen - platform for building agentic Claude Code workflows with MCP/SDK/Claude pattern",
+  "icp": "Developers building AI-powered products, especially with Claude Code",
+  "signals_we_want": [
+    "Uses or mentions Claude Code/Anthropic/Claude",
+    "Building agent-native or agentic applications",
+    "Technical founder with AI/dev background",
+    "B2B product (not consumer)"
+  ],
+  "disqualifiers": [
+    "B2C consumer apps",
+    "No technical decision maker",
+    "Non-AI product"
+  ],
+  "user_intent": "Find YC F25 founders who could benefit from DataGen - developers building AI/agentic products who might use Claude Code",
+  "enrichment_strategy": {
+    "filter": "B2B companies only (is_b2b = 1, 59 companies)",
+    "signals_to_detect": [
+      "AI-native company (building AI, not just using it)",
+      "Claude/Anthropic mentions in LinkedIn posts",
+      "Agent/agentic keywords in posts or company description"
+    ]
+  },
   "nodes": [
     {
       "name": "yc_founder_lookup",
       "purpose": "Extract founder name, title, and LinkedIn URL from YC company page",
       "ready": true
+    },
+    {
+      "name": "ai_native_classifier",
+      "purpose": "Classify if company is AI-native (building AI products) vs AI-assisted",
+      "ready": false
+    },
+    {
+      "name": "claude_signal_detector",
+      "purpose": "Search founder LinkedIn posts for Claude/Anthropic/agent mentions",
+      "ready": false
     }
   ]
 }

@@ -14,6 +14,76 @@ Execute lead enrichment workflows using SQLite database backend.
 
 ---
 
+## Phase 0: Understand Who We Are & What We're Looking For (CRITICAL)
+
+**This phase MUST come before any technical work.**
+
+Good enrichment starts with understanding:
+1. **Who we are** - Our product, value prop, and ICP
+2. **What signals matter** - What indicates a good fit
+
+### Step 1: Load Context
+
+Check for context files the user provides or references:
+
+```bash
+# Common locations for context
+ls who_we_are/ 2>/dev/null
+ls context/ 2>/dev/null
+cat who_we_are/*.md 2>/dev/null | head -100
+```
+
+If user says "based on @folder" or "using @file", READ those files first.
+
+### Step 2: Extract Key Information
+
+From the context, identify:
+
+| Question | Answer |
+|----------|--------|
+| **What do we do?** | (e.g., "Build agentic workflows with Claude") |
+| **Who is our ICP?** | (e.g., "Developers building AI products") |
+| **What signals indicate fit?** | (e.g., "Uses Claude Code, builds agents, posts about AI dev") |
+| **What would disqualify?** | (e.g., "B2C consumer apps, no technical founder") |
+
+### Step 3: Document the Enrichment Goal
+
+Before proceeding, create/update the node-status.json with intent:
+
+```json
+{
+  "context_source": "who_we_are/how_to_use_dg_build_agentic_claude_code.md",
+  "who_we_are": "DataGen - build agentic Claude Code workflows",
+  "icp": "Developers building AI-powered products, especially with Claude",
+  "signals_we_want": [
+    "Uses or mentions Claude Code",
+    "Building agent-native applications",
+    "Technical founder with AI/dev background",
+    "B2B product (not consumer)"
+  ],
+  "disqualifiers": [
+    "B2C consumer apps",
+    "No technical decision maker"
+  ],
+  "user_intent": "Find YC F25 founders who could benefit from DataGen"
+}
+```
+
+### Step 4: Design Enrichment Strategy
+
+Map signals to enrichment nodes:
+
+| Signal We Want | Data Source | Enrichment Node |
+|----------------|-------------|-----------------|
+| Uses Claude Code | LinkedIn posts | `claude_code_detector` |
+| Technical founder | LinkedIn profile | `technical_classifier` |
+| B2B company | Company description | `b2b_classifier` |
+| Building with AI | Posts + bio | `ai_builder_detector` |
+
+**Only after this mapping is clear, proceed to Phase 1.**
+
+---
+
 ## Getting Up to Speed Protocol
 
 **IMPORTANT**: Before starting any enrichment work, check for existing progress.
@@ -130,15 +200,59 @@ a node can do        a node behaves          nodes connect
 
 ---
 
-## Phase 1: Ask What to Enrich (INTERACTIVE)
+## Phase 1: Understand Current Data (INTERACTIVE)
 
-**Ask the user first before exploring options.**
+**First, show the user what data they have before asking what to enrich.**
+
+### Step 1: Show Existing Columns
+
+```bash
+# Show all columns in the lead table
+sqlite3 leads/{name}/table.db "PRAGMA table_info(leads);" | cut -d'|' -f2
+
+# Or if using CSV directly
+head -1 leads/{name}/table.csv
+```
+
+### Step 2: Show Sample Data
+
+```bash
+# Show sample rows with key columns
+sqlite3 leads/{name}/table.db "SELECT * FROM leads LIMIT 3" -header -column
+```
+
+### Step 3: Present Data Summary to User
+
+Display a clear summary:
+
+```
+## Your Lead Data: {name}
+
+### Available Columns:
+| Column | Sample Value | Description |
+|--------|--------------|-------------|
+| name | "Acme Corp" | Company name |
+| description | "AI platform for..." | Company description |
+| founder_linkedin_url | "linkedin.com/in/..." | Founder's LinkedIn |
+| is_b2b | "1" | Already classified |
+
+### Row Count: {N} leads
+
+### What can be enriched from this data:
+- **From LinkedIn URLs**: Profile details, posts, activity
+- **From company names**: Domain lookup, funding data
+- **From descriptions**: AI classification, categorization
+```
+
+### Step 4: Ask User What to Enrich
 
 Use `AskUserQuestion`:
-- "What do you want to enrich these leads with?"
-- Let user describe in their own words
+- "Based on your existing data, what would you like to enrich?"
+- Let user describe in their own words, informed by what columns they have
 
-**Then** search for matching capabilities based on their answer:
+### Step 5: Search for Matching Capabilities
+
+**After** user describes their goal, search for tools:
 
 ```bash
 # Local primitives

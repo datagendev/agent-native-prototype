@@ -4,40 +4,43 @@ description: View enriched CSV data in interactive web viewer
 
 # View Table Command
 
-You are helping the user view their enriched CSV data in a modern interactive web viewer.
+Launch the interactive table viewer for enriched lead data.
 
 ## Steps to follow:
 
-1. **Check if server is already running**
-   - Check if port 3001 is in use: `lsof -i :3001`
-   - If running:
-     - Show the user: ✅ Server running at http://localhost:3001
-     - Ask if they want to open it or restart.
+1. **Find available port** (starting from 3001)
+   ```bash
+   PORT=3001; while lsof -i :$PORT >/dev/null 2>&1; do ((PORT++)); done; echo $PORT
+   ```
 
-2. **Start server if needed**
-   - Navigate to `scripts/viewer/`
-   - Kill old server if restarting: `lsof -ti:3001 | xargs kill -9`
-   - Start server: `~/.bun/bin/bun server.ts --port 3001`
-   - Run in background (`&`) and capture PID.
+2. **Start server on available port**
+   ```bash
+   ~/.bun/bin/bun scripts/viewer/server.ts --port $PORT &
+   ```
 
-3. **Confirm success**
-   - Show the user:
-     - ✅ Server running at http://localhost:3001
-     - 📊 Dashboard: Select a file to view
-     - 💡 To stop: `lsof -ti:3001 | xargs kill`
-   - Open the URL for the user: `open http://localhost:3001` (if on Mac)
+3. **Wait briefly and open browser**
+   ```bash
+   sleep 1 && open http://localhost:$PORT
+   ```
 
-## Error handling:
+4. **Open browser window for user**
+   ```bash
+   open http://localhost:$PORT
+   ```
+   Always use `open` to pop the browser window automatically.
 
-- If server fails to start → check logs
-- If port is blocked → suggest different port or kill process
+5. **Confirm to user**
+   - Server running at http://localhost:{PORT}
+   - To stop: `lsof -ti:{PORT} | xargs kill`
 
-## Example interaction:
+## One-liner (preferred)
 
+```bash
+PORT=3001; while lsof -i :$PORT >/dev/null 2>&1; do ((PORT++)); done; ~/.bun/bin/bun scripts/viewer/server.ts --port $PORT & sleep 1 && open http://localhost:$PORT
 ```
-User: /view-table
-Agent: Checking server status...
-Agent: Starting viewer server...
-Agent: ✅ Server running at http://localhost:3001
-Agent: Opening dashboard...
-```
+
+## Data Sources
+
+The viewer scans:
+- `lead-list/` - CSV files
+- `leads/` - SQLite databases (shows as "name (SQLite)")
