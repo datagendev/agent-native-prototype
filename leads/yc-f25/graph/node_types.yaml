@@ -165,3 +165,130 @@ node_types:
         type: string
         default: ""
         description: Prefix for output column names
+
+  # ---------------------------------------------------------------------------
+  # LinkedIn Education
+  # ---------------------------------------------------------------------------
+  linkedin_education:
+    description: Extract education history from LinkedIn profile
+    file: nodes/linkedin_education.py
+    class: LinkedInEducation
+
+    inputs:
+      founder_linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to fetch education data from
+        example: "https://linkedin.com/in/patrickcollison"
+
+    outputs:
+      education_history:
+        type: string
+        description: JSON string containing full education history (schools, degrees, fields of study, dates)
+      school_names:
+        type: string
+        description: Comma-separated list of school names for easy querying
+
+  # ---------------------------------------------------------------------------
+  # Harvard Detection
+  # ---------------------------------------------------------------------------
+  harvard_detection:
+    description: Detect if a founder attended Harvard based on education history
+    file: nodes/harvard_detection.py
+    class: HarvardDetection
+
+    inputs:
+      school_names:
+        type: string
+        required: true
+        description: Comma-separated list of school names from linkedin_education node
+        example: "Stanford University, Harvard Business School, MIT"
+
+    outputs:
+      went_to_harvard:
+        type: boolean
+        description: True if founder attended any Harvard school, False otherwise
+      harvard_school_name:
+        type: string
+        description: The exact Harvard school name if found (e.g., "Harvard Business School", "Harvard University"), empty string if not found
+
+  # ---------------------------------------------------------------------------
+  # LinkedIn Profile Enrichment
+  # ---------------------------------------------------------------------------
+  linkedin_profile_enrichment:
+    description: Fetch comprehensive LinkedIn profile data including headline, summary, positions, and education
+    file: nodes/linkedin_profile_enrichment.py
+    class: LinkedInProfileEnrichment
+
+    inputs:
+      founder_linkedin_url:
+        type: string
+        required: true
+        description: LinkedIn profile URL to fetch profile data from
+        example: "https://linkedin.com/in/patrickcollison"
+
+    outputs:
+      founder_headline:
+        type: string
+        description: LinkedIn headline text
+      founder_summary:
+        type: string
+        description: Profile summary (truncated to 500 chars)
+      founder_top_role:
+        type: string
+        description: Most recent job title from positions
+      founder_education_field:
+        type: string
+        description: Field of study from most recent education
+
+  # ---------------------------------------------------------------------------
+  # Technical Founder Classifier
+  # ---------------------------------------------------------------------------
+  technical_classifier:
+    description: Classify founders as technical vs non-technical based on LinkedIn profile data
+    file: nodes/technical_classifier.py
+    class: TechnicalClassifier
+
+    inputs:
+      founder_name:
+        type: string
+        required: false
+        description: Founder's name
+        example: "Patrick Collison"
+      founder_headline:
+        type: string
+        required: false
+        description: LinkedIn headline text
+        example: "CEO at Stripe"
+      founder_summary:
+        type: string
+        required: false
+        description: Profile summary text
+        example: "Building internet infrastructure..."
+      founder_top_role:
+        type: string
+        required: false
+        description: Most recent job title
+        example: "CTO & Co-founder"
+      founder_education_field:
+        type: string
+        required: false
+        description: Field of study from education
+        example: "Computer Science"
+
+    outputs:
+      is_technical_founder:
+        type: boolean
+        description: True if founder has technical background (engineering, CS, development)
+      founder_role_type:
+        type: string
+        description: Classification as "technical", "non-technical", or "hybrid"
+      classification_signals:
+        type: string
+        description: Comma-separated list of key signals used for classification (e.g., "CTO title, CS degree, engineering keywords")
+
+    parameters:
+      output_prefix:
+        type: string
+        default: ""
+        description: Prefix for output column names (e.g., "tech" -> "tech_is_technical_founder")
