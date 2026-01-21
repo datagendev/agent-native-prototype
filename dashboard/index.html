@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Monitor | Datagen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    // Apply saved theme or system preference before React renders.
+    (() => {
+      try {
+        const saved = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = saved ? saved === 'dark' : systemPrefersDark;
+        document.documentElement.classList.toggle('dark', isDark);
+      } catch {
+        // Fall back to light mode on error.
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dg-primary': '#005047',
+            'dg-secondary': '#00795e',
+            'dg-accent': '#10B981',
+            'dg-dark': '#0a0f0e',
+            'dg-surface': '#111918',
+            'dg-surface-2': '#1a2423',
+            'dg-border': '#243330',
+          },
+          fontFamily: {
+            'display': ['Outfit', 'sans-serif'],
+            'mono': ['IBM Plex Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { scrollbar-width: thin; scrollbar-color: #243330 transparent; }
+    *::-webkit-scrollbar { width: 6px; height: 6px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb { background: #243330; border-radius: 3px; }
+    *::-webkit-scrollbar-thumb:hover { background: #00795e; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    }
+    @keyframes slide-in-right {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-slide-in-right { animation: slide-in-right 0.3s ease-out forwards; }
+    .animate-fade-in { animation: fade-in 0.2s ease-out forwards; }
+
+    .noise-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+    }
+    .gradient-mesh {
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(0, 80, 71, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(0, 121, 94, 0.05) 0%, transparent 50%);
+    }
+    .dark .gradient-mesh {
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(0, 80, 71, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(0, 121, 94, 0.1) 0%, transparent 50%);
+    }
+
+    /* Markdown Styles - Dark */
+    .dark .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: white; }
+    .dark .markdown-content h2 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #10B981; }
+    .dark .markdown-content h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #10B981; }
+    .dark .markdown-content p { margin-bottom: 0.75rem; line-height: 1.6; color: #d1d5db; }
+    .dark .markdown-content ul, .dark .markdown-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .dark .markdown-content li { margin-bottom: 0.25rem; color: #d1d5db; }
+    .dark .markdown-content code { background: rgba(16, 185, 129, 0.1); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.875rem; color: #10B981; }
+    .dark .markdown-content pre { background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; }
+    .dark .markdown-content pre code { background: transparent; padding: 0; color: #d1d5db; }
+    .dark .markdown-content strong { font-weight: 600; color: white; }
+    .dark .markdown-content em { font-style: italic; }
+    .dark .markdown-content blockquote { border-left: 3px solid #10B981; padding-left: 1rem; margin-left: 0; color: #9ca3af; }
+    .dark .markdown-content hr { border-color: #243330; margin: 1rem 0; }
+
+    /* Markdown Styles - Light */
+    .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #111827; }
+    .markdown-content h2 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #005047; }
+    .markdown-content h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #005047; }
+    .markdown-content p { margin-bottom: 0.75rem; line-height: 1.6; color: #374151; }
+    .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .markdown-content li { margin-bottom: 0.25rem; color: #374151; }
+    .markdown-content code { background: rgba(0, 80, 71, 0.1); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.875rem; color: #005047; }
+    .markdown-content pre { background: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; border: 1px solid #e5e7eb; }
+    .markdown-content pre code { background: transparent; padding: 0; color: #374151; }
+    .markdown-content strong { font-weight: 600; color: #111827; }
+    .markdown-content em { font-style: italic; }
+    .markdown-content blockquote { border-left: 3px solid #005047; padding-left: 1rem; margin-left: 0; color: #6b7280; }
+    .markdown-content hr { border-color: #e5e7eb; margin: 1rem 0; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-dg-dark dark:text-gray-100 font-display antialiased">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useRef } = React;
+
+    // Mock Data
+    const mockAgents = [
+      {
+        id: 'agent-001',
+        name: 'linkedin-post-search',
+        description: 'Search for LinkedIn posts about Claude Code and GTM, recommend the most aligned and fresh posts.',
+        model: 'sonnet',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-001',
+        lastRun: '2026-01-15T10:23:45Z',
+        totalRuns: 45,
+        successfulRuns: 42,
+        successRate: 93,
+        createdAt: '2025-12-01T10:00:00Z',
+        prompt: `# LinkedIn Post Search Agent - Claude Code & GTM
+
+Find LinkedIn posts about **Claude Code** and **GTM (go-to-market)**, analyze results, and save the best ones to the database for review.
+
+## Your 4-Step Workflow
+
+### Step 1: Search & Save Raw Results
+Execute search using the search_and_save_raw.py script with the query parameter.
+
+### Step 2: Read Results
+Analyze the normalized search results markdown file and look for:
+- 🔗 LinkedIn post URLs (linkedin.com/posts/)
+- 📅 Fresh posts (< 30 days)
+- 🎯 Claude Code + GTM mentions
+
+### Step 3: Recommend Top Posts
+Score each post (0-100) based on freshness, relevance, platform, and authority. Save posts with score >= 60.
+
+### Step 4: Save to Database
+Save approved posts to the linkedin_posts_tracker table in Neon database.`,
+      },
+      {
+        id: 'agent-002',
+        name: 'enrichment-node-creator',
+        description: 'Create and implement new enrichment nodes for lead tables using Graph architecture.',
+        model: 'sonnet',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-002',
+        lastRun: '2026-01-15T09:15:00Z',
+        totalRuns: 128,
+        successfulRuns: 125,
+        successRate: 98,
+        createdAt: '2025-11-15T14:30:00Z',
+        prompt: `You are an expert DataGen enrichment pipeline architect specializing in creating robust, composable enrichment nodes for lead tables.
+
+## Your Expertise
+- Designing nodes that extend the Graph base class
+- Implementing nodes in leads/{lead}/graph/nodes/
+- Composing primitives into multi-step workflows
+- Configuring nodes via YAML
+
+## Your Workflow
+1. Understand the requirement (which lead table, input/output columns)
+2. Choose primitives from scripts/primitives/
+3. Design the node (extend Graph, declare input_cols/output_cols)
+4. Create the file in leads/{lead}/graph/nodes/<name>.py
+5. Register the node in __init__.py and node_types.yaml
+6. Test with --preview flag`,
+      },
+      {
+        id: 'agent-003',
+        name: 'heyreach-reporter',
+        description: 'Generate HeyReach campaign performance reports with AI strategic recommendations.',
+        model: 'opus',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-003',
+        lastRun: '2026-01-15T08:00:00Z',
+        totalRuns: 89,
+        successfulRuns: 72,
+        successRate: 81,
+        createdAt: '2025-12-10T09:00:00Z',
+      },
+      {
+        id: 'agent-004',
+        name: 'prospect-enricher',
+        description: 'Enrich prospect data with company info, LinkedIn profiles, and contact details.',
+        model: 'sonnet',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-004',
+        lastRun: '2026-01-14T16:00:00Z',
+        totalRuns: 234,
+        successfulRuns: 228,
+        successRate: 97,
+        createdAt: '2025-10-20T11:00:00Z',
+      },
+      {
+        id: 'agent-005',
+        name: 'crm-hygiene-checker',
+        description: 'Automated CRM dedup, standardization, and completeness checks with Slack reporting.',
+        model: 'haiku',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-005',
+        lastRun: '2026-01-14T12:00:00Z',
+        totalRuns: 67,
+        successfulRuns: 66,
+        successRate: 99,
+        createdAt: '2025-11-01T16:00:00Z',
+      },
+      {
+        id: 'agent-006',
+        name: 'email-sequence-writer',
+        description: 'Generate personalized email sequences based on prospect research and ICP matching.',
+        model: 'opus',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-006',
+        lastRun: '2026-01-14T16:30:00Z',
+        totalRuns: 156,
+        successfulRuns: 149,
+        successRate: 96,
+        createdAt: '2025-12-05T13:00:00Z',
+      },
+      {
+        id: 'agent-007',
+        name: 'competitor-tracker',
+        description: 'Monitor competitor websites, pricing changes, and feature updates.',
+        model: 'sonnet',
+        webhookUrl: 'https://api.datagen.dev/webhooks/agent-007',
+        lastRun: '2026-01-15T10:25:00Z',
+        totalRuns: 312,
+        successfulRuns: 305,
+        successRate: 98,
+        createdAt: '2025-09-12T08:00:00Z',
+      },
+    ];
+
+    // Mock Run Logs
+    const mockRunLogs = [
+      {
+        id: 'run-001',
+        agentId: 'agent-001',
+        agentName: 'linkedin-post-search',
+        status: 'running',
+        startedAt: '2026-01-15T10:23:45Z',
+        duration: null,
+        trigger: 'webhook',
+        source: {
+          ip: '203.0.113.42',
+          origin: 'https://app.datagen.dev/workflows/linkedin-search',
+          userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        },
+        payload: { query: 'Claude Code GTM', limit: 50, min_score: 60 },
+        logs: [
+          { timestamp: '2026-01-15T10:23:45Z', action: 'INIT', details: 'Agent initialized with webhook payload' },
+          { timestamp: '2026-01-15T10:23:46Z', action: 'SEARCH', details: 'Executing search query: "Claude Code GTM"' },
+          { timestamp: '2026-01-15T10:23:52Z', action: 'PROCESS', details: 'Found 27 results, analyzing relevance...' },
+          { timestamp: '2026-01-15T10:24:01Z', action: 'FILTER', details: 'Filtered to 12 high-relevance posts' },
+        ],
+      },
+      {
+        id: 'run-002',
+        agentId: 'agent-007',
+        agentName: 'competitor-tracker',
+        status: 'running',
+        startedAt: '2026-01-15T10:25:00Z',
+        duration: null,
+        trigger: 'scheduled',
+        source: {
+          ip: '10.0.0.1',
+          origin: 'cron://internal/scheduler',
+          userAgent: 'Datagen-Scheduler/1.0',
+        },
+        payload: { competitors: ['clay.com', 'apollo.io', 'zoominfo.com'] },
+        logs: [
+          { timestamp: '2026-01-15T10:25:00Z', action: 'INIT', details: 'Starting competitor analysis' },
+          { timestamp: '2026-01-15T10:25:10Z', action: 'CRAWL', details: 'Crawling competitor websites...' },
+        ],
+      },
+      {
+        id: 'run-003',
+        agentId: 'agent-002',
+        agentName: 'enrichment-node-creator',
+        status: 'completed',
+        startedAt: '2026-01-15T09:15:00Z',
+        completedAt: '2026-01-15T09:18:32Z',
+        duration: '3m 32s',
+        trigger: 'webhook',
+        source: {
+          ip: '198.51.100.23',
+          origin: 'https://app.datagen.dev/leads/yc-f25/enrich',
+          userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        },
+        payload: { lead_table: 'yc-f25', node_type: 'company_research' },
+        logs: [
+          { timestamp: '2026-01-15T09:15:00Z', action: 'INIT', details: 'Agent initialized' },
+          { timestamp: '2026-01-15T09:15:02Z', action: 'ANALYZE', details: 'Analyzing lead table schema: yc-f25' },
+          { timestamp: '2026-01-15T09:16:45Z', action: 'CREATE', details: 'Created CompanyResearch node class' },
+          { timestamp: '2026-01-15T09:17:20Z', action: 'REGISTER', details: 'Registered in nodes/__init__.py' },
+          { timestamp: '2026-01-15T09:18:30Z', action: 'TEST', details: 'Preview test passed with 3 rows' },
+          { timestamp: '2026-01-15T09:18:32Z', action: 'COMPLETE', details: 'Node created successfully' },
+        ],
+        result: { node_name: 'company_research', file: 'leads/yc-f25/graph/nodes/company_research.py' },
+      },
+      {
+        id: 'run-004',
+        agentId: 'agent-003',
+        agentName: 'heyreach-reporter',
+        status: 'failed',
+        startedAt: '2026-01-15T08:00:00Z',
+        failedAt: '2026-01-15T08:02:15Z',
+        duration: '2m 15s',
+        trigger: 'webhook',
+        source: {
+          ip: '192.0.2.156',
+          origin: 'https://app.datagen.dev/campaigns/reports/generate',
+          userAgent: 'PostmanRuntime/7.36.3',
+        },
+        payload: { campaign_ids: [291852, 210501], date_range: 'last_30_days' },
+        logs: [
+          { timestamp: '2026-01-15T08:00:00Z', action: 'INIT', details: 'Agent initialized' },
+          { timestamp: '2026-01-15T08:00:05Z', action: 'FETCH', details: 'Fetching campaign data from HeyReach API' },
+          { timestamp: '2026-01-15T08:01:30Z', action: 'PROCESS', details: 'Processing 5 campaigns...' },
+          { timestamp: '2026-01-15T08:02:15Z', action: 'ERROR', details: 'HeyReach API rate limit exceeded (429)' },
+        ],
+        error: 'HeyReach API rate limit exceeded. Retry after 60 seconds.',
+      },
+      {
+        id: 'run-005',
+        agentId: 'agent-006',
+        agentName: 'email-sequence-writer',
+        status: 'completed',
+        startedAt: '2026-01-14T16:30:00Z',
+        completedAt: '2026-01-14T16:45:22Z',
+        duration: '15m 22s',
+        trigger: 'manual',
+        source: {
+          ip: '127.0.0.1',
+          origin: 'manual://dashboard',
+          userAgent: 'Datagen-Dashboard/2.1.0',
+        },
+        payload: { prospect_ids: ['p1', 'p2', 'p3', '...'], template: 'cold_outreach_v2' },
+        logs: [
+          { timestamp: '2026-01-14T16:30:00Z', action: 'INIT', details: 'Agent initialized with 25 prospects' },
+          { timestamp: '2026-01-14T16:32:00Z', action: 'RESEARCH', details: 'Researching prospect backgrounds...' },
+          { timestamp: '2026-01-14T16:40:00Z', action: 'GENERATE', details: 'Generating personalized sequences...' },
+          { timestamp: '2026-01-14T16:45:22Z', action: 'COMPLETE', details: 'Created 25 email sequences' },
+        ],
+        result: { sequences_created: 25, avg_personalization_score: 87 },
+      },
+      {
+        id: 'run-006',
+        agentId: 'agent-004',
+        agentName: 'prospect-enricher',
+        status: 'completed',
+        startedAt: '2026-01-14T16:00:00Z',
+        completedAt: '2026-01-14T16:12:45Z',
+        duration: '12m 45s',
+        trigger: 'webhook',
+        source: {
+          ip: '203.0.113.89',
+          origin: 'https://zapier.com/engine/runs/12345678',
+          userAgent: 'Zapier/1.0',
+        },
+        payload: { prospect_count: 50, enrich_fields: ['linkedin', 'company', 'email'] },
+        logs: [
+          { timestamp: '2026-01-14T16:00:00Z', action: 'INIT', details: 'Enrichment started for 50 prospects' },
+          { timestamp: '2026-01-14T16:05:00Z', action: 'ENRICH', details: 'Fetching LinkedIn data...' },
+          { timestamp: '2026-01-14T16:10:00Z', action: 'ENRICH', details: 'Fetching company data...' },
+          { timestamp: '2026-01-14T16:12:45Z', action: 'COMPLETE', details: 'Enriched 48/50 prospects' },
+        ],
+        result: { enriched: 48, failed: 2 },
+      },
+    ];
+
+    // Icons
+    const Icons = {
+      agents: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+      logs: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+      ),
+      sun: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ),
+      moon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      ),
+      copy: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      ),
+      check: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      ),
+      x: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      ),
+      search: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      ),
+      chevronDown: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      ),
+      replay: (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+      settings: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
+    };
+
+    // Status Badge
+    function StatusBadge({ status, size = 'sm' }) {
+      const styles = {
+        running: 'bg-dg-accent/20 text-dg-accent dark:text-dg-accent border-dg-accent/30',
+        completed: 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30',
+        failed: 'bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30',
+        idle: 'bg-gray-500/20 text-gray-600 dark:text-gray-400 border-gray-500/30',
+      };
+      const sizeClass = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-2.5 py-1 text-sm';
+
+      return (
+        <span className={`inline-flex items-center gap-1.5 font-mono font-medium rounded border ${styles[status]} ${sizeClass}`}>
+          {status === 'running' && <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />}
+          {status}
+        </span>
+      );
+    }
+
+    // Copy Button
+    function CopyButton({ text, className = '' }) {
+      const [copied, setCopied] = useState(false);
+      const handleCopy = async () => {
+        await navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+      return (
+        <button
+          onClick={handleCopy}
+          className={`p-1.5 rounded transition-all ${copied ? 'bg-dg-accent/20 text-dg-accent' : 'text-gray-500 hover:text-dg-accent hover:bg-gray-100 dark:hover:bg-dg-surface-2'} ${className}`}
+        >
+          {copied ? Icons.check : Icons.copy}
+        </button>
+      );
+    }
+
+    // Stat Card
+    function StatCard({ label, value, color, icon }) {
+      return (
+        <div className="bg-white dark:bg-dg-surface rounded-xl p-4 border border-gray-200 dark:border-dg-border shadow-sm">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wider">{label}</p>
+              <p className={`text-2xl font-mono font-semibold mt-1 ${color}`}>{value}</p>
+            </div>
+            <div className={`p-2 rounded-lg bg-gray-100 dark:bg-dg-surface-2 ${color}`}>{icon}</div>
+          </div>
+        </div>
+      );
+    }
+
+    // Filter Dropdown
+    function FilterDropdown({ label, value, options, onChange }) {
+      return (
+        <div className="relative">
+          <select
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="appearance-none bg-white dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg px-3 py-2 pr-8 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:border-dg-secondary cursor-pointer"
+          >
+            {options.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+            {Icons.chevronDown}
+          </div>
+        </div>
+      );
+    }
+
+    // Agent Detail Panel
+    function AgentDetailPanel({ agent, onClose }) {
+      const [copied, setCopied] = useState(false);
+      const [width, setWidth] = useState(500);
+      const [isResizing, setIsResizing] = useState(false);
+
+      if (!agent) return null;
+
+      const handleMouseDown = (e) => {
+        setIsResizing(true);
+        e.preventDefault();
+      };
+
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          if (!isResizing) return;
+          const newWidth = window.innerWidth - e.clientX;
+          if (newWidth >= 400 && newWidth <= 1200) {
+            setWidth(newWidth);
+          }
+        };
+
+        const handleMouseUp = () => {
+          setIsResizing(false);
+        };
+
+        if (isResizing) {
+          document.addEventListener('mousemove', handleMouseMove);
+          document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+          document.removeEventListener('mousemove', handleMouseMove);
+          document.removeEventListener('mouseup', handleMouseUp);
+        };
+      }, [isResizing]);
+
+      return (
+        <>
+          <div className="fixed inset-0 bg-black/50 z-40 animate-fade-in" onClick={onClose} />
+          <div
+            className="fixed right-0 top-0 bottom-0 bg-white dark:bg-dg-surface border-l border-gray-200 dark:border-dg-border z-50 animate-slide-in-right overflow-y-auto"
+            style={{ width: `${width}px` }}
+          >
+            {/* Resize Handle */}
+            <div
+              onMouseDown={handleMouseDown}
+              className={`absolute left-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-dg-accent transition-colors ${isResizing ? 'bg-dg-accent' : 'bg-transparent'}`}
+              style={{ zIndex: 100 }}
+            >
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-gray-300 dark:bg-dg-border rounded-r" />
+            </div>
+            {/* Header */}
+            <div className="sticky top-0 bg-white dark:bg-dg-surface border-b border-gray-200 dark:border-dg-border p-4 flex items-center justify-between">
+              <div>
+                <h2 className="font-mono text-lg font-semibold text-gray-900 dark:text-white">{agent.name}</h2>
+                <div className="flex items-center gap-2 mt-1">
+                  <StatusBadge status={agent.status} />
+                  <span className="text-xs text-gray-500">{agent.id}</span>
+                </div>
+              </div>
+              <button onClick={onClose} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dg-surface-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                {Icons.x}
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-4">
+              {/* Webhook URL */}
+              <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Webhook URL</label>
+                <div className="flex items-center gap-2 mt-2">
+                  <code className="flex-1 font-mono text-sm text-dg-primary dark:text-dg-accent truncate">{agent.webhookUrl}</code>
+                  <CopyButton text={agent.webhookUrl} />
+                </div>
+              </div>
+
+              {/* Config Grid */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider">Model</label>
+                  <p className="font-mono text-gray-900 dark:text-white mt-1 flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${agent.model === 'opus' ? 'bg-purple-400' : agent.model === 'sonnet' ? 'bg-blue-400' : 'bg-gray-400'}`} />
+                    {agent.model}
+                  </p>
+                </div>
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider">Total Runs</label>
+                  <p className="font-mono text-gray-900 dark:text-white mt-1">{agent.totalRuns}</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider">Success Rate</label>
+                  <p className={`font-mono font-medium mt-1 ${
+                    agent.successRate >= 95 ? 'text-emerald-600 dark:text-emerald-400' :
+                    agent.successRate >= 85 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'
+                  }`}>
+                    {agent.successRate}%
+                  </p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Description</label>
+                <p className="text-gray-700 dark:text-gray-300 mt-2 text-sm leading-relaxed">{agent.description}</p>
+              </div>
+
+              {/* Prompt */}
+              {agent.prompt && (
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Agent Prompt</label>
+                  <div
+                    className="markdown-content mt-2 text-sm bg-white dark:bg-dg-surface-2/50 rounded p-4 max-h-96 overflow-y-auto border border-gray-200 dark:border-transparent"
+                    dangerouslySetInnerHTML={{ __html: marked.parse(agent.prompt) }}
+                  />
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex gap-2">
+                <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-dg-primary hover:bg-dg-secondary text-white rounded-lg font-medium text-sm transition-colors">
+                  {Icons.replay}
+                  Execute Now
+                </button>
+              </div>
+
+              {/* Last Run */}
+              <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Last Run</label>
+                <p className="font-mono text-gray-700 dark:text-gray-300 mt-1 text-sm">
+                  {new Date(agent.lastRun).toLocaleString()}
+                </p>
+              </div>
+
+              {/* Created */}
+              <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Created</label>
+                <p className="font-mono text-gray-700 dark:text-gray-300 mt-1 text-sm">
+                  {new Date(agent.createdAt).toLocaleString()}
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    // Agents View
+    function AgentsView({ agents, onSelectAgent }) {
+      const [search, setSearch] = useState('');
+      const [modelFilter, setModelFilter] = useState('all');
+
+      const filteredAgents = useMemo(() => {
+        return agents.filter(agent => {
+          const matchesSearch = agent.name.toLowerCase().includes(search.toLowerCase()) ||
+            agent.description.toLowerCase().includes(search.toLowerCase());
+          const matchesModel = modelFilter === 'all' || agent.model === modelFilter;
+          return matchesSearch && matchesModel;
+        });
+      }, [agents, search, modelFilter]);
+
+      const totalRuns = agents.reduce((sum, a) => sum + a.totalRuns, 0);
+      const totalSuccessful = agents.reduce((sum, a) => sum + a.successfulRuns, 0);
+      const avgSuccessRate = agents.length > 0
+        ? Math.round(agents.reduce((sum, a) => sum + a.successRate, 0) / agents.length)
+        : 0;
+
+      const stats = {
+        total: agents.length,
+        totalRuns: totalRuns,
+        avgSuccessRate: avgSuccessRate,
+        totalSuccessful: totalSuccessful,
+      };
+
+      return (
+        <div className="p-6">
+          {/* Stats */}
+          <div className="grid grid-cols-4 gap-4 mb-6">
+            <StatCard label="Total Agents" value={stats.total} color="text-gray-900 dark:text-white" icon={Icons.agents} />
+            <StatCard label="Total Runs" value={stats.totalRuns.toLocaleString()} color="text-blue-600 dark:text-blue-400" icon={Icons.logs} />
+            <StatCard label="Avg Success Rate" value={`${stats.avgSuccessRate}%`} color="text-dg-primary dark:text-dg-accent" icon={Icons.check} />
+            <StatCard label="Successful Runs" value={stats.totalSuccessful.toLocaleString()} color="text-emerald-600 dark:text-emerald-400" icon={Icons.check} />
+          </div>
+
+          {/* Filters */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="relative flex-1 max-w-md">
+              <input
+                type="text"
+                placeholder="Search agents..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-white dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg pl-10 pr-4 py-2 text-sm text-gray-900 dark:text-gray-300 placeholder-gray-500 focus:outline-none focus:border-dg-secondary"
+              />
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">{Icons.search}</div>
+            </div>
+            <FilterDropdown
+              label="Model"
+              value={modelFilter}
+              onChange={setModelFilter}
+              options={[
+                { value: 'all', label: 'All Models' },
+                { value: 'opus', label: 'Opus' },
+                { value: 'sonnet', label: 'Sonnet' },
+                { value: 'haiku', label: 'Haiku' },
+              ]}
+            />
+          </div>
+
+          {/* Table */}
+          <div className="bg-white dark:bg-dg-surface rounded-xl border border-gray-200 dark:border-dg-border overflow-hidden shadow-sm">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200 dark:border-dg-border bg-gray-50 dark:bg-dg-surface-2/50">
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Agent</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Success Rate</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Total Runs</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Last Run</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Webhook</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-dg-border">
+                {filteredAgents.map(agent => (
+                  <tr
+                    key={agent.id}
+                    onClick={() => onSelectAgent(agent)}
+                    className="hover:bg-gray-50 dark:hover:bg-dg-surface-2/50 cursor-pointer transition-colors"
+                  >
+                    <td className="px-4 py-3">
+                      <div>
+                        <p className="font-mono text-sm text-gray-900 dark:text-white">{agent.name}</p>
+                        <p className="text-xs text-gray-500 mt-0.5 truncate max-w-xs">{agent.description}</p>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-mono text-sm text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                        <span className={`w-2 h-2 rounded-full ${agent.model === 'opus' ? 'bg-purple-400' : agent.model === 'sonnet' ? 'bg-blue-400' : 'bg-gray-400'}`} />
+                        {agent.model}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <span className={`font-mono text-sm font-medium ${
+                          agent.successRate >= 95 ? 'text-emerald-600 dark:text-emerald-400' :
+                          agent.successRate >= 85 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'
+                        }`}>
+                          {agent.successRate}%
+                        </span>
+                        <span className="text-xs text-gray-500">({agent.successfulRuns}/{agent.totalRuns})</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-mono text-sm text-gray-700 dark:text-gray-300">{agent.totalRuns}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{new Date(agent.lastRun).toLocaleString()}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <CopyButton text={agent.webhookUrl} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    // Run Detail Panel
+    function RunDetailPanel({ run, onClose, onStop }) {
+      const [width, setWidth] = useState(600);
+      const [isResizing, setIsResizing] = useState(false);
+      const [showSource, setShowSource] = useState(false);
+
+      if (!run) return null;
+
+      const handleMouseDown = (e) => {
+        setIsResizing(true);
+        e.preventDefault();
+      };
+
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          if (!isResizing) return;
+          const newWidth = window.innerWidth - e.clientX;
+          if (newWidth >= 400 && newWidth <= 1200) {
+            setWidth(newWidth);
+          }
+        };
+
+        const handleMouseUp = () => {
+          setIsResizing(false);
+        };
+
+        if (isResizing) {
+          document.addEventListener('mousemove', handleMouseMove);
+          document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+          document.removeEventListener('mousemove', handleMouseMove);
+          document.removeEventListener('mouseup', handleMouseUp);
+        };
+      }, [isResizing]);
+
+      const actionColors = {
+        INIT: 'text-blue-400',
+        SEARCH: 'text-purple-400',
+        PROCESS: 'text-yellow-400',
+        FILTER: 'text-cyan-400',
+        CREATE: 'text-dg-accent',
+        REGISTER: 'text-dg-secondary',
+        TEST: 'text-emerald-400',
+        COMPLETE: 'text-emerald-400',
+        ERROR: 'text-red-400',
+        FETCH: 'text-indigo-400',
+        ANALYZE: 'text-orange-400',
+        GENERATE: 'text-pink-400',
+        RESEARCH: 'text-violet-400',
+        CRAWL: 'text-amber-400',
+        ENRICH: 'text-teal-400',
+      };
+
+      return (
+        <>
+          <div className="fixed inset-0 bg-black/50 z-40 animate-fade-in" onClick={onClose} />
+          <div
+            className="fixed right-0 top-0 bottom-0 bg-white dark:bg-dg-surface border-l border-gray-200 dark:border-dg-border z-50 animate-slide-in-right overflow-y-auto"
+            style={{ width: `${width}px` }}
+          >
+            {/* Resize Handle */}
+            <div
+              onMouseDown={handleMouseDown}
+              className={`absolute left-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-dg-accent transition-colors ${isResizing ? 'bg-dg-accent' : 'bg-transparent'}`}
+              style={{ zIndex: 100 }}
+            >
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-gray-300 dark:bg-dg-border rounded-r" />
+            </div>
+            {/* Header */}
+            <div className="sticky top-0 bg-white dark:bg-dg-surface border-b border-gray-200 dark:border-dg-border p-4 flex items-center justify-between">
+              <div>
+                <h2 className="font-mono text-lg font-semibold text-gray-900 dark:text-white">{run.agentName}</h2>
+                <div className="flex items-center gap-2 mt-1">
+                  <StatusBadge status={run.status} />
+                  <span className="text-xs text-gray-500">{run.id}</span>
+                </div>
+              </div>
+              <button onClick={onClose} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dg-surface-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                {Icons.x}
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-4">
+              {/* Status Card */}
+              {run.status === 'running' && (
+                <div className="bg-dg-accent/10 border border-dg-accent/30 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-dg-accent animate-pulse" />
+                      <span className="text-sm font-medium text-dg-primary dark:text-dg-accent">Running</span>
+                    </div>
+                    <button
+                      onClick={() => onStop(run.id)}
+                      className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Stop Run
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Started {new Date(run.startedAt).toLocaleString()}
+                  </p>
+                </div>
+              )}
+
+              {run.status === 'completed' && (
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2 text-emerald-600 dark:text-emerald-400">
+                    {Icons.check}
+                    <span className="text-sm font-medium">Completed Successfully</span>
+                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Duration: {run.duration}</p>
+                </div>
+              )}
+
+              {run.status === 'failed' && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2 text-red-600 dark:text-red-400">
+                    {Icons.x}
+                    <span className="text-sm font-medium">Failed</span>
+                  </div>
+                  <p className="text-sm text-red-600 dark:text-red-400 mt-2">{run.error}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Duration: {run.duration}</p>
+                </div>
+              )}
+
+              {/* Metadata Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider">Trigger</label>
+                  <p className={`text-sm mt-1 font-medium ${
+                    run.trigger === 'webhook' ? 'text-blue-600 dark:text-blue-400' :
+                    run.trigger === 'scheduled' ? 'text-purple-600 dark:text-purple-400' : 'text-gray-600 dark:text-gray-400'
+                  }`}>
+                    {run.trigger}
+                  </p>
+                </div>
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider">Started</label>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{new Date(run.startedAt).toLocaleTimeString()}</p>
+                </div>
+              </div>
+
+              {/* Source Information (Expandable) */}
+              {run.source && (
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg border border-gray-200 dark:border-dg-border overflow-hidden">
+                  <button
+                    onClick={() => setShowSource(!showSource)}
+                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-dg-surface/50 transition-colors"
+                  >
+                    <label className="text-xs text-gray-500 uppercase tracking-wider font-medium cursor-pointer">Source Information</label>
+                    <svg
+                      className={`w-4 h-4 text-gray-500 transition-transform ${showSource ? 'rotate-180' : ''}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {showSource && (
+                    <div className="px-4 pb-3 pt-1 space-y-3 border-t border-gray-200 dark:border-dg-border">
+                      <div>
+                        <label className="text-xs text-gray-500 uppercase tracking-wider">IP Address</label>
+                        <p className="font-mono text-sm text-gray-700 dark:text-gray-300 mt-1">{run.source.ip}</p>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-500 uppercase tracking-wider">Origin</label>
+                        <p className="font-mono text-sm text-gray-700 dark:text-gray-300 mt-1 break-all">{run.source.origin}</p>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-500 uppercase tracking-wider">User Agent</label>
+                        <p className="font-mono text-xs text-gray-700 dark:text-gray-300 mt-1 break-all">{run.source.userAgent}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Payload */}
+              {run.payload && (
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Payload</label>
+                  <pre className="font-mono text-xs text-gray-700 dark:text-gray-300 mt-2 overflow-x-auto bg-white dark:bg-dg-surface-2/50 border border-gray-200 dark:border-transparent rounded p-3">
+                    {JSON.stringify(run.payload, null, 2)}
+                  </pre>
+                </div>
+              )}
+
+              {/* Logs */}
+              <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg border border-gray-200 dark:border-dg-border overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-dg-surface-2/50 border-b border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Execution Log</label>
+                  <span className="text-xs text-gray-500">{run.logs.length} entries</span>
+                </div>
+                <div className="max-h-80 overflow-y-auto p-2">
+                  {run.logs.map((log, i) => (
+                    <div key={i} className="flex items-start gap-3 py-2 px-2 hover:bg-gray-100 dark:hover:bg-dg-surface/50 rounded">
+                      <span className="font-mono text-xs text-gray-500 shrink-0 w-20">
+                        {new Date(log.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
+                      </span>
+                      <span className={`font-mono text-xs font-semibold shrink-0 w-20 ${actionColors[log.action] || 'text-gray-600 dark:text-gray-400'}`}>
+                        [{log.action}]
+                      </span>
+                      <span className="font-mono text-xs text-gray-700 dark:text-gray-300 leading-relaxed">{log.details}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Result */}
+              {run.result && (
+                <div className="bg-gray-50 dark:bg-dg-dark/50 rounded-lg p-3 border border-gray-200 dark:border-dg-border">
+                  <label className="text-xs text-gray-500 uppercase tracking-wider font-medium">Result</label>
+                  <pre className="font-mono text-xs text-emerald-600 dark:text-emerald-400 mt-2 overflow-x-auto bg-white dark:bg-dg-surface-2/50 border border-gray-200 dark:border-transparent rounded p-3">
+                    {JSON.stringify(run.result, null, 2)}
+                  </pre>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    // Run Logs View
+    function RunLogsView({ runLogs, onSelectRun }) {
+      const [search, setSearch] = useState('');
+      const [statusFilter, setStatusFilter] = useState('all');
+
+      const filteredLogs = useMemo(() => {
+        return runLogs.filter(log => {
+          const matchesSearch = log.agentName.toLowerCase().includes(search.toLowerCase());
+          const matchesStatus = statusFilter === 'all' || log.status === statusFilter;
+          return matchesSearch && matchesStatus;
+        });
+      }, [runLogs, search, statusFilter]);
+
+      const actionColors = {
+        INIT: 'text-blue-400',
+        SEARCH: 'text-purple-400',
+        PROCESS: 'text-yellow-400',
+        FILTER: 'text-cyan-400',
+        CREATE: 'text-dg-accent',
+        REGISTER: 'text-dg-secondary',
+        TEST: 'text-emerald-400',
+        COMPLETE: 'text-emerald-400',
+        ERROR: 'text-red-400',
+        FETCH: 'text-indigo-400',
+        ANALYZE: 'text-orange-400',
+        GENERATE: 'text-pink-400',
+        RESEARCH: 'text-violet-400',
+        CRAWL: 'text-amber-400',
+        ENRICH: 'text-teal-400',
+      };
+
+      return (
+        <div className="p-6">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Run Logs</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-500 mt-1">View execution history across all agents</p>
+            </div>
+          </div>
+
+          {/* Filters */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="relative flex-1 max-w-md">
+              <input
+                type="text"
+                placeholder="Search by agent name..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-white dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg pl-10 pr-4 py-2 text-sm text-gray-900 dark:text-gray-300 placeholder-gray-500 focus:outline-none focus:border-dg-secondary"
+              />
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">{Icons.search}</div>
+            </div>
+            <FilterDropdown
+              label="Status"
+              value={statusFilter}
+              onChange={setStatusFilter}
+              options={[
+                { value: 'all', label: 'All Status' },
+                { value: 'running', label: 'Running' },
+                { value: 'completed', label: 'Completed' },
+                { value: 'failed', label: 'Failed' },
+              ]}
+            />
+          </div>
+
+          {/* Table */}
+          <div className="bg-white dark:bg-dg-surface rounded-xl border border-gray-200 dark:border-dg-border overflow-hidden shadow-sm">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200 dark:border-dg-border bg-gray-50 dark:bg-dg-surface-2/50">
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Run ID</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Agent</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Trigger</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Started</th>
+                  <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-dg-border">
+                {filteredLogs.map(run => (
+                  <tr
+                    key={run.id}
+                    onClick={() => onSelectRun(run)}
+                    className="hover:bg-gray-50 dark:hover:bg-dg-surface-2/50 cursor-pointer transition-colors"
+                  >
+                    <td className="px-4 py-3">
+                      <span className="font-mono text-sm text-gray-600 dark:text-gray-400">{run.id}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-mono text-sm text-gray-900 dark:text-white">{run.agentName}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={run.status} />
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded ${
+                        run.trigger === 'webhook' ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400' :
+                        run.trigger === 'scheduled' ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400' :
+                        'bg-gray-500/20 text-gray-600 dark:text-gray-400'
+                      }`}>
+                        {run.trigger}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{new Date(run.startedAt).toLocaleString()}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-mono text-sm text-gray-600 dark:text-gray-400">{run.duration || '--'}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    }
+
+    // Settings View
+    function SettingsView() {
+      const [profile, setProfile] = useState({
+        name: 'Yu-Sheng Kuo',
+        email: 'yu-sheng.kuo@datagen.dev',
+        role: 'Admin',
+        avatar: 'https://ui-avatars.com/api/?name=Yu-Sheng+Kuo&background=005047&color=fff&size=128'
+      });
+      const [isEditing, setIsEditing] = useState(false);
+      const [tempProfile, setTempProfile] = useState(profile);
+
+      const handleSave = () => {
+        setProfile(tempProfile);
+        setIsEditing(false);
+        // In real app: API call to update profile
+      };
+
+      return (
+        <div className="p-6 max-w-4xl mx-auto">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Settings</h2>
+          
+          <div className="bg-white dark:bg-dg-surface rounded-xl border border-gray-200 dark:border-dg-border overflow-hidden shadow-sm">
+            <div className="p-6 border-b border-gray-200 dark:border-dg-border">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white">Personal Information</h3>
+              <p className="text-sm text-gray-500 mt-1">Manage your profile details and contact information.</p>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              <div className="flex items-center gap-6">
+                <img src={profile.avatar} alt={profile.name} className="w-20 h-20 rounded-full border-2 border-dg-accent/20" />
+                <div>
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white">{profile.name}</h4>
+                  <p className="text-sm text-gray-500">{profile.role}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    disabled={!isEditing}
+                    value={isEditing ? tempProfile.name : profile.name}
+                    onChange={(e) => setTempProfile({...tempProfile, name: e.target.value})}
+                    className="w-full bg-gray-50 dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-dg-secondary disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    disabled={!isEditing}
+                    value={isEditing ? tempProfile.email : profile.email}
+                    onChange={(e) => setTempProfile({...tempProfile, email: e.target.value})}
+                    className="w-full bg-gray-50 dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-dg-secondary disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  />
+                </div>
+                 <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
+                  <input
+                    type="text"
+                    disabled={true}
+                    value={profile.role}
+                    className="w-full bg-gray-50 dark:bg-dg-surface-2 border border-gray-300 dark:border-dg-border rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white opacity-60 cursor-not-allowed"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-4 bg-gray-50 dark:bg-dg-surface-2/50 border-t border-gray-200 dark:border-dg-border flex justify-end gap-3">
+              {isEditing ? (
+                <>
+                  <button
+                    onClick={() => { setIsEditing(false); setTempProfile(profile); }}
+                    className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSave}
+                    className="px-4 py-2 text-sm font-medium text-white bg-dg-primary hover:bg-dg-secondary rounded-lg transition-colors"
+                  >
+                    Save Changes
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="px-4 py-2 text-sm font-medium text-white bg-dg-primary hover:bg-dg-secondary rounded-lg transition-colors"
+                >
+                  Edit Profile
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Main Dashboard
+    function Dashboard() {
+      const [activeView, setActiveView] = useState('agents');
+      const [selectedAgent, setSelectedAgent] = useState(null);
+      const [selectedRun, setSelectedRun] = useState(null);
+      const [isDark, setIsDark] = useState(() => {
+        try {
+          const saved = localStorage.getItem('theme');
+          if (saved) return saved === 'dark';
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        } catch {
+          return false;
+        }
+      });
+
+      useEffect(() => {
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch {
+          // Ignore storage errors.
+        }
+      }, [isDark]);
+
+      const handleStopRun = (runId) => {
+        console.log('Stopping run:', runId);
+        // In real app: API call to stop the run
+        alert(`Stopping run ${runId}`);
+      };
+
+      const navItems = [
+        { id: 'agents', label: 'Agents', icon: Icons.agents },
+        { id: 'logs', label: 'Run Logs', icon: Icons.logs },
+        { id: 'settings', label: 'Settings', icon: Icons.settings },
+      ];
+
+      return (
+        <div className="min-h-screen flex relative bg-white dark:bg-dg-dark text-gray-900 dark:text-gray-100">
+          {/* Background Effects */}
+          <div className="fixed inset-0 gradient-mesh pointer-events-none" />
+          <div className="fixed inset-0 noise-overlay pointer-events-none" />
+
+          {/* Side Navigation */}
+          <aside className="w-16 bg-dg-primary dark:bg-dg-surface/80 backdrop-blur-sm border-r border-dg-primary dark:border-dg-border flex flex-col items-center py-4 relative z-10">
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-6 border border-white/10">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+
+            {/* Nav Items */}
+            <nav className="flex flex-col gap-2 flex-1">
+              {navItems.map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveView(item.id);
+                    setSelectedAgent(null);
+                    setSelectedRun(null);
+                  }}
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                    activeView === item.id
+                      ? 'bg-dg-accent text-dg-primary'
+                      : 'text-dg-accent/60 hover:text-white hover:bg-white/10'
+                  } dark:${
+                    activeView === item.id
+                      ? 'bg-dg-primary text-white'
+                      : 'text-gray-500 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-dg-surface-2'
+                  }`}
+                  title={item.label}
+                >
+                  {item.icon}
+                </button>
+              ))}
+            </nav>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="w-10 h-10 rounded-lg flex items-center justify-center transition-all text-dg-accent/60 hover:text-white hover:bg-white/10 dark:text-gray-500 dark:hover:text-white dark:hover:bg-dg-surface-2"
+              title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDark ? Icons.sun : Icons.moon}
+            </button>
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1 relative z-10 overflow-y-auto">
+            {activeView === 'agents' && (
+              <AgentsView agents={mockAgents} onSelectAgent={setSelectedAgent} />
+            )}
+            {activeView === 'logs' && (
+              <RunLogsView runLogs={mockRunLogs} onSelectRun={setSelectedRun} />
+            )}
+            {activeView === 'settings' && (
+              <SettingsView />
+            )}
+          </main>
+
+          {/* Agent Detail Panel */}
+          {selectedAgent && (
+            <AgentDetailPanel agent={selectedAgent} onClose={() => setSelectedAgent(null)} />
+          )}
+
+          {/* Run Detail Panel */}
+          {selectedRun && (
+            <RunDetailPanel run={selectedRun} onClose={() => setSelectedRun(null)} onStop={handleStopRun} />
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Dashboard />);
+  </script>
+</body>
+</html>

@@ -123,6 +123,65 @@ async function parseCSV(filePath: string): Promise<Array<Record<string, string>>
   });
 }
 
+// Save CSV
+async function saveCSV(filePath: string, data: Array<Record<string, string>>): Promise<void> {
+  if (data.length === 0) return;
+  const headers = Object.keys(data[0]);
+
+  const escape = (val: string) => {
+    if (val === null || val === undefined) return "";
+    const str = String(val);
+    if (str.includes(",") || str.includes("\n") || str.includes('"')) {
+      return `"${str.replace(/"/g, '""')}"`;
+    }
+    return str;
+  };
+
+  const csvContent = [
+    headers.join(","),
+    ...data.map(row => headers.map(h => escape(row[h])).join(","))
+  ].join("\n");
+
+  await Bun.write(filePath, csvContent);
+}
+
+// Save SQLite
+async function saveSQLite(dbPath: string, data: Array<Record<string, string>>): Promise<void> {
+  if (data.length === 0) return;
+
+  const { Database } = await import("bun:sqlite");
+  const db = new Database(dbPath);
+
+  // infer columns from first row
+  const columns = Object.keys(data[0]);
+
+  const transaction = db.transaction(() => {
+    // 1. Drop existing table to ensure schema matches new data
+    //    We assume the main table is always named 'leads' based on parseSQLite
+    db.run("DROP TABLE IF EXISTS leads");
+
+    // 2. Create table
+    //    We treat everything as TEXT to match the Viewer's string-based nature
+    const colDefs = columns.map(c => `"${c}" TEXT`).join(", ");
+    db.run(`CREATE TABLE leads (${colDefs})`);
+
+    // 3. Insert data
+    const placeholders = columns.map(() => "?").join(", ");
+    const insert = db.prepare(`INSERT INTO leads (${columns.map(c => `"${c}"`).join(", ")}) VALUES (${placeholders})`);
+
+    for (const row of data) {
+      const values = columns.map(col => row[col]);
+      insert.run(...values);
+    }
+  });
+
+  try {
+    transaction();
+  } finally {
+    db.close();
+  }
+}
+
 // Analyze workflow (same logic as before)
 function analyzeWorkflow(data: Array<Record<string, string>>) {
   const headers = Object.keys(data[0] || {});
@@ -286,6 +345,33 @@ Bun.serve({
         return Response.json(workflow);
       } catch (e) {
         return Response.json({ error: "File not found or invalid" }, { status: 404 });
+      }
+    }
+
+    // API: Save Data (CSV only for now)
+    if (url.pathname === "/api/save" && req.method === "POST") {
+      try {
+        const body = await req.json();
+        const { file, data } = body;
+
+        if (!file || !data || !Array.isArray(data)) {
+          return Response.json({ error: "Invalid payload" }, { status: 400 });
+        }
+
+        if (file.startsWith("lead-list/") && file.endsWith(".csv")) {
+          const csvPath = join(LEAD_LIST_DIR, file.replace("lead-list/", ""));
+          await saveCSV(csvPath, data);
+          return Response.json({ success: true });
+        } else if (file.startsWith("leads/") && file.endsWith(".db")) {
+          const dbPath = join(LEADS_DIR, file.replace("leads/", ""));
+          await saveSQLite(dbPath, data);
+          return Response.json({ success: true });
+        } else {
+          return Response.json({ error: "Only CSV and SQLite (.db) saving is currently supported" }, { status: 400 });
+        }
+      } catch (e) {
+        console.error("Save failed", e);
+        return Response.json({ error: "Save failed" }, { status: 500 });
       }
     }
 
