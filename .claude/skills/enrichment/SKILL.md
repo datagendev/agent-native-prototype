@@ -138,7 +138,12 @@ Use `AskUserQuestion`:
 - "What do you want to enrich these leads with?"
 - Let user describe in their own words
 
-**Then** search for matching capabilities based on their answer:
+**Then** Try to come up with columns needed to accomplish the enrichment task and stop to check with users. you should simply show what columns you think is needed to the users. in format of : 
+Suggested Columns:
+{column name}: {reason to have this columns}
+and iterate with user 
+
+**finally** search for matching capabilities based on their answer:
 
 ```bash
 # Local primitives
@@ -150,7 +155,7 @@ ls scripts/integrations/
 
 For external tools, use `mcp__datagen__searchTools`.
 
-Present matching options and confirm with user.
+Present matching options and confirm with user. 
 
 ---
 

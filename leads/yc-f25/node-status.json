@@ -1,10 +1,17 @@
 {
-  "user_intent": "Enrich B2B companies with founder LinkedIn URLs",
+  "user_intent": "Find non-technical founders talking about Claude Code - Step 1: Classify technical vs non-technical",
   "nodes": [
     {
-      "name": "yc_founder_lookup",
-      "purpose": "Extract founder name, title, and LinkedIn URL from YC company page",
+      "name": "linkedin_profile_enrichment",
+      "purpose": "Fetch full LinkedIn profile data (headline, summary, positions, education)",
+      "mcp_tool": "get_linkedin_person_data",
       "ready": true
+    },
+    {
+      "name": "technical_classifier",
+      "purpose": "Classify founder as technical vs non-technical based on profile data",
+      "method": "AI classification using ai_writer tool",
+      "ready": false
     }
   ]
 }

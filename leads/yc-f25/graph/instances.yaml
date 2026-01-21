@@ -83,3 +83,21 @@ instances:
     description: Classify YC company as B2B or B2C
     parameters:
       output_prefix: ""
+
+  # ---------------------------------------------------------------------------
+  # LinkedIn Education
+  # ---------------------------------------------------------------------------
+  linkedin_education:
+    type: linkedin_education
+    description: Fetch education history from LinkedIn profile
+    parameters:
+      output_prefix: ""
+
+  # ---------------------------------------------------------------------------
+  # Harvard Detection
+  # ---------------------------------------------------------------------------
+  harvard_detection:
+    type: harvard_detection
+    description: Detect if founder attended Harvard
+    parameters:
+      output_prefix: ""

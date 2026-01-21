@@ -187,3 +187,27 @@ workflows:
         to: yc_founder.name
       - from: $input.yc_url
         to: yc_founder.yc_url
+
+  # ---------------------------------------------------------------------------
+  # HARVARD DETECTION - Find founders who attended Harvard
+  # ---------------------------------------------------------------------------
+  harvard_founders:
+    description: "Find founder LinkedIn, get education history, detect Harvard attendance"
+    nodes:
+      - yc_founder
+      - linkedin_education
+      - harvard_detection
+    connections:
+      # Step 1: Get founder LinkedIn URL from YC page
+      - from: $input.name
+        to: yc_founder.name
+      - from: $input.yc_url
+        to: yc_founder.yc_url
+
+      # Step 2: Fetch education history from LinkedIn profile
+      - from: yc_founder.founder_linkedin_url
+        to: linkedin_education.founder_linkedin_url
+
+      # Step 3: Detect if any school is Harvard
+      - from: linkedin_education.school_names
+        to: harvard_detection.school_names
