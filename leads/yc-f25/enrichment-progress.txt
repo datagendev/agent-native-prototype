@@ -72,3 +72,13 @@ Phase: 1 - New User Intent
 - Benefits: Faster, cheaper, more reliable domain extraction
 - Next: Re-run enrichment to get accurate domains for all B2B companies
 
+
+## Session 2026-01-16
+Phase: 1 - New User Intent
+- User intent: Find non-technical founders talking about Claude Code
+- Strategy: Two-step approach
+  - Step 1: Classify all founders as technical vs non-technical
+  - Step 2: Search non-technical founders' posts for Claude mentions
+- Current data: 156 companies with founder LinkedIn URLs
+- Next: Define columns for Step 1 (technical classification)
+
