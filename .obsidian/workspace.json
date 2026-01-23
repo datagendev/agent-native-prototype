@@ -185,6 +185,8 @@
   },
   "active": "5894df755d25d34e",
   "lastOpenFiles": [
+    "lead/davidkwint_draft.md",
+    "lead",
     "who_we_are~dcdf5cb5324949df0ae9a66453f407dcb35d9400",
     "tmp/fireflies/meeting-summary.md",
     "tmp/fireflies/transcript.json",
@@ -197,8 +199,6 @@
     "services/webhook-service/requirements.txt",
     "services/webhook-service/pyproject.toml",
     "services/webhook-service/app/core/exceptions/base.py",
-    "services/webhook-service/app/core/exceptions/__init__.py",
-    "services/webhook-service/app/core/mixins/__init__.py",
     "services/webhook-service/PLANNING.md",
     "services/webhook-service/HANDOFF.md",
     "how_to_use_dg_build_agentic_claude_code.md",
