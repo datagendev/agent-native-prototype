@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{REPORT_TITLE}}</title>
+  <style>
+    /* DataGen Brand Colors */
+    :root {
+      --primary: #005047;
+      --secondary: #00795e;
+      --success: #219653;
+      --danger: #D34053;
+      --warning: #FFA70B;
+      --boxdark: #24303F;
+      --boxdark-2: #1A222C;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header .date {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .summary-card {
+      padding: 24px 16px;
+      text-align: center;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .summary-card:last-child {
+      border-right: none;
+    }
+
+    .summary-card .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .summary-card .label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section {
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .section-icon.action { background: rgba(211, 64, 83, 0.1); }
+    .section-icon.active { background: rgba(33, 150, 83, 0.1); }
+    .section-icon.warning { background: rgba(255, 167, 11, 0.1); }
+    .section-icon.info { background: rgba(0, 80, 71, 0.1); }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    tr:hover {
+      background: var(--gray-50);
+    }
+
+    .email-cell {
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-action {
+      background: rgba(211, 64, 83, 0.1);
+      color: var(--danger);
+    }
+
+    .badge-success {
+      background: rgba(33, 150, 83, 0.1);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background: rgba(255, 167, 11, 0.1);
+      color: #b45309;
+    }
+
+    .badge-primary {
+      background: rgba(0, 80, 71, 0.1);
+      color: var(--primary);
+    }
+
+    /* Metrics Bar */
+    .metrics-bar {
+      display: flex;
+      gap: 24px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .metric-dot.green { background: var(--success); }
+    .metric-dot.red { background: var(--danger); }
+    .metric-dot.yellow { background: var(--warning); }
+    .metric-dot.blue { background: #3b82f6; }
+
+    .metric-value {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .metric-label {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    /* Action Button */
+    .action-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .action-btn:hover {
+      background: var(--secondary);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 32px;
+      color: var(--gray-500);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 24px 40px;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Trend Indicator */
+    .trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .trend.up { color: var(--success); }
+    .trend.down { color: var(--danger); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-card {
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+
+      .metrics-bar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>{{REPORT_TITLE}}</h1>
+      <p class="date">{{REPORT_DATE}} | DataGen Analytics</p>
+    </div>
+
+    <!-- Content sections go here -->
+    {{CONTENT}}
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Generated by <a href="https://datagen.dev">DataGen</a></p>
+      <p style="margin-top: 8px;"><a href="https://datagen.dev/signalgen/agents">View Dashboard</a></p>
+    </div>
+  </div>
+</body>
+</html>
