@@ -259,6 +259,31 @@ skills:
 **Reference:** [Claude Code Subagents Docs](https://code.claude.com/docs/en/sub-agents)
 
 
+## MCP Tool Error Handling
+
+When MCP tool execution fails:
+
+1. **Save the error locally** - Write what went wrong to a file (e.g., `./tmp/{workflow}/errors.json`)
+2. **Don't keep searching for new tools** - If a tool fails, document the failure and move on
+3. **Continue with available data** - Generate partial results rather than blocking entirely
+4. **Report clearly** - Summarize what succeeded and what failed
+
+```python
+# Example: Save MCP error to local file
+error_log = {
+    "tool": "mcp_Posthog_query_run",
+    "error": str(e),
+    "timestamp": datetime.now().isoformat(),
+    "query": query_params
+}
+with open(f"./tmp/{workflow}/errors.json", "a") as f:
+    json.dump(error_log, f)
+    f.write("\n")
+```
+
+**Why:** Searching for alternative tools wastes tokens and rarely succeeds. Better to save context and let the user decide next steps.
+
+
 ## When saving articles or post. following follow front matter standard
 ## Frontmatter Standard
 
