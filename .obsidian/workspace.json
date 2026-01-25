@@ -185,6 +185,9 @@
   },
   "active": "5894df755d25d34e",
   "lastOpenFiles": [
+    "tmp/daily-report-2026-01-25/report.html",
+    "tmp/daily-report-2026-01-25/activity.json",
+    "tmp/daily-report-2026-01-25",
     "lead/815693940_draft.md",
     "how_to_use_dg_build_agentic_claude_code.md",
     "docs/claude-code-nondev-gtm-usage-posts-webhook-fit.md",
@@ -199,10 +202,8 @@
     "tmp/fireflies/meeting-summary.md",
     "tmp/fireflies/transcript.json",
     "tmp/fireflies",
-    "tmp",
     "sidebar_solid_light.png",
     "sidebar_solid_green_light.png",
-    "services/webhook-service/tests/__init__.py",
     "services/webhook-service/PLANNING.md",
     "services/webhook-service/HANDOFF.md",
     "docs/async-agent-deployment-webhook-prospecting.md",
@@ -223,7 +224,6 @@
     "CLAUDE.md",
     "docs/DOES-SYSTEM-HANDLE-IT.md",
     "docs/COMPLETE-WORKFLOW-PROGRESSION.md",
-    "docs/async-agent-deployment-webhook-user-profiles.md",
-    "docs/async-agent-deployment-webhook-noncoding-use-cases.md"
+    "docs/async-agent-deployment-webhook-user-profiles.md"
   ]
 }
