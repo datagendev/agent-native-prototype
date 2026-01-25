@@ -49,9 +49,10 @@ Use the **generate-report** skill templates and brand colors to create the repor
 
 ## Error Handling
 
-1. If a query fails, continue with available data
-2. If email fails, save report to `reports/user-activity/report-{date}.html`
-3. Report what succeeded and what failed
+1. If a query fails, **save the error locally** to `./tmp/daily-report-{date}/errors.json`
+2. **Don't search for alternative tools** - document failure and continue with available data
+3. If email fails, save report to `reports/user-activity/report-{date}.html`
+4. Report what succeeded and what failed
 
 ## Output
 
