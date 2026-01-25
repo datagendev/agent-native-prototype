@@ -46,10 +46,10 @@ PostHog (Behavior)              Neon (State)
 
 | Table | Purpose | Key Columns |
 |-------|---------|-------------|
-| `wasp_user` | User accounts | id, email, credits, subscription_status, last_active_timestamp |
+| `wasp_user` | User accounts | id, email, credits, subscription_status, last_active_timestamp, created_at |
 | `fastapi_user` | Backend link | wasp_user_id, id (for joins) |
-| `fastapi_run` | Execution history | user_id, run_state, created_at |
-| `fastapi_code_execution` | Code runs | user_id, status, execution_time_ms |
+| `fastapi_run` | Execution history | user_id, run_state, created_at, run_error_log |
+| `fastapi_code_execution` | Code runs | user_id, status, execution_time_ms, script_name |
 | `fastapi_deployment` | Custom tools | user_id, name, final_code |
 
 ### PostHog Events
@@ -60,15 +60,13 @@ PostHog (Behavior)              Neon (State)
 | `mcp_url_copied` | Setup completion | - |
 | `$rageclick` | UX frustration | $pathname |
 | `$exception` | JS errors | $exception_message |
-| `$pageview` | Traffic | $pathname, $referrer |
+| `$pageview` | Traffic | $pathname, $referrer, $referring_domain, $geoip_country_code |
 
-## Workflow
+---
 
-### Step 1: Query PostHog (MCP Layer)
+## PostHog Queries
 
-Run these queries to get behavioral data:
-
-**1a. Key events last 7 days (excluding internal)**
+### Event Overview (7 days)
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -84,7 +82,7 @@ Run these queries to get behavioral data:
 }
 ```
 
-**1b. MCP connect clicks with user details**
+### MCP Connect Clicks (with user details)
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -93,14 +91,14 @@ Run these queries to get behavioral data:
       "kind": "DataVisualizationNode",
       "source": {
         "kind": "HogQLQuery",
-        "query": "SELECT person.properties.email as email, count() as click_count, any(properties.template_name) as mcp_server, any(properties.$referring_domain) as referrer, min(timestamp) as first_click, max(timestamp) as last_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 30 DAY GROUP BY email ORDER BY click_count DESC"
+        "query": "SELECT person.properties.email as email, count() as click_count, groupArray(properties.template_name) as mcp_servers, any(properties.$referring_domain) as referrer, min(timestamp) as first_click, max(timestamp) as last_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 30 DAY GROUP BY email ORDER BY click_count DESC"
       }
     }
   }
 }
 ```
 
-**1c. Daily unique users trend**
+### Daily Unique Users (DAU Trend)
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -119,7 +117,39 @@ Run these queries to get behavioral data:
 }
 ```
 
-**1d. Rage clicks and errors (UX issues)**
+### Traffic Sources (by referrer)
+```json
+{
+  "tool_alias_name": "mcp_Posthog_query_run",
+  "parameters": {
+    "query": {
+      "kind": "DataVisualizationNode",
+      "source": {
+        "kind": "HogQLQuery",
+        "query": "SELECT properties.$referring_domain as referrer, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY referrer ORDER BY visits DESC LIMIT 20"
+      }
+    }
+  }
+}
+```
+
+### Traffic by Country
+```json
+{
+  "tool_alias_name": "mcp_Posthog_query_run",
+  "parameters": {
+    "query": {
+      "kind": "DataVisualizationNode",
+      "source": {
+        "kind": "HogQLQuery",
+        "query": "SELECT properties.$geoip_country_code as country, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY country ORDER BY visits DESC LIMIT 15"
+      }
+    }
+  }
+}
+```
+
+### UX Issues (rage clicks + errors)
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -135,9 +165,27 @@ Run these queries to get behavioral data:
 }
 ```
 
-### Step 2: Query Neon (MCP Layer)
+### Page Breakdown
+```json
+{
+  "tool_alias_name": "mcp_Posthog_query_run",
+  "parameters": {
+    "query": {
+      "kind": "DataVisualizationNode",
+      "source": {
+        "kind": "HogQLQuery",
+        "query": "SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY page ORDER BY views DESC LIMIT 20"
+      }
+    }
+  }
+}
+```
 
-**2a. User overview stats**
+---
+
+## Neon Queries
+
+### User Overview Stats
 ```json
 {
   "tool_alias_name": "mcp_Neon_run_sql",
@@ -149,31 +197,31 @@ Run these queries to get behavioral data:
 }
 ```
 
-**2b. Users with run activity**
+### Users with Run Activity (with success rate)
 ```json
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, w.credits, COUNT(r.id) as run_count, MAX(r.created_at) as last_run FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' GROUP BY w.email, w.credits HAVING COUNT(r.id) > 0 ORDER BY run_count DESC LIMIT 20",
+    "sql": "SELECT w.email, w.credits, COUNT(r.id) as run_count, COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) as success_count, ROUND(100.0 * COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) / NULLIF(COUNT(r.id), 0), 1) as success_rate, MAX(r.created_at) as last_run FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' GROUP BY w.email, w.credits HAVING COUNT(r.id) > 0 ORDER BY run_count DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
 }
 ```
 
-**2c. Users with no runs but have account**
+### Users with No Runs (churned/at-risk)
 ```json
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, w.credits, w.created_at, w.last_active_timestamp FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' AND r.id IS NULL ORDER BY w.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, w.credits, w.created_at, w.last_active_timestamp, EXTRACT(DAY FROM NOW() - w.created_at) as days_since_signup FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' AND r.id IS NULL ORDER BY w.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
 }
 ```
 
-**2d. Recent failed runs**
+### Recent Failed Runs
 ```json
 {
   "tool_alias_name": "mcp_Neon_run_sql",
@@ -185,85 +233,35 @@ Run these queries to get behavioral data:
 }
 ```
 
-### Step 3: Combine & Analyze (Claude Layer)
-
-After running the queries, identify these user segments:
-
-#### Segment 1: High-Intent Prospects (ACTION: Outreach)
-- Clicked MCP connect but credits = 100 (no usage)
-- Cross-reference PostHog `mcp_connect_clicked` with Neon `wasp_user.credits = 100`
-- Priority: Users who clicked multiple times or specific high-value MCPs (Gmail, Slack)
-
-#### Segment 2: Active Power Users (ACTION: Nurture)
-- Multiple runs, credit consumption
-- From Neon: `run_count > 5` or `credits < 50`
-- Consider for case studies, testimonials, premium upsell
-
-#### Segment 3: At-Risk Users (ACTION: Re-engage)
-- Signed up but no activity in 7+ days
-- From Neon: `created_at < NOW() - 7 days` AND no runs
-- Send re-engagement email with use case
-
-#### Segment 4: Frustrated Users (ACTION: Fix UX)
-- Rage clicks or exceptions
-- From PostHog: `$rageclick` or `$exception` events
-- Investigate pages with issues, prioritize fixes
-
-#### Segment 5: Failed Runs (ACTION: Support)
-- Users with failed executions
-- From Neon: `run_state = 'failed'`
-- Proactive support outreach
-
-### Step 4: Generate Report (Claude Layer)
-
-Output a markdown report with:
-
-```markdown
-# User Activity Report - {YYYY-MM-DD}
-
-## Summary
-- Total users: X
-- New users (7d): X
-- Users with usage: X
-- Avg credits: X
-
-## Traffic (PostHog)
-- DAU trend: [sparkline or numbers]
-- Top pages: [list]
-- Referral sources: [list]
-
-## High-Intent Prospects (Outreach Needed)
-| Email | MCP Interest | Clicks | Referrer | Credits | Action |
-|-------|--------------|--------|----------|---------|--------|
-| ... | Gmail | 14 | LinkedIn | 100 | Reach out about Gmail automation |
-
-## Active Users
-| Email | Runs | Credits Used | Last Active |
-|-------|------|--------------|-------------|
-| ... | 25 | 75 | 2026-01-24 |
-
-## At-Risk Users
-| Email | Signed Up | Days Inactive | Credits |
-|-------|-----------|---------------|---------|
-| ... | 2026-01-10 | 14 | 100 |
-
-## UX Issues
-| User | Issue Type | Page | Timestamp |
-|------|------------|------|-----------|
-| ... | Rage click | /signalgen/mcp-servers | 2026-01-23 |
-
-## Failed Runs (Support Needed)
-| User | Error | Timestamp |
-|------|-------|-----------|
-| ... | API timeout | 2026-01-22 |
-
-## Recommendations
-1. [Specific action items based on data]
+### Recent Code Executions (what users are building)
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT w.email, ce.script_name, ce.status, ce.execution_time_ms, ce.created_at FROM fastapi_code_execution ce JOIN fastapi_user f ON ce.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY ce.created_at DESC LIMIT 20",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
 ```
 
-## Deep Dive Queries
+### Custom Tools Created
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT w.email, d.name, d.created_at, LENGTH(d.final_code) as code_length FROM fastapi_deployment d JOIN fastapi_user f ON d.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY d.created_at DESC LIMIT 20",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
 
-### Get full journey for specific user
+---
+
+## Deep Dive Queries (per user)
+
+### Full User Journey (PostHog)
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -279,7 +277,7 @@ Output a markdown report with:
 }
 ```
 
-### Get MCP servers a user clicked
+### MCP Servers User Clicked
 ```json
 {
   "tool_alias_name": "mcp_Posthog_query_run",
@@ -295,17 +293,50 @@ Output a markdown report with:
 }
 ```
 
-### Check user's Neon records
+### User's Neon Records
 ```json
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.*, (SELECT COUNT(*) FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id WHERE f.wasp_user_id = w.id) as run_count FROM wasp_user w WHERE w.email = '{EMAIL}'",
+    "sql": "SELECT w.*, (SELECT COUNT(*) FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id WHERE f.wasp_user_id = w.id) as run_count, (SELECT COUNT(*) FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id WHERE f.wasp_user_id = w.id AND r.run_state = 'completed') as success_count FROM wasp_user w WHERE w.email = '{EMAIL}'",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
 }
 ```
+
+---
+
+## User Segmentation Logic
+
+After running queries, classify users into these segments:
+
+### Segment 1: High-Intent Prospects (ACTION: Outreach)
+- Clicked MCP connect but credits = 100 (no usage)
+- Cross-reference PostHog `mcp_connect_clicked` with Neon `wasp_user.credits = 100`
+- Priority: Users who clicked multiple times or high-value MCPs (Gmail, Slack, Linear)
+
+### Segment 2: Power Users (ACTION: Nurture)
+- Multiple runs, credit consumption
+- Criteria: `run_count > 5` or `credits < 50`
+- Consider for case studies, testimonials, premium upsell
+
+### Segment 3: At-Risk Users (ACTION: Re-engage)
+- Signed up but no activity in 7+ days
+- Criteria: `created_at < NOW() - 7 days` AND no runs
+- Send re-engagement email with use case
+
+### Segment 4: Frustrated Users (ACTION: Fix UX)
+- Rage clicks or exceptions
+- From PostHog: `$rageclick` or `$exception` events
+- Investigate pages with issues, prioritize fixes
+
+### Segment 5: Failing Users (ACTION: Support)
+- Users with high failure rate
+- Criteria: `success_rate < 50%` with `run_count > 5`
+- Proactive support outreach
+
+---
 
 ## Key Metrics to Track
 
@@ -317,61 +348,12 @@ Output a markdown report with:
 | Run Success Rate | Neon | >80% | >95% |
 | Credit Utilization | Neon | >20% using | >50% using |
 
-## Step 5: Generate HTML Report (Claude Layer)
-
-After gathering data, generate HTML report from template:
-
-1. Read template: `.claude/skills/user-activity-tracker/templates/report-email.html`
-2. Replace placeholders with actual data
-3. Save to `reports/user-activity/report-{YYYY-MM-DD}.html`
-
-## Step 6: Send via Email (MCP Layer)
-
-Send the report via Gmail with HTML body:
-
-```json
-{
-  "tool_alias_name": "mcp_Gmail_Yusheng_gmail_send_email",
-  "parameters": {
-    "to": ["yusheng.kuo@datagen.dev"],
-    "subject": "DataGen User Activity Report - {DATE}",
-    "body": "Your daily user activity report is attached. View in HTML-enabled email client.",
-    "htmlBody": "<full HTML content here>",
-    "mimeType": "multipart/alternative"
-  }
-}
-```
-
-**Gmail MCP supports:**
-- `htmlBody`: Full HTML content for rich formatting
-- `mimeType`: Set to `multipart/alternative` for HTML + plain text fallback
-- `to`: Array of recipients
-
-## Brand Colors Reference
-
-```css
---primary: #005047;      /* Dark teal - headers, buttons */
---secondary: #00795e;    /* Light teal - accents */
---success: #219653;      /* Green - positive metrics */
---danger: #D34053;       /* Red - action needed */
---warning: #FFA70B;      /* Orange - warnings */
---boxdark: #24303F;      /* Dark mode background */
-```
-
-## File Structure
-
-```
-.claude/skills/user-activity-tracker/
-├── SKILL.md                         # This file
-├── templates/
-│   ├── report-email.html            # HTML template with placeholders
-│   └── sample-report.html           # Example with real data
-└── scripts/                         # Future: Python scripts for automation
-```
+---
 
 ## Notes
 
 - Always exclude `@datagen.dev` emails from analysis
-- PostHog has `filterTestAccounts: true` option for queries
+- PostHog has `filterTestAccounts: true` option for trend queries
 - Neon project ID: `rough-base-02149126`, database: `datagen`
 - User ID links: `wasp_user.id` = `fastapi_user.wasp_user_id`
+- Replace `{EMAIL}` placeholder in deep dive queries with actual email
