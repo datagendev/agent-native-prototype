@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-01-25",
+  "posthog_data": {
+    "event_overview_7d": {
+      "page_viewed": 484,
+      "autocapture": 232,
+      "pageview": 82,
+      "web_vitals": 48,
+      "pageleave": 43,
+      "set": 25,
+      "mcp_connect_clicked": 14,
+      "rageclick": 1,
+      "mcp_url_copied": 1
+    },
+    "traffic_sources": [
+      {"referrer": "Direct", "visits": 413, "unique_visitors": 135},
+      {"referrer": "mcp.datagen.dev", "visits": 28, "unique_visitors": 5},
+      {"referrer": "LinkedIn", "visits": 27, "unique_visitors": 25},
+      {"referrer": "Google", "visits": 19, "unique_visitors": 17},
+      {"referrer": "LinkedIn Android", "visits": 7, "unique_visitors": 5},
+      {"referrer": "Claude.ai", "visits": 4, "unique_visitors": 1}
+    ],
+    "geographic_distribution": [
+      {"country": "US", "visits": 397, "unique_visitors": 115},
+      {"country": "DE", "visits": 15, "unique_visitors": 4},
+      {"country": "IN", "visits": 14, "unique_visitors": 10},
+      {"country": "PL", "visits": 7, "unique_visitors": 2},
+      {"country": "IL", "visits": 7, "unique_visitors": 4}
+    ],
+    "top_pages": [
+      {"page": "/", "views": 337, "unique_visitors": 156},
+      {"page": "/oauth/callback", "views": 26, "unique_visitors": 18},
+      {"page": "/login/oauth/authorize", "views": 25, "unique_visitors": 5},
+      {"page": "/signalgen/agents", "views": 21, "unique_visitors": 3},
+      {"page": "/account", "views": 19, "unique_visitors": 6},
+      {"page": "/privacy", "views": 15, "unique_visitors": 12},
+      {"page": "/signalgen/mcp-servers", "views": 9, "unique_visitors": 5}
+    ]
+  },
+  "neon_data": {
+    "user_stats": {
+      "total_users": 78,
+      "new_users_7d": 0,
+      "users_with_usage": 26,
+      "avg_credits": 317.3
+    },
+    "power_users": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "credits": 4830,
+        "run_count": 877,
+        "success_count": 742,
+        "success_rate": 84.6,
+        "last_run": "2026-01-25T00:12:16.000Z"
+      },
+      {
+        "email": "ravi@fulllist.ai",
+        "credits": 496,
+        "run_count": 409,
+        "success_count": 0,
+        "success_rate": 0.0,
+        "last_run": "2026-01-24T15:00:00.000Z"
+      },
+      {
+        "email": "catecean20@gmail.com",
+        "credits": 974,
+        "run_count": 40,
+        "success_count": 20,
+        "success_rate": 50.0,
+        "last_run": "2026-01-19T09:00:00.000Z"
+      }
+    ],
+    "inactive_users": [
+      {"email": "ben@beneficial-intelligence.com", "days_since_signup": 11},
+      {"email": "andriyvovchak15@gmail.com", "days_since_signup": 12},
+      {"email": "akil@leadle.in", "days_since_signup": 12},
+      {"email": "anand.mridul3@gmail.com", "days_since_signup": 13},
+      {"email": "team@oneaway.io", "days_since_signup": 13}
+    ],
+    "recent_failures": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "error": "No module named 'httpx'",
+        "timestamp": "2026-01-24T23:35:05.000Z"
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "error": "name 'findall_id' is not defined",
+        "timestamp": "2026-01-24T23:26:47.000Z"
+      }
+    ]
+  },
+  "key_insights": {
+    "engagement": "14 MCP connect clicks in 7 days",
+    "activation_challenge": "0 new signups in past 7 days",
+    "power_user_highlight": "jeremy.scott.ross@gmail.com with 877 runs (84.6% success)",
+    "at_risk_user": "ravi@fulllist.ai with 409 runs but 0% success rate",
+    "traffic_insight": "82% US traffic, LinkedIn driving 27 qualified visits"
+  }
+}
