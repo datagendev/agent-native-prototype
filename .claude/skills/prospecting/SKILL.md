@@ -29,8 +29,8 @@ AskUserQuestion:
       description: "Extract team/contact info from a company website"
     - label: "LinkedIn Engagers"
       description: "Get people who engaged with a LinkedIn post"
-    - label: "Map & Batch Scrape"
-      description: "Extract from multiple pages on a large site"
+    - label: "Find Alike"
+      description: "Using find alike like DiscoLike to find similar ones"
     - label: "Web Search"
       description: "Find prospects via search query"
 ```
