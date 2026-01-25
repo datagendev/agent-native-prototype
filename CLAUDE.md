@@ -205,6 +205,60 @@ Edit: Append "## AI Strategic Analysis" section with insights
 4. **Separation of Concerns**: Each layer does what it's best at
 
 
+## Subagent Configuration
+
+Subagents are defined in `.claude/agents/` with YAML frontmatter.
+
+### Frontmatter Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Unique identifier (lowercase, hyphens) |
+| `description` | Yes | When Claude should delegate to this agent |
+| `model` | No | `sonnet`, `opus`, `haiku`, or `inherit` |
+| `tools` | No | Tools the agent can use (inherits all if omitted) |
+| `skills` | No | Skills to auto-load into agent context at startup |
+| `color` | No | Background color for UI identification |
+
+### Skills Field
+
+The `skills` field **injects full skill content** into the agent's context at startup:
+
+```yaml
+---
+name: daily-reporter
+description: Generate and email daily reports
+model: sonnet
+skills:
+  - user-activity-tracker
+  - generate-report
+---
+```
+
+**Key points:**
+- Skills are **injected**, not just "available" - full content loaded at startup
+- Subagents **don't inherit** skills from parent - must list explicitly
+- Keeps agent files clean by referencing skills instead of duplicating content
+- Agent body describes workflow; skills provide the details (queries, templates, etc.)
+
+### Example Structure
+
+```
+.claude/
+├── agents/
+│   └── daily-reporter.md      # Agent config + workflow
+└── skills/
+    ├── user-activity-tracker/
+    │   └── SKILL.md            # Data queries (PostHog, Neon)
+    └── generate-report/
+        ├── SKILL.md            # Template instructions
+        └── templates/
+            └── user-activity.html
+```
+
+**Reference:** [Claude Code Subagents Docs](https://code.claude.com/docs/en/sub-agents)
+
+
 ## When saving articles or post. following follow front matter standard
 ## Frontmatter Standard
 
