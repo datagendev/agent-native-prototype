@@ -1,0 +1,48 @@
+{
+  "report_date": "2026-01-25",
+  "user_stats": {
+    "total_users": 78,
+    "new_users_7d": 0,
+    "users_with_usage": 26,
+    "avg_credits": 317.3
+  },
+  "posthog_events_7d": {
+    "page_viewed": 471,
+    "autocapture": 232,
+    "pageview": 75,
+    "web_vitals": 50,
+    "pageleave": 39,
+    "set": 24,
+    "mcp_connect_clicked": 14,
+    "exception": 1,
+    "rageclick": 1,
+    "mcp_url_copied": 1
+  },
+  "traffic_sources": [
+    {"referrer": "$direct", "visits": 406, "unique_visitors": 132},
+    {"referrer": "www.linkedin.com", "visits": 27, "unique_visitors": 25},
+    {"referrer": "mcp.datagen.dev", "visits": 27, "unique_visitors": 5},
+    {"referrer": "www.google.com", "visits": 20, "unique_visitors": 18}
+  ],
+  "ux_issues": [
+    {"email": "david@automatedemand.com", "event": "$rageclick", "page": "/", "timestamp": "2026-01-23T18:15:29.703000Z"},
+    {"email": null, "event": "$exception", "page": "/", "timestamp": "2026-01-18T14:25:56.868000Z"}
+  ],
+  "active_users": [
+    {"email": "jeremy.scott.ross@gmail.com", "credits": 4830, "run_count": 877, "success_count": 742, "success_rate": 84.6, "last_run": "2026-01-25T00:12:16.000Z"},
+    {"email": "ravi@fulllist.ai", "credits": 496, "run_count": 409, "success_count": 0, "success_rate": 0.0, "last_run": "2026-01-24T15:00:00.000Z"},
+    {"email": "catecean20@gmail.com", "credits": 974, "run_count": 40, "success_count": 20, "success_rate": 50.0, "last_run": "2026-01-19T09:00:00.000Z"}
+  ],
+  "at_risk_users": [
+    {"email": "ben@beneficial-intelligence.com", "days_since_signup": 11},
+    {"email": "andriyvovchak15@gmail.com", "days_since_signup": 11},
+    {"email": "akil@leadle.in", "days_since_signup": 12},
+    {"email": "anand.mridul3@gmail.com", "days_since_signup": 13},
+    {"email": "team@oneaway.io", "days_since_signup": 13}
+  ],
+  "failed_runs": [
+    {"email": "jeremy.scott.ross@gmail.com", "error": "No module named 'httpx'", "timestamp": "2026-01-24T23:35:05.000Z"},
+    {"email": "jeremy.scott.ross@gmail.com", "error": "name 'findall_id' is not defined", "timestamp": "2026-01-24T23:26:47.000Z"},
+    {"email": "ravi@fulllist.ai", "error": null, "timestamp": "2026-01-24T15:00:00.000Z"}
+  ]
+}
