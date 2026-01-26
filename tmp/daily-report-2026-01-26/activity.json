@@ -1,0 +1,97 @@
+{
+  "date": "2026-01-26",
+  "posthog": {
+    "event_overview_7d": [
+      {"event": "page_viewed", "count": 484},
+      {"event": "$autocapture", "count": 232},
+      {"event": "$pageview", "count": 82},
+      {"event": "$web_vitals", "count": 48},
+      {"event": "$pageleave", "count": 43},
+      {"event": "$set", "count": 25},
+      {"event": "mcp_connect_clicked", "count": 14},
+      {"event": "$rageclick", "count": 1},
+      {"event": "mcp_url_copied", "count": 1}
+    ],
+    "mcp_connect_clicks": [],
+    "traffic_sources": [
+      {"referrer": "$direct", "visits": 413, "unique_visitors": 135},
+      {"referrer": "mcp.datagen.dev", "visits": 28, "unique_visitors": 5},
+      {"referrer": "www.linkedin.com", "visits": 27, "unique_visitors": 25},
+      {"referrer": "www.google.com", "visits": 19, "unique_visitors": 17},
+      {"referrer": "com.linkedin.android", "visits": 7, "unique_visitors": 5},
+      {"referrer": "claude.ai", "visits": 4, "unique_visitors": 1},
+      {"referrer": "old.reddit.com", "visits": 2, "unique_visitors": 1},
+      {"referrer": "datagen.dev", "visits": 2, "unique_visitors": 1}
+    ],
+    "traffic_by_country": [
+      {"country": "US", "visits": 397, "unique_visitors": 115},
+      {"country": "DE", "visits": 15, "unique_visitors": 4},
+      {"country": "IN", "visits": 14, "unique_visitors": 10},
+      {"country": "PL", "visits": 7, "unique_visitors": 2},
+      {"country": "IL", "visits": 7, "unique_visitors": 4},
+      {"country": "LB", "visits": 6, "unique_visitors": 1},
+      {"country": "CA", "visits": 6, "unique_visitors": 3},
+      {"country": "GB", "visits": 5, "unique_visitors": 4},
+      {"country": "EE", "visits": 5, "unique_visitors": 1},
+      {"country": "BE", "visits": 5, "unique_visitors": 2},
+      {"country": "FR", "visits": 4, "unique_visitors": 3},
+      {"country": "RS", "visits": 4, "unique_visitors": 2},
+      {"country": "BR", "visits": 4, "unique_visitors": 4},
+      {"country": "KW", "visits": 3, "unique_visitors": 2},
+      {"country": "FI", "visits": 2, "unique_visitors": 2}
+    ],
+    "ux_issues": [
+      {"email": "david@automatedemand.com", "event": "$rageclick", "page": "/", "timestamp": "2026-01-23T18:15:29.703000Z"}
+    ],
+    "page_breakdown": [
+      {"page": "/", "views": 337, "unique_visitors": 156},
+      {"page": "/oauth/callback", "views": 26, "unique_visitors": 18},
+      {"page": "/login/oauth/authorize", "views": 25, "unique_visitors": 5},
+      {"page": "/signalgen/agents", "views": 21, "unique_visitors": 3},
+      {"page": "/account", "views": 19, "unique_visitors": 6},
+      {"page": "/privacy", "views": 15, "unique_visitors": 12},
+      {"page": "/signalgen/mcp-servers", "views": 9, "unique_visitors": 5},
+      {"page": "/signalgen/tools", "views": 7, "unique_visitors": 3},
+      {"page": "/signalgen/chat", "views": 7, "unique_visitors": 4},
+      {"page": "/login", "views": 7, "unique_visitors": 7}
+    ]
+  },
+  "neon": {
+    "user_overview": {
+      "total_users": 78,
+      "new_users_7d": 0,
+      "users_with_usage": 26,
+      "avg_credits": 317.3
+    },
+    "active_users": [
+      {"email": "jeremy.scott.ross@gmail.com", "credits": 4830, "run_count": 877, "success_count": 742, "success_rate": 84.6, "last_run": "2026-01-25T00:12:16.000Z"},
+      {"email": "ravi@fulllist.ai", "credits": 496, "run_count": 409, "success_count": 0, "success_rate": 0.0, "last_run": "2026-01-24T15:00:00.000Z"},
+      {"email": "catecean20@gmail.com", "credits": 974, "run_count": 40, "success_count": 20, "success_rate": 50.0, "last_run": "2026-01-19T09:00:00.000Z"},
+      {"email": "felixjon2000@gmail.com", "credits": 1000, "run_count": 8, "success_count": 6, "success_rate": 75.0, "last_run": "2025-10-09T09:44:24.000Z"},
+      {"email": "cell@criteria.dev", "credits": 849, "run_count": 8, "success_count": 6, "success_rate": 75.0, "last_run": "2025-06-08T05:10:02.000Z"},
+      {"email": "steve@misterbrady.com", "credits": 99, "run_count": 2, "success_count": 2, "success_rate": 100.0, "last_run": "2026-01-11T14:26:37.000Z"},
+      {"email": "nocodecanada@gmail.com", "credits": 96, "run_count": 2, "success_count": 0, "success_rate": 0.0, "last_run": "2025-11-15T10:54:49.000Z"}
+    ],
+    "churned_users": [
+      {"email": "ben@beneficial-intelligence.com", "credits": 100, "created_at": "2026-01-14T00:20:39.406Z", "days_since_signup": 12},
+      {"email": "andriyvovchak15@gmail.com", "credits": 100, "created_at": "2026-01-13T18:06:16.315Z", "days_since_signup": 12},
+      {"email": "akil@leadle.in", "credits": 100, "created_at": "2026-01-13T12:13:36.372Z", "days_since_signup": 12},
+      {"email": "anand.mridul3@gmail.com", "credits": 100, "created_at": "2026-01-12T13:25:20.472Z", "days_since_signup": 13},
+      {"email": "team@oneaway.io", "credits": 100, "created_at": "2026-01-12T10:43:04.133Z", "days_since_signup": 13},
+      {"email": "alex@talenthaul.com", "credits": 100, "created_at": "2026-01-11T08:30:22.488Z", "days_since_signup": 14},
+      {"email": "david@automatedemand.com", "credits": 100, "created_at": "2026-01-06T17:45:59.914Z", "days_since_signup": 19},
+      {"email": "isaac@recruitcloud.io", "credits": 100, "created_at": "2026-01-06T16:51:52.922Z", "days_since_signup": 19},
+      {"email": "leszek@getbackpack.ai", "credits": 100, "created_at": "2026-01-05T10:53:33.790Z", "days_since_signup": 20}
+    ],
+    "failed_runs": [
+      {"email": "jeremy.scott.ross@gmail.com", "run_state": "failed", "created_at": "2026-01-24T23:35:05.000Z", "error_preview": "Modal sandbox execution failed (rc=0). error=No module named 'httpx'"},
+      {"email": "jeremy.scott.ross@gmail.com", "run_state": "failed", "created_at": "2026-01-24T23:26:47.000Z", "error_preview": "Modal sandbox execution failed (rc=0). error=name 'findall_id' is not defined"},
+      {"email": "ravi@fulllist.ai", "run_state": "failed", "created_at": "2026-01-24T15:00:00.000Z", "error_preview": null},
+      {"email": "jeremy.scott.ross@gmail.com", "run_state": "failed", "created_at": "2026-01-24T04:50:16.000Z", "error_preview": "Modal sandbox execution failed (rc=137). error=None"}
+    ]
+  },
+  "errors": {
+    "code_executions": "Column ce.script_name does not exist in database schema",
+    "custom_tools": "Column d.name does not exist in database schema"
+  }
+}
