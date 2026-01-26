@@ -84,8 +84,9 @@ def _extract_activity_id(post_url: str) -> str:
     """
     Extract activity ID from LinkedIn post URL.
     Example: https://...activity-7407257858251141120-BZqe -> 7407257858251141120
+    Example: https://...ugcPost-7421207915300024321-CRT2 -> 7421207915300024321
     """
-    match = re.search(r'activity-(\d+)', post_url)
+    match = re.search(r'(?:activity-|ugcPost-)(\d+)', post_url)
     if not match:
         raise ValueError(f"Could not extract activity ID from URL: {post_url}")
     return match.group(1)
