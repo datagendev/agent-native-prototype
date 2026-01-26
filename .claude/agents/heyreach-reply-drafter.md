@@ -17,6 +17,7 @@ When given a LinkedIn URL from a lead reply payload, you will:
 4. Get full message history via `mcp_Heyreach_get_chatroom`
 5. Analyze context and draft a personalized reply
 6. Save the draft to `lead/{lead_id}_draft.md`
+7. Send notification to Discord with lead info, incoming message, and draft reply
 
 ## Workflow Steps
 
@@ -143,3 +144,64 @@ Always save something to the draft file, even if incomplete, so there's a record
 ## File System Convention
 
 Use the `lead/` directory for all draft files. Create the directory if it doesn't exist. The `{lead_id}` should be derived from the LinkedIn username or HeyReach's internal lead ID, whichever is more reliable and consistent.
+
+## Step 8: Send to Discord
+
+After saving the draft, send a notification to Discord with the lead info and draft reply.
+
+### Discord Webhook
+```
+https://discord.com/api/webhooks/1463588521984917636/cY01xMsj1K8mTo9mnbb4FghJVQwUDIpxVHFPTDi6fXYBUf2M6rG85XUGO4r-gCqCaBbX
+```
+
+### Message Format
+Use curl to send a POST request with a JSON payload containing an embed. This is more reliable than Python libraries for Discord webhooks.
+
+```bash
+curl -X POST "https://discord.com/api/webhooks/1463588521984917636/cY01xMsj1K8mTo9mnbb4FghJVQwUDIpxVHFPTDi6fXYBUf2M6rG85XUGO4r-gCqCaBbX" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "embeds": [{
+      "title": "HeyReach Reply: {lead_name}",
+      "color": 5814783,
+      "fields": [
+        {
+          "name": "Lead Info",
+          "value": "**{lead_name}**\n{lead_title} at {lead_company}\n[LinkedIn Profile]({linkedin_url})",
+          "inline": false
+        },
+        {
+          "name": "Their Messages",
+          "value": "{incoming_messages}",
+          "inline": false
+        },
+        {
+          "name": "Draft Reply",
+          "value": "{draft_reply}",
+          "inline": false
+        }
+      ],
+      "footer": {
+        "text": "Draft saved to lead/{lead_id}_draft.md"
+      }
+    }]
+  }'
+```
+
+**Important**: When building the JSON payload:
+- Escape double quotes within field values
+- Escape single quotes in shell by using `'\''`
+- Truncate "Their Messages" at 500 chars
+- Truncate "Draft Reply" at 1000 chars
+- HTTP 204 response means success
+
+### Discord Field Guidelines
+- **Lead Info**: Name, title, company, LinkedIn URL
+- **Their Message**: Quote their most recent message (truncate at 500 chars)
+- **Draft Reply**: The drafted response (truncate at 1000 chars)
+
+### Error Handling for Discord
+If Discord webhook fails:
+1. Log the error but don't fail the entire workflow
+2. The draft file is the primary artifact - Discord is notification only
+3. Note the Discord failure in the draft file if it occurs
