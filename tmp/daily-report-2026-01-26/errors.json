@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Posthog_query_run",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "MCP Connect Clicks",
+    "impact": "Cannot retrieve user MCP engagement data"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Posthog_query_run",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Page Breakdown",
+    "impact": "Cannot retrieve detailed page view analytics"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Posthog_query_run",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Traffic Sources",
+    "impact": "Cannot retrieve referrer analytics"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "User Overview Stats",
+    "impact": "Cannot retrieve user count and credit statistics"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Users with Run Activity",
+    "impact": "Cannot retrieve active user metrics"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Users with No Runs",
+    "impact": "Cannot retrieve at-risk user data"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Recent Failed Runs",
+    "impact": "Cannot retrieve error data for support"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Custom Tools Created",
+    "impact": "Cannot retrieve custom tool creation data"
+  },
+  {
+    "timestamp": "2026-01-26T00:00:00Z",
+    "tool": "mcp_Gmail_Yusheng_gmail_send_email",
+    "error": "Tool execution failed with status 524 (timeout)",
+    "query_type": "Email Delivery",
+    "impact": "Could not send email report to yusheng.kuo@datagen.dev"
+  }
+]
