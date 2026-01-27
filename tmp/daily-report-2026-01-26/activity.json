@@ -1,0 +1,28 @@
+{
+  "date": "2026-01-26",
+  "status": "partial",
+  "errors": "Multiple MCP tool timeouts - see errors.json",
+  "posthog_data": {
+    "event_overview_7d": {
+      "page_viewed": 556,
+      "$autocapture": 270,
+      "$pageview": 92,
+      "$pageleave": 50,
+      "$web_vitals": 48,
+      "$set": 29,
+      "mcp_connect_clicked": 14,
+      "$rageclick": 1,
+      "mcp_url_copied": 1
+    },
+    "dau_trend_14d": {
+      "dates": ["2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26"],
+      "dau": [12, 11, 20, 6, 5, 5, 8, 4, 6, 9, 16, 10, 5, 16, 7],
+      "total_pageviews": 140
+    }
+  },
+  "neon_data": {
+    "status": "failed",
+    "reason": "All Neon queries timed out with status 524"
+  },
+  "data_quality": "low - only basic PostHog event counts available"
+}
