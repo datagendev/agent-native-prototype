@@ -1,0 +1,73 @@
+{
+  "event_overview_7d": {
+    "page_viewed": 600,
+    "autocapture": 296,
+    "pageview": 101,
+    "pageleave": 58,
+    "web_vitals": 38,
+    "set": 31,
+    "mcp_connect_clicked": 15,
+    "rageclick": 1,
+    "internal_link_clicked": 1,
+    "mcp_url_copied": 1
+  },
+  "dau_trend_14d": {
+    "dates": ["2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27"],
+    "dau": [11, 20, 6, 5, 5, 8, 4, 6, 9, 16, 10, 5, 16, 11, 11],
+    "total_count": 143
+  },
+  "traffic_sources_30d": [
+    {"referrer": "$direct", "visits": 458, "unique_visitors": 144},
+    {"referrer": "mcp.datagen.dev", "visits": 29, "unique_visitors": 5},
+    {"referrer": "www.linkedin.com", "visits": 26, "unique_visitors": 24},
+    {"referrer": "www.google.com", "visits": 21, "unique_visitors": 19},
+    {"referrer": "com.linkedin.android", "visits": 7, "unique_visitors": 5},
+    {"referrer": "claude.ai", "visits": 4, "unique_visitors": 1},
+    {"referrer": "www.parseek.com", "visits": 1, "unique_visitors": 1},
+    {"referrer": "datagen.dev", "visits": 1, "unique_visitors": 1},
+    {"referrer": "yabigo.com", "visits": 1, "unique_visitors": 1},
+    {"referrer": "www.google.com.vn", "visits": 1, "unique_visitors": 1}
+  ],
+  "traffic_by_country_30d": [
+    {"country": "US", "visits": 437, "unique_visitors": 121},
+    {"country": "DE", "visits": 15, "unique_visitors": 4},
+    {"country": "IN", "visits": 14, "unique_visitors": 10},
+    {"country": "PL", "visits": 7, "unique_visitors": 2},
+    {"country": "IL", "visits": 7, "unique_visitors": 4},
+    {"country": "LB", "visits": 6, "unique_visitors": 1},
+    {"country": "CA", "visits": 6, "unique_visitors": 3},
+    {"country": "PT", "visits": 5, "unique_visitors": 1},
+    {"country": "EE", "visits": 5, "unique_visitors": 1},
+    {"country": "BE", "visits": 5, "unique_visitors": 2},
+    {"country": "GB", "visits": 4, "unique_visitors": 4},
+    {"country": "RS", "visits": 4, "unique_visitors": 2},
+    {"country": "BR", "visits": 4, "unique_visitors": 4},
+    {"country": "KW", "visits": 3, "unique_visitors": 2},
+    {"country": "FI", "visits": 2, "unique_visitors": 2}
+  ],
+  "ux_issues_7d": [
+    {"email": "david@automatedemand.com", "event": "$rageclick", "page": "/", "timestamp": "2026-01-23T18:15:29.703000Z"}
+  ],
+  "page_breakdown_30d": [
+    {"page": "/", "views": 351, "unique_visitors": 162},
+    {"page": "/signalgen/agents", "views": 35, "unique_visitors": 3},
+    {"page": "/oauth/callback", "views": 27, "unique_visitors": 19},
+    {"page": "/login/oauth/authorize", "views": 26, "unique_visitors": 5},
+    {"page": "/account", "views": 21, "unique_visitors": 6},
+    {"page": "/privacy", "views": 16, "unique_visitors": 13},
+    {"page": "/signalgen/mcp-servers", "views": 10, "unique_visitors": 6},
+    {"page": "/signalgen/tools", "views": 8, "unique_visitors": 3},
+    {"page": "/login", "views": 7, "unique_visitors": 7},
+    {"page": "/signalgen/chat", "views": 7, "unique_visitors": 4},
+    {"page": "/checkout", "views": 6, "unique_visitors": 1},
+    {"page": "/signalgen/agents/f335a153-436f-4e88-a3cc-1dd10f6772dc", "views": 4, "unique_visitors": 1},
+    {"page": "/signalgen/agent-logs/899f9d01-733d-4d31-b200-f95ad3b4e5b9", "views": 3, "unique_visitors": 1},
+    {"page": "/signalgen/agent-logs/5e47a2cd-a828-43b5-bcd1-1f8c49ba49c1", "views": 3, "unique_visitors": 1},
+    {"page": "/signalgen/runs/b1df33ed-8f1d-4bc0-a2d3-e027323b54c1", "views": 2, "unique_visitors": 1},
+    {"page": "/signalgen/agent-logs/ec8a38e0-fbf1-40de-83fc-7c2ef60b4f26", "views": 2, "unique_visitors": 1},
+    {"page": "/signup", "views": 2, "unique_visitors": 2},
+    {"page": "/signalgen/agents/8e379768-cb0b-4377-b5d7-6ca981460d9c", "views": 2, "unique_visitors": 1},
+    {"page": "/signalgen/agent-logs/7eb002fd-e1d5-402f-8bcf-62eeac639223", "views": 2, "unique_visitors": 1},
+    {"page": "/signalgen/runs", "views": 2, "unique_visitors": 1}
+  ]
+}
