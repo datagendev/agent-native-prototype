@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-01-27",
+  "errors": [
+    {
+      "source": "PostHog",
+      "query": "MCP Connect Clicks (with user details)",
+      "error": "Operation timed out after 30 seconds"
+    },
+    {
+      "source": "Neon",
+      "query": "User Overview Stats",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Neon",
+      "query": "Users with Run Activity",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Neon",
+      "query": "Users with No Runs",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Neon",
+      "query": "Recent Failed Runs",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Neon",
+      "query": "Recent Code Executions",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Neon",
+      "query": "Custom Tools Created",
+      "error": "Tool execution failed with status 524 (timeout)"
+    },
+    {
+      "source": "Gmail MCP",
+      "query": "Send email to yusheng.kuo@datagen.dev",
+      "error": "Tool execution failed with status 524 (timeout)"
+    }
+  ],
+  "note": "All Neon database queries timed out. Report generated with PostHog data only. Email delivery also failed due to timeout."
+}
