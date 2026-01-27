@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-01-26",
+  "errors": [
+    {
+      "tool": "mcp_Neon_run_sql",
+      "query": "code_executions",
+      "error": "NeonDbError: column ce.script_name does not exist",
+      "impact": "Unable to fetch recent code execution details"
+    },
+    {
+      "tool": "mcp_Neon_run_sql",
+      "query": "custom_tools",
+      "error": "NeonDbError: column d.name does not exist",
+      "impact": "Unable to fetch custom tool deployment details"
+    }
+  ],
+  "note": "These database schema issues prevented complete data collection. Report generated with available data."
+}
