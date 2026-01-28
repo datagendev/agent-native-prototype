@@ -1,0 +1,5 @@
+{
+  "tool": "Exa",
+  "query": "Claude Code GTM AI agents",
+  "error": "HTTPSConnectionPool(host='api.datagen.dev', port=443): Max retries exceeded with url: /api/tools/execute (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))"
+}
