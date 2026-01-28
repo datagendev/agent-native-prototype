@@ -238,7 +238,7 @@ PostHog (Behavior)              Neon (State)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, ce.script_name, ce.status, ce.execution_time_ms, ce.created_at FROM fastapi_code_execution ce JOIN fastapi_user f ON ce.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY ce.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, ce.name, ce.status, ce.execution_time_ms, ce.created_at FROM fastapi_code_execution ce JOIN fastapi_user f ON ce.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY ce.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -250,7 +250,7 @@ PostHog (Behavior)              Neon (State)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, d.name, d.created_at, LENGTH(d.final_code) as code_length FROM fastapi_deployment d JOIN fastapi_user f ON d.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY d.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, d.description, d.created_at, LENGTH(d.final_code) as code_length FROM fastapi_deployment d JOIN fastapi_user f ON d.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY d.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
