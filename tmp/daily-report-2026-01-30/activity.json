@@ -1,0 +1,104 @@
+{
+  "date": "2026-01-30",
+  "posthog_data": {
+    "event_overview_7d": {
+      "page_viewed": 805,
+      "autocapture": 430,
+      "pageview": 145,
+      "pageleave": 100,
+      "set": 47,
+      "web_vitals": 17,
+      "mcp_connect_clicked": 8,
+      "internal_link_clicked": 2,
+      "rageclick": 1,
+      "mcp_url_copied": 1,
+      "external_link_clicked": 1
+    },
+    "mcp_connect_clicks": [
+      {
+        "email": "david@automatedemand.com",
+        "click_count": 14,
+        "mcp_servers": ["Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase"],
+        "referrer": "$direct",
+        "first_click": "2026-01-23T12:54:32.952000Z",
+        "last_click": "2026-01-23T18:15:44.257000Z"
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "click_count": 4,
+        "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+        "referrer": "mcp.datagen.dev",
+        "first_click": "2026-01-28T13:43:51.107000Z",
+        "last_click": "2026-01-28T13:48:22.652000Z"
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "click_count": 1,
+        "mcp_servers": ["Heyreach"],
+        "referrer": "$direct",
+        "first_click": "2026-01-26T17:44:56.895000Z",
+        "last_click": "2026-01-26T17:44:56.895000Z"
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "click_count": 1,
+        "mcp_servers": ["Gmail"],
+        "referrer": "claude.ai",
+        "first_click": "2026-01-27T20:12:29.296000Z",
+        "last_click": "2026-01-27T20:12:29.296000Z"
+      }
+    ],
+    "dau_trend": {
+      "total_pageviews": 151,
+      "daily_data": [
+        {"date": "2026-01-16", "dau": 5},
+        {"date": "2026-01-17", "dau": 5},
+        {"date": "2026-01-18", "dau": 8},
+        {"date": "2026-01-19", "dau": 4},
+        {"date": "2026-01-20", "dau": 6},
+        {"date": "2026-01-21", "dau": 9},
+        {"date": "2026-01-22", "dau": 16},
+        {"date": "2026-01-23", "dau": 10},
+        {"date": "2026-01-24", "dau": 5},
+        {"date": "2026-01-25", "dau": 16},
+        {"date": "2026-01-26", "dau": 11},
+        {"date": "2026-01-27", "dau": 21},
+        {"date": "2026-01-28", "dau": 16},
+        {"date": "2026-01-29", "dau": 10},
+        {"date": "2026-01-30", "dau": 9}
+      ]
+    },
+    "traffic_sources": [
+      {"referrer": "$direct", "visits": 562, "unique_visitors": 166},
+      {"referrer": "mcp.datagen.dev", "visits": 38, "unique_visitors": 6},
+      {"referrer": "www.linkedin.com", "visits": 24, "unique_visitors": 21},
+      {"referrer": "www.google.com", "visits": 20, "unique_visitors": 18},
+      {"referrer": "com.linkedin.android", "visits": 6, "unique_visitors": 5},
+      {"referrer": "claude.ai", "visits": 5, "unique_visitors": 1}
+    ],
+    "traffic_by_country": [
+      {"country": "US", "visits": 521, "unique_visitors": 138},
+      {"country": "GB", "visits": 18, "unique_visitors": 6},
+      {"country": "DE", "visits": 15, "unique_visitors": 4},
+      {"country": "EE", "visits": 13, "unique_visitors": 1},
+      {"country": "PT", "visits": 12, "unique_visitors": 1},
+      {"country": "IN", "visits": 11, "unique_visitors": 8},
+      {"country": "PL", "visits": 10, "unique_visitors": 2},
+      {"country": "CA", "visits": 9, "unique_visitors": 6}
+    ],
+    "page_breakdown": [
+      {"page": "/", "views": 426, "unique_visitors": 181},
+      {"page": "/signalgen/agents", "views": 41, "unique_visitors": 4},
+      {"page": "/oauth/callback", "views": 31, "unique_visitors": 19},
+      {"page": "/login/oauth/authorize", "views": 26, "unique_visitors": 6},
+      {"page": "/account", "views": 22, "unique_visitors": 7},
+      {"page": "/signalgen/mcp-servers", "views": 18, "unique_visitors": 6},
+      {"page": "/privacy", "views": 15, "unique_visitors": 12}
+    ]
+  },
+  "neon_data": {
+    "total_users": 78,
+    "new_users_7d": 0,
+    "users_with_usage": 26
+  }
+}
