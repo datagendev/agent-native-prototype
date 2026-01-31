@@ -1,0 +1,52 @@
+{
+  "event_overview_7d": {
+    "page_viewed": 623,
+    "autocapture": 304,
+    "pageview": 107,
+    "pageleave": 62,
+    "web_vitals": 36,
+    "set": 33,
+    "mcp_connect_clicked": 15,
+    "rageclick": 1,
+    "internal_link_clicked": 1,
+    "mcp_url_copied": 1
+  },
+  "mcp_connect_clicks": [],
+  "dau_trend_14d": {
+    "dates": ["2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27"],
+    "values": [11, 20, 6, 5, 5, 8, 4, 6, 9, 16, 10, 5, 16, 11, 17],
+    "total_count": 149
+  },
+  "traffic_sources": [
+    {"referrer": "$direct", "visits": 465, "unique_visitors": 147},
+    {"referrer": "mcp.datagen.dev", "visits": 29, "unique_visitors": 5},
+    {"referrer": "www.linkedin.com", "visits": 26, "unique_visitors": 24},
+    {"referrer": "www.google.com", "visits": 21, "unique_visitors": 19},
+    {"referrer": "com.linkedin.android", "visits": 7, "unique_visitors": 5},
+    {"referrer": "claude.ai", "visits": 4, "unique_visitors": 1},
+    {"referrer": "datagen.dev", "visits": 2, "unique_visitors": 2}
+  ],
+  "traffic_by_country": [
+    {"country": "US", "visits": 441, "unique_visitors": 123},
+    {"country": "DE", "visits": 16, "unique_visitors": 5},
+    {"country": "IN", "visits": 14, "unique_visitors": 10},
+    {"country": "PT", "visits": 7, "unique_visitors": 1},
+    {"country": "CA", "visits": 7, "unique_visitors": 4},
+    {"country": "PL", "visits": 7, "unique_visitors": 2},
+    {"country": "IL", "visits": 7, "unique_visitors": 4}
+  ],
+  "ux_issues": [
+    {"email": "david@automatedemand.com", "event": "$rageclick", "page": "/", "timestamp": "2026-01-23T18:15:29.703000Z"}
+  ],
+  "page_breakdown": [
+    {"page": "/", "views": 357, "unique_visitors": 166},
+    {"page": "/signalgen/agents", "views": 36, "unique_visitors": 4},
+    {"page": "/oauth/callback", "views": 27, "unique_visitors": 19},
+    {"page": "/login/oauth/authorize", "views": 26, "unique_visitors": 5},
+    {"page": "/account", "views": 21, "unique_visitors": 6},
+    {"page": "/privacy", "views": 16, "unique_visitors": 13},
+    {"page": "/signalgen/mcp-servers", "views": 10, "unique_visitors": 6},
+    {"page": "/signalgen/tools", "views": 8, "unique_visitors": 3},
+    {"page": "/signalgen/chat", "views": 8, "unique_visitors": 5}
+  ]
+}

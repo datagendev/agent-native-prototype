@@ -1,0 +1,25 @@
+{
+  "lead_id": "815693940",
+  "timestamp": "2026-01-26T10:00:00Z",
+  "errors": [
+    {
+      "tool": "mcp_Heyreach_get_lead",
+      "error": "Tool execution failed with status 524",
+      "parameters": {
+        "profileUrl": "https://www.linkedin.com/in/ACoAADCegHQBQYc2XY4iDACYcEm79ulLHRroTZ0/"
+      }
+    },
+    {
+      "tool": "mcp_Heyreach_get_conversations_v2",
+      "error": "Tool execution failed with status 524",
+      "parameters": {
+        "linkedInAccountIds": [],
+        "campaignIds": [],
+        "leadProfileUrl": "https://www.linkedin.com/in/ACoAADCegHQBQYc2XY4iDACYcEm79ulLHRroTZ0/",
+        "limit": 10
+      }
+    }
+  ],
+  "fallback_action": "Drafted reply using payload data only",
+  "draft_file": "lead/815693940_draft.md"
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "timestamp": "2026-01-27T00:00:00Z",
+    "tool": "mcp_Neon_run_sql",
+    "error": "Parameter format error - params object should not be nested",
+    "query_type": "user_overview_stats"
+  }
+]

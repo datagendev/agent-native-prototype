@@ -1,0 +1,115 @@
+# Client Response Rules
+# Used by auto-response-client-comms agent (optional - agent works without this file)
+# Customize classification, response templates, escalation paths, and auto-send behavior
+
+settings:
+  default_lookback: "4h"
+  max_emails_per_run: 50
+  auto_send_enabled: false          # Set to true to allow auto-send for high-confidence responses
+  auto_send_confidence_threshold: 0.85
+  exclude_senders:
+    - "@datagen.dev"
+  escalation_recipient: "yusheng@datagen.dev"
+  summary_recipient: "yusheng@datagen.dev"
+  auto_send_footer: |
+    ---
+    This is an automated response from DataGen.
+    A team member will follow up if needed.
+
+neon:
+  project_id: "rough-base-02149126"
+  database: "datagen"
+
+rules:
+  - type: status_inquiry
+    action: draft
+    urgency: normal
+    template: |
+      Hi {client_name},
+
+      Thanks for checking in! Here's a quick update:
+
+      - Account status: {subscription_status}
+      - Recent activity: {total_runs} workflow runs
+      - Last active: {last_active}
+
+      Let me know if you need anything specific or want to jump on a call.
+
+      Best,
+      Yu-Sheng
+
+  - type: faq
+    action: draft
+    urgency: normal
+    confidence_threshold: 0.85
+    fallback: escalate
+    template: |
+      Hi {client_name},
+
+      Great question! {answer}
+
+      You can also check our docs at https://docs.datagen.dev for more details.
+
+      Let me know if that helps or if you have other questions.
+
+      Best,
+      Yu-Sheng
+
+  - type: bug_report
+    action: acknowledge_and_escalate
+    urgency: high
+    template: |
+      Hi {client_name},
+
+      Thanks for flagging this -- I've logged the issue and notified the team.
+
+      What I understand:
+      {issue_summary}
+
+      Someone will follow up with you shortly. In the meantime, if you have any
+      additional details (screenshots, error messages, steps to reproduce),
+      feel free to reply to this thread.
+
+      Best,
+      Yu-Sheng
+
+  - type: urgent
+    action: acknowledge_and_escalate
+    urgency: critical
+    escalate_via: ["email"]
+    template: |
+      Hi {client_name},
+
+      I understand this is urgent. I've flagged this for immediate attention
+      and notified the team.
+
+      {account_manager_or_default} will be in touch shortly.
+
+      Best,
+      Yu-Sheng
+
+  - type: scheduling
+    action: draft
+    urgency: normal
+    template: |
+      Hi {client_name},
+
+      Happy to connect! Feel free to book a time that works:
+      https://calendly.com/datagen
+
+      Or let me know your preferred times and I'll send an invite.
+
+      Best,
+      Yu-Sheng
+
+  - type: general
+    action: draft
+    urgency: low
+    template: |
+      Hi {client_name},
+
+      Thanks for your message! I'll make sure the right person sees this
+      and gets back to you.
+
+      Best,
+      Yu-Sheng

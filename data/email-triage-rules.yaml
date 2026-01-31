@@ -1,0 +1,85 @@
+# Email Triage Rules
+# Used by async-email-triage agent (optional - agent works without this file)
+# Customize classification rules, response templates, and priority overrides
+
+settings:
+  default_lookback: "4h"
+  max_emails_per_run: 50
+  draft_confidence_threshold: 0.7
+  exclude_senders:
+    - "@datagen.dev"
+  summary_recipient: "yusheng@datagen.dev"
+
+rules:
+  - name: "Sales inquiry from known domain"
+    condition:
+      intent: sales_inquiry
+    action: draft
+    priority: high
+    notify: true
+    template: |
+      Hi {sender_name},
+
+      Thanks for reaching out! I'd love to learn more about what you're looking for.
+
+      Could you share a bit about your current workflow and what challenges you're facing?
+      That way I can point you to the most relevant features.
+
+      Happy to jump on a quick call if that's easier.
+
+      Best,
+      Yu-Sheng
+
+  - name: "Support - access issue"
+    condition:
+      intent: support
+      keywords: ["login", "password", "access", "can't sign in", "locked out"]
+    action: draft
+    priority: medium
+    template: |
+      Hi {sender_name},
+
+      Sorry to hear you're having trouble accessing your account. Let me help:
+
+      1. Try resetting your password at https://app.datagen.dev/forgot-password
+      2. If that doesn't work, let me know the email you signed up with and I'll look into it
+
+      I'll follow up shortly with more details.
+
+      Best,
+      Yu-Sheng
+
+  - name: "Meeting request"
+    condition:
+      intent: meeting
+    action: draft
+    priority: medium
+    template: |
+      Hi {sender_name},
+
+      Thanks for suggesting we connect! Here are a few times that work:
+
+      [Calendar availability to be filled in]
+
+      Let me know what works best for you, or feel free to book directly:
+      https://calendly.com/datagen
+
+      Looking forward to it!
+
+      Best,
+      Yu-Sheng
+
+  - name: "Newsletter / marketing"
+    condition:
+      intent: newsletter
+    action: skip
+    priority: low
+    notify: false
+
+  - name: "Urgent from any sender"
+    condition:
+      intent: urgent
+    action: flag
+    priority: high
+    notify: true
+    escalate_to: "yusheng@datagen.dev"

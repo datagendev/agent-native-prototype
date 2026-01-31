@@ -1,0 +1,1 @@
+[{"tool": "mcp_Neon_run_sql", "query": "code_execution_table", "error": "column ce.script_name does not exist"}, {"tool": "mcp_Neon_run_sql", "query": "deployment_table", "error": "column d.name does not exist"}]

@@ -1,0 +1,40 @@
+# Competitor Watchlist
+# Used by scheduled-competitor-intelligence agent
+# Add/remove competitors as needed
+
+competitors:
+  - name: "Clay"
+    domain: "clay.com"
+    blog_url: "https://www.clay.com/blog"
+    linkedin_company: "https://www.linkedin.com/company/clay-hq/"
+    linkedin_people:
+      - "https://www.linkedin.com/in/nicolassharp/"
+    notes: "Data enrichment and outreach platform. Primary competitor for prospecting workflows."
+
+  - name: "Apollo"
+    domain: "apollo.io"
+    blog_url: "https://www.apollo.io/blog"
+    linkedin_company: "https://www.linkedin.com/company/apollo-io/"
+    linkedin_people: []
+    notes: "Sales intelligence and engagement platform. Competitor for lead data and outreach."
+
+  - name: "ZoomInfo"
+    domain: "zoominfo.com"
+    blog_url: "https://www.zoominfo.com/blog"
+    linkedin_company: "https://www.linkedin.com/company/zoominfo/"
+    linkedin_people: []
+    notes: "Enterprise B2B data provider. Competitor for contact and company intelligence."
+
+  - name: "Clearbit"
+    domain: "clearbit.com"
+    blog_url: "https://clearbit.com/blog"
+    linkedin_company: "https://www.linkedin.com/company/clearbit/"
+    linkedin_people: []
+    notes: "Data enrichment API (now part of HubSpot). Competitor for real-time enrichment."
+
+  - name: "Instantly"
+    domain: "instantly.ai"
+    blog_url: "https://instantly.ai/blog"
+    linkedin_company: "https://www.linkedin.com/company/instantly-ai/"
+    linkedin_people: []
+    notes: "Cold email platform. Competitor for outbound automation."
