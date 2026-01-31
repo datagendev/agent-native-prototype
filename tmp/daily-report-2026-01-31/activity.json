@@ -1,0 +1,99 @@
+{
+  "date": "2026-01-31",
+  "user_stats": {
+    "total_users": 80,
+    "new_users_7d": 2,
+    "users_with_usage": 26,
+    "avg_credits": 321.5
+  },
+  "event_summary_7d": [
+    {"event": "page_viewed", "count": 658},
+    {"event": "$autocapture", "count": 365},
+    {"event": "$pageview", "count": 137},
+    {"event": "$pageleave", "count": 88},
+    {"event": "$set", "count": 35},
+    {"event": "$web_vitals", "count": 32},
+    {"event": "mcp_connect_clicked", "count": 9},
+    {"event": "$identify", "count": 2},
+    {"event": "internal_link_clicked", "count": 2},
+    {"event": "user_signed_up", "count": 1},
+    {"event": "mcp_url_copied", "count": 1},
+    {"event": "external_link_clicked", "count": 1}
+  ],
+  "mcp_connect_clicks_30d": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 14,
+      "mcp_servers": ["Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Notion", "Notion", "Slack", "Instantly", "Supabase", "Gmail", "Gmail"],
+      "referrer": "www.linkedin.com",
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-01-23T18:15:44.257000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear", "Linear"],
+      "referrer": "mcp.datagen.dev",
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail", "Google Calendar"],
+      "referrer": "$direct",
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "$direct",
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 1,
+      "mcp_servers": ["Gmail"],
+      "referrer": "claude.ai",
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-01-27T20:12:29.296000Z"
+    }
+  ],
+  "traffic_sources_30d": [
+    {"referrer": "$direct", "visits": 578, "unique_visitors": 165},
+    {"referrer": "mcp.datagen.dev", "visits": 38, "unique_visitors": 6},
+    {"referrer": "www.linkedin.com", "visits": 26, "unique_visitors": 23},
+    {"referrer": "www.google.com", "visits": 20, "unique_visitors": 18},
+    {"referrer": "com.linkedin.android", "visits": 6, "unique_visitors": 5},
+    {"referrer": "claude.ai", "visits": 5, "unique_visitors": 1},
+    {"referrer": "datagen.dev", "visits": 5, "unique_visitors": 3}
+  ],
+  "traffic_by_country_30d": [
+    {"country": "US", "visits": 538, "unique_visitors": 141},
+    {"country": "GB", "visits": 18, "unique_visitors": 6},
+    {"country": "DE", "visits": 15, "unique_visitors": 4},
+    {"country": "EE", "visits": 13, "unique_visitors": 1},
+    {"country": "PT", "visits": 12, "unique_visitors": 1},
+    {"country": "IN", "visits": 10, "unique_visitors": 7},
+    {"country": "PL", "visits": 10, "unique_visitors": 2},
+    {"country": "CA", "visits": 9, "unique_visitors": 6}
+  ],
+  "top_pages_30d": [
+    {"page": "/", "views": 437, "unique_visitors": 183},
+    {"page": "/signalgen/agents", "views": 41, "unique_visitors": 4},
+    {"page": "/oauth/callback", "views": 32, "unique_visitors": 20},
+    {"page": "/login/oauth/authorize", "views": 26, "unique_visitors": 6},
+    {"page": "/account", "views": 22, "unique_visitors": 7},
+    {"page": "/signalgen/mcp-servers", "views": 20, "unique_visitors": 6}
+  ],
+  "dau_trend_14d": {
+    "labels": ["17-Jan-2026", "18-Jan-2026", "19-Jan-2026", "20-Jan-2026", "21-Jan-2026", "22-Jan-2026", "23-Jan-2026", "24-Jan-2026", "25-Jan-2026", "26-Jan-2026", "27-Jan-2026", "28-Jan-2026", "29-Jan-2026", "30-Jan-2026", "31-Jan-2026"],
+    "data": [5, 8, 4, 6, 9, 16, 10, 5, 16, 11, 21, 16, 10, 15, 5],
+    "total": 157,
+    "avg_dau": 10.5
+  },
+  "neon_error": "Authentication failed for Neon database queries"
+}
