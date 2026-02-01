@@ -1,0 +1,135 @@
+{
+  "report_date": "2026-02-01",
+  "user_stats": {
+    "total_users": 80,
+    "new_users_7d": 2,
+    "users_with_usage": 26,
+    "avg_credits": 321.5
+  },
+  "event_overview_7d": [
+    {"event": "page_viewed", "count": 693},
+    {"event": "$autocapture", "count": 378},
+    {"event": "$pageview", "count": 147},
+    {"event": "$pageleave", "count": 89},
+    {"event": "$web_vitals", "count": 43},
+    {"event": "$set", "count": 37},
+    {"event": "mcp_connect_clicked", "count": 10},
+    {"event": "$identify", "count": 2},
+    {"event": "internal_link_clicked", "count": 2},
+    {"event": "user_signed_up", "count": 1},
+    {"event": "mcp_url_copied", "count": 1},
+    {"event": "external_link_clicked", "count": 1}
+  ],
+  "mcp_connect_clicks_30d": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 14,
+      "mcp_servers": ["Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase"],
+      "referrer": "$direct"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "referrer": "mcp.datagen.dev"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "referrer": "$direct"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 2,
+      "mcp_servers": ["Gmail"],
+      "referrer": "$direct"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "$direct"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 4830,
+      "run_count": 995,
+      "success_count": 858,
+      "success_rate": 86.2,
+      "last_run": "2026-01-26T16:18:20.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 99,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "days_since_signup": 1
+    },
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 468,
+      "days_since_signup": 4
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 100,
+      "days_since_signup": 25,
+      "note": "High MCP interest (14 clicks) but no usage"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 100,
+      "days_since_signup": 18,
+      "note": "Moderate MCP interest (4 clicks) but no usage"
+    }
+  ],
+  "failing_users": [
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 496,
+      "run_count": 428,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-01-31T15:00:00.000Z",
+      "recent_failures": 10
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": 42,
+      "success_count": 20,
+      "success_rate": 47.6,
+      "last_run": "2026-01-26T09:00:00.000Z"
+    }
+  ],
+  "traffic_sources_30d": [
+    {"referrer": "$direct", "visits": 602, "unique_visitors": 173},
+    {"referrer": "mcp.datagen.dev", "visits": 38, "unique_visitors": 6},
+    {"referrer": "www.linkedin.com", "visits": 28, "unique_visitors": 25},
+    {"referrer": "www.google.com", "visits": 18, "unique_visitors": 17},
+    {"referrer": "claude.ai", "visits": 5, "unique_visitors": 1}
+  ],
+  "custom_tools_created": [
+    {
+      "email": "steve@misterbrady.com",
+      "description": "LinkedIn data enrichment and UK ICP filtering",
+      "created_at": "2026-01-29T11:41:42.000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "count": 17,
+      "latest": "2026-01-26T07:01:27.000Z"
+    }
+  ]
+}
