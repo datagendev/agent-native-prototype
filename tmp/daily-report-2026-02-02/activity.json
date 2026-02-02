@@ -1,0 +1,164 @@
+{
+  "report_date": "2026-02-02",
+  "user_overview": {
+    "total_users": 80,
+    "new_users_7d": 2,
+    "users_with_usage": 26,
+    "avg_credits": 321.5
+  },
+  "posthog_events_7d": [
+    {"event": "page_viewed", "count": 627},
+    {"event": "$autocapture", "count": 341},
+    {"event": "$pageview", "count": 131},
+    {"event": "$pageleave", "count": 80},
+    {"event": "$web_vitals", "count": 45},
+    {"event": "$set", "count": 33},
+    {"event": "mcp_connect_clicked", "count": 10},
+    {"event": "$identify", "count": 2},
+    {"event": "internal_link_clicked", "count": 2},
+    {"event": "user_signed_up", "count": 1},
+    {"event": "mcp_url_copied", "count": 1},
+    {"event": "external_link_clicked", "count": 1}
+  ],
+  "mcp_connect_activity": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 14,
+      "mcp_servers": ["Gmail", "Gmail", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Notion", "Notion", "Slack", "Instantly", "Supabase"],
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-01-23T18:15:44.257000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear", "Linear"],
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail", "Google Calendar"],
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 2,
+      "mcp_servers": ["Gmail", "Gmail"],
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-02-01T05:11:50.621000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 4830,
+      "run_count": 1994,
+      "success_count": 1856,
+      "success_rate": 93.1,
+      "last_run": "2026-02-01T08:47:29.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 496,
+      "run_count": 428,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-01-31T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": 42,
+      "success_count": 20,
+      "success_rate": 47.6,
+      "last_run": "2026-01-26T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 99,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "created_at": "2026-01-30T21:21:48.607Z",
+      "days_since_signup": 2
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "created_at": "2026-01-14T00:20:39.406Z",
+      "days_since_signup": 19
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 100,
+      "created_at": "2026-01-13T18:06:16.315Z",
+      "days_since_signup": 19
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 100,
+      "created_at": "2026-01-06T17:45:59.914Z",
+      "days_since_signup": 26
+    }
+  ],
+  "recent_custom_tools": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "description": "Batch research SEC 10-K filings for Fortune 1000 companies using parallel execution",
+      "created_at": "2026-02-01T05:33:57.000Z",
+      "code_length": 6144
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "description": "Takes a list of company names or domains and enriches with LinkedIn data",
+      "created_at": "2026-01-29T11:41:42.000Z",
+      "code_length": 4890
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "description": "Scrapes UK VC portfolio pages and enriches with LinkedIn data",
+      "created_at": "2026-01-29T11:40:59.000Z",
+      "code_length": 6848
+    }
+  ],
+  "top_pages_30d": [
+    {"page": "/", "views": 456, "unique_visitors": 190},
+    {"page": "/signalgen/agents", "views": 45, "unique_visitors": 4},
+    {"page": "/oauth/callback", "views": 33, "unique_visitors": 20},
+    {"page": "/account", "views": 22, "unique_visitors": 7},
+    {"page": "/signalgen/mcp-servers", "views": 21, "unique_visitors": 6}
+  ],
+  "traffic_sources_30d": [
+    {"referrer": "$direct", "visits": 609, "unique_visitors": 174},
+    {"referrer": "mcp.datagen.dev", "visits": 38, "unique_visitors": 6},
+    {"referrer": "www.linkedin.com", "visits": 28, "unique_visitors": 25},
+    {"referrer": "www.google.com", "visits": 18, "unique_visitors": 17}
+  ],
+  "recent_failures": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "created_at": "2026-02-01T05:34:41.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "created_at": "2026-01-31T15:00:00.000Z",
+      "note": "Multiple recurring failures - needs investigation"
+    }
+  ]
+}
