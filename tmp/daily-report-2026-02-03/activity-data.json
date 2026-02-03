@@ -1,0 +1,153 @@
+{
+  "report_date": "2026-02-03",
+  "posthog_data": {
+    "event_overview_7d": {
+      "page_viewed": 577,
+      "autocapture": 324,
+      "pageview": 122,
+      "pageleave": 71,
+      "web_vitals": 53,
+      "set": 28,
+      "mcp_connect_clicked": 10,
+      "identify": 2,
+      "user_signed_up": 1,
+      "internal_link_clicked": 1,
+      "mcp_url_copied": 1,
+      "external_link_clicked": 1
+    },
+    "dau_trend_14d": {
+      "total_pageviews": 167,
+      "daily_values": [6, 9, 16, 10, 5, 16, 11, 21, 16, 10, 15, 6, 15, 5, 6],
+      "dates": ["2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03"],
+      "today_dau": 6
+    },
+    "mcp_interest": [
+      {
+        "email": "david@automatedemand.com",
+        "click_count": 15,
+        "mcp_servers": ["Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase"],
+        "referrer": "www.linkedin.com",
+        "first_click": "2026-01-23",
+        "last_click": "2026-02-03"
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "click_count": 4,
+        "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+        "referrer": "mcp.datagen.dev",
+        "first_click": "2026-01-28",
+        "last_click": "2026-01-28"
+      },
+      {
+        "email": "gillybolton.302090@gmail.com",
+        "click_count": 3,
+        "mcp_servers": ["Google Calendar", "Gmail"],
+        "referrer": "$direct",
+        "first_click": "2026-01-30",
+        "last_click": "2026-01-30"
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "click_count": 2,
+        "mcp_servers": ["Gmail"],
+        "referrer": "$direct",
+        "first_click": "2026-01-27",
+        "last_click": "2026-02-01"
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "click_count": 1,
+        "mcp_servers": ["Heyreach"],
+        "referrer": "$direct",
+        "first_click": "2026-01-26",
+        "last_click": "2026-01-26"
+      }
+    ],
+    "top_pages": [
+      {"/": 450, "unique_visitors": 193},
+      {"/signalgen/agents": 45, "unique_visitors": 4},
+      {"/oauth/callback": 31, "unique_visitors": 19},
+      {"/login/oauth/authorize": 26, "unique_visitors": 6},
+      {"/signalgen/mcp-servers": 21, "unique_visitors": 6}
+    ]
+  },
+  "neon_data": {
+    "user_stats": {
+      "total_users": 80,
+      "new_users_7d": 2,
+      "users_with_usage": 26,
+      "avg_credits": 321.5
+    },
+    "power_users": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "credits": 4830,
+        "run_count": 1994,
+        "success_count": 1856,
+        "success_rate": 93.1,
+        "last_run": "2026-02-01"
+      },
+      {
+        "email": "ravi@fulllist.ai",
+        "credits": 496,
+        "run_count": 431,
+        "success_count": 0,
+        "success_rate": 0.0,
+        "last_run": "2026-02-02"
+      },
+      {
+        "email": "catecean20@gmail.com",
+        "credits": 974,
+        "run_count": 44,
+        "success_count": 20,
+        "success_rate": 45.5,
+        "last_run": "2026-02-02"
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "credits": 99,
+        "run_count": 11,
+        "success_count": 11,
+        "success_rate": 100.0,
+        "last_run": "2026-01-29"
+      }
+    ],
+    "at_risk_users": [
+      {
+        "email": "gillybolton.302090@gmail.com",
+        "credits": 499,
+        "days_since_signup": 3,
+        "created_at": "2026-01-30",
+        "mcp_interest": true
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "credits": 100,
+        "days_since_signup": 20,
+        "created_at": "2026-01-13",
+        "mcp_interest": true
+      },
+      {
+        "email": "david@automatedemand.com",
+        "credits": 100,
+        "days_since_signup": 27,
+        "created_at": "2026-01-06",
+        "mcp_interest": true
+      }
+    ],
+    "recent_deployments": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "description": "Batch research SEC 10-K filings for Fortune 1000 companies",
+        "created_at": "2026-02-01",
+        "code_length": 6144
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "description": "UK ICP enrichment with LinkedIn data",
+        "created_at": "2026-01-29",
+        "code_length": 4890
+      }
+    ]
+  }
+}
