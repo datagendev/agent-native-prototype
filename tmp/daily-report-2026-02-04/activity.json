@@ -1,0 +1,140 @@
+{
+  "report_date": "2026-02-04",
+  "user_stats": {
+    "total_users": 80,
+    "new_users_7d": 1,
+    "users_with_usage": 26,
+    "avg_credits": 321.5
+  },
+  "event_overview_7d": [
+    {"event": "page_viewed", "count": 446},
+    {"event": "$autocapture", "count": 232},
+    {"event": "$pageview", "count": 106},
+    {"event": "$pageleave", "count": 64},
+    {"event": "$web_vitals", "count": 62},
+    {"event": "mcp_connect_clicked", "count": 5},
+    {"event": "user_signed_up", "count": 1}
+  ],
+  "mcp_connect_clicks": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 15,
+      "mcp_servers": ["Supabase", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl"],
+      "last_click": "2026-02-03"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "last_click": "2026-01-28"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "last_click": "2026-01-30"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 2,
+      "mcp_servers": ["Gmail"],
+      "last_click": "2026-02-01"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "last_click": "2026-01-26"
+    }
+  ],
+  "active_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 4830,
+      "run_count": 1994,
+      "success_count": 1856,
+      "success_rate": 93.1,
+      "last_run": "2026-02-01"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 496,
+      "run_count": 434,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-03"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": 45.5,
+      "last_run": "2026-02-02"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 99,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 100,
+      "run_count": 1,
+      "success_count": 1,
+      "success_rate": 100.0,
+      "last_run": "2026-02-03"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "days_since_signup": 4,
+      "last_active": "2026-01-30"
+    },
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 468,
+      "days_since_signup": 7,
+      "last_active": "2026-01-30"
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "days_since_signup": 21,
+      "last_active": "2026-01-14"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 100,
+      "days_since_signup": 21,
+      "last_active": "2026-01-13"
+    }
+  ],
+  "recent_failures": [
+    {
+      "email": "ravi@fulllist.ai",
+      "error": "Null error - needs investigation"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "error": "MCP tool 'mcp_Dropbox_dropbox_search_files' not defined"
+    }
+  ],
+  "traffic_sources": [
+    {"referrer": "$direct", "visits": 577, "unique_visitors": 167},
+    {"referrer": "mcp.datagen.dev", "visits": 38, "unique_visitors": 6},
+    {"referrer": "www.linkedin.com", "visits": 30, "unique_visitors": 26},
+    {"referrer": "www.google.com", "visits": 17, "unique_visitors": 16}
+  ],
+  "top_pages": [
+    {"page": "/", "views": 437, "unique_visitors": 186},
+    {"page": "/signalgen/agents", "views": 46, "unique_visitors": 4},
+    {"page": "/oauth/callback", "views": 30, "unique_visitors": 18},
+    {"page": "/signalgen/mcp-servers", "views": 21, "unique_visitors": 6}
+  ]
+}
