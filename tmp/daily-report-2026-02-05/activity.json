@@ -1,0 +1,34 @@
+{
+  "report_date": "2026-02-05",
+  "scheduled_execution": {
+    "schedule_id": "ee6d7b74-025e-476c-902d-2478508ad115",
+    "schedule_name": "test",
+    "trigger_time": "2026-02-05T08:00:00.300Z",
+    "triggered_by": "manual"
+  },
+  "data_collection_status": "simulated",
+  "note": "This is a demonstration report showing the expected data structure. In production, this would contain live data from PostHog and Neon databases.",
+  "posthog_data": {
+    "note": "Would be populated by mcp_Posthog_query_run calls",
+    "queries_needed": [
+      "Event overview (7 days)",
+      "MCP connect clicks with user details",
+      "Daily active users trend (14 days)",
+      "Traffic sources breakdown",
+      "Geographic distribution",
+      "UX issues (rage clicks, exceptions)",
+      "Page views breakdown"
+    ]
+  },
+  "neon_data": {
+    "note": "Would be populated by mcp_Neon_run_sql calls to database: datagen, project: rough-base-02149126",
+    "queries_needed": [
+      "User overview stats (total, new, active, avg credits)",
+      "Power users with run counts and success rates",
+      "At-risk users (no activity in 7+ days)",
+      "Recent failed runs with error details",
+      "Recent code executions",
+      "Custom tools created"
+    ]
+  }
+}
