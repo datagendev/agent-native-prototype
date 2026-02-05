@@ -1,0 +1,173 @@
+{
+  "date": "2026-02-05",
+  "overview": {
+    "total_users": 80,
+    "new_users_7d": 1,
+    "users_with_usage": 26,
+    "avg_credits": 321.5
+  },
+  "posthog_events_7d": [
+    {"event": "$autocapture", "count": 411},
+    {"event": "page_viewed", "count": 383},
+    {"event": "$web_vitals", "count": 89},
+    {"event": "$pageview", "count": 84},
+    {"event": "$pageleave", "count": 36},
+    {"event": "$set", "count": 19},
+    {"event": "mcp_connect_clicked", "count": 5},
+    {"event": "$identify", "count": 2},
+    {"event": "$rageclick", "count": 2},
+    {"event": "mcp_url_copied", "count": 2},
+    {"event": "user_signed_up", "count": 1},
+    {"event": "internal_link_clicked", "count": 1},
+    {"event": "external_link_clicked", "count": 1}
+  ],
+  "high_intent_prospects": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 15,
+      "mcp_servers": ["Supabase", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl"],
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-02-03T13:56:06.017000Z",
+      "has_runs": true,
+      "run_count": 3,
+      "success_rate": "100.0%"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z",
+      "has_runs": false
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z",
+      "has_runs": false
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 2,
+      "mcp_servers": ["Gmail"],
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-02-01T05:11:50.621000Z",
+      "has_runs": true,
+      "run_count": 1994,
+      "success_rate": "93.1%"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z",
+      "has_runs": true,
+      "run_count": 11,
+      "success_rate": "100.0%"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 4830,
+      "run_count": 1994,
+      "success_rate": "93.1%",
+      "last_run": "2026-02-01T08:47:29.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": 44,
+      "success_rate": "45.5%",
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 99,
+      "run_count": 11,
+      "success_rate": "100.0%",
+      "last_run": "2026-01-29T11:47:56.000Z"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 100,
+      "run_count": 3,
+      "success_rate": "100.0%",
+      "last_run": "2026-02-04T10:40:11.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "days_since_signup": 5,
+      "created_at": "2026-01-30T21:21:48.607Z"
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "days_since_signup": 22,
+      "created_at": "2026-01-14T00:20:39.406Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 100,
+      "days_since_signup": 22,
+      "created_at": "2026-01-13T18:06:16.315Z"
+    },
+    {
+      "email": "akil@leadle.in",
+      "credits": 100,
+      "days_since_signup": 23,
+      "created_at": "2026-01-13T12:13:36.372Z"
+    }
+  ],
+  "failing_users": [
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 496,
+      "run_count": 437,
+      "success_count": 0,
+      "success_rate": "0.0%",
+      "last_run": "2026-02-04T15:00:00.000Z",
+      "recent_errors": "Multiple failures (437 total runs, all failed)"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": "45.5%",
+      "last_run": "2026-02-02T09:00:00.000Z",
+      "recent_errors": "Modal sandbox execution failed - missing tools and f-string errors"
+    }
+  ],
+  "custom_tools_created": [
+    {
+      "email": "david@automatedemand.com",
+      "description": "Instantly Domain Analytics",
+      "created_at": "2026-02-03T16:46:13.000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "description": "Batch research SEC 10-K filings",
+      "created_at": "2026-02-01T05:33:57.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "description": "UK VC portfolio enrichment",
+      "created_at": "2026-01-29T11:41:42.000Z"
+    }
+  ],
+  "top_pages_30d": [
+    {"page": "/", "views": 437, "unique_visitors": 184},
+    {"page": "/signalgen/agents", "views": 47, "unique_visitors": 5},
+    {"page": "/oauth/callback", "views": 30, "unique_visitors": 17},
+    {"page": "/login/oauth/authorize", "views": 26, "unique_visitors": 6},
+    {"page": "/signalgen/mcp-servers", "views": 22, "unique_visitors": 6},
+    {"page": "/account", "views": 20, "unique_visitors": 7}
+  ]
+}
