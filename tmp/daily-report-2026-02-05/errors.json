@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-02-05T08:00:00.300Z",
+  "schedule_id": "ee6d7b74-025e-476c-902d-2478508ad115",
+  "schedule_name": "test",
+  "triggered_by": "manual",
+  "error_type": "MCP_TOOLS_NOT_ACCESSIBLE",
+  "error_message": "MCP tools (PostHog and Neon) are not directly accessible in this execution context. The agent requires access to mcp_Posthog_query_run and mcp_Neon_run_sql to collect real-time user activity data.",
+  "workaround": "In a production environment, this agent would invoke MCP tools via the Claude Desktop integration to query PostHog analytics and Neon database directly.",
+  "steps_attempted": [
+    "Attempted to invoke user-activity-tracker skill - skill invocation not available in current context",
+    "Looked for alternative data collection methods",
+    "Determined that MCP tool access is required for live data"
+  ],
+  "recommendation": "This scheduled task demonstrates the workflow structure. For full functionality, ensure the agent has access to MCP servers configured in Claude Desktop."
+}
