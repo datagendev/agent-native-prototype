@@ -1,4 +1,15 @@
-Bella Italia
+---
+title: "Bella Italia - A Poem About Italy"
+description: "A poetic celebration of Italy's landscapes, cities, culture, and timeless beauty"
+category: "creative"
+tags: ["poetry", "italy", "travel", "culture"]
+created: 2026-02-06
+updated: 2026-02-06
+status: "active"
+priority: "low"
+---
+
+# Bella Italia
 
 Where azure waves kiss sun-bleached stone,
 And ancient Rome still guards her throne,
