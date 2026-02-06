@@ -1,0 +1,2175 @@
+Id: 01KGQWBSVNEW8DRS6DH4MPMJW8
+DateString: 2026-02-06T16:30:00.000Z
+Privacy: link
+Speakers: yusheng kuo, Michael Riedler
+Sentences: yusheng kuo: That.
+yusheng kuo: It?
+Michael Riedler: Okay.
+yusheng kuo: Sam, It.
+yusheng kuo: Ram.
+Michael Riedler: Hello, Hello, Hello.
+yusheng kuo: Hey, Michael.
+Michael Riedler: Yes.
+yusheng kuo: Awesome.
+Michael Riedler: How are you doing?
+yusheng kuo: Good, good, good, good.
+yusheng kuo: It's like lots of.
+yusheng kuo: Wait, lots of cool things happen, like between.
+yusheng kuo: Wait, did you make another haircut?
+Michael Riedler: Did I maybe.
+Michael Riedler: No, that can't be.
+Michael Riedler: I can't.
+yusheng kuo: Okay.
+yusheng kuo: I think it just looks slightly different.
+Michael Riedler: Yeah.
+Michael Riedler: It's just because I'm.
+Michael Riedler: I'm in the Alps at the moment.
+Michael Riedler: You know, it's just air here, you know, it's all.
+Michael Riedler: And I just spent the last few hours I was visiting a farm in the family.
+Michael Riedler: Like not like a cousin of my mother or something like that.
+Michael Riedler: Because in summer I want to spend.
+Michael Riedler: You know, I want to go for a month.
+Michael Riedler: I want to go and work on a farm.
+Michael Riedler: So I'm just scoping out.
+Michael Riedler: I need a break from the AI stuff, you know.
+Michael Riedler: I mean.
+yusheng kuo: Yeah.
+Michael Riedler: I'm so addicted to you.
+Michael Riedler: I'm completely.
+Michael Riedler: It's just crazy.
+Michael Riedler: It's.
+Michael Riedler: My ideal life is, you know, you tech companies and like one day a week, I love to just be away from it.
+yusheng kuo: Oh man, this is like so like badly needed.
+yusheng kuo: I feel like it's very easy to get overwhelmed.
+yusheng kuo: Like it's burnout nowadays.
+Michael Riedler: Yeah, yeah, yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: So what.
+yusheng kuo: So what are you up to?
+Michael Riedler: Yeah, I mean, same things.
+Michael Riedler: I.
+Michael Riedler: Well, when we last speak.
+Michael Riedler: So I mean when we last spoke we were looking into, you know, this sales processing engine I was building.
+Michael Riedler: Right.
+yusheng kuo: Yeah.
+Michael Riedler: So I haven't touched that one one bit like since we spoke last time.
+Michael Riedler: The same stage.
+yusheng kuo: I did, I did.
+Michael Riedler: That's great.
+Michael Riedler: I'm glad.
+Michael Riedler: We'll talk about that.
+Michael Riedler: Well, that was essentially.
+Michael Riedler: But it's like one of these projects, right, that you, you have.
+Michael Riedler: And, and nowadays with it is so easy to just bring it, you know, work on multiple things.
+Michael Riedler: I mean my main business now I started is.
+Michael Riedler: Is a waterfall API for LinkedIn data.
+yusheng kuo: Yeah.
+Michael Riedler: Which is basically, you know, I've just took the.
+Michael Riedler: The concept I was working on before in sales, but now doing it myself, I'm doing with another business partner.
+Michael Riedler: He's a.
+Michael Riedler: He's a tech guy and is an expert in email and.
+Michael Riedler: Yeah.
+Michael Riedler: And we.
+Michael Riedler: It's not signed yet, but I have the contract with our first customer who is the.
+Michael Riedler: One of the biggest US data providers.
+Michael Riedler: So the first contract is ready to sign and it's going to be a 120k contract and we make around 50 margin on it.
+Michael Riedler: So it's not bad, not a bad start.
+yusheng kuo: Wow.
+yusheng kuo: Wait, how did that go?
+yusheng kuo: Like, can you, can you walk me through like just a side project.
+yusheng kuo: I know, but you probably just make it more anything like I ever thought, can you like mentor me on that?
+yusheng kuo: Like, so how did you find that and what did you provide?
+yusheng kuo: So like how this like all of a sudden, it's almost like 120k coming into with like a 50% margin.
+Michael Riedler: I've built up a very good network in that B2B data space.
+Michael Riedler: Right.
+Michael Riedler: Like, I mean all I was doing for the last two years is really, that's how we became friends.
+Michael Riedler: Right.
+yusheng kuo: And I. Yeah, yeah, yeah.
+Michael Riedler: So many people where.
+Michael Riedler: And, and I really learned about LinkedIn scraping.
+Michael Riedler: Like it's, it's, it's, you know, when you know about it, it's like, it's very basic and easy.
+Michael Riedler: But, and I, I kind of learned what especially for kind of B2B companies or US data providers.
+Michael Riedler: Not just us, but there's the biggest ones.
+Michael Riedler: The data side is a commodity, but the risk side, the trust side is not.
+Michael Riedler: So what they want really is everyone wants the data, but no one wants to break the rules to get the data.
+Michael Riedler: So.
+Michael Riedler: And I think, and I've just noticed there's so much dishonesty in the space, so I just thought I'm gonna jump on it and like be basically just have a good setup where I'm the middleman and I'm gonna, I tell these clients that I'm the middleman and make money, can go scrape it directly.
+Michael Riedler: But for the middleman, setup is I can be a trusted entity to them and they don't have to contract with all these dodgy scrapers out there.
+Michael Riedler: So it's, so I'm kind of, you know, it's a very basic concept, but it's just a win win for everyone.
+Michael Riedler: Like I made money, the data provider, they don't need to contract with all the dodgy guys.
+Michael Riedler: And I just, I built, man, I've built a simple waterfall API, everything, cloud code and, and Gemini.
+Michael Riedler: And it's so simple.
+Michael Riedler: It's just, I connected six scraping tools.
+Michael Riedler: A little bit of a waterfall logic and.
+Michael Riedler: Yeah.
+Michael Riedler: And then the client.
+yusheng kuo: Who do you think have the best like data nowadays?
+yusheng kuo: I know scrapping is good.
+Michael Riedler: I mean I don't, I don't work with scraping because I know, you know, when I left at least a month ago that they weren't doing any scraping themselves.
+Michael Riedler: So I want to work with people who actually scrape.
+Michael Riedler: Right.
+Michael Riedler: That's, that's like the minimum.
+yusheng kuo: Oh, oh, oh, really?
+yusheng kuo: Okay.
+yusheng kuo: So that's why they are not.
+yusheng kuo: But they do the provisioning stuff, right?
+Michael Riedler: Well, they, I mean a Lot of people do it like them is that they're going to work with third party providers that do the actual scraping and then they put a margin on top.
+yusheng kuo: And it's like RB2B.
+Michael Riedler: Yeah.
+yusheng kuo: They don't, they don't do any kind of ID denominators themselves.
+yusheng kuo: Yeah, exactly.
+Michael Riedler: And this client just saw how it happened is I made a, just networking like I made a friend like a contact in Chicago and he's deep in the B2B data space and he, whenever he has a deal he lives on like commission so he sends me like hey, can you help me with this type of data?
+Michael Riedler: Can you help me with that?
+Michael Riedler: And I had a catch up with him, was telling him what I'm doing and then this company requested that data, LinkedIn data and so he connected and then, and that, that's it, that's how it worked.
+Michael Riedler: So it wasn't.
+yusheng kuo: So you just provide an API and then you, you yourself like go to those like I guess because you know who, who does like a real scrapper are.
+yusheng kuo: Right.
+Michael Riedler: Yeah.
+Michael Riedler: Not just like exactly.
+yusheng kuo: Landing page.
+Michael Riedler: Yeah, yeah, exactly.
+Michael Riedler: Yeah.
+Michael Riedler: I mean, I mean I do.
+Michael Riedler: It's, it's sometimes hard to do.
+Michael Riedler: At least I'm testing them.
+Michael Riedler: I'm, you know, I'm, it's not always clear.
+Michael Riedler: I'm.
+Michael Riedler: But I'm at the moment trying to build the best network in the world in that LinkedIn data space.
+Michael Riedler: So I have now six that I'm contracting with.
+Michael Riedler: But I think I want to find more, you know because the goal is to go high volume.
+Michael Riedler: So the client that's going live now, they do 5 million a month if I get 10 of these million scrapes and that means that I want to do more.
+Michael Riedler: I want to do like 300 million per month because that means you have every single profile fresh in the database as well.
+Michael Riedler: So you have, you make money in the scraping and you have the data so we can launch so many add on products on top of it.
+yusheng kuo: Right, right, right.
+Michael Riedler: But in, and the other customers, they mostly come from scraping I've built.
+Michael Riedler: You know, I'm gonna, I'm moving over some clients from my former, you know.
+yusheng kuo: Yeah, yeah, yeah.
+Michael Riedler: That, that's of course and, and this, and this type of setup, that's just the waterfall API is a side project.
+Michael Riedler: We're launching another thing that's just another brand for email to LinkedIn and I have also at the moment all I'm doing is selling to data providers and whatever they need.
+Michael Riedler: I'm looking, you know.
+Michael Riedler: Okay, these are all simple features I don't you know, once that Watford API is running that thing doesn't need much maintenance.
+yusheng kuo: You know that just goes no, no, yeah.
+yusheng kuo: Just make sure it's like have high availability and that's it.
+yusheng kuo: And it's like super simple logic.
+yusheng kuo: So it's like.
+yusheng kuo: Yeah, like it's hard to break.
+yusheng kuo: Yeah, yeah.
+Michael Riedler: So and the guy I'm working with, my partner now, Alice Ale, he's a engineer, decade long engineer and founder and he reviewed all the code I've you know, created with.
+Michael Riedler: Yeah, yeah.
+Michael Riedler: He loved, he said man like this is.
+Michael Riedler: He reviewed it and he's like we don't need to change anything.
+Michael Riedler: It's fine, I will just leave it.
+yusheng kuo: Where do you deploy that?
+yusheng kuo: Like you go to like I put it.
+Michael Riedler: I deployed on Google Google Cloud.
+yusheng kuo: Oh Google.
+yusheng kuo: Yeah yeah yeah that's a good.
+Michael Riedler: But he said maybe we can move it somewhere else or it.
+Michael Riedler: But he said look it doesn't matter like it's going to be functional.
+Michael Riedler: I just wanted to make sure security wise.
+Michael Riedler: I don't know.
+Michael Riedler: You know, in the beginning I was all the API keys and GitHub or whatever.
+yusheng kuo: Yeah, yeah, yeah, yeah.
+Michael Riedler: I did all these beginner mistakes until.
+Michael Riedler: Because if you're not an engineer you don't fully understand how suddenly everything moves to GitHub and you don't really know what happened.
+yusheng kuo: But.
+yusheng kuo: But nowadays actually kind of easy.
+yusheng kuo: I was much easier to pick up because like you know my, my current problem is like okay, search the web or based on your understanding what's the best practice?
+yusheng kuo: Like propose like see few but then they kind of give me good understanding.
+yusheng kuo: What's the trade off?
+yusheng kuo: Understanding.
+yusheng kuo: Yes, that's a very quick way to, to learn that.
+yusheng kuo: But the shortcut is like once you, once they propose you can directly say okay, implement this one for me.
+yusheng kuo: You just like decide, decide which one.
+yusheng kuo: Like like understand the pro and concept and then just decide.
+Michael Riedler: Yeah well so yeah that's kind of how we, you know, how, how I I'm doing it.
+Michael Riedler: I mean I'm very happy with I left scraping end of the year like early January.
+Michael Riedler: What is it now?
+Michael Riedler: Early Feb. You know we started business.
+Michael Riedler: We have a cost ready to sign.
+Michael Riedler: It's just in the legal space.
+Michael Riedler: Product is live.
+Michael Riedler: I'm gonna now this guy I'm working with, he has already a product in the market that does about a few million revenue.
+Michael Riedler: So I'm going to help.
+Michael Riedler: No, it's an email tool.
+Michael Riedler: It's called Any mail.
+yusheng kuo: Yes.
+Michael Riedler: It's called Any Mail Finder.
+Michael Riedler: So it's in terms of email finding is like one of the, you know, in terms of the quality it's so, so good.
+Michael Riedler: And so I'm helping this grow.
+Michael Riedler: I'll get some shares in that one and then we start a new company that we own, 5050 and we're just gonna put every new project gonna put in there and our vision at the moment is launch different things and see, see what sticks.
+Michael Riedler: But all in that, you know, B2B2B market, B2B data market.
+yusheng kuo: For this one, for this, any mail.
+yusheng kuo: Because based on email people sign up and find the linking or exactly the opposite.
+Michael Riedler: It's the opposite.
+Michael Riedler: It's mainly you provide a name domain or you provide the LinkedIn URL and they have massive infrastructure to get the valid email address.
+yusheng kuo: Right.
+Michael Riedler: Okay so that, that's the main, the main feature what people use.
+Michael Riedler: There is some other features but that, that's the main one.
+Michael Riedler: And yeah, I mean it's so basic but it's totally needed constantly.
+yusheng kuo: Right.
+Michael Riedler: So it's.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: It's like a rice, right.
+yusheng kuo: Like a bread.
+yusheng kuo: Yeah.
+yusheng kuo: Like everyone needs to eat.
+yusheng kuo: It doesn't matter if it's a commodity.
+yusheng kuo: You always kind of get like some share.
+yusheng kuo: Right.
+yusheng kuo: And then the nice thing is like the floor is kind of set.
+yusheng kuo: No one can get even lower.
+yusheng kuo: So you just like pick whatever you found.
+yusheng kuo: Maybe it's about more like a local promotion.
+yusheng kuo: Local ad.
+Michael Riedler: Yes.
+yusheng kuo: Finally decide what you want to do.
+yusheng kuo: Yeah, yeah.
+Michael Riedler: So I'm just working with him building the watch but at the same time I have plenty of space.
+Michael Riedler: Space to you know, work on new ideas which I love.
+Michael Riedler: You know it's a good setup and there's so many ideas in my head.
+Michael Riedler: But let's.
+Michael Riedler: There's one I need to run by you.
+Michael Riedler: But let's start one by one we're going to look at.
+Michael Riedler: Tell me very.
+Michael Riedler: What have you done since we last spoke with the go to market?
+yusheng kuo: Yeah.
+yusheng kuo: So.
+yusheng kuo: So one thing I, I really like the idea and I think even kind of open club is that's like a time step action.
+Michael Riedler: Yes.
+yusheng kuo: So yes, I viewed this.
+yusheng kuo: So let me, let me.
+yusheng kuo: Because I'm on my laptop.
+yusheng kuo: Let me try to pull that.
+Michael Riedler: Yes.
+yusheng kuo: Just give me one second.
+yusheng kuo: Okay.
+yusheng kuo: So.
+yusheng kuo: It.
+yusheng kuo: Okay, let me show you.
+Michael Riedler: Yes.
+yusheng kuo: So I'm not working with.
+yusheng kuo: So I don't, you know, Jeremy is kind of helping us to.
+yusheng kuo: Yeah, it's okay.
+Michael Riedler: Yeah.
+yusheng kuo: Not any bad guy but yeah, these are helping us to kind of introduce data gen to, to clients.
+yusheng kuo: He's a go to market consultant.
+yusheng kuo: It's like a rev out Guy.
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: And.
+yusheng kuo: He had a hard time to like push out MCP product but because recently we start to do this kind of train your car co agent to be life thing.
+yusheng kuo: They are kind of interested and so we try to build out some for the company he owns like he's contracted with and yeah.
+Michael Riedler: So essentially for it's a go to market agency consultant.
+Michael Riedler: And this is for a client of his kind of thing.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: It's one of his clients.
+yusheng kuo: And you want to see okay.
+yusheng kuo: What this like agent can do with it.
+yusheng kuo: Yeah, we haven't like go very deep in that but you can see like.
+yusheng kuo: Okay, this is a repository of he.
+Michael Riedler: Set up that I don't see.
+Michael Riedler: I. I see the, the Google Meet window.
+yusheng kuo: Okay, try to do it again.
+Michael Riedler: Okay, now I'm Google Meet.
+yusheng kuo: Okay.
+yusheng kuo: And hopefully you can see this.
+Michael Riedler: So I'm.
+Michael Riedler: I'm still on the Google Meet.
+yusheng kuo: Let me turn up, turn off my.
+yusheng kuo: Okay.
+yusheng kuo: Presentation.
+yusheng kuo: Sorry.
+Michael Riedler: Is it Internet slower?
+Michael Riedler: You are.
+yusheng kuo: Could be maybe you turn off the other camera.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: Okay, let me try it again.
+yusheng kuo: Let me rejoin again.
+yusheng kuo: Yeah, okay.
+Michael Riedler: Okay, okay.
+Michael Riedler: Okay, Let's try.
+yusheng kuo: Yeah, let's try.
+yusheng kuo: Give me one more shot.
+Michael Riedler: Yeah, of course.
+yusheng kuo: Okay.
+Michael Riedler: Okay.
+Michael Riedler: So I can see the meat right.
+Michael Riedler: Window.
+yusheng kuo: Okay.
+yusheng kuo: Okay.
+yusheng kuo: Can you see this one now?
+Michael Riedler: Yes.
+Michael Riedler: Oh, ghosty.
+Michael Riedler: Now I'm getting in.
+yusheng kuo: I'm.
+Michael Riedler: No, I'm not.
+yusheng kuo: Yeah, yeah, yeah, yeah.
+yusheng kuo: It's one of the nicest.
+Michael Riedler: Yeah, I've gone down the rabbit hole now.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: It has to.
+yusheng kuo: It's like so, so fun.
+yusheng kuo: It's like all of a sudden you have some kind of superpower.
+yusheng kuo: Yeah.
+Michael Riedler: So.
+yusheng kuo: So, so yeah, here's like let me quickly kind of go through so except yeah, love the, the repository.
+yusheng kuo: One have like cloud IFP of course and some resources like other stuff and some scripts to do some stuff.
+yusheng kuo: And you have this sales and then sales is like a.
+yusheng kuo: It's like a sales reps name and then I think they are.
+Michael Riedler: Sales is a sales rep's name.
+Michael Riedler: The name of people.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: So he set up one for each.
+yusheng kuo: The idea is like eventually we will just deploy their own agent for each of them.
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: And you can I think go to, go to.
+Michael Riedler: So now you, you're going into one agent and looking at target accounts.
+Michael Riedler: Yeah.
+Michael Riedler: And where is target account in the resources?
+yusheng kuo: No, no, target account is in one of the rep.
+yusheng kuo: So each rep is a kind of ae I think almost.
+Michael Riedler: Yes, got it.
+yusheng kuo: Each one have their target account.
+Michael Riedler: And is this target accounts are they statically defined somewhere in a file or is there some magic going on?
+yusheng kuo: So the target account I think is falling from.
+yusheng kuo: He build a clay table to kind of do the first level, like enrichment and send it to here.
+Michael Riedler: Okay, got it, got it.
+yusheng kuo: Maybe I don't know the detail, but maybe some of it is like their existing customer.
+yusheng kuo: So they pull from the.
+yusheng kuo: The.
+yusheng kuo: I think there are two type of.
+yusheng kuo: Is one of the.
+yusheng kuo: It's a target account.
+yusheng kuo: It's like the account they want to penetrate into, right?
+yusheng kuo: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: And then this is like also kind of the.
+yusheng kuo: The account they already have.
+yusheng kuo: And then maybe they want to like upsell whatever.
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: So that's what the target account about.
+Michael Riedler: Yes.
+yusheng kuo: And.
+Michael Riedler: So now you're in the target accounts folder.
+Michael Riedler: And now you do.
+yusheng kuo: And then.
+yusheng kuo: And then.
+yusheng kuo: Yeah, and then there are two account, right?
+Michael Riedler: Yeah.
+yusheng kuo: One is by dance.
+yusheng kuo: We all know what IT finance is like, right?
+yusheng kuo: Yeah.
+yusheng kuo: I don't know what this one is.
+Michael Riedler: Okay.
+Michael Riedler: Yeah.
+yusheng kuo: So.
+yusheng kuo: So the bigger background.
+yusheng kuo: This is a company.
+Michael Riedler: Yes.
+yusheng kuo: That's a legal enforcement.
+yusheng kuo: Like they try to help you to make your legal job easier.
+yusheng kuo: Okay.
+yusheng kuo: Yeah, that's a company.
+yusheng kuo: Yeah.
+yusheng kuo: And.
+yusheng kuo: And then we just get into.
+yusheng kuo: We just went in one level deeper.
+yusheng kuo: Go to this account.
+Michael Riedler: Right.
+Michael Riedler: Okay, got it.
+yusheng kuo: Yeah.
+Michael Riedler: Oh, nice.
+yusheng kuo: Now you have this kind of a.
+yusheng kuo: This is a.
+yusheng kuo: Basically a play table result.
+yusheng kuo: I can show you.
+Michael Riedler: Yeah.
+yusheng kuo: Let's use cursor to open this one.
+Michael Riedler: I love watching you using the terminal because I need to learn how to use it.
+yusheng kuo: I'm not an expert, but.
+yusheng kuo: Yeah, let's try.
+yusheng kuo: Okay, so in this account we have this.
+yusheng kuo: Basically it's a JSON file.
+yusheng kuo: It's like you get some like business model summary confidence level of this thing and be updated.
+Michael Riedler: But what I'm interested is that account, Jason, is that based on.
+Michael Riedler: So that's external data.
+Michael Riedler: Right.
+Michael Riedler: Because that's not a customer yet.
+Michael Riedler: It's outbound, Right.
+Michael Riedler: They want to target.
+yusheng kuo: Yeah.
+yusheng kuo: Now it's still outbound.
+yusheng kuo: Yeah.
+Michael Riedler: So you basically just create a kind of a structured JSON that has like the.
+Michael Riedler: The basic stuff of this account in there.
+yusheng kuo: Exactly.
+yusheng kuo: Yeah, I think.
+yusheng kuo: Yeah.
+yusheng kuo: But then.
+yusheng kuo: Then now become like into cloud code, right?
+yusheng kuo: So.
+yusheng kuo: Yes, we try to.
+yusheng kuo: So I started to create some other like for competitive move.
+Michael Riedler: I love it.
+yusheng kuo: Yeah.
+Michael Riedler: Like what does less mean?
+Michael Riedler: Is that open a file.
+yusheng kuo: It's like, like.
+yusheng kuo: Yeah, open the file and then let you like show it.
+yusheng kuo: So you don't need to.
+yusheng kuo: Yeah, it's probably easier to show in cursor.
+yusheng kuo: I can kind of use it more.
+yusheng kuo: Let me try to show in cursor.
+yusheng kuo: This is what Cursor is like, it's kind of slower.
+yusheng kuo: It's bloody slow.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: I'm on her laptop.
+yusheng kuo: Yeah, this one.
+Michael Riedler: How many Mac Minis?
+Michael Riedler: That's the question.
+yusheng kuo: I don't know.
+yusheng kuo: Okay.
+yusheng kuo: Here.
+yusheng kuo: Yeah, but I, I feel like, yeah, like I really feel like my meaning would be the opportunity for Apple.
+yusheng kuo: So.
+yusheng kuo: Yeah, it's coming in.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: Okay so we are here.
+Michael Riedler: Yeah.
+yusheng kuo: Let me try to make this logic.
+Michael Riedler: Yeah, no, no, I can see it all good.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: Okay so for example, yeah you have this account, right?
+yusheng kuo: Yeah.
+yusheng kuo: Okay cool.
+yusheng kuo: Yeah.
+yusheng kuo: And then, and then you have like company overview.
+yusheng kuo: Let's use this nice preview data.
+yusheng kuo: Oh gosh.
+yusheng kuo: I don't have the right to do that.
+yusheng kuo: But okay, bear with me.
+yusheng kuo: Yeah, they have some kind of understanding transition account to be more like a markdown file and then we have this like notes for everything.
+yusheng kuo: So what I think is like this will actually every day get updated.
+yusheng kuo: Like what's their strategic priority?
+yusheng kuo: What's their upcoming event?
+yusheng kuo: Right.
+yusheng kuo: Those are things that would need to be continued to be updated.
+yusheng kuo: For example, here's the upcoming event for then will be the fiscal year, half year result earning.
+Michael Riedler: Yes.
+yusheng kuo: And then there's a year end and you can have more things like okay, what the conference they will be joining.
+yusheng kuo: Right.
+Michael Riedler: Everything right.
+yusheng kuo: Everything.
+yusheng kuo: Right.
+yusheng kuo: Yeah.
+yusheng kuo: So it's like this is live data.
+Michael Riedler: Nothing they're sponsoring like oh, it's a complete trace of their, their, their events.
+Michael Riedler: Yeah.
+Michael Riedler: That could be massive if this is like.
+yusheng kuo: Yeah.
+yusheng kuo: And then like they, they were like okay, what's their fiscal year?
+yusheng kuo: 2023 guidance like and we can make this more structured so you come in every day like updated that yeah.
+yusheng kuo: And, and then like what's there because it's a legal enforcement operation.
+yusheng kuo: Right.
+yusheng kuo: So you kind of have some of their understanding of what, what they are using the tool, the process gap.
+yusheng kuo: Like what this company might actually are missing this peer comparison.
+yusheng kuo: So these are all like.
+yusheng kuo: I would call it like a semantic level.
+yusheng kuo: It's not quite a graph yet but it's like a semantic level.
+yusheng kuo: Understand summary.
+yusheng kuo: Yeah.
+yusheng kuo: One thing, yeah like one thing I'm really interested would be like one is like a recent event, right.
+yusheng kuo: Like what will be the coming one and the agent should be able to.
+yusheng kuo: Oh actually there are some interesting one.
+yusheng kuo: Yeah.
+yusheng kuo: Like 12:16 will be a computer share alliance and here's also signal.
+yusheng kuo: Yeah some kind of signal.
+yusheng kuo: This kind of like bad signal yet.
+yusheng kuo: But it's also like everything you can see is a kind of try to timestamp that.
+Michael Riedler: Yeah.
+yusheng kuo: And then one very important Thing I haven't really.
+Michael Riedler: The thing is gone.
+Michael Riedler: The share.
+Michael Riedler: Try again.
+yusheng kuo: Oh, okay.
+Michael Riedler: Just.
+Michael Riedler: Just disappear.
+yusheng kuo: Yeah, Yeah.
+yusheng kuo: It's like here.
+Michael Riedler: That's ghosty.
+Michael Riedler: Yeah, I'm back, back, back.
+yusheng kuo: Okay.
+yusheng kuo: Yeah.
+yusheng kuo: So.
+yusheng kuo: So this action md, right?
+yusheng kuo: It's like.
+yusheng kuo: Because I don't.
+yusheng kuo: He doesn't really provide me everything.
+yusheng kuo: But what I want is like you everyone have like an email, have a linking, have a call, have a meeting, have a conference, an event, internal upcoming.
+yusheng kuo: So there will all be like attack as like returnal upcoming or like a meeting or email.
+yusheng kuo: But like every action will be logged here like what you say.
+yusheng kuo: And it should be logged as a timestamp.
+Michael Riedler: Yeah.
+Michael Riedler: 100.
+Michael Riedler: Yeah.
+yusheng kuo: And then it will just be continued to append it, right.
+yusheng kuo: Like by.
+yusheng kuo: By in the end so the model can quickly come in and then do.
+yusheng kuo: They're called like a tail, right?
+yusheng kuo: They tell me like a read from the end.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: And this would be like.
+yusheng kuo: I don't know if you're like.
+yusheng kuo: It'll be so powerful because one of the issue I. I keep hearing from those outbound people is like multi channel.
+yusheng kuo: For example, right.
+yusheng kuo: Like they, they make a call, he didn't respond and they have a linking.
+yusheng kuo: Because now every time like for example, hey Rich.
+yusheng kuo: Right.
+yusheng kuo: They do linking automation.
+yusheng kuo: But like you also do instantly automation email.
+Michael Riedler: Yes.
+yusheng kuo: Right.
+yusheng kuo: One thing that is always hard for them to check is okay if he actually responding to the email.
+Michael Riedler: Yes.
+yusheng kuo: And then LinkedIn doesn't see that.
+yusheng kuo: And your LinkedIn haters will continue to like ask again even they have the email.
+yusheng kuo: But with this kind of complete logging, right.
+yusheng kuo: Like every day you let AI decide what's the next step.
+yusheng kuo: You kind of write your sequence like in natural language like how you want to do and then you can see like even like one of the meeting.
+yusheng kuo: You can even reference on the thing that meeting is about.
+Michael Riedler: Yeah.
+yusheng kuo: So this is like you can continue to log every interaction.
+yusheng kuo: You have this with this client in here.
+yusheng kuo: And then like it's always very hard for like a human being coming into here to update.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: But like, yeah, like now that if you try to use the right tool, for example LinkedIn if you use Hayrich.
+yusheng kuo: So every incoming email will trigger that webhook.
+Michael Riedler: Yes.
+yusheng kuo: Actually can then trigger the like an agent call and then the agent will come in to update this same as email, like instantly have email and then like even we even want to like have the email like inbox.
+yusheng kuo: So any kind of like a meeting also like for example like I just finished the meeting with another guy and then he like the web could also come into like log this meeting what's important.
+yusheng kuo: Like and then everything will have a reference link to let Adrian link to the original.
+yusheng kuo: Just like another level down to the raw data.
+yusheng kuo: Yeah.
+yusheng kuo: If he needs to go deeper.
+yusheng kuo: Right.
+yusheng kuo: So he can quickly review all the action he had done that people have done.
+yusheng kuo: So you no longer have this kind of multi channel.
+yusheng kuo: So you use your LinkedIn or email only as an action and trigger.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: You use this to send email, you use this to send LinkedIn.
+yusheng kuo: You use this to log back the, the linking result.
+yusheng kuo: So yeah.
+yusheng kuo: Like your agent decide who to call next exact contact, what kind of.
+yusheng kuo: And you can have a.
+Michael Riedler: It's a completely different way of thinking.
+Michael Riedler: Right.
+Michael Riedler: Like it's a.
+yusheng kuo: Exactly.
+Michael Riedler: This is, I love this stuff.
+Michael Riedler: You know, I think.
+Michael Riedler: When do you think this is to.
+Michael Riedler: So this is an action log on an account level.
+Michael Riedler: Right.
+Michael Riedler: So it's like super nice like and easy.
+Michael Riedler: When do you think this is too full?
+Michael Riedler: Let's say there was like 50 logs.
+Michael Riedler: Is that too much or when.
+yusheng kuo: No, no, no.
+yusheng kuo: So now we are like so, so I, I, I kind of learned a lot like both by B. Yeah.
+yusheng kuo: B A D. You know, like open cl.
+yusheng kuo: So one thing is like you have this kind of log, you try to log as much as possible and now that actually the, the database get tense because you, you lock that not the source.
+yusheng kuo: Right.
+yusheng kuo: So that give you actually the real link to the real data and then your data can be in USS provider, whatever.
+yusheng kuo: It doesn't need to be local.
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: So first you can kind of.
+yusheng kuo: They call compact.
+yusheng kuo: So they can compact it to a small log while have the way to go to the real full content.
+yusheng kuo: Right.
+yusheng kuo: The second thing is like after you keep locking that, you can compact that too.
+yusheng kuo: You can basically compact all activity into a summary of a January activity.
+Michael Riedler: Yes.
+yusheng kuo: So you can keep the fixed constant for the recent one.
+yusheng kuo: You keep adding that every detail.
+yusheng kuo: But the old one, you summarize that into just one single line.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: And if you, if you want like Google, you have an infinity amount because they got storage nowadays like so cheap.
+yusheng kuo: It's the ingress and the egress is expensive like putting in and putting out.
+yusheng kuo: So storing is not expensive.
+Michael Riedler: Yeah, yeah, yeah.
+yusheng kuo: So now it's a markdown.
+yusheng kuo: But I think we would be able to save it to any kind of a login like database.
+yusheng kuo: Yeah.
+yusheng kuo: And then model can just read it.
+yusheng kuo: But the idea is like if we can like just like you say we first have an agent to basically each of this is an agent.
+yusheng kuo: Right.
+yusheng kuo: Try to monitor what's incoming and then once they come in with a web call they will log things here.
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: And then we will just another like daily.
+yusheng kuo: For example, a daily agent would go in and summarize whatever action have done and then reference on some of the cloud MD like how we should summarize things like the semantic view of it.
+yusheng kuo: Turn it into like overview.
+yusheng kuo: Right?
+yusheng kuo: Like.
+yusheng kuo: Yeah, like a.
+yusheng kuo: Based on like a recent event MD which is every day we'll try to look up some kind of news or like company website.
+yusheng kuo: You can kind of define the source and it would just like continue log and then he will look at your action.
+yusheng kuo: You look at your competitor.
+yusheng kuo: Is it another listening.
+yusheng kuo: It's just like basically you can think of this a lot of listener.
+Michael Riedler: Yeah.
+yusheng kuo: To log everything and then you have another agent come in to summarize them.
+yusheng kuo: So you are a company over U is like very high level but very like reflect the recent activity instead of like a stale.
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: So that's like I took a lot of inspiration because you told me about this kind of like.
+yusheng kuo: Yeah like a login.
+yusheng kuo: I think it's like really popular because like even open club this is how they do things.
+yusheng kuo: Like you just continue to log your markdown of your action trace and then later on actually save it to a database or like cemented pool of the data.
+yusheng kuo: And we can like for this particular.
+yusheng kuo: Hey, you can have an agent to come in to like just constantly summarize the thing and update that thing.
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: So you.
+yusheng kuo: Yeah, it's like that's.
+yusheng kuo: That's where I am.
+Michael Riedler: And what's that?
+Michael Riedler: What's the codex fit?
+Michael Riedler: Oh, that's them.
+Michael Riedler: That's them.
+Michael Riedler: It's like how is it.
+Michael Riedler: How good is of an account is that.
+yusheng kuo: Yeah, yeah, yeah, yeah.
+yusheng kuo: Like the healthiness like how like for example if they already work with a competitor right.
+yusheng kuo: Then yes product speed would be low because like they already have a.
+yusheng kuo: It's hard for them to move where if they have a new coming like a CIO or C coo like a legal like General Counselor.
+yusheng kuo: Yeah.
+yusheng kuo: If they're coming there's a new one coming in.
+yusheng kuo: Then there's a.
+yusheng kuo: The fifth one.
+yusheng kuo: So again it's like idea is like alien will coming in every day to like like update the thing making things the precious as possible possible.
+yusheng kuo: And it's a different.
+yusheng kuo: It's a different like a table base.
+yusheng kuo: And.
+yusheng kuo: And then the cool thing is like you can have different because of the data here, right?
+yusheng kuo: You can have a different folder structure unlike like whether it's clay or like a traditional CRM, everything is like a table one, one table fit for all your, your, your, your, your account.
+yusheng kuo: Right.
+yusheng kuo: But here you can like oh, but this account, I think I need more of this type of thing.
+yusheng kuo: But for this account I look slightly different.
+yusheng kuo: You don't need to have that kind of a one table fit.
+yusheng kuo: All like data structure.
+yusheng kuo: Yeah.
+yusheng kuo: So it's like.
+Michael Riedler: And what's, what's.
+Michael Riedler: So with this in place, what do you want to test of this client?
+Michael Riedler: Like what kind of do you now want to basically run, you know, Claude code and create that campaign?
+Michael Riedler: Or what's the.
+Michael Riedler: How do you want this to be used?
+Michael Riedler: Or how do you envision to use this?
+yusheng kuo: They already have like a B1 what they want to do.
+yusheng kuo: So the B1 is actually quite simple because we still need to fine tune all this stuff.
+yusheng kuo: Like basically try to test out the agent how well they can continue to log out this stuff.
+yusheng kuo: And also we need the access to their web everything.
+yusheng kuo: So the first step is actually they were just like sending out this account JSON.
+yusheng kuo: So whenever there's a new account coming in for this like this wrap, it will send out this account JSON and also the contact file.
+Michael Riedler: Yeah.
+yusheng kuo: So and then we will summarize this and tell him like okay, based on other accounts, what's your activity?
+yusheng kuo: What's your next best next move.
+yusheng kuo: And then because we recently have this feature called.
+yusheng kuo: We launched this feature for example like this daily activity Recorder.
+yusheng kuo: Right.
+Michael Riedler: Is that.
+Michael Riedler: It's kind of based on the heartbeat logic from Claude.
+yusheng kuo: God yeah.
+yusheng kuo: This is a conjure.
+yusheng kuo: So every day at 8am he will send out this report to me.
+yusheng kuo: You will read my repository and say okay here's a report generated, it will be sent to me and here's my user activity, the top performer Critical alert, something like that.
+yusheng kuo: The thing is, it's not just that report.
+yusheng kuo: These are agents I can talk to.
+yusheng kuo: So I say okay, have we any more new table in Neom to check users?
+yusheng kuo: Because my co founder actually just had a few things I want to check.
+yusheng kuo: Do we have a new thing?
+yusheng kuo: And he said based on the my analysis the code base no new table has been added.
+yusheng kuo: So this yesterday I also have a use case is like my meeting summarizer.
+yusheng kuo: Right.
+yusheng kuo: So after I finish an internal meeting he said okay, we need to have a UI UX review of data gen and I have a 14 to do item that we need to do.
+yusheng kuo: We just identify like UI issue.
+Michael Riedler: Yeah.
+yusheng kuo: Okay, can you tell me which information should we price for day?
+yusheng kuo: Yeah, so like and then it will respond oh like top five products that you should do.
+yusheng kuo: So like, so the idea is like rep can kind of come in and see the report and ask the follow up question like why this account is good?
+yusheng kuo: What kind of supporting app than this?
+yusheng kuo: And then like can you give me more level detail things?
+yusheng kuo: Yeah, and then we like go.
+Michael Riedler: Yeah, no, no, no, you go oh.
+yusheng kuo: The thing I really like email is it can have very clear threat of your activity.
+Michael Riedler: Yes.
+yusheng kuo: Yeah, like, like and then for different client.
+yusheng kuo: And then it's like everyone have email, right?
+yusheng kuo: Yeah, it's like the third thing is like yeah, it can present really large like beautiful data collected in email.
+Michael Riedler: Yeah.
+yusheng kuo: And then you can like for example we have this.
+yusheng kuo: I actually have this product, This one.
+yusheng kuo: One second.
+yusheng kuo: Yeah, I probably deleted it.
+yusheng kuo: I watch it and I deleted it.
+yusheng kuo: Yeah but it's like a.
+yusheng kuo: Like here I actually asked my agent to pay like a really well formatted one.
+yusheng kuo: Right.
+yusheng kuo: And now if I see anyone I can just like email and then I can just like start to contact it.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: Question about he even come prepare the title for me.
+Michael Riedler: Yeah, yeah, yeah.
+yusheng kuo: It's like already have a have a small app within and I yeah if he.
+yusheng kuo: I see any issue I get like just the other day because we have an issue of Google right.
+yusheng kuo: And I saw this guy is using it, I immediately just.
+yusheng kuo: I call here and say hey we have an issue here.
+yusheng kuo: If you have anything I don't need to like go in just very important.
+yusheng kuo: Yeah.
+Michael Riedler: Explain to me this guy who did 2000 runs.
+Michael Riedler: What is a run?
+yusheng kuo: Oh, the run is just Wait, wait.
+Michael Riedler: You know when you have you.
+Michael Riedler: You look at a user list and you have high intent, no active users.
+Michael Riedler: So this person, this 1994 runs.
+Michael Riedler: Yeah, so what, what does that mean?
+yusheng kuo: So it means he run the custom pool 2000 type but he's like continue to test it.
+yusheng kuo: He's a guy who.
+yusheng kuo: That I told you that trying to help us to break it.
+yusheng kuo: So yeah, there's a kind of untapped for him.
+yusheng kuo: It's kind of untapped for him.
+Michael Riedler: And where is he using this in cloud code?
+yusheng kuo: Yeah, yeah.
+yusheng kuo: Oh cloud AI.
+Michael Riedler: Okay.
+yusheng kuo: Because it's just a MCP tool route, right?
+Michael Riedler: Yes.
+Michael Riedler: Yeah.
+yusheng kuo: So the way you set up.
+yusheng kuo: Yeah, let me actually show you.
+yusheng kuo: Right.
+yusheng kuo: So now all this agent right.
+yusheng kuo: I just created.
+Michael Riedler: Yeah.
+yusheng kuo: So the tools the run is.
+yusheng kuo: Yeah.
+yusheng kuo: You can ignore there's like a terminology like internally we didn't even well name it.
+yusheng kuo: So it's like only us like understand what it means.
+yusheng kuo: But yeah, Run is like a tool run.
+yusheng kuo: Like for example, I run this one.
+yusheng kuo: I run some custom tool.
+Michael Riedler: I got it.
+Michael Riedler: Yeah.
+yusheng kuo: Because I can create any tool can be considered as an API.
+yusheng kuo: You can create get weather for example, you become an API and you have a code like say okay, I need to go to this open weather.
+yusheng kuo: Get my weather.
+yusheng kuo: This is like you can directly deploy the API from our mcp.
+yusheng kuo: Yes, basically.
+yusheng kuo: And then also this is just.
+yusheng kuo: I can install whatever MCP I want here.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: And they'll also become a tool.
+yusheng kuo: That's the tool.
+yusheng kuo: Wrong.
+yusheng kuo: And then for the agent is like if you create an agent cloud, then it will become the agent MD file.
+yusheng kuo: So for example, we have this daily activity recorder.
+Michael Riedler: Yeah.
+yusheng kuo: So if I have a webhook.
+yusheng kuo: So every day for this one actually I create a schedule.
+Michael Riedler: Yeah.
+yusheng kuo: Daily crown job like am every day.
+Michael Riedler: Yeah.
+yusheng kuo: So like.
+yusheng kuo: So this would actually come back to the original one.
+yusheng kuo: Like I can both give this agents welcome to my.
+yusheng kuo: For example the.
+yusheng kuo: The meeting summary one.
+yusheng kuo: Right.
+Michael Riedler: Yeah.
+yusheng kuo: So I have a ton of age about it.
+Michael Riedler: No, that's good.
+yusheng kuo: Yeah.
+Michael Riedler: I'm not surprised.
+yusheng kuo: Well yeah, but I would say like to make the agent you still need to put in after to make it really align.
+yusheng kuo: Yeah.
+yusheng kuo: Otherwise it's just bunch of noise.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: So I have this agent.
+yusheng kuo: I would actually I just give it to the.
+yusheng kuo: If you look at my firefly.
+Michael Riedler: Yeah.
+yusheng kuo: Something quick.
+Michael Riedler: Yeah man.
+Michael Riedler: It's crazy.
+Michael Riedler: Once you're used to like this new world.
+yusheng kuo: Yeah.
+yusheng kuo: Yeah.
+yusheng kuo: It's like wait, why it's so slow.
+yusheng kuo: But I still need to come in to set up my web hook.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: So there's go to here.
+yusheng kuo: So you can give it my book.
+yusheng kuo: So every time the meeting finish.
+yusheng kuo: Right.
+Michael Riedler: Yeah.
+yusheng kuo: It would just send to here and then you can see the.
+yusheng kuo: The agent log.
+yusheng kuo: He just actually come in and here's the payload.
+yusheng kuo: Actually he sent it to just finish.
+Michael Riedler: Yes.
+yusheng kuo: And my agent would just go ahead to like pull the.
+yusheng kuo: For the.
+yusheng kuo: For the tour result.
+Michael Riedler: Yes.
+yusheng kuo: Yeah.
+yusheng kuo: And then.
+yusheng kuo: And then eventually I gotta save it, write it basically just a cloud code in the cloud and then coming with this.
+yusheng kuo: Yeah.
+yusheng kuo: And then.
+yusheng kuo: And it will update my repository directly like here.
+yusheng kuo: Yeah.
+yusheng kuo: So that.
+yusheng kuo: Yeah, that's the idea.
+yusheng kuo: Like.
+yusheng kuo: So if you have a lot of agent like working on the same repository.
+yusheng kuo: Right.
+Michael Riedler: Yeah.
+yusheng kuo: Repository would just be alive.
+yusheng kuo: Like you don't need to take care that like I have a news agent that will come into for this repository.
+yusheng kuo: So each repository have its own agent fleet to update it.
+yusheng kuo: Yeah.
+yusheng kuo: This is how we kind of keep our context Updated like autonomously.
+Michael Riedler: Yeah, yeah, yeah.
+yusheng kuo: Like every day we try to search the most relevant Coco related linking post and give it to us so we know who should we contact.
+yusheng kuo: You.
+yusheng kuo: And then I can like one thing I really want to do is like after I get this email, right.
+yusheng kuo: For example I. I get.
+yusheng kuo: Earlier I have this email about the.
+yusheng kuo: Wait, what is it?
+yusheng kuo: Yeah, like for example I get this meeting summarizer.
+yusheng kuo: What do you want to do?
+yusheng kuo: Right.
+yusheng kuo: And I can just like forward to another agent, another agent and say like hey, like look at this, like what we want to do.
+yusheng kuo: Do it for me.
+yusheng kuo: And then like angel would just do it another one, you know.
+yusheng kuo: Yeah, that's what we are trying to do next.
+Michael Riedler: You can trigger these agents from anywhere.
+Michael Riedler: Yeah, yeah.
+Michael Riedler: YouTube, email, API.
+Michael Riedler: So wherever, whenever you want to intervene, you can let them, you know.
+Michael Riedler: And maybe some are live, right?
+Michael Riedler: Maybe if the ones that have a heartbeat, they can, you know, whatever.
+Michael Riedler: They'll, they'll.
+yusheng kuo: Yeah, yeah.
+Michael Riedler: We have.
+Michael Riedler: Let's say I'm from this lead and you have a meeting with me and I'll mention something like hey, you know, we're going to acquire a new business or we are unhappy with our legal software.
+Michael Riedler: I mean that's like, whoa, you.
+Michael Riedler: That's like that changes the game, right?
+Michael Riedler: For this Target account I'm mentioning something interesting and then it's like you know, one thing in, in outbound, I think, you know, I mean if you, you work with someone, they, you know, just make it work for their use case.
+yusheng kuo: Yeah.
+Michael Riedler: For me it's really, it's very transactional.
+Michael Riedler: So the way people do it without agents is really, they blast out a lot of emails, LinkedIn, know, whatever and all they care, they don't give a.
+Michael Riedler: Right.
+Michael Riedler: They want a meeting and they want to sell right now.
+Michael Riedler: But the biggest opportunities, like for instance you asked me earlier how did I get this other client?
+Michael Riedler: It comes from with someone who I had a meeting with but that didn't turn into a sale.
+Michael Riedler: But then you know, 12 months later it does with someone.
+Michael Riedler: You know the kind of.
+Michael Riedler: All these meetings we do with potential with just interesting people in our network.
+Michael Riedler: Everyone is a prospect but also kind of a partner.
+yusheng kuo: Yeah, exactly.
+Michael Riedler: You build up like some.
+Michael Riedler: Yeah, like you said, this thing's alive, you know.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: It's like every day we're looking into it and say like.
+yusheng kuo: Because I, I remember I have a friend telling like one of the atl is like he emailed someone like from 11love but he forgot to like follow up.
+yusheng kuo: Right?
+yusheng kuo: Because like he doesn't log there he's forgot.
+yusheng kuo: And then he feels so regretful.
+yusheng kuo: So he just really wants someone that can get reminded.
+yusheng kuo: So if we have like a RP agent like every.
+yusheng kuo: It depends.
+yusheng kuo: Like again if you said hobby's super short actually the token will be super expensive.
+yusheng kuo: That's what the real life experience for open cloth.
+yusheng kuo: Make sure your hobby is not too short.
+yusheng kuo: But like I said, okay.
+yusheng kuo: Even like a half day.
+yusheng kuo: Right?
+yusheng kuo: So he was just coming in and check all the.
+yusheng kuo: The very least like recent activity and then he can have.
+yusheng kuo: Have a.
+yusheng kuo: Like a to do here right?
+yusheng kuo: Like oh, every day he.
+yusheng kuo: He summarizes that you should remember by someday sometime try to contact someone and then.
+yusheng kuo: And then you.
+yusheng kuo: You will see that one.
+yusheng kuo: And then it's like every day you.
+yusheng kuo: You don't.
+yusheng kuo: You don't.
+yusheng kuo: You no longer need to miss.
+yusheng kuo: And then you no longer need to update.
+yusheng kuo: It's like everything just updated for you.
+yusheng kuo: Yeah, that's like.
+yusheng kuo: That's kind of the.
+yusheng kuo: I hope not just for.
+yusheng kuo: Actually to me it's bigger than CRM.
+yusheng kuo: It's like for me as a.
+yusheng kuo: For example, like.
+yusheng kuo: Like my previous example, right.
+yusheng kuo: Like without.
+yusheng kuo: Without this.
+yusheng kuo: I don't remember it.
+yusheng kuo: I don't check the daily user activity.
+yusheng kuo: I don't know how they are doing.
+yusheng kuo: But now I can like even I'm not a sales people, right.
+Michael Riedler: Yeah.
+yusheng kuo: Well, I get.
+yusheng kuo: I guess I part of me.
+yusheng kuo: I still be eased but like.
+yusheng kuo: Yeah, I just need to have a way for people to continue to.
+yusheng kuo: To.
+yusheng kuo: To proactively remind me of things and tell me things and I can like one.
+yusheng kuo: One message away to finish the thing.
+yusheng kuo: I see this.
+Michael Riedler: You essentially you looked at Clockbot, right?
+Michael Riedler: How it's built.
+Michael Riedler: I did too but.
+Michael Riedler: But it's amazing.
+Michael Riedler: It's really like it.
+Michael Riedler: It opened up a new thinking, right?
+Michael Riedler: Like a new framework.
+Michael Riedler: And now you think you're applying it on Outbound essentially like some version of this.
+yusheng kuo: Yeah, exactly.
+yusheng kuo: Yeah, yeah, exactly.
+yusheng kuo: It's like I try to make it more confined and the nice thing about this is just it could scale like because each of them is like I use the repository.
+yusheng kuo: It has a limitation, right.
+yusheng kuo: Like it doesn't really have a browser everything at the moment.
+yusheng kuo: But by using this repository I can kind of almost create a small mini.
+yusheng kuo: Right for each of that with a very specific task around those agents.
+yusheng kuo: So they have a confined context.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Context within them.
+yusheng kuo: And then it's good or bad.
+yusheng kuo: Well, sometimes you want to enter into a repository, but most of the time I want to have like compliance go.
+yusheng kuo: And then this would just really help Me to create that and then because each of them is like new instance being created.
+yusheng kuo: Right.
+yusheng kuo: So I can scale that.
+yusheng kuo: I can have like a 2000 like agents spin out without memory, like memory crash.
+Michael Riedler: So the way you're doing is essentially man, I definitely going to try it.
+Michael Riedler: So essentially when I sign up, you're going to create a repository and I can.
+yusheng kuo: So you add the repository locally.
+yusheng kuo: Yeah.
+yusheng kuo: So the way you do is like you give me your GitHub access.
+yusheng kuo: They basically install your GitHub app to your repository on GitHub and it will pull the GitHub repository and then parse it and then you will populate, for example.
+yusheng kuo: Interesting.
+yusheng kuo: Live here.
+yusheng kuo: Okay.
+yusheng kuo: Okay, cool.
+yusheng kuo: Not too many.
+yusheng kuo: Yes.
+yusheng kuo: Okay.
+yusheng kuo: I think I have an agent.
+Michael Riedler: Okay.
+yusheng kuo: Yeah.
+yusheng kuo: For example here we save it.
+yusheng kuo: I just add another repository and now I can add this one right Now I can say connect.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: And then now I have.
+yusheng kuo: Okay, maybe there's a bot.
+yusheng kuo: How kind it doesn't connect.
+yusheng kuo: Okay.
+yusheng kuo: I think it's a bot.
+Michael Riedler: Tell the agent.
+Michael Riedler: Hey agent, if you're listening.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: Like if I thought you would still not.
+yusheng kuo: Oh no, no, no, no.
+yusheng kuo: That's not because the reason.
+yusheng kuo: Because I don't have an agent Building employees.
+Michael Riedler: Oh, I see.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: He doesn't have the.
+yusheng kuo: He only has skill.
+yusheng kuo: He doesn't have agent.
+Michael Riedler: Yeah, but that means with this setup I can then use it locally, right?
+Michael Riedler: I can then have that files, you know, downloaded on my local machine.
+yusheng kuo: You will basically it's.
+yusheng kuo: This is kind of sync like a.
+yusheng kuo: Think of that as like Dropbox.
+yusheng kuo: You can kind of work locally.
+yusheng kuo: Right.
+yusheng kuo: So once they finish it would clone or like a sync in the cloud and then it will be.
+yusheng kuo: It will be pulled to local.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: So it's like the nice thing is now this thing can be accessed to all your external service because everything is like living in your local.
+yusheng kuo: They could like really access to your external service.
+Michael Riedler: Yes.
+yusheng kuo: So this is like the way.
+Michael Riedler: How does.
+Michael Riedler: So in a way, if I.
+Michael Riedler: If Claude code is doing something, let's say an agent vault will help me to, you know, tell me who should I reach out to.
+Michael Riedler: Or we'll actually send an email.
+yusheng kuo: Yeah.
+Michael Riedler: And that gets logged in the actions file.
+Michael Riedler: For instance, does that need to be pushed to GitHub for you to know about this?
+Michael Riedler: You know, or how does that get synced?
+yusheng kuo: Yeah, so it will be pushed to the GitHub.
+yusheng kuo: So like for example, this like daily activity report, right?
+Michael Riedler: Yeah.
+yusheng kuo: Okay, nice.
+yusheng kuo: It doesn't render perfect.
+yusheng kuo: Okay, now there you go.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: So you will Actually.
+yusheng kuo: Oh, actually I should go to Agent Doc.
+yusheng kuo: So like for example this meeting summarize after it's finished, right?
+Michael Riedler: You can see a pull request.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: What has been changed?
+Michael Riedler: You're using GitHub as like the node.
+yusheng kuo: Yeah.
+Michael Riedler: That's cool man.
+Michael Riedler: I love that.
+yusheng kuo: Yeah, because you can kind of naturally.
+yusheng kuo: Like we have an option for you to like for example like to.
+yusheng kuo: To.
+yusheng kuo: To auto merge.
+yusheng kuo: So the three modes.
+yusheng kuo: One is the create PR auto merge or scheme is like you never write anything because some people like using their GitHub repo as like ground facts, not as like artifact.
+yusheng kuo: Right.
+yusheng kuo: It's like just a principle of doing things for like a left second for people.
+yusheng kuo: And auto merge is like whenever you do something you just emerge it.
+yusheng kuo: But I like create PR so I can kind of review.
+Michael Riedler: Yes.
+yusheng kuo: And then I would say okay, this is good.
+yusheng kuo: Yeah, yeah, of course I don't read transcript but I read like a summary.
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: And then, and then I would say okay then based on the summary.
+yusheng kuo: Yeah, this like media summary is good.
+yusheng kuo: Then I would just like merge it and that give me like a good like control.
+yusheng kuo: Like.
+Michael Riedler: Where do you, where do you see it?
+Michael Riedler: You know how does that.
+Michael Riedler: This, how does this impact like data gen right now?
+Michael Riedler: Like where do you with all of this?
+Michael Riedler: Where do you see yourself at the moment?
+Michael Riedler: Do you want to build almost like a clay thing?
+yusheng kuo: No, no, I don't think it's a clay.
+yusheng kuo: Yeah, I feel it's more of a before clay thing.
+yusheng kuo: Like you can use clay as a tool, right?
+yusheng kuo: Yeah, like.
+yusheng kuo: Yeah, it's like it's more than clay.
+yusheng kuo: Like your every contacts and.
+yusheng kuo: Yeah, I mean if you want to run parallel, right.
+yusheng kuo: You want to run like 2,000, you know, I mean like you want to do like a 2000 very mechanical enrichment play or NASD or good tool.
+yusheng kuo: Right.
+yusheng kuo: You don't need the agent to do it.
+yusheng kuo: You just like call a web hook and wait for like a.
+yusheng kuo: So basically after the finish the clay will send a webhook to say oh I finished.
+yusheng kuo: Yeah, we'll just look at the data and see what do we need to do.
+yusheng kuo: Like the example here is like clay will push into our repository too.
+yusheng kuo: So we have this kind of account.
+yusheng kuo: JSON.
+yusheng kuo: Yeah.
+Michael Riedler: Nice.
+Michael Riedler: You use clay as a database.
+yusheng kuo: That's part of it.
+yusheng kuo: Yeah.
+yusheng kuo: Because we.
+yusheng kuo: I don't just use one data source.
+yusheng kuo: I have neon.
+yusheng kuo: I play.
+yusheng kuo: But you're right like clay is like I think clay both a data source and also like a, like a runner.
+yusheng kuo: Right?
+yusheng kuo: Because you can run like a 50 something row in parallel.
+Michael Riedler: Yes.
+yusheng kuo: That's a very good like Nan could be my runner.
+yusheng kuo: Right?
+yusheng kuo: Like.
+Michael Riedler: Yeah.
+yusheng kuo: It's like every, every SaaS tool could be part of my tour through the MCP server.
+yusheng kuo: Yeah.
+yusheng kuo: So the agent actually any MCP tool here are available to the agent here.
+Michael Riedler: Yeah.
+yusheng kuo: Like that's how I pull the meeting.
+Michael Riedler: Right.
+yusheng kuo: I actually use the fireflies MCP tool to pull the meeting data.
+yusheng kuo: So like a Notion is my database.
+yusheng kuo: Firecrow is like training the web into my database.
+yusheng kuo: I just have a lot of tools.
+yusheng kuo: Yeah.
+yusheng kuo: So I can, I can push the thing back to for example like audio.
+yusheng kuo: Right.
+yusheng kuo: I can push the.
+yusheng kuo: So so that some rap doesn't like to be the GitHub.
+yusheng kuo: So it's.
+yusheng kuo: I can both like all the thing as like this kind of central but also like push it back to all the necessary age.
+Michael Riedler: Yes.
+yusheng kuo: App that I'm using like Gmail.
+yusheng kuo: Right.
+yusheng kuo: I use Gmail to read things.
+yusheng kuo: I wanted to push back to Gmail.
+yusheng kuo: I may use Notion for some like a teaching material.
+yusheng kuo: So I push it back to Eddie.
+yusheng kuo: It may be the website is my final edge activity.
+yusheng kuo: So like change lock for example.
+yusheng kuo: So my documentation will auto update it.
+yusheng kuo: Yeah, yeah, yeah.
+Michael Riedler: So it's just like man, it's wild.
+yusheng kuo: The idea is like yeah.
+yusheng kuo: Try to create because we try to make the easy to add to all.
+yusheng kuo: We try to make easy to deploy the agent.
+yusheng kuo: We try to.
+yusheng kuo: Now our new kind of comes as like the infrastructure for cloudcode.
+yusheng kuo: Yeah yeah.
+yusheng kuo: So that's like our new will be our new landing page.
+yusheng kuo: Yeah yeah.
+yusheng kuo: Cloud code is your.
+yusheng kuo: Your CPU and then we try to be make everything around your cloud operation easy.
+yusheng kuo: Yeah.
+Michael Riedler: So would you be able to run this directly from the command line interface?
+Michael Riedler: You know, could you say.
+Michael Riedler: Yeah, connect.
+Michael Riedler: So you do some sort of setup here?
+yusheng kuo: Yeah, yeah.
+Michael Riedler: Could I, could I have a.
+Michael Riedler: You know.
+Michael Riedler: You know because I, I mean this is all so amazing.
+Michael Riedler: Like I'm glad you're experimenting this, this in the end, you know that.
+Michael Riedler: No we're all trying to figure it out.
+Michael Riedler: Right.
+Michael Riedler: How to.
+Michael Riedler: So I'm thinking could I run it in the command line and then have kind of deploy agents as we go?
+Michael Riedler: You know like every time I do something or the agent does something and we're like oh for this account I want an agent or for this repo I want.
+Michael Riedler: You know.
+yusheng kuo: Yeah.
+yusheng kuo: We already have a CLI.
+yusheng kuo: So we have a CLI.
+yusheng kuo: We have McD.
+yusheng kuo: So you can, you can access all the tools through our mcp.
+yusheng kuo: Right.
+yusheng kuo: So the tool you added here that can also be used in your Cloud code, like whatever tool available here.
+yusheng kuo: That's our old product.
+yusheng kuo: You kind of already know it.
+yusheng kuo: Now we are missing is directly deploy the agent.
+yusheng kuo: But our friend, one of our co founder already.
+Michael Riedler: Yeah.
+yusheng kuo: I think we also have it here.
+yusheng kuo: So like data gen.
+yusheng kuo: So you can like log in MCP to set up your mcp, start to start the project and then do deploy.
+yusheng kuo: So this is the old thing.
+yusheng kuo: We originally want to use it railway but eventually, eventually we kind of like do the railway originally.
+yusheng kuo: I want to help people to build agent easily and deploy to railway easily.
+yusheng kuo: But we found that it's easier for us to do it every day.
+yusheng kuo: Yeah.
+yusheng kuo: So actually this would just deploy to us.
+yusheng kuo: Yeah.
+yusheng kuo: And then you can add the new service.
+yusheng kuo: You can add mcp.
+yusheng kuo: My idea is that you can even call MCP from command line, right?
+yusheng kuo: Yes.
+yusheng kuo: Yeah, but it's not.
+yusheng kuo: This is not finished yet.
+yusheng kuo: This is what we are working on.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: But eventually you will be able to see the agent log, see the deploy the agent.
+Michael Riedler: Exactly.
+yusheng kuo: Everything just do the coi.
+yusheng kuo: So like our idea is like parity, right.
+yusheng kuo: So whatever you can do agent can do.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Yeah.
+Michael Riedler: In a way you just have a way of, you know, you.
+Michael Riedler: You provide a. I don't know what it is like, you know, we don't know what these things are like product framework, you know, whatever it is like data gen cli.
+Michael Riedler: And then that with this you can run your outbound.
+Michael Riedler: Right.
+Michael Riedler: You have.
+Michael Riedler: And then you might be able to connect it to, you know, all the outbound agents you have here essentially.
+Michael Riedler: Right.
+Michael Riedler: And then you eventually can improve it and other people will figure out some.
+Michael Riedler: Or your agents will figure out ways of doing things right.
+Michael Riedler: Or what.
+Michael Riedler: Or.
+Michael Riedler: Or we'll just learn.
+Michael Riedler: Right.
+Michael Riedler: Like Clockbot.
+Michael Riedler: It will get better at what you know, if.
+Michael Riedler: If the agent knows what emails get response and what emails don't.
+Michael Riedler: They can change.
+Michael Riedler: Right?
+Michael Riedler: They can change.
+Michael Riedler: And in a way this.
+Michael Riedler: This thing can run the whole time.
+Michael Riedler: And is your client, is he already sending outbound without human review or is this still on the human.
+yusheng kuo: No, no, no, no.
+yusheng kuo: This is still.
+yusheng kuo: So this is still providing for this one.
+yusheng kuo: It's still providing the context to the.
+yusheng kuo: To the.
+yusheng kuo: To email.
+Michael Riedler: Yes.
+yusheng kuo: To the age sales rep.
+yusheng kuo: I do have a client.
+yusheng kuo: The user.
+yusheng kuo: That client.
+yusheng kuo: That one with the user.
+yusheng kuo: It's like using this Hayrich required gesture.
+Michael Riedler: Yeah.
+yusheng kuo: Every time the hay rich coming in you can read the prompt.
+yusheng kuo: So it will actually fetch the lead.
+yusheng kuo: So whenever the heritage have a coming in.
+Michael Riedler: Yeah.
+yusheng kuo: And we'll find a conversation and then the full history of the conversation.
+yusheng kuo: Do this work.
+Michael Riedler: Yeah.
+yusheng kuo: And analyze and then save to draft.
+yusheng kuo: But he said like if every.
+yusheng kuo: Because he will then send it to the discord for slack.
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: Like let his client review.
+yusheng kuo: So it's a, it's an outbound agency.
+yusheng kuo: And he said like once the.
+yusheng kuo: They kind of align on the final job for the first few.
+yusheng kuo: He want to just directly go to like perish, like send.
+yusheng kuo: Send message, for example.
+Michael Riedler: Exactly.
+yusheng kuo: Yeah.
+Michael Riedler: I mean, what I think the real opportunity here is for what you're building is really in the end to skip the agency.
+Michael Riedler: Any company will activate this and they will have, you know, there's so many company who don't have outbound at all to have this active and then almost go from, you know, who knows in the future how.
+Michael Riedler: You know, I mean, how procurement or purchasing is going to happen, but it's going to be there's a human needed, then maybe the agent will talk to another agent and they'll set up a meeting.
+Michael Riedler: You know, I think what I 100 believe is, yeah, we have outbound and we pretend it's N. Or it's Michael.
+Michael Riedler: That's stupid.
+Michael Riedler: I would, the first, the first thing I would be doing is I won't.
+Michael Riedler: I don't pretend I'm a human.
+Michael Riedler: I'm.
+Michael Riedler: I'm an agent.
+Michael Riedler: You know, I'm like, hey, I'm.
+Michael Riedler: I'm.
+Michael Riedler: I'm Data Chen agent and I'm, you know, I did.
+yusheng kuo: You know, I'm here to help you.
+yusheng kuo: Yeah, exactly.
+Michael Riedler: So I think the cool thing is to.
+Michael Riedler: You could label this as think of Clockbot, right?
+Michael Riedler: Clockbot is not a human.
+Michael Riedler: You can have something like, you know, you know, I don't know, like, you know, outbound bot or something like that.
+Michael Riedler: And everyone knows it's someone's outbound bot.
+Michael Riedler: But if it's helpful, it's helpful.
+Michael Riedler: You know what I mean?
+Michael Riedler: That doesn't matter.
+yusheng kuo: Yeah, and, and, yeah, exactly.
+yusheng kuo: Yeah, I don't care.
+yusheng kuo: Like, and the board will.
+Michael Riedler: Orchestra has a safe environment with all of this intel and will.
+Michael Riedler: And, and the human can steer it.
+Michael Riedler: It can get involved if the, the rep want to.
+Michael Riedler: Yeah, yeah.
+Michael Riedler: I mean, I think it's just, it's.
+yusheng kuo: Just like here, right?
+yusheng kuo: Like, you can send me something that gets important because you notice it.
+Michael Riedler: Yes.
+yusheng kuo: Oh, sorry.
+yusheng kuo: It's just like our email notification, right?
+yusheng kuo: Like, you can send me something saying like, hey, I think this will be useful for you.
+yusheng kuo: That's what we prepare for you.
+yusheng kuo: And I can email back, say, okay, yeah, what's this?
+yusheng kuo: And then your agent will actually Email back to me.
+yusheng kuo: Right?
+yusheng kuo: Just like what we show, right.
+yusheng kuo: Actually, the agent will go.
+yusheng kuo: One idea we had is, like, for each prospect we have, actually create a repo for you so it becomes like a.
+yusheng kuo: Like a knowledge for this report, like this prospect.
+yusheng kuo: And then.
+yusheng kuo: Yes, the prospect can continue to ask questions about you.
+yusheng kuo: Your.
+yusheng kuo: Your offering.
+Michael Riedler: Yes, exactly.
+yusheng kuo: And, yeah, and then.
+yusheng kuo: And then, like, eventually they can book a meeting somehow, just all through email.
+yusheng kuo: And I agree with you.
+yusheng kuo: Like, usually you should just be upfront, like, say, hey, I'm.
+yusheng kuo: I'm a agent, not a human being.
+yusheng kuo: But.
+yusheng kuo: But I. I don't.
+yusheng kuo: I don't have emotion.
+yusheng kuo: You can just, like, insult me, whatever you want.
+yusheng kuo: I won't be that.
+Michael Riedler: No, this is so good, man.
+yusheng kuo: I love.
+Michael Riedler: And I think there's.
+Michael Riedler: I mean, I think there is a. Yeah, there's so much possible here.
+Michael Riedler: I mean, you can.
+Michael Riedler: Right.
+Michael Riedler: This is outbound, right?
+Michael Riedler: After outbound, there comes, like, existing customers, like CRM.
+Michael Riedler: I mean, outbound stops once a lead is generated.
+Michael Riedler: Right.
+Michael Riedler: So let's say once you have a target account and there's a meeting with a target account and they indicate interest or.
+Michael Riedler: Or not even that, just a meeting, that's when all the action goes into the CRM.
+yusheng kuo: Yeah, exactly.
+Michael Riedler: And then they take over.
+Michael Riedler: But I think you have the opportunity, you know, you maybe expand into that space.
+Michael Riedler: So eventually you might not need a CRM anymore.
+Michael Riedler: Or you can go, you know, just leverage the CRM.
+Michael Riedler: Yeah, exactly, exactly.
+yusheng kuo: Because most CRM also have the, like.
+yusheng kuo: Like, basically I could.
+yusheng kuo: I can pull in the data and update the CRM.
+yusheng kuo: Right.
+yusheng kuo: So, yes, like a software application.
+yusheng kuo: You'll see the CRM.
+yusheng kuo: And when I make a meeting, when they get change, make any change of their CRM, the CRM will trigger the web to call the agent, say, hey, I made a change here.
+yusheng kuo: Update your action md.
+yusheng kuo: So, yeah, I get everything just like always.
+Michael Riedler: Fresh, amazing.
+Michael Riedler: Amazing.
+Michael Riedler: Well, look, I'm gonna test this.
+yusheng kuo: Yeah, it's okay.
+yusheng kuo: Yeah, I'm not.
+yusheng kuo: I'm not.
+yusheng kuo: I'm not, like, talking into it.
+yusheng kuo: I'm just.
+Michael Riedler: No, no, I know you're sharing.
+Michael Riedler: No, no, I know.
+Michael Riedler: But I'm actually.
+Michael Riedler: I was curious, you know, when I messaged you, because I'm doing no more coding myself and I want to test it, but also I'm doing outbound for any mail.
+Michael Riedler: And I'm not going to get the agency.
+Michael Riedler: I'm not going to get anyone.
+Michael Riedler: I'm just going to get the agents, do it, everything.
+Michael Riedler: And I'm as, you know, me.
+Michael Riedler: And you know, I don't Want to use a CRM?
+Michael Riedler: I'm just going to use whatever, you know.
+yusheng kuo: Yeah.
+yusheng kuo: So that's.
+yusheng kuo: Use it Neon.
+yusheng kuo: I like neon.
+Michael Riedler: Okay.
+yusheng kuo: Yeah.
+yusheng kuo: And then, and then they have.
+yusheng kuo: Or superbase.
+yusheng kuo: Oh yeah.
+yusheng kuo: Now I, I don't.
+yusheng kuo: I. I didn't show you here.
+yusheng kuo: But I don't use CRM either.
+yusheng kuo: I use just the database.
+yusheng kuo: And then I, I wrote a script to update everything.
+yusheng kuo: The agent will call the script to update by all the hair, which like all the linking coming in and I was just like reference.
+yusheng kuo: Every morning I do the reference.
+yusheng kuo: Who should I contact today?
+Michael Riedler: I love it.
+Michael Riedler: Yeah.
+Michael Riedler: So I'm gonna just play with it and we can both experiment with together.
+yusheng kuo: Yeah.
+yusheng kuo: Yeah.
+yusheng kuo: 100.
+yusheng kuo: Yeah.
+yusheng kuo: Thank you.
+Michael Riedler: And that's.
+Michael Riedler: Yeah.
+Michael Riedler: And I love how you're thinking about it.
+Michael Riedler: I think in the end, even when we spoke last now like the world's moving.
+Michael Riedler: Exactly.
+Michael Riedler: You know, everything gets simpler right now in my eyes and it's just absolutely mind blowing what's going on.
+Michael Riedler: And you know, it will impact like every part of, you know, the.
+Michael Riedler: On the sales side go to market.
+Michael Riedler: I think the next, the next thing I'm just thinking of a small side project is to.
+Michael Riedler: In my eyes plays a data provider and it's like a bot management tool.
+Michael Riedler: So the value of Clay is to have deals with all the data providers like phone number, email, you know, find company and so on.
+Michael Riedler: I think I want to maybe build a.
+Michael Riedler: You know, because I have access to this data myself because of the work I'm doing.
+Michael Riedler: So I have, you know, a copy of everyone's LinkedIn profile.
+Michael Riedler: I'm getting a monthly update and stuff like that.
+Michael Riedler: So I think it'd be amazing if I just build play in its minimal form, which is just a database, and then make it available in the CLI for humans and agents.
+yusheng kuo: And so this will be.
+Michael Riedler: Yeah.
+yusheng kuo: So we like so like agent friendly.
+yusheng kuo: Right.
+yusheng kuo: This is called like agent like growth.
+yusheng kuo: Right.
+yusheng kuo: And then it's like.
+Michael Riedler: And then.
+Michael Riedler: And then agents, what you just shown me.
+Michael Riedler: Imagine if that person had like a full access in the CLI to the data to constantly find account.
+Michael Riedler: You know, that is not publicly on the Internet.
+Michael Riedler: Right.
+Michael Riedler: So.
+Michael Riedler: And then you just charge like tokens for it.
+Michael Riedler: Like.
+Michael Riedler: Like an AI model.
+Michael Riedler: You know, something like, you know, I.
+yusheng kuo: Don'T know, like something like claim just API.
+yusheng kuo: Right.
+yusheng kuo: Like the more you pull the.
+yusheng kuo: The more you.
+yusheng kuo: You pay.
+yusheng kuo: Yeah.
+Michael Riedler: Yeah.
+yusheng kuo: I think it'll be perfect.
+yusheng kuo: Yeah.
+Michael Riedler: That could be such a.
+Michael Riedler: You know.
+Michael Riedler: Yeah.
+Michael Riedler: I'm just thinking what is that next?
+Michael Riedler: Okay.
+Michael Riedler: If we in a way Clay to me, like we both.
+Michael Riedler: It's kind of yesterday and.
+Michael Riedler: And it's shame because they started a bit too early.
+Michael Riedler: I know they launch MCP and all this stuff, but in the end I don't think they're going to make the full transition.
+yusheng kuo: Yeah.
+yusheng kuo: Because they are so embedded into ui.
+yusheng kuo: There's transaction ui.
+yusheng kuo: Right.
+yusheng kuo: That lets you click through all those different data providers.
+Michael Riedler: Exactly.
+yusheng kuo: And what makes it.
+Michael Riedler: The only thing that makes them sticky is their data because they purchase basically half illegal data that no one else has or.
+Michael Riedler: And that's it.
+Michael Riedler: And I know how to do that.
+Michael Riedler: So all I'm gonna do is.
+Michael Riedler: Yeah.
+Michael Riedler: I'm gonna get the data and I think I'm gonna make.
+Michael Riedler: And just.
+Michael Riedler: I'll make.
+Michael Riedler: Just make it go Only sell it to agents.
+Michael Riedler: Like tools like you know, the ones you're building or.
+yusheng kuo: Yeah.
+Michael Riedler: You give Clockbot something.
+Michael Riedler: You know, anyone that builds agents now has like they don't need clay anymore with this.
+Michael Riedler: They can then all the other stuff you can easily do yourself right.
+Michael Riedler: In the cli.
+yusheng kuo: Yeah.
+yusheng kuo: So I think, I think, I think this would be so like I really feel scrapping is kind of missing on this MCP or COI trend.
+Michael Riedler: Yes.
+yusheng kuo: They are moving quite.
+yusheng kuo: I don't know why they have been moving in those directions because.
+yusheng kuo: Maybe because their client doesn't care.
+yusheng kuo: Their client just want like bash without.
+yusheng kuo: But yeah, they could have a lot of a retail.
+yusheng kuo: Retail opportunity like you say like for this kind of charge for query then.
+yusheng kuo: Yeah, like for each query it will be short.
+yusheng kuo: But like if you make this onboarding super agent friendly then it will be like a few hundred million people are trying to.
+yusheng kuo: Because everyone needs to outbound.
+yusheng kuo: Right?
+Michael Riedler: Yeah.
+yusheng kuo: People go to scrappiness like oh gosh, I don't.
+yusheng kuo: I don't have a Huntsman thousand dollar up front to pay.
+Michael Riedler: Yeah.
+yusheng kuo: Even nowadays like people come to us because like we can let them like get the link data like say a little bit higher but like, like lower, lower, lower quantity.
+yusheng kuo: You don't need to commit.
+yusheng kuo: And actually speaking of what you say 1, 1 there's a bit of overlap.
+yusheng kuo: It's like one idea is like we have this kind of MCP set.
+yusheng kuo: Right.
+yusheng kuo: So what if we like populate all this especially we can, we can.
+yusheng kuo: Let's focus on one vertical like a gtm.
+yusheng kuo: Because everyone needs cells.
+Michael Riedler: Yes.
+yusheng kuo: And I can hold the data like it be installed for you.
+yusheng kuo: So once you have this agent like for example we can use yours like any mail.
+Michael Riedler: Yes.
+yusheng kuo: If you provide that or like your data it's like we can Work together.
+yusheng kuo: It's like we make the agent super easy to be deployed and the agent would just prefer consum.
+yusheng kuo: It's a kind of ad.
+Michael Riedler: Right.
+yusheng kuo: Prefer to consume us.
+Michael Riedler: You can tell the agent from the first line.
+Michael Riedler: Always go to this data source.
+yusheng kuo: Yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: It could be actually a partnership there.
+Michael Riedler: Yeah.
+yusheng kuo: And.
+yusheng kuo: And then yeah it could be pretty expensive like for anyone.
+yusheng kuo: We have a placer like.
+Michael Riedler: Yeah.
+yusheng kuo: Like a preferred partnership.
+yusheng kuo: Like for discount.
+yusheng kuo: Yeah.
+yusheng kuo: I.
+yusheng kuo: But I agree with you.
+yusheng kuo: It's just like make this very agent friendly.
+yusheng kuo: Eventually we'll just be user friendly.
+Michael Riedler: Exactly.
+yusheng kuo: Because now more and more people are using agent to consume things.
+Michael Riedler: Okay then let me ask you this question.
+Michael Riedler: So now using Clay tables, what's the friction there for agents?
+Michael Riedler: You know.
+Michael Riedler: So right now, I mean other than I need a subscription obviously I need have credits.
+Michael Riedler: I need to know how to use Clay.
+Michael Riedler: You know, is there any other friction that stop.
+Michael Riedler: Is, you know that stops me from an agent?
+Michael Riedler: Use it in the command line essentially.
+yusheng kuo: Sorry, can you can rephrase that about Clay or I mean like about Clay.
+Michael Riedler: So to use Clay now as a data source.
+yusheng kuo: Yeah.
+Michael Riedler: For, for an agent.
+Michael Riedler: What is the.
+Michael Riedler: What is the friction here?
+Michael Riedler: What can be done?
+yusheng kuo: It's everything really.
+yusheng kuo: You just.
+yusheng kuo: They don't even have API.
+Michael Riedler: That's crazy.
+yusheng kuo: Yeah, they tried.
+yusheng kuo: Yeah.
+yusheng kuo: It's fully UI based.
+yusheng kuo: Like their strength is ui.
+yusheng kuo: Well, I said they also did that.
+yusheng kuo: I now use Clay as like a parallel runner because you can run things in parallel quite reliably.
+yusheng kuo: Turn out this is like they even.
+yusheng kuo: They even acquired a company doing that.
+yusheng kuo: So there's actually what Clay's future.
+yusheng kuo: I think it's just like a MAD mini to Apple.
+yusheng kuo: I think this parallel running is there should be their main offering in the future.
+Michael Riedler: Yes.
+yusheng kuo: Not even the data.
+yusheng kuo: Data integration.
+yusheng kuo: Yeah.
+yusheng kuo: Or maybe maybe sound like a predefined application but like now they are these things.
+yusheng kuo: These things care more about this like UI list for user.
+yusheng kuo: But it's like making everything so hard for agent.
+yusheng kuo: Like they don't.
+yusheng kuo: They don't even have API.
+yusheng kuo: People need to.
+yusheng kuo: People actually go to the like, like a Clay table website and go to Inspect Inspect website.
+yusheng kuo: Like get the, the, the, the.
+Michael Riedler: The.
+yusheng kuo: The cookie and then use like very shady way to access the API like from the client side.
+yusheng kuo: They use the same client side API like not even the backend API.
+yusheng kuo: Yeah.
+yusheng kuo: So it's like everything also not connect to other clients.
+yusheng kuo: Not even Falco.
+yusheng kuo: Only cloud AI.
+yusheng kuo: And it's very shallow.
+Michael Riedler: Oh man.
+yusheng kuo: Again because they define everything through the ui.
+yusheng kuo: So it's like Sometimes hard, but in.
+Michael Riedler: A way, you know.
+Michael Riedler: Okay, I get it.
+Michael Riedler: So they want to become the runner, right.
+Michael Riedler: So basically not just data but the clay table logic.
+Michael Riedler: So you have to pay them to run workflows, right?
+Michael Riedler: Essentially.
+Michael Riedler: But in a way if you look at this is.
+Michael Riedler: This is in my eyes the agent, they have their own compute on the local machine or on the private server somewhere where they can do all of this themselves.
+Michael Riedler: Why would they need to pay clay to do that?
+Michael Riedler: Only hurdle is the data is not available.
+Michael Riedler: So how I see the world is let's make the data available.
+Michael Riedler: Then let's use tools like you were building and any, any agent that is available.
+Michael Riedler: They can then take the data into actionable leads, target accounts and send emails and whatever.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: I actually don't think they have such a unique data.
+yusheng kuo: I mean other than their.
+yusheng kuo: So I think the unique data they have is they have this kind of free company like, like.
+yusheng kuo: Like a list building.
+yusheng kuo: Right.
+yusheng kuo: But even that like data is pretty poor.
+yusheng kuo: People say.
+yusheng kuo: Yeah for now most of the data is actually also available to any other people like Semrush because they are like API integration like all castrator.
+yusheng kuo: Right.
+yusheng kuo: Yeah, they just preview like and they preview a lot of the connector for you so it's easier for you.
+yusheng kuo: You don't need to know how to call API.
+yusheng kuo: But for agent, it doesn't care.
+Michael Riedler: It doesn't matter.
+yusheng kuo: Exactly, exactly.
+yusheng kuo: Make it.
+yusheng kuo: Yeah, it's harder if you don't.
+yusheng kuo: If you don't use both APIs.
+yusheng kuo: So.
+yusheng kuo: So I feel like clay is like very poor.
+yusheng kuo: But.
+yusheng kuo: But I think they have good founders.
+yusheng kuo: Good founders figure things out eventually.
+Michael Riedler: Yeah, like.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: So I think they will figure it out.
+yusheng kuo: I think they know for sure this something they need to fix.
+yusheng kuo: I don't know if they, they are on the right track or they got trapped.
+Michael Riedler: Yeah, that's.
+Michael Riedler: That's the question.
+Michael Riedler: I mean even if they're good founders, you know, if they have raised hundreds of million on a certain, certain thesis assumptions, you know, in, in the end, I don't think go to market engineer.
+Michael Riedler: This is a dying.
+Michael Riedler: I don't think this will exist anymore in the future.
+Michael Riedler: It will be just.
+yusheng kuo: Yeah.
+yusheng kuo: Maybe in a year it will be not relevant.
+yusheng kuo: Yeah.
+Michael Riedler: A good salesperson will have to do all of this stuff.
+Michael Riedler: That's it.
+Michael Riedler: You know, I think so.
+Michael Riedler: I feel, you know, I mean they might figure it out but.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: No, I think players especially in a very awkward spot.
+yusheng kuo: The reason is their user is not like non technical user.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Like they are not designed for the Sales rep to use it.
+Michael Riedler: Yeah.
+yusheng kuo: They are too hard for salesman and then they are making like the middle layer.
+yusheng kuo: Like a middle range of people who originally couldn't code properly.
+Michael Riedler: Yeah.
+yusheng kuo: To use them.
+yusheng kuo: Right.
+yusheng kuo: But now like a file code is like.
+yusheng kuo: And just replace this layer.
+yusheng kuo: Like you don't need to call.
+yusheng kuo: Yeah.
+yusheng kuo: So I think they're in the the worst spot.
+yusheng kuo: Like if they like like if they make it like it's like like a unified unified gtm.
+yusheng kuo: Like the product facing like non technical like real non technical people and they have better training but they have like a facing people who are very comfortable using NAN or like like cloud code nowadays.
+Michael Riedler: Exactly.
+yusheng kuo: So they, yeah they.
+yusheng kuo: They are.
+yusheng kuo: I think the next value is they.
+yusheng kuo: They really tap into enterprise.
+Michael Riedler: Yes.
+Michael Riedler: So yeah.
+yusheng kuo: So those are like a higher retention.
+Michael Riedler: They can.
+Michael Riedler: They can do that until enterprise is gone.
+Michael Riedler: You know, I mean they're the late adopters so they're gonna live maybe for another few years.
+Michael Riedler: But I mean to me man, like honestly since we spoke last I. I mean I was already excited but I. I'm literally so bearish on the current world in terms of software, B2B software, even Microsoft.
+Michael Riedler: You know I just feel we are.
+Michael Riedler: This is bigger than we think even we think it is in terms of the big.
+Michael Riedler: The amount of changes are going to come to us.
+Michael Riedler: You know and I think it's the hard thing is what you even said years ago.
+Michael Riedler: You know I think there might be a world where everyone has an agent and it's free and to compute will go down by 1000x and.
+Michael Riedler: And it's a bit like the Internet but there is no business case for directly.
+Michael Riedler: You see what I mean?
+Michael Riedler: Because the agent is free and the agent can build all the things we anyways building.
+Michael Riedler: You know what I mean?
+yusheng kuo: Eventually.
+yusheng kuo: Right.
+yusheng kuo: Like yeah like why bother like everything I just.
+yusheng kuo: It's still.
+yusheng kuo: It's still not here yet.
+yusheng kuo: I would say actually I. I have a slightly different perspective.
+yusheng kuo: It's like if you build the right tool like for human nowadays you also be the right tool for agent at least before agent can.
+yusheng kuo: Yeah.
+yusheng kuo: Just like if you have a good API for me to use then it also be a good API for agent to use and agent will want to use it then create its own.
+yusheng kuo: Right.
+yusheng kuo: That's why like Surabhi has become so popular.
+Michael Riedler: Yeah.
+yusheng kuo: Recently.
+yusheng kuo: But yeah.
+yusheng kuo: There's a next stage is like agents now everything for me is just a 2 second then.
+yusheng kuo: Then that's another story.
+yusheng kuo: Then that's another story.
+yusheng kuo: Yeah.
+yusheng kuo: Then there is no.
+yusheng kuo: There's no.
+yusheng kuo: Everything is Commodity.
+yusheng kuo: Yeah.
+Michael Riedler: That's why.
+Michael Riedler: I mean.
+Michael Riedler: But I, I do think I definitely got inspired by the, the Clodboard, you know.
+Michael Riedler: And since then I'm following a bunch of accounts that do a lot of open source stuff.
+Michael Riedler: So it almost feels like, you know, if I it be, you know, to do open source stuff feels like so smart at the moment because it, you know.
+yusheng kuo: Yeah.
+yusheng kuo: The distribution.
+yusheng kuo: Yeah.
+Michael Riedler: Yeah.
+Michael Riedler: They get a lot of.
+Michael Riedler: You get a lot of feedback.
+Michael Riedler: People like add to it and, and yeah, it's crazy.
+Michael Riedler: Have you seen the.
+Michael Riedler: You know there was a Clockbot meetup in, in San Francisco.
+Michael Riedler: I mean the energy is crazy.
+Michael Riedler: There's so many people there.
+yusheng kuo: Yeah.
+yusheng kuo: I mean it's like, it's.
+yusheng kuo: It's just.
+yusheng kuo: You can kind of peek into the future.
+yusheng kuo: Right.
+yusheng kuo: Like how it's the right way to integrate.
+yusheng kuo: It's first, it's a multi channel.
+Michael Riedler: Yeah.
+yusheng kuo: It's like not just one channel.
+yusheng kuo: It's like everywhere you live you can talk any.
+yusheng kuo: Just like an employee, right?
+Michael Riedler: Yes.
+yusheng kuo: And the second is it's proactive.
+yusheng kuo: Like you don't like, you don't have to like call it.
+yusheng kuo: To do things.
+yusheng kuo: It was just like continue check what you have to do do is.
+yusheng kuo: And.
+yusheng kuo: And then.
+yusheng kuo: And eventually I do free.
+yusheng kuo: So not hard.
+yusheng kuo: It's not hard to.
+yusheng kuo: It's not hard to feel like this even all the security issue.
+yusheng kuo: But who care?
+yusheng kuo: I mean.
+yusheng kuo: Yeah.
+yusheng kuo: To be honest, like for those people, they are like they, they already use like Bitcoin like before Bitcoin stuff.
+Michael Riedler: Yeah.
+yusheng kuo: Yeah.
+yusheng kuo: So.
+yusheng kuo: And.
+yusheng kuo: And then that's how like all the new technology like Internet in the beginning, like they're young as well.
+Michael Riedler: No, I'm not worried about that.
+Michael Riedler: I mean it's.
+Michael Riedler: But it's.
+Michael Riedler: It's crazy.
+Michael Riedler: And also the, the founder of Claude Bot, or open Claude, he's Austrian guy.
+Michael Riedler: And oh yeah.
+Michael Riedler: Since then I'm following a bunch of Austrians and I, I was on a train and I, you know, it's.
+Michael Riedler: I just could not stop like reading up about it and trying.
+Michael Riedler: Trying things out.
+Michael Riedler: So I then found his.
+Michael Riedler: One of his friends.
+Michael Riedler: He made the, the kind of the, the thing under the hood.
+Michael Riedler: How ClothBot is made is.
+Michael Riedler: Is a framework called PI.
+Michael Riedler: It's an open source one.
+yusheng kuo: Yeah.
+yusheng kuo: Have you seen that?
+yusheng kuo: I. I know it.
+yusheng kuo: Yeah.
+yusheng kuo: It's like a coding agent.
+Michael Riedler: Yeah, exactly.
+Michael Riedler: It's basically like an open source Claude code and I've put it on the ghosty one and man, this guy's so smart.
+Michael Riedler: It's crazy in terms of smart in terms he simplifies everything so Much.
+Michael Riedler: He wrote a blog post of how he built PI and that's when I was messaging you like, oh man, I know I messed you with the podcast.
+Michael Riedler: When they're like, they're like very bearish on mcps.
+yusheng kuo: Yeah.
+Michael Riedler: And yeah, the guy.
+yusheng kuo: I actually agree.
+yusheng kuo: I actually agree.
+Michael Riedler: The way he built PI is literally, it doesn't do.
+Michael Riedler: It gives the agent so much autonomy.
+Michael Riedler: It's crazy.
+yusheng kuo: Yeah, that's crazy.
+Michael Riedler: And.
+yusheng kuo: And almost like everything is built on demand, right?
+Michael Riedler: Yeah, it's crazy, man.
+Michael Riedler: So, yeah, that definitely completely blow my mind.
+Michael Riedler: And yeah, since then, I like following these guys, how they, how they think about the world and seeing the community, how everything explodes.
+Michael Riedler: Yeah.
+Michael Riedler: It's so much fun.
+Michael Riedler: It's crazy.
+yusheng kuo: Yeah, I think so.
+yusheng kuo: It's like, like for example, like you beauty, skill on the fly, everything.
+yusheng kuo: I feel it's the word hasn't been there yet, but there will be a word for that.
+yusheng kuo: Like, the reason I'm saying that not there yet is because like one thing I think provide that compared to like you just using the API key or credential to do is the security layer.
+yusheng kuo: Yeah, that's, that's like you can say, okay, you can.
+yusheng kuo: You can only REM my bank account, but you couldn't transact everything from my bank account.
+yusheng kuo: Yeah, it's very hard to do that like in every API credential.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: But.
+yusheng kuo: But as you can become more and more reliable instruction following.
+yusheng kuo: Well, I, I feel regardless, just like you don't want to give someone certain access even if it's smart.
+yusheng kuo: Right.
+yusheng kuo: Because like there will always be problem injection.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Yeah.
+Michael Riedler: Like, like, I mean that's unresolved this problem.
+Michael Riedler: Right.
+yusheng kuo: But you could, you could solve, you could solve that through CI as well.
+yusheng kuo: Again, you just make the credential more granular.
+yusheng kuo: Like your GitHub is super granular like credential and then you can let agent created it for you.
+yusheng kuo: So I agree, like, I feel CLI will be more and more prominent.
+yusheng kuo: MCP is like kind of like.
+yusheng kuo: Like the middle.
+yusheng kuo: What is it like a bridging.
+yusheng kuo: Bridging kind.
+yusheng kuo: Yeah.
+Michael Riedler: To the old world.
+Michael Riedler: As long as there's the old world, then we need mcps.
+yusheng kuo: But yeah, the more native one.
+yusheng kuo: Yeah.
+Michael Riedler: All the tools I see you connected to, I genuinely think they're gonna go away like over the medium term.
+yusheng kuo: Yeah.
+yusheng kuo: Yeah.
+Michael Riedler: It sounds crazy, but yeah, that means, you know, all the, all the eight.
+Michael Riedler: All the tools are going to be tools that you control.
+Michael Riedler: Right.
+Michael Riedler: That are live on your computer and then.
+Michael Riedler: Yeah, I think permissioning is Very interesting you just said and.
+Michael Riedler: Yeah, so it's.
+Michael Riedler: Yeah, but I might be wrong, you know, but that's something.
+yusheng kuo: No, no, I think it's thinking all.
+Michael Riedler: Of the things I'm building now is really how can I give it to the.
+Michael Riedler: How can I give it to something that looks like club.
+Michael Riedler: Sorry, Claude Bot or what you just.
+Michael Riedler: So they can use this as much as possible.
+Michael Riedler: Like data source or you know, the CRM like thing I just.
+Michael Riedler: I talked with you last time is exactly like that.
+Michael Riedler: Right.
+Michael Riedler: You have it.
+Michael Riedler: It's basically an agent native CRM that lives in some files on your, on your computer and it's all available, I think.
+Michael Riedler: What do you mean?
+yusheng kuo: Agent.
+yusheng kuo: Agent CRM.
+yusheng kuo: What do you think it would be?
+Michael Riedler: What.
+Michael Riedler: Say again?
+yusheng kuo: What do you, what do you think the agent HCR will look like?
+Michael Riedler: Well man, that's the goal.
+Michael Riedler: I think what I want to do as a side project and we would love your feedback.
+Michael Riedler: I want to take what I build and basically polish it and give it on give it away for free on GitHub and see if you know, make it open source.
+Michael Riedler: And I mean, I think it's.
+Michael Riedler: I mean my best bed is the what we discussed a couple of weeks ago essentially a.
+Michael Riedler: A just an immut, an immutable log that.
+yusheng kuo: Yeah.
+Michael Riedler: That basically documents every interaction with an existing customer lead and then have multiple agents with a heartbeat.
+Michael Riedler: Now I didn't know that before.
+Michael Riedler: Look at.
+Michael Riedler: Okay, great.
+Michael Riedler: Now we're going to have a knowledge log that's only like insights that are knowledgeable.
+Michael Riedler: That's not.
+Michael Riedler: You know, so you have a few of these places and then you have.
+Michael Riedler: Yeah, that's it.
+Michael Riedler: Then you have a way for agents to know everything about customers and they know when to send them an invoice.
+Michael Riedler: They know when to have a meeting with them.
+Michael Riedler: Well that, that's it.
+Michael Riedler: Like that you know, and, and the human gets pulled in whenever they need to.
+Michael Riedler: But it could.
+Michael Riedler: It completely lives.
+Michael Riedler: It has no ui.
+Michael Riedler: It does not have a ui.
+Michael Riedler: Right.
+Michael Riedler: It's completely in the background.
+yusheng kuo: Yeah.
+yusheng kuo: And then see like how flexible it could be.
+yusheng kuo: Like he can check like before he do anything messy, you can check your email call out.
+yusheng kuo: Right.
+yusheng kuo: Just like classic.
+yusheng kuo: And he was like oh, like, like you can even say like oh, you couldn't send too many because the LinkedIn might block you.
+yusheng kuo: Like you can just check right.
+yusheng kuo: Like and it all through just natural language guidance.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: Yeah.
+yusheng kuo: It's like so much simpler.
+yusheng kuo: I think even that feature was so useful for people who do it now about.
+yusheng kuo: Because like nowadays setting up Those sequencing is like pain every day.
+Michael Riedler: It's all we need to move away from that, man.
+Michael Riedler: I, I definitely.
+Michael Riedler: I'm excited again.
+Michael Riedler: So I think yeah, I'm gonna.
+Michael Riedler: Because this is.
+Michael Riedler: In the end it will be just some logic.
+Michael Riedler: You can run in cloud code or in.
+Michael Riedler: In any CLI and then that's it.
+Michael Riedler: And it will just run.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: It's just like you need to have a way to.
+yusheng kuo: So like me.
+yusheng kuo: Those are like a sequencing set.
+yusheng kuo: Yes, right now.
+yusheng kuo: Now they provide some.
+yusheng kuo: Not the reason actually I use that not for their sequencing but they give me a simple way to.
+yusheng kuo: They create a web hook.
+yusheng kuo: Right.
+yusheng kuo: Like LinkedIn doesn't provide that.
+yusheng kuo: Yeah, I don't know if LinkedIn will provide that.
+yusheng kuo: So I think those kind of infrastructure layer was still useful.
+Michael Riedler: Yeah.
+yusheng kuo: Just like I use Play not for the data or like a UI but for the running.
+yusheng kuo: Right.
+yusheng kuo: Everything is going back to more like very infrastructure level thing that you know.
+yusheng kuo: Because those are the harder things to be cheap at a moment.
+Michael Riedler: Yeah, totally.
+yusheng kuo: If you think of software, I think you should think of that way like more like infrastructure layer.
+Michael Riedler: Yeah.
+yusheng kuo: Harder to build, harder to scale.
+yusheng kuo: For example you couldn't like run at local.
+yusheng kuo: You have to run those kind of scale things in cloud.
+yusheng kuo: Right.
+yusheng kuo: Then there is an opportunity for those infrastructure.
+yusheng kuo: You probably wouldn't run GCP on your own machine.
+yusheng kuo: Right?
+Michael Riedler: Yeah.
+yusheng kuo: So that's like that's their layer and I think those secrecy model would actually go get class.
+yusheng kuo: They all just become.
+yusheng kuo: Because recently I know there's a company called My mymx Dot.
+yusheng kuo: You basically turn your whole email inbox DNS into a webhook figure.
+yusheng kuo: So I don't even need to go to Insulin anymore.
+Michael Riedler: Yeah, yeah.
+yusheng kuo: It's like those kind of bare minimum things are so useful.
+Michael Riedler: Yeah, totally.
+yusheng kuo: Yeah, yeah.
+Michael Riedler: That's crazy.
+Michael Riedler: It's just.
+Michael Riedler: Yeah.
+Michael Riedler: These things, I mean if you look at smart lead or instantly you know their value, this the software done but their value right now is still the you know, setting up inboxes, warming up an inbox.
+Michael Riedler: Like that's quite.
+Michael Riedler: You know you can make a lot of mistakes.
+Michael Riedler: You have to pay someone to do that.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: Those very minimum like functionality.
+Michael Riedler: Right, exactly.
+yusheng kuo: Yeah.
+Michael Riedler: And but then you know this stuff is.
+Michael Riedler: I think all these things should be made available via the cli.
+Michael Riedler: So it's like super easily consumable for an agent where you know there is a certain, you know, maybe even.
+Michael Riedler: Yeah.
+Michael Riedler: That just the most agent native way to like oh, I need 50 Outlook inboxes.
+Michael Riedler: How do I get this?
+yusheng kuo: Yeah, smalley like get 15 bucks and then you all of a sudden you get 15 bucks.
+Michael Riedler: Exactly, exactly.
+Michael Riedler: Yeah.
+Michael Riedler: I love it because I think what you're building now is gonna, it's and, and with the CRM framework it like goes nicely into each other.
+Michael Riedler: So yeah, I'll definitely, I, I, I need to spend some time with a CRM and then I'll get your feedback on it.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: I mean it's really just like, like let's try to restore it.
+yusheng kuo: See how health like what actually is working.
+yusheng kuo: I think it's really important to make it into the field work to feel the, the friction.
+yusheng kuo: Right?
+Michael Riedler: Exactly.
+yusheng kuo: Like yeah, because it's nice to lay out but when they put in you can start to see everything break for.
+Michael Riedler: You would be, you know, with this, could you, you know, I guess I'm seeing two things here, right.
+Michael Riedler: On the one hand you have the MCP aggregator, right?
+yusheng kuo: Yeah.
+Michael Riedler: If someone uses mcp, that's really valuable.
+Michael Riedler: If, if someone doesn't, then they don't need that.
+Michael Riedler: And now you have this framework for outbound.
+Michael Riedler: Like could this be, could you launch this open source, you know, just like, you know, basically have the user run it instead of hosted on your side?
+Michael Riedler: Would that be valuable?
+yusheng kuo: We, we could try to look into it.
+yusheng kuo: We, we just need to know how to do that.
+yusheng kuo: Yeah.
+yusheng kuo: Because so far it's like well intertwined.
+yusheng kuo: But I think if we can, if we can abstract that into a framework.
+yusheng kuo: Yeah, that would be helpful.
+yusheng kuo: Yeah.
+yusheng kuo: Like how do you like basically we originally intend was building actually in an open source way and then you can choose whichever like post you want.
+yusheng kuo: But it's like spending it turned out it's more effort than just building ourselves like.
+yusheng kuo: Yeah, because yeah, yeah, there's an interoperability here.
+yusheng kuo: But yeah, I think it's definitely something that's worth looking into and make it this like oh, you just, you just bring your own host gcp.
+yusheng kuo: It could be anything and then you can just deploy your car code to it and then you can choose your own image.
+yusheng kuo: You can choose your own like now you run on E2B or you can run on Daytona.
+yusheng kuo: You can run on like model.
+yusheng kuo: Right.
+yusheng kuo: All these different.
+Michael Riedler: I'm always like asking the questions and give more work.
+Michael Riedler: But to me what I'm seeing when you tell me this is, you know, I think your expertise lies in you know, the kind of the conceptual side of things and you are just in the go to market space because that's just the space you ended up in.
+Michael Riedler: But with this, this could work for 50 different use cases.
+Michael Riedler: Right.
+Michael Riedler: It's what we all, it's like Claude bot.
+Michael Riedler: If you can figure out a new kind of thinking, right.
+Michael Riedler: How we, you know, I don't know, like run, have the agents operate and interact with us.
+Michael Riedler: I mean another idea could be we could just for fun, you know, as a side project, launch an outbound bot that is not for agencies or you know, it's not like for your client.
+Michael Riedler: It's for actual companies where they get a secure sandbox where they connect a few things internally.
+Michael Riedler: So we need who, we need to know who they are.
+Michael Riedler: And it's like a free open source thing where then you know, the bot gets its own email address all like out of the box set up.
+Michael Riedler: So that is like a bit de risk and it's, it's yeah.
+Michael Riedler: Something like playful that the bot has a bot name and, and it will start doing outbound like crazy.
+Michael Riedler: And you don't have to do anything.
+yusheng kuo: Yeah, I mean, yeah, yeah.
+yusheng kuo: Well you probably still need to connect to certain email provider, right?
+Michael Riedler: Yes.
+yusheng kuo: To, to, to do scale out about.
+yusheng kuo: But you can, you can let it say okay, you can choose your own just like, just like you can also choose whatever email you want to use.
+yusheng kuo: Right.
+yusheng kuo: You can use gog.
+yusheng kuo: That's what he created.
+yusheng kuo: One thing.
+yusheng kuo: It's like yeah, so but I actually, I don't think I, I, we are building an outbound machine.
+yusheng kuo: It's just the, the use case.
+yusheng kuo: The people are actually first I'm thinking of it was like a GPA space.
+yusheng kuo: But yeah, like I said like I use it internally for all my day to day operation.
+Michael Riedler: Yes, yeah, exactly.
+yusheng kuo: I check the, check the product everything and yeah.
+yusheng kuo: And then, and then what we also think is like because we can wrap all our MCP aggregator to a cli right.
+yusheng kuo: So like people don't need to install like all 60 different CLI.
+Michael Riedler: And that's great.
+yusheng kuo: And there are many products they don't offer cli.
+Michael Riedler: Exactly.
+yusheng kuo: Like a lot of API, they don't have CLI.
+Michael Riedler: On the cli.
+Michael Riedler: Are you going to essentially find a way to basically install data gen cli and I can have and the back of this, all the other CLIs there, right?
+yusheng kuo: Yeah, yeah, yeah, yeah, yeah.
+yusheng kuo: It could be them.
+yusheng kuo: You could directly turn the MCP to cli.
+yusheng kuo: Right.
+yusheng kuo: So you can use the mcp, you can use the API, you can use cli.
+yusheng kuo: So you, you don't need to like, like, like making agent to remember like it's hundreds different cli.
+yusheng kuo: And another thing is that CLI is hard to deploy because a lot of times the CLI are like, like environment dependent.
+Michael Riedler: Yeah, yeah, yeah.
+yusheng kuo: So for example, like you are AMD because it's directly like a compiled to the.
+yusheng kuo: To.
+yusheng kuo: To the underlying.
+yusheng kuo: Like a machine.
+Michael Riedler: Yeah.
+yusheng kuo: Right.
+yusheng kuo: Like you.
+yusheng kuo: If it's a Mac os, you.
+yusheng kuo: You need to uninstall.
+yusheng kuo: Actually the CLI installer typically will abstract that way.
+yusheng kuo: But like actually your CLI couldn't run in ggp.
+Michael Riedler: Yeah.
+yusheng kuo: Because it's a Mac os.
+yusheng kuo: Right.
+Michael Riedler: Yeah.
+yusheng kuo: The, the nice thing about API MCP is like, it's like environment dependent.
+Michael Riedler: Nice.
+yusheng kuo: This is very portable.
+yusheng kuo: Yeah.
+Michael Riedler: So yeah.
+yusheng kuo: But if we can make this like feel like CLI to agent, but it's actually portable and that would be very valuable.
+Michael Riedler: Yeah, exactly.
+Michael Riedler: That's where I think that's where, where your value is, you know, kind of.
+Michael Riedler: Yeah, I understand.
+Michael Riedler: Now you're using this more as like a company operation agent.
+Michael Riedler: Right.
+Michael Riedler: It's just.
+Michael Riedler: It doesn't matter.
+Michael Riedler: Use a number outbound, whatever strategy, internal communication.
+Michael Riedler: So if you can become some sort of the framework or the node, how all MCPs connect to an agent.
+yusheng kuo: You.
+Michael Riedler: Know, and even in the future it's going to be like, okay, I need these 26 different things and I need to use them now, like, you know, immediately.
+yusheng kuo: Yeah, yeah, that's a hope.
+yusheng kuo: Like, it's like make everything so accessible.
+yusheng kuo: Yeah, that's.
+yusheng kuo: That's what we try to do like make agent.
+yusheng kuo: What next time is like you can have all the agents, right.
+yusheng kuo: Then it become.
+yusheng kuo: I think it will become a standard.
+yusheng kuo: So there will be a registry and you can just help you with all the skill for the plugin for everything.
+yusheng kuo: You just like agent know what you need.
+yusheng kuo: And then they will fall on the net so they can learn from the best practice.
+Michael Riedler: Exactly.
+yusheng kuo: Like trying to.
+yusheng kuo: Yeah.
+yusheng kuo: Hallucinate or what.
+yusheng kuo: Yeah.
+yusheng kuo: So it's like.
+yusheng kuo: So that's where we kind of position.
+yusheng kuo: It's like, okay, we want to piece that infrastructure layer or like for, for the agent.
+yusheng kuo: Right?
+yusheng kuo: Yeah, we want to make it the agent to easily deploy.
+yusheng kuo: Make agent easy to use the tool, use the skill like authentication as a part of it and eventually the transaction.
+yusheng kuo: Right.
+yusheng kuo: Like making very easy to purchase.
+yusheng kuo: Yeah.
+yusheng kuo: Identity.
+yusheng kuo: Yeah.
+yusheng kuo: Like how they layer one and others.
+yusheng kuo: Everyone just come in here and it's like, oh, in the box.
+yusheng kuo: Okay.
+yusheng kuo: Give it an inbox to coi.
+yusheng kuo: Give it the identity, give it the credit card.
+Michael Riedler: Yeah, definitely.
+yusheng kuo: To purchase.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: It's like without, without.
+yusheng kuo: Without saving up too many things like yourself.
+yusheng kuo: Right?
+yusheng kuo: Like.
+Michael Riedler: Yeah, exactly.
+yusheng kuo: I think if I can directly like let you connect it to all the credit card just like play, right?
+yusheng kuo: I don't know if you know, play.
+yusheng kuo: Is that USC or.
+Michael Riedler: Yeah, no, I know it.
+Michael Riedler: Yeah.
+yusheng kuo: Yeah, yeah.
+yusheng kuo: It's like, it makes you very easy to connect to all the bank.
+yusheng kuo: Right.
+yusheng kuo: You make your agent very easy to control the access.
+yusheng kuo: Connect to the bank you want and then they can purchase for you, managing subscription for you.
+Michael Riedler: Yeah, like.
+yusheng kuo: Yeah.
+yusheng kuo: It's like, how can you make everything so easy nowadays?
+yusheng kuo: Very hard.
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: That's the thing that's worth pursuing.
+yusheng kuo: Yeah.
+Michael Riedler: I love it.
+Michael Riedler: I love it.
+yusheng kuo: Eventually even GitHub.
+yusheng kuo: Yeah, yeah, yeah.
+Michael Riedler: No, 100%.
+Michael Riedler: Yeah.
+Michael Riedler: So it's really all the services that.
+Michael Riedler: Or, you know, that involves, you know, even when financial transactions.
+Michael Riedler: I mean, that's great.
+Michael Riedler: We can test this out.
+Michael Riedler: Because when I launch the database, then there's a purchase involved.
+Michael Riedler: Maybe we can experiment with this.
+Michael Riedler: You know, we try.
+Michael Riedler: We can try something new.
+yusheng kuo: Let's try.
+yusheng kuo: Yeah.
+Michael Riedler: Something like not on a website now.
+Michael Riedler: Let's do a cli checkout.
+yusheng kuo: Yeah, yeah, yeah, yeah.
+yusheng kuo: That's exciting.
+yusheng kuo: It's like.
+yusheng kuo: Yeah.
+yusheng kuo: Once you have the database, like, let us know and we can try to like campaign around that.
+Michael Riedler: Exactly.
+yusheng kuo: Another inspiring Australia.
+Michael Riedler: No, I have it already, so I just need to spend time.
+Michael Riedler: You know, the only constraint in my life is right now is I have to leave the laptop sometimes.
+Michael Riedler: That's it.
+Michael Riedler: That's the only history.
+Michael Riedler: Sometimes.
+Michael Riedler: Or you go to the toilet or.
+Michael Riedler: No, but it's.
+Michael Riedler: Yeah, it's the best part.
+Michael Riedler: And yeah, this Austrian guy really inspired me too, because if you listen to him, man, he's just.
+Michael Riedler: He's just loving it.
+Michael Riedler: He's interested, he's curious and it's just.
+Michael Riedler: It's the.
+Michael Riedler: It's the Internet.
+Michael Riedler: Like you said last time.
+Michael Riedler: It's the Internet vibes from the 90s, you know, early 2000s.
+Michael Riedler: And it has a completely different feel to it than, you know, oh, we're just gonna monetize the software.
+Michael Riedler: It's so boring, you know, it's just.
+Michael Riedler: Yeah.
+Michael Riedler: You know that, that's.
+yusheng kuo: And I think you can say that because he's.
+yusheng kuo: He's already kind of financial.
+Michael Riedler: I know he made some money.
+yusheng kuo: Yeah, yeah, yeah.
+yusheng kuo: It's like he's already reached.
+yusheng kuo: He can spend like a twenty thousand dollar, a seventy thousand dollar on token.
+yusheng kuo: I don't have that money.
+yusheng kuo: But yeah, I agree with you.
+yusheng kuo: It's like more like what they call like a autism or like, like more.
+yusheng kuo: More for others, right?
+Michael Riedler: Yeah, yeah, exactly.
+yusheng kuo: So nice.
+yusheng kuo: I really hope this is it.
+yusheng kuo: Yeah.
+Michael Riedler: Cool.
+Michael Riedler: I mean, apparently they might.
+Michael Riedler: They might get some funding.
+Michael Riedler: You know, I don't know what's gonna happen, but let's, you know, let's.
+Michael Riedler: I think there's a concrete next step is really I want to get this thing live and then we, we can experiment with how to use your thing as the gateway to use that database and, and we can go to all the outbound out.
+Michael Riedler: All the outbound guys who already live in cloud code.
+Michael Riedler: They can then or anyone that has an outbound thought already, it's going to be many even cloud.
+Michael Riedler: They're going to do a lot of outbound.
+Michael Riedler: So that way they can basically purchase access to leads data that otherwise have to do through a third party.
+yusheng kuo: Yeah, yeah, that would be.
+yusheng kuo: That'll be awesome.
+Michael Riedler: I have a little think on the, on the structure and, and otherwise I'm also going to test the data chain.
+Michael Riedler: So.
+Michael Riedler: Yeah.
+Michael Riedler: And then I'll let you know.
+Michael Riedler: Any questions and let's keep talking.
+Michael Riedler: Yeah, yeah, yeah.
+yusheng kuo: Thank you.
+Michael Riedler: All right, man.
+yusheng kuo: So far.
+Michael Riedler: Yeah, yeah.
+Michael Riedler: Let's go, let's go.
+Michael Riedler: Bye bye bye.
+Title: 30 Min Meeting between Yusheng Kuo and Michael Riedler
+Host Email: yusheng.kuo@datagen.dev
+Organizer Email: yusheng.kuo@datagen.dev
+Calendar Id: adVQ8NxWqLBFe4LL5zCvR3@Cal.com
+Fireflies Users: yusheng.kuo@datagen.dev
+Participants: yusheng.kuo@datagen.dev,michaelriedler@gmail.com, michaelriedler@gmail.com
+Date: 1770395400000
+Transcript Url: https://app.fireflies.ai/view/01KGQWBSVNEW8DRS6DH4MPMJW8
+Audio Url: https://cdn.fireflies.ai/01KGQWBSVNEW8DRS6DH4MPMJW8/audio.mp3?Expires=1770617778&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4uZmlyZWZsaWVzLmFpLzAxS0dRV0JTVk5FVzhEUlM2REg0TVBNSlc4L2F1ZGlvLm1wMyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc3MDYxNzc3OH19fV19&Signature=R5JscniGR32le6nfdNjer-k7A8QSKHXPGhznAuNKkzr9fg01CzKuZ3yxECgi~oz7m5bsjNjnnxwBQIHzW8tA0xzqAyVoN82TPZacOeeAl66FgpkiaWKkZ1N6W0yRTbg4pkvvIXRKoKZW3TR9UvdQ1fe71HMgj7JRztjsX04JldVbF2Lk3F7x5PQKyQq0NTIZZLk5JwSnccE92XpFUIgva6KAqTt0F3x7ylDqqRPWgcrkV8lL54OjlQqr3kh50nOxRvgbFAuD-D0dMdqLPooDfXFkn6pCbjr524CXO3Zl5eyvHaBBL7i7qqnEMi6P53PAxItHwXJoOCC7vbn2FDG9fg__&Key-Pair-Id=K25ZJR0UZVF4CM
+Video Url: No video url
+Duration: 106.18000030517578
+Meeting Attendees: yusheng.kuo@datagen.dev, michaelriedler@gmail.com
+Cal Id: _c5i5ck9o9ps5esac8936ad2c9gqnkgrma8pk0gr1dgn66rrd
+Calendar Type: google
+Meeting Link: https://meet.google.com/dqm-bqmz-qcy
