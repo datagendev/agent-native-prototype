@@ -1,0 +1,146 @@
+{
+  "date": "2026-02-08",
+  "posthog": {
+    "events_7d": [
+      {"event": "$autocapture", "count": 394},
+      {"event": "page_viewed", "count": 365},
+      {"event": "$web_vitals", "count": 82},
+      {"event": "$pageview", "count": 73},
+      {"event": "$pageleave", "count": 45},
+      {"event": "$set", "count": 22},
+      {"event": "$rageclick", "count": 2},
+      {"event": "mcp_url_copied", "count": 2},
+      {"event": "mcp_connect_clicked", "count": 2}
+    ],
+    "mcp_connect_clicks": [
+      {
+        "email": "david@automatedemand.com",
+        "click_count": 16,
+        "mcp_servers": ["Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase", "HubSpot"],
+        "referrer": "www.linkedin.com"
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "click_count": 4,
+        "mcp_servers": ["Supabase", "Firecrawl", "Linear"]
+      },
+      {
+        "email": "gillybolton.302090@gmail.com",
+        "click_count": 3,
+        "mcp_servers": ["Google Calendar", "Gmail"]
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "click_count": 2,
+        "mcp_servers": ["Gmail"]
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "click_count": 1,
+        "mcp_servers": ["Heyreach"]
+      }
+    ],
+    "traffic_by_country": [
+      {"country": "US", "visits": 556, "unique_visitors": 157}
+    ],
+    "ux_issues": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "event": "$rageclick",
+        "page": "/signalgen/agents/35ac164a-463a-46a1-951f-addf445e9591"
+      }
+    ],
+    "top_pages": [
+      {"page": "/", "views": 438, "unique_visitors": 182},
+      {"page": "/signalgen/agents", "views": 50, "unique_visitors": 5}
+    ]
+  },
+  "neon": {
+    "total_users": 81,
+    "active_users": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "credits": 2436,
+        "run_count": 2085,
+        "success_count": 1929,
+        "success_rate": 92.5,
+        "last_run": "2026-02-06T21:06:27.000Z"
+      },
+      {
+        "email": "ravi@fulllist.ai",
+        "credits": 500,
+        "run_count": 446,
+        "success_count": 0,
+        "success_rate": 0.0,
+        "last_run": "2026-02-07T15:00:00.000Z"
+      },
+      {
+        "email": "catecean20@gmail.com",
+        "credits": 954,
+        "run_count": 44,
+        "success_count": 20,
+        "success_rate": 45.5,
+        "last_run": "2026-02-02T09:00:00.000Z"
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "credits": 5000,
+        "run_count": 11,
+        "success_count": 11,
+        "success_rate": 100.0,
+        "last_run": "2026-01-29T11:47:56.000Z"
+      },
+      {
+        "email": "david@automatedemand.com",
+        "credits": 2771,
+        "run_count": 3,
+        "success_count": 3,
+        "success_rate": 100.0,
+        "last_run": "2026-02-04T10:40:11.000Z"
+      }
+    ],
+    "at_risk_users": [
+      {
+        "email": "gillybolton.302090@gmail.com",
+        "credits": 499,
+        "days_since_signup": 8
+      },
+      {
+        "email": "ben@beneficial-intelligence.com",
+        "credits": 100,
+        "days_since_signup": 25
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "credits": 0,
+        "days_since_signup": 25
+      }
+    ],
+    "failed_runs": [
+      {
+        "email": "ravi@fulllist.ai",
+        "run_state": "failed",
+        "created_at": "2026-02-07T15:00:00.000Z",
+        "error_preview": null
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "run_state": "failed",
+        "created_at": "2026-02-06T21:06:27.000Z",
+        "error_preview": "Modal sandbox execution failed (rc=0). error=Client error '401 Unauthorized' for url 'https://dashboard.starbridge.ai/api/opportunity/v3?pageSize=10&pageNumber=1&sortField=SearchRelevancy&sortDirectio"
+      }
+    ],
+    "custom_tools_created": [
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "description": "Reference data and org utility endpoints. 8 actions for metadata, credits, filters, proposals, integrations. Auto-discovers orgId.",
+        "created_at": "2026-02-05T10:38:43.000Z"
+      },
+      {
+        "email": "david@automatedemand.com",
+        "description": "Instantly Domain Analytics - Fetches ALL Instantly accounts with pagination, aggregates by domain, saves to Supabase, sends daily Slack summary.",
+        "created_at": "2026-02-03T16:46:13.000Z"
+      }
+    ]
+  }
+}
