@@ -1,0 +1,169 @@
+{
+  "date": "2026-02-09",
+  "user_stats": {
+    "total_users": 81,
+    "new_users_7d": 1,
+    "users_with_usage": 25,
+    "avg_credits": 509.3
+  },
+  "event_overview_7d": [
+    {"event": "page_viewed", "count": 560},
+    {"event": "$autocapture", "count": 554},
+    {"event": "$web_vitals", "count": 128},
+    {"event": "$pageview", "count": 97},
+    {"event": "$pageleave", "count": 67},
+    {"event": "$set", "count": 43},
+    {"event": "$rageclick", "count": 2},
+    {"event": "mcp_url_copied", "count": 2},
+    {"event": "mcp_connect_clicked", "count": 2},
+    {"event": "$identify", "count": 1}
+  ],
+  "mcp_connect_activity": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 16,
+      "mcp_servers": ["HubSpot", "Supabase", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl"],
+      "referrer": "$direct",
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-02-06T15:45:13.324000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "referrer": "mcp.datagen.dev",
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "referrer": "$direct",
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 2,
+      "mcp_servers": ["Gmail"],
+      "referrer": "$direct",
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-02-01T05:11:50.621000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "$direct",
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 2429,
+      "run_count": 2085,
+      "success_count": 1929,
+      "success_rate": 92.5,
+      "last_run": "2026-02-06T21:06:27.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 500,
+      "run_count": 455,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-08T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 954,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": 45.5,
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 5000,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 2751,
+      "run_count": 3,
+      "success_count": 3,
+      "success_rate": 100.0,
+      "last_run": "2026-02-04T10:40:11.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 500,
+      "created_at": "2026-02-06T02:43:41.114Z",
+      "last_active_timestamp": "2026-02-06T02:43:41.114Z",
+      "days_since_signup": 3
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "created_at": "2026-01-30T21:21:48.607Z",
+      "last_active_timestamp": "2026-01-30T21:41:02.054Z",
+      "days_since_signup": 9
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "created_at": "2026-01-14T00:20:39.406Z",
+      "last_active_timestamp": "2026-01-14T00:20:39.406Z",
+      "days_since_signup": 26
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 5000,
+      "created_at": "2026-01-13T18:06:16.315Z",
+      "last_active_timestamp": "2026-02-09T10:19:05.693Z",
+      "days_since_signup": 26
+    }
+  ],
+  "top_pages": [
+    {"page": "/", "views": 441, "unique_visitors": 181},
+    {"page": "/signalgen/agents", "views": 51, "unique_visitors": 5},
+    {"page": "/oauth/callback", "views": 34, "unique_visitors": 16},
+    {"page": "/login/oauth/authorize", "views": 25, "unique_visitors": 5},
+    {"page": "/signalgen/mcp-servers", "views": 21, "unique_visitors": 5}
+  ],
+  "traffic_sources": [
+    {"referrer": "$direct", "visits": 634, "unique_visitors": 168},
+    {"referrer": "mcp.datagen.dev", "visits": 36, "unique_visitors": 5},
+    {"referrer": "www.linkedin.com", "visits": 28, "unique_visitors": 24},
+    {"referrer": "www.google.com", "visits": 11, "unique_visitors": 10},
+    {"referrer": "datagen.dev", "visits": 6, "unique_visitors": 4}
+  ],
+  "recent_custom_tools": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "description": "Reference data and org utility endpoints. 8 actions for metadata, credits, filters, proposals, integrations.",
+      "created_at": "2026-02-05T10:38:43.000Z",
+      "code_length": 3916
+    },
+    {
+      "email": "david@automatedemand.com",
+      "description": "Instantly Domain Analytics - Fetches ALL Instantly accounts with pagination",
+      "created_at": "2026-02-03T16:46:13.000Z",
+      "code_length": 5371
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "description": "Takes a list of company names or domains and enriches with LinkedIn data",
+      "created_at": "2026-01-29T11:41:42.000Z",
+      "code_length": 4890
+    }
+  ]
+}
