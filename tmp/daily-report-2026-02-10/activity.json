@@ -1,0 +1,94 @@
+{
+  "date": "2026-02-10",
+  "posthog": {
+    "event_overview_7d": {
+      "page_viewed": 620,
+      "autocapture": 576,
+      "web_vitals": 133,
+      "pageview": 97,
+      "pageleave": 68,
+      "set": 47,
+      "mcp_connect_clicked": 3,
+      "rageclick": 2,
+      "mcp_url_copied": 2,
+      "cta_clicked": 1,
+      "identify": 1
+    },
+    "mcp_connect_clicks_30d": [
+      {
+        "email": "david@automatedemand.com",
+        "click_count": 16,
+        "mcp_servers": ["HubSpot","Supabase","Gmail","Gmail","Gmail","Heyreach","Instantly","Apify","Notion","Slack","Firecrawl","Notion","Notion","Slack","Instantly","Supabase"],
+        "referrer": "$direct",
+        "first_click": "2026-01-23T12:54:32.952000Z",
+        "last_click": "2026-02-06T15:45:13.324000Z"
+      },
+      {
+        "email": "andriyvovchak15@gmail.com",
+        "click_count": 4,
+        "mcp_servers": ["Supabase","Firecrawl","Linear","Linear"],
+        "referrer": "mcp.datagen.dev",
+        "first_click": "2026-01-28T13:43:51.107000Z",
+        "last_click": "2026-01-28T13:48:22.652000Z"
+      },
+      {
+        "email": "jeremy.scott.ross@gmail.com",
+        "click_count": 3,
+        "mcp_servers": ["Gmail","Gmail","Gmail"],
+        "referrer": "claude.ai",
+        "first_click": "2026-01-27T20:12:29.296000Z",
+        "last_click": "2026-02-09T18:28:59.602000Z"
+      },
+      {
+        "email": "gillybolton.302090@gmail.com",
+        "click_count": 3,
+        "mcp_servers": ["Google Calendar","Gmail","Google Calendar"],
+        "referrer": "$direct",
+        "first_click": "2026-01-30T21:23:30.111000Z",
+        "last_click": "2026-01-30T21:27:47.204000Z"
+      },
+      {
+        "email": "steve@misterbrady.com",
+        "click_count": 1,
+        "mcp_servers": ["Heyreach"],
+        "referrer": "$direct",
+        "first_click": "2026-01-26T17:44:56.895000Z",
+        "last_click": "2026-01-26T17:44:56.895000Z"
+      }
+    ],
+    "top_pages_30d": [
+      {"page": "/", "views": 441, "unique_visitors": 177},
+      {"page": "/signalgen/agents", "views": 55, "unique_visitors": 5},
+      {"page": "/oauth/callback", "views": 34, "unique_visitors": 16},
+      {"page": "/login/oauth/authorize", "views": 25, "unique_visitors": 5},
+      {"page": "/signalgen/mcp-servers", "views": 21, "unique_visitors": 5}
+    ]
+  },
+  "neon": {
+    "user_stats": {
+      "total_users": 81,
+      "new_users_7d": 1,
+      "users_with_usage": 25,
+      "avg_credits": 509.3
+    },
+    "users_no_runs_20": [
+      {"email": "kuoyusheng@gmail.com", "credits": 500, "days_since_signup": 4},
+      {"email": "gillybolton.302090@gmail.com", "credits": 499, "days_since_signup": 10},
+      {"email": "kuoyusheng@gmail.com", "credits": 468, "days_since_signup": 13},
+      {"email": "ben@beneficial-intelligence.com", "credits": 100, "days_since_signup": 27},
+      {"email": "andriyvovchak15@gmail.com", "credits": 5000, "days_since_signup": 27},
+      {"email": "akil@leadle.in", "credits": 100, "days_since_signup": 27},
+      {"email": "anand.mridul3@gmail.com", "credits": 100, "days_since_signup": 28},
+      {"email": "team@oneaway.io", "credits": 100, "days_since_signup": 28},
+      {"email": "alex@talenthaul.com", "credits": 100, "days_since_signup": 29},
+      {"email": "isaac@recruitcloud.io", "credits": 100, "days_since_signup": 34}
+    ],
+    "custom_tools_recent_20": [
+      {"email": "jeremy.scott.ross@gmail.com", "description": "Reference data and org utility endpoints", "created_at": "2026-02-05T10:38:43.000Z", "code_length": 3916},
+      {"email": "jeremy.scott.ross@gmail.com", "description": "Manage Bridges (saved search workflows with AI-enriched columns)", "created_at": "2026-02-05T10:38:22.000Z", "code_length": 4200},
+      {"email": "jeremy.scott.ross@gmail.com", "description": "Full buyer intel pipeline in ONE call", "created_at": "2026-02-05T10:37:56.000Z", "code_length": 5997},
+      {"email": "david@automatedemand.com", "description": "Instantly Domain Analytics", "created_at": "2026-02-03T16:46:13.000Z", "code_length": 5371},
+      {"email": "david@automatedemand.com", "description": "Daily Instantly domain analytics", "created_at": "2026-02-03T16:05:42.000Z", "code_length": 3415}
+    ]
+  }
+}
