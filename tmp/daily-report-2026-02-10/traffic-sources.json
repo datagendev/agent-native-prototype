@@ -1,0 +1,18 @@
+{
+  "referrers": [
+    {"referrer": "$direct", "visits": 648, "unique_visitors": 164},
+    {"referrer": "mcp.datagen.dev", "visits": 36, "unique_visitors": 5},
+    {"referrer": "www.linkedin.com", "visits": 28, "unique_visitors": 24},
+    {"referrer": "www.google.com", "visits": 11, "unique_visitors": 10},
+    {"referrer": "datagen.dev", "visits": 6, "unique_visitors": 3},
+    {"referrer": "claude.ai", "visits": 4, "unique_visitors": 1}
+  ],
+  "top_pages": [
+    {"page": "/", "views": 441, "unique_visitors": 177},
+    {"page": "/signalgen/agents", "views": 55, "unique_visitors": 5},
+    {"page": "/oauth/callback", "views": 34, "unique_visitors": 16},
+    {"page": "/login/oauth/authorize", "views": 25, "unique_visitors": 5},
+    {"page": "/signalgen/mcp-servers", "views": 21, "unique_visitors": 5},
+    {"page": "/account", "views": 16, "unique_visitors": 7}
+  ]
+}

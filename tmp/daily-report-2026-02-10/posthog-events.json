@@ -1,0 +1,20 @@
+{
+  "event_overview_7d": [
+    {"event": "page_viewed", "count": 620},
+    {"event": "$autocapture", "count": 576},
+    {"event": "$web_vitals", "count": 133},
+    {"event": "$pageview", "count": 97},
+    {"event": "$pageleave", "count": 68},
+    {"event": "$set", "count": 47},
+    {"event": "mcp_connect_clicked", "count": 3},
+    {"event": "$rageclick", "count": 2},
+    {"event": "mcp_url_copied", "count": 2},
+    {"event": "cta_clicked", "count": 1},
+    {"event": "$identify", "count": 1}
+  ],
+  "dau_trend": {
+    "dates": ["2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10"],
+    "values": [21, 16, 10, 15, 6, 15, 5, 10, 7, 15, 10, 3, 3, 9, 4],
+    "total": 149
+  }
+}

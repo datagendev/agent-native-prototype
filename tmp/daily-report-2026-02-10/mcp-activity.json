@@ -1,0 +1,44 @@
+{
+  "mcp_connect_clicks": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 16,
+      "mcp_servers": ["HubSpot", "Supabase", "Gmail", "Gmail", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Notion", "Notion", "Slack", "Instantly", "Supabase"],
+      "referrer": "$direct",
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-02-06T15:45:13.324000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear", "Linear"],
+      "referrer": "mcp.datagen.dev",
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Gmail", "Gmail", "Gmail"],
+      "referrer": "claude.ai",
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-02-09T18:28:59.602000Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail", "Google Calendar"],
+      "referrer": "$direct",
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "$direct",
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z"
+    }
+  ]
+}
