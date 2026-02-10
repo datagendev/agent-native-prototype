@@ -1,0 +1,95 @@
+{
+  "report_date": "2026-02-06",
+  "event_overview_7d": {
+    "autocapture": 417,
+    "page_viewed": 387,
+    "web_vitals": 94,
+    "pageview": 82,
+    "pageleave": 39,
+    "mcp_connect_clicked": 5,
+    "mcp_url_copied": 2,
+    "rageclick": 2,
+    "user_signed_up": 1
+  },
+  "active_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 4830,
+      "run_count": "2077",
+      "success_count": "1929",
+      "success_rate": "92.9",
+      "last_run": "2026-02-06T00:12:22.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 496,
+      "run_count": "440",
+      "success_count": "0",
+      "success_rate": "0.0",
+      "last_run": "2026-02-05T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 974,
+      "run_count": "44",
+      "success_count": "20",
+      "success_rate": "45.5",
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 99,
+      "run_count": "11",
+      "success_count": "11",
+      "success_rate": "100.0",
+      "last_run": "2026-01-29T11:47:56.000Z"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 100,
+      "run_count": "3",
+      "success_count": "3",
+      "success_rate": "100.0",
+      "last_run": "2026-02-04T10:40:11.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "days_since_signup": "6"
+    },
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 468,
+      "days_since_signup": "9"
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "days_since_signup": "23"
+    }
+  ],
+  "recent_failures": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "error": "401 Unauthorized - Starbridge.ai API"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "error": "Unknown failure"
+    }
+  ],
+  "traffic_sources": {
+    "direct": {"visits": 598, "unique_visitors": 171},
+    "mcp.datagen.dev": {"visits": 36, "unique_visitors": 5},
+    "linkedin": {"visits": 29, "unique_visitors": 25},
+    "google": {"visits": 17, "unique_visitors": 16}
+  },
+  "top_pages": [
+    {"page": "/", "views": 445, "unique_visitors": 190},
+    {"page": "/signalgen/agents", "views": 47, "unique_visitors": 5},
+    {"page": "/oauth/callback", "views": 30, "unique_visitors": 16},
+    {"page": "/account", "views": 20, "unique_visitors": 7}
+  ]
+}
