@@ -1,0 +1,7 @@
+{
+  "tool": "mcp_Posthog_query_run",
+  "error": "API tool mcp_Posthog_query_run request failed: MCP tool call 'query-run' timed out after 25 seconds waiting for server response",
+  "timestamp": "2026-02-10",
+  "query": "UX issues (rage clicks + errors) - 7 day query",
+  "note": "Continuing with available data from other queries"
+}
