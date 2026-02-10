@@ -1,0 +1,20 @@
+{
+  "errors": [
+    {
+      "step": "posthog_rage_clicks_query",
+      "tool": "mcp_Posthog_query_run",
+      "error": "Tool execution failed: API tool mcp_Posthog_query_run request failed: MCP tool call 'query-run' timed out after 25 seconds waiting for server response",
+      "timestamp": "2026-02-10",
+      "severity": "non-fatal",
+      "impact": "UX issues (rage clicks and exceptions) data not available in report"
+    },
+    {
+      "step": "neon_run_activity_query",
+      "tool": "mcp_Neon_run_sql",
+      "error": "Tool execution failed: API tool mcp_Neon_run_sql request failed: NeonDbError: syntax error at or near \")\"",
+      "timestamp": "2026-02-10",
+      "severity": "non-fatal",
+      "impact": "User run activity with success rates not available in report"
+    }
+  ]
+}
