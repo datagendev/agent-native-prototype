@@ -1,0 +1,39 @@
+{
+  "workflow": "daily-activity-reporter",
+  "date": "2026-02-10",
+  "status": "completed",
+  "steps": {
+    "activity_tracking": {
+      "status": "completed",
+      "data_sources": ["PostHog", "Neon"],
+      "output_file": "/home/user/repo/tmp/daily-report-2026-02-10/activity.json"
+    },
+    "report_generation": {
+      "status": "completed",
+      "template": "user-activity.html",
+      "output_file": "/home/user/repo/tmp/daily-report-2026-02-10/report.html"
+    },
+    "email_delivery": {
+      "status": "completed",
+      "recipient": "yusheng.kuo@datagen.dev",
+      "subject": "Daily Activity Report - February 10, 2026",
+      "message_id": "19c46996bd3d6976",
+      "sent_at": "2026-02-10"
+    }
+  },
+  "key_findings": {
+    "total_users": 81,
+    "new_users_7d": 1,
+    "active_users": 25,
+    "unique_visitors_30d": 200,
+    "high_intent_prospects": 2,
+    "at_risk_users": 5,
+    "critical_issues": 1
+  },
+  "actionable_insights": [
+    "david@automatedemand.com: High-intent prospect with 16 MCP clicks across HubSpot, Supabase, Gmail, Heyreach - Recommend immediate outreach",
+    "ravi@fulllist.ai: Critical issue with 458 failed runs (0% success rate) - Requires urgent support",
+    "5 at-risk users with no runs: Need re-engagement campaign",
+    "catecean20@gmail.com: Active user with low success rate (45.5%) - May need guidance"
+  ]
+}
