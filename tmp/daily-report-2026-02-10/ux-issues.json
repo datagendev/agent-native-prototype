@@ -1,0 +1,16 @@
+{
+  "rage_clicks": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "event": "$rageclick",
+      "page": "/signalgen/agents/35ac164a-463a-46a1-951f-addf445e9591",
+      "timestamp": "2026-02-05T05:33:26.259000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "event": "$rageclick",
+      "page": "/signalgen/agents/35ac164a-463a-46a1-951f-addf445e9591",
+      "timestamp": "2026-02-05T05:29:32.271000Z"
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Activity Report</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f5;">
+    <tr>
+      <td align="center" valign="top" style="padding:32px 16px;">
+
+        <!-- Main Container -->
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;">
+
+          <!-- Header -->
+          <tr>
+            <td align="center" valign="middle" style="padding:40px 32px 32px;border-bottom:1px solid #e4e4e7;">
+              <p style="margin:0;font-size:11px;font-weight:bold;color:#71717a;text-transform:uppercase;letter-spacing:1px;">DataGen</p>
+              <h1 style="margin:8px 0 0;font-size:22px;font-weight:600;color:#18181b;line-height:1.3;">User Activity Report</h1>
+              <p style="margin:8px 0 0;font-size:13px;color:#71717a;">February 10, 2026</p>
+            </td>
+          </tr>
+
+          <!-- Stats Row -->
+          <tr>
+            <td style="padding:0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="25%" align="center" valign="top" style="padding:24px 8px;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;">
+                    <p style="margin:0;font-size:24px;font-weight:700;color:#18181b;">81</p>
+                    <p style="margin:4px 0 0;font-size:10px;font-weight:600;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.5px;">Total</p>
+                  </td>
+                  <td width="25%" align="center" valign="top" style="padding:24px 8px;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;">
+                    <p style="margin:0;font-size:24px;font-weight:700;color:#18181b;">1</p>
+                    <p style="margin:4px 0 0;font-size:10px;font-weight:600;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.5px;">New 7d</p>
+                  </td>
+                  <td width="25%" align="center" valign="top" style="padding:24px 8px;border-bottom:1px solid #e4e4e7;border-right:1px solid #e4e4e7;">
+                    <p style="margin:0;font-size:24px;font-weight:700;color:#18181b;">25</p>
+                    <p style="margin:4px 0 0;font-size:10px;font-weight:600;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.5px;">Active</p>
+                  </td>
+                  <td width="25%" align="center" valign="top" style="padding:24px 8px;border-bottom:1px solid #e4e4e7;">
+                    <p style="margin:0;font-size:24px;font-weight:700;color:#18181b;">164</p>
+                    <p style="margin:4px 0 0;font-size:10px;font-weight:600;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.5px;">Unique 30d</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- High-Intent Section -->
+          <tr>
+            <td style="padding:28px 32px;border-bottom:1px solid #e4e4e7;">
+              <p style="margin:0 0 16px;font-size:13px;font-weight:600;color:#18181b;">High-Intent Prospects</p>
+              
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">{{EMAIL}}</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">{{MCP_SERVER}} &middot; {{CLICK_COUNT}} clicks</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <a href="mailto:{{EMAIL}}?subject=Quick%20question%20about%20{{MCP_SERVER}}" style="display:inline-block;padding:6px 10px;background-color:#18181b;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Email</a>
+                  </td>
+                </tr>
+              </table>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">gillybolton.302090@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">Gmail, Google Calendar &middot; 3 clicks</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <a href="mailto:gillybolton.302090@gmail.com?subject=Quick%20question%20about%20MCP" style="display:inline-block;padding:6px 10px;background-color:#18181b;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Email</a>
+                  </td>
+                </tr>
+              </table>
+
+              {{^HIGH_INTENT_PROSPECTS}}
+              <p style="margin:0;font-size:12px;color:#a1a1aa;">None this period</p>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">gillybolton.302090@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">Gmail, Google Calendar &middot; 3 clicks</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fafafa;">
+                    <a href="mailto:gillybolton.302090@gmail.com?subject=Quick%20question%20about%20MCP" style="display:inline-block;padding:6px 10px;background-color:#18181b;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Email</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Active Users Section -->
+          <tr>
+            <td style="padding:28px 32px;border-bottom:1px solid #e4e4e7;">
+              <p style="margin:0 0 16px;font-size:13px;font-weight:600;color:#18181b;">Active Users</p>
+              
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">{{EMAIL}}</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">{{RUN_COUNT}} runs &middot; {{SUCCESS_RATE}}% success &middot; {{LAST_RUN}}</p>
+                  </td>
+                </tr>
+              </table>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">jeremy.scott.ross@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">2087 runs &middot; 92% success &middot; today</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ravi@fulllist.ai</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">458 runs &middot; 0% success &middot; today</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">catecean20@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">44 runs &middot; 45% success &middot; 7d ago</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">steve@misterbrady.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">11 runs &middot; 100% success &middot; 11d ago</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">david@automatedemand.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">3 runs &middot; 100% success &middot; 5d ago</p>
+                  </td>
+                </tr>
+              </table>
+
+              {{^ACTIVE_USERS}}
+              <p style="margin:0;font-size:12px;color:#a1a1aa;">None this period</p>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">jeremy.scott.ross@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">2087 runs &middot; 92% success &middot; today</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ravi@fulllist.ai</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">458 runs &middot; 0% success &middot; today</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">catecean20@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">44 runs &middot; 45% success &middot; 7d ago</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">steve@misterbrady.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">11 runs &middot; 100% success &middot; 11d ago</p>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+                <tr>
+                  <td valign="middle" style="padding:8px 0;border-bottom:1px solid #f4f4f5;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">david@automatedemand.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#71717a;">3 runs &middot; 100% success &middot; 5d ago</p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- At-Risk Section -->
+          <tr>
+            <td style="padding:28px 32px;border-bottom:1px solid #e4e4e7;">
+              <p style="margin:0 0 16px;font-size:13px;font-weight:600;color:#18181b;">At-Risk Users</p>
+              
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">{{EMAIL}}</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">{{DAYS_INACTIVE}}d inactive &middot; {{CREDITS}} credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:{{EMAIL}}?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">gillybolton.302090@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">10d inactive &middot; 499 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:gillybolton.302090@gmail.com?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ben@beneficial-intelligence.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">27d inactive &middot; 100 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:ben@beneficial-intelligence.com?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">akil@leadle.in</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">27d inactive &middot; 100 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:akil@leadle.in?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+
+              {{^AT_RISK_USERS}}
+              <p style="margin:0;font-size:12px;color:#a1a1aa;">None this period</p>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">gillybolton.302090@gmail.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">10d inactive &middot; 499 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:gillybolton.302090@gmail.com?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ben@beneficial-intelligence.com</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">27d inactive &middot; 100 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:ben@beneficial-intelligence.com?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">akil@leadle.in</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#854d0e;">27d inactive &middot; 100 credits</p>
+                  </td>
+                  <td width="80" align="right" valign="middle" style="padding:10px 12px;background-color:#fef9c3;">
+                    <a href="mailto:akil@leadle.in?subject=Need%20help%20getting%20started%3F" style="display:inline-block;padding:6px 10px;background-color:#ca8a04;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Re-engage</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Failed Runs Section -->
+          <tr>
+            <td style="padding:28px 32px;border-bottom:1px solid #e4e4e7;">
+              <p style="margin:0 0 16px;font-size:13px;font-weight:600;color:#18181b;">Failed Runs</p>
+              
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">{{EMAIL}}</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#991b1b;">{{ERROR_PREVIEW}}</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <a href="mailto:{{EMAIL}}?subject=I%20noticed%20an%20error" style="display:inline-block;padding:6px 10px;background-color:#dc2626;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Help</a>
+                  </td>
+                </tr>
+              </table>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ravi@fulllist.ai</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#991b1b;">458 consecutive failures - needs immediate investigation</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <a href="mailto:ravi@fulllist.ai?subject=I%20noticed%20an%20error" style="display:inline-block;padding:6px 10px;background-color:#dc2626;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Help</a>
+                  </td>
+                </tr>
+              </table>
+
+              {{^FAILED_RUNS}}
+              <p style="margin:0;font-size:12px;color:#a1a1aa;">None this period</p>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;">
+                <tr>
+                  <td valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <p style="margin:0;font-size:13px;font-weight:500;color:#18181b;">ravi@fulllist.ai</p>
+                    <p style="margin:2px 0 0;font-size:11px;color:#991b1b;">458 consecutive failures - needs immediate investigation</p>
+                  </td>
+                  <td width="60" align="right" valign="middle" style="padding:10px 12px;background-color:#fee2e2;">
+                    <a href="mailto:ravi@fulllist.ai?subject=I%20noticed%20an%20error" style="display:inline-block;padding:6px 10px;background-color:#dc2626;color:#ffffff;text-decoration:none;font-size:11px;font-weight:500;">Help</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" valign="middle" style="padding:24px 32px;background-color:#fafafa;">
+              <p style="margin:0;font-size:11px;color:#a1a1aa;">
+                <a href="https://datagen.dev" style="color:#71717a;text-decoration:none;">datagen.dev</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Main Container -->
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

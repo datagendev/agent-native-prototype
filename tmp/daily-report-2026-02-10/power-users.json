@@ -1,0 +1,42 @@
+[
+  {
+    "email": "jeremy.scott.ross@gmail.com",
+    "credits": 2429,
+    "run_count": 2087,
+    "success_count": 1931,
+    "success_rate": 92.5,
+    "last_run": "2026-02-09T15:05:33.000Z"
+  },
+  {
+    "email": "ravi@fulllist.ai",
+    "credits": 500,
+    "run_count": 458,
+    "success_count": 0,
+    "success_rate": 0.0,
+    "last_run": "2026-02-09T15:00:00.000Z"
+  },
+  {
+    "email": "catecean20@gmail.com",
+    "credits": 954,
+    "run_count": 44,
+    "success_count": 20,
+    "success_rate": 45.5,
+    "last_run": "2026-02-02T09:00:00.000Z"
+  },
+  {
+    "email": "steve@misterbrady.com",
+    "credits": 5000,
+    "run_count": 11,
+    "success_count": 11,
+    "success_rate": 100.0,
+    "last_run": "2026-01-29T11:47:56.000Z"
+  },
+  {
+    "email": "david@automatedemand.com",
+    "credits": 2751,
+    "run_count": 3,
+    "success_count": 3,
+    "success_rate": 100.0,
+    "last_run": "2026-02-04T10:40:11.000Z"
+  }
+]
