@@ -1,0 +1,144 @@
+{
+  "report_date": "2026-02-10",
+  "event_overview_7d": {
+    "page_viewed": 620,
+    "autocapture": 576,
+    "web_vitals": 133,
+    "pageview": 97,
+    "pageleave": 68,
+    "set": 47,
+    "mcp_connect_clicked": 3,
+    "rageclick": 2,
+    "mcp_url_copied": 2,
+    "cta_clicked": 1,
+    "identify": 1
+  },
+  "user_stats": {
+    "total_users": 81,
+    "new_users_7d": 1,
+    "users_with_usage": 25,
+    "avg_credits": 509.3
+  },
+  "mcp_connect_clicks": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 16,
+      "mcp_servers": ["HubSpot", "Supabase", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl"],
+      "referrer": "direct",
+      "first_click": "2026-01-23T12:54:32.952Z",
+      "last_click": "2026-02-06T15:45:13.324Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "referrer": "mcp.datagen.dev",
+      "first_click": "2026-01-28T13:43:51.107Z",
+      "last_click": "2026-01-28T13:48:22.652Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Gmail"],
+      "referrer": "claude.ai",
+      "first_click": "2026-01-27T20:12:29.296Z",
+      "last_click": "2026-02-09T18:28:59.602Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "referrer": "direct",
+      "first_click": "2026-01-30T21:23:30.111Z",
+      "last_click": "2026-01-30T21:27:47.204Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "direct",
+      "first_click": "2026-01-26T17:44:56.895Z",
+      "last_click": "2026-01-26T17:44:56.895Z"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 2429,
+      "run_count": 2087,
+      "success_count": 1931,
+      "success_rate": 92.5,
+      "last_run": "2026-02-09T15:05:33.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 500,
+      "run_count": 458,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-09T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 954,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": 45.5,
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 5000,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 2751,
+      "run_count": 3,
+      "success_count": 3,
+      "success_rate": 100.0,
+      "last_run": "2026-02-04T10:40:11.000Z"
+    }
+  ],
+  "at_risk_users": [
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 500,
+      "created_at": "2026-02-06T02:43:41.114Z",
+      "days_since_signup": 4
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "created_at": "2026-01-30T21:21:48.607Z",
+      "days_since_signup": 10
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "created_at": "2026-01-14T00:20:39.406Z",
+      "days_since_signup": 27
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 5000,
+      "created_at": "2026-01-13T18:06:16.315Z",
+      "days_since_signup": 27
+    },
+    {
+      "email": "akil@leadle.in",
+      "credits": 100,
+      "created_at": "2026-01-13T12:13:36.372Z",
+      "days_since_signup": 27
+    }
+  ],
+  "dau_trend_14d": {
+    "dates": ["2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10"],
+    "values": [21, 16, 10, 15, 6, 15, 5, 10, 7, 15, 10, 3, 3, 9, 4],
+    "total_count": 149,
+    "avg_dau": 9.9
+  }
+}
