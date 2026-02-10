@@ -1,0 +1,174 @@
+{
+  "date": "2026-02-10",
+  "user_overview": {
+    "total_users": 81,
+    "new_users_7d": 1,
+    "users_with_usage": 25,
+    "avg_credits": 509.3
+  },
+  "events_7d": {
+    "page_viewed": 701,
+    "autocapture": 700,
+    "web_vitals": 137,
+    "pageview": 99,
+    "pageleave": 71,
+    "set": 50,
+    "rageclick": 3,
+    "mcp_url_copied": 2,
+    "mcp_connect_clicked": 2,
+    "cta_clicked": 1,
+    "identify": 1
+  },
+  "mcp_connect_activity": [
+    {
+      "email": "david@automatedemand.com",
+      "click_count": 16,
+      "mcp_servers": ["HubSpot", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase"],
+      "referrer": "$direct",
+      "first_click": "2026-01-23T12:54:32.952000Z",
+      "last_click": "2026-02-06T15:45:13.324000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "click_count": 4,
+      "mcp_servers": ["Supabase", "Firecrawl", "Linear"],
+      "referrer": "mcp.datagen.dev",
+      "first_click": "2026-01-28T13:43:51.107000Z",
+      "last_click": "2026-01-28T13:48:22.652000Z"
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Gmail"],
+      "referrer": "$direct",
+      "first_click": "2026-01-27T20:12:29.296000Z",
+      "last_click": "2026-02-09T18:28:59.602000Z"
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "click_count": 3,
+      "mcp_servers": ["Google Calendar", "Gmail"],
+      "referrer": "$direct",
+      "first_click": "2026-01-30T21:23:30.111000Z",
+      "last_click": "2026-01-30T21:27:47.204000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "click_count": 1,
+      "mcp_servers": ["Heyreach"],
+      "referrer": "$direct",
+      "first_click": "2026-01-26T17:44:56.895000Z",
+      "last_click": "2026-01-26T17:44:56.895000Z"
+    }
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 2429,
+      "run_count": 2087,
+      "success_count": 1931,
+      "success_rate": 92.5,
+      "last_run": "2026-02-09T15:05:33.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 500,
+      "run_count": 458,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-09T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 954,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": 45.5,
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 5000,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    },
+    {
+      "email": "david@automatedemand.com",
+      "credits": 2751,
+      "run_count": 3,
+      "success_count": 3,
+      "success_rate": 100.0,
+      "last_run": "2026-02-04T10:40:11.000Z"
+    }
+  ],
+  "no_run_users": [
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 500,
+      "days_since_signup": 4
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "days_since_signup": 10
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "days_since_signup": 27
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 5000,
+      "days_since_signup": 27
+    },
+    {
+      "email": "akil@leadle.in",
+      "credits": 100,
+      "days_since_signup": 28
+    }
+  ],
+  "failed_runs": [
+    {
+      "email": "ravi@fulllist.ai",
+      "run_state": "failed",
+      "created_at": "2026-02-09T15:00:00.000Z",
+      "error_preview": null
+    },
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "run_state": "failed",
+      "created_at": "2026-02-06T21:06:27.000Z",
+      "error_preview": "Modal sandbox execution failed (rc=0). error=Client error '401 Unauthorized' for url 'https://dashboard.starbridge.ai/api/opportunity/v3"
+    }
+  ],
+  "top_pages_30d": [
+    {
+      "page": "/",
+      "views": 441,
+      "unique_visitors": 176
+    },
+    {
+      "page": "/signalgen/agents",
+      "views": 62,
+      "unique_visitors": 5
+    },
+    {
+      "page": "/oauth/callback",
+      "views": 33,
+      "unique_visitors": 15
+    },
+    {
+      "page": "/login/oauth/authorize",
+      "views": 25,
+      "unique_visitors": 5
+    },
+    {
+      "page": "/signalgen/mcp-servers",
+      "views": 21,
+      "unique_visitors": 5
+    }
+  ]
+}
