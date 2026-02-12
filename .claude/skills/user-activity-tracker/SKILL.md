@@ -10,17 +10,19 @@ Combines PostHog behavioral analytics with Neon database records to surface acti
 ## Architecture: Dual-Source Analytics
 
 ```
-PostHog (Behavior)              Neon (State)
+PostHog (Behavior)              Neon (State + Execution)
 ├── Page views                  ├── wasp_user (credits, subscription)
 ├── MCP connect clicks          ├── fastapi_user (account link)
-├── MCP URL copied              ├── fastapi_run (executions)
-├── Rage clicks                 ├── fastapi_code_execution (usage)
-├── Exceptions                  └── fastapi_deployment (custom tools)
-└── Referral sources
+├── MCP URL copied              ├── fastapi_run (workflow executions)
+├── Rage clicks                 ├── fastapi_code_execution (code runs)
+├── Exceptions                  ├── fastapi_deployment (custom tools)
+└── Referral sources            ├── fastapi_tool_executions (every tool call)
+                                └── wasp_agentexecution (agent-level runs)
          │                              │
          └──────────┬───────────────────┘
                     ▼
             Combined User Profile
+            (who, what tools, when, success rate)
                     │
                     ▼
             Actionable Segments
@@ -66,120 +68,110 @@ PostHog (Behavior)              Neon (State)
 
 ## PostHog Queries
 
-### Event Overview (7 days)
+> **IMPORTANT**: `mcp_Posthog_query_run` has been removed from the PostHog MCP server.
+> Use the two-step approach instead:
+> 1. Create an insight with `mcp_Posthog_insight_create_from_query`
+> 2. Fetch results with `mcp_Posthog_insight_query`
+>
+> Alternatively, use existing saved insights by ID with `mcp_Posthog_insight_query`.
+
+### Saved Insights (query by ID)
+
+| Insight ID | Name | Description |
+|------------|------|-------------|
+| 2625022 | Daily active users (DAUs) | 30-day DAU trend via $pageview |
+| 2625023 | Weekly active users (WAUs) | 90-day WAU trend |
+| 2625024 | Retention | Weekly retention (first-time) |
+| 2625025 | Growth accounting | Lifecycle: new, returning, resurrecting, dormant |
+| 2625026 | Referring domain (last 14d) | Traffic sources by referring domain |
+| 2625027 | Pageview funnel, by browser | 3-step pageview funnel |
+| 6126979 | New signups (last 30d) | user_signed_up events by day |
+| 6126980 | MCP connect clicks by template (last 30d) | MCP servers clicked by template |
+| 6876824 | MCP connects by user (excl datagen.dev) | Which external users connected which MCPs |
+
+#### Querying a saved insight
 ```json
 {
-  "tool_alias_name": "mcp_Posthog_query_run",
+  "tool_alias_name": "mcp_Posthog_insight_query",
   "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT event, count() as count FROM events WHERE timestamp > now() - INTERVAL 7 DAY AND person.properties.email NOT LIKE '%@datagen.dev' GROUP BY event ORDER BY count DESC"
+    "insightId": "2625022"
+  }
+}
+```
+
+### Creating new ad-hoc queries
+
+Use `mcp_Posthog_insight_create_from_query` to create a new insight, then `mcp_Posthog_insight_query` to fetch results.
+
+#### Step 1: Create insight
+```json
+{
+  "tool_alias_name": "mcp_Posthog_insight_create_from_query",
+  "parameters": {
+    "data": {
+      "name": "Your Insight Name",
+      "favorited": false,
+      "query": {
+        "kind": "DataVisualizationNode",
+        "source": {
+          "kind": "HogQLQuery",
+          "query": "YOUR HOGQL QUERY HERE"
+        }
       }
     }
   }
 }
 ```
 
-### MCP Connect Clicks (with user details)
+#### Step 2: Fetch results (use the ID returned from step 1)
 ```json
 {
-  "tool_alias_name": "mcp_Posthog_query_run",
+  "tool_alias_name": "mcp_Posthog_insight_query",
   "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT person.properties.email as email, count() as click_count, groupArray(properties.template_name) as mcp_servers, any(properties.$referring_domain) as referrer, min(timestamp) as first_click, max(timestamp) as last_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 30 DAY GROUP BY email ORDER BY click_count DESC"
-      }
-    }
+    "insightId": "INSIGHT_ID_FROM_STEP_1"
   }
 }
 ```
 
-### Daily Unique Users (DAU Trend)
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "InsightVizNode",
-      "source": {
-        "kind": "TrendsQuery",
-        "series": [{"kind": "EventsNode", "event": "$pageview", "custom_name": "DAU", "math": "dau"}],
-        "interval": "day",
-        "dateRange": {"date_from": "-14d", "date_to": "now"},
-        "filterTestAccounts": true
-      }
-    }
-  }
-}
+### Example HogQL Queries (for use in step 1)
+
+**Event Overview (7 days)**
+```sql
+SELECT event, count() as count FROM events WHERE timestamp > now() - INTERVAL 7 DAY AND person.properties.email NOT LIKE '%@datagen.dev' GROUP BY event ORDER BY count DESC
 ```
 
-### Traffic Sources (by referrer)
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT properties.$referring_domain as referrer, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY referrer ORDER BY visits DESC LIMIT 20"
-      }
-    }
-  }
-}
+**MCP Connect Clicks (with user details)**
+```sql
+SELECT person.properties.email as email, count() as click_count, groupArray(properties.template_name) as mcp_servers, any(properties.$referring_domain) as referrer, min(timestamp) as first_click, max(timestamp) as last_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 30 DAY GROUP BY email ORDER BY click_count DESC
 ```
 
-### Traffic by Country
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT properties.$geoip_country_code as country, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY country ORDER BY visits DESC LIMIT 15"
-      }
-    }
-  }
-}
+**Traffic Sources (by referrer)**
+```sql
+SELECT properties.$referring_domain as referrer, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY referrer ORDER BY visits DESC LIMIT 20
 ```
 
-### UX Issues (rage clicks + errors)
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT person.properties.email as email, event, properties.$pathname as page, timestamp FROM events WHERE event IN ('$rageclick', '$exception') AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 7 DAY ORDER BY timestamp DESC LIMIT 20"
-      }
-    }
-  }
-}
+**Traffic by Country**
+```sql
+SELECT properties.$geoip_country_code as country, count() as visits, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY country ORDER BY visits DESC LIMIT 15
 ```
 
-### Page Breakdown
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY page ORDER BY views DESC LIMIT 20"
-      }
-    }
-  }
-}
+**UX Issues (rage clicks + errors)**
+```sql
+SELECT person.properties.email as email, event, properties.$pathname as page, timestamp FROM events WHERE event IN ('$rageclick', '$exception') AND person.properties.email NOT LIKE '%@datagen.dev' AND timestamp > now() - INTERVAL 7 DAY ORDER BY timestamp DESC LIMIT 20
 ```
+
+**Page Breakdown**
+```sql
+SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id) as unique_visitors FROM events WHERE event = '$pageview' AND timestamp > now() - INTERVAL 30 DAY GROUP BY page ORDER BY views DESC LIMIT 20
+```
+
+### Other Available PostHog Tools
+
+- `mcp_Posthog_event_definitions_list` — List all tracked events
+- `mcp_Posthog_properties_list` — List properties for events or persons
+- `mcp_Posthog_insights_get_all` — List all saved insights
+- `mcp_Posthog_entity_search` — Search insights/dashboards/flags by name
+- `mcp_Posthog_list_errors` — List JS errors in the project
 
 ---
 
@@ -261,36 +253,16 @@ PostHog (Behavior)              Neon (State)
 
 ## Deep Dive Queries (per user)
 
+> For per-user queries, create a new insight via `mcp_Posthog_insight_create_from_query`, then fetch with `mcp_Posthog_insight_query`. Replace `{EMAIL}` with the actual user email.
+
 ### Full User Journey (PostHog)
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT event, properties.$pathname as page, timestamp FROM events WHERE person.properties.email = '{EMAIL}' AND timestamp > now() - INTERVAL 30 DAY ORDER BY timestamp DESC LIMIT 100"
-      }
-    }
-  }
-}
+```sql
+SELECT event, properties.$pathname as page, timestamp FROM events WHERE person.properties.email = '{EMAIL}' AND timestamp > now() - INTERVAL 30 DAY ORDER BY timestamp DESC LIMIT 100
 ```
 
 ### MCP Servers User Clicked
-```json
-{
-  "tool_alias_name": "mcp_Posthog_query_run",
-  "parameters": {
-    "query": {
-      "kind": "DataVisualizationNode",
-      "source": {
-        "kind": "HogQLQuery",
-        "query": "SELECT properties.template_name as mcp_server, properties.template_id, count() as clicks, min(timestamp) as first_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email = '{EMAIL}' GROUP BY mcp_server, properties.template_id ORDER BY clicks DESC"
-      }
-    }
-  }
-}
+```sql
+SELECT properties.template_name as mcp_server, properties.template_id, count() as clicks, min(timestamp) as first_click FROM events WHERE event = 'mcp_connect_clicked' AND person.properties.email = '{EMAIL}' GROUP BY mcp_server, properties.template_id ORDER BY clicks DESC
 ```
 
 ### User's Neon Records
@@ -299,6 +271,125 @@ PostHog (Behavior)              Neon (State)
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
     "sql": "SELECT w.*, (SELECT COUNT(*) FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id WHERE f.wasp_user_id = w.id) as run_count, (SELECT COUNT(*) FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id WHERE f.wasp_user_id = w.id AND r.run_state = 'completed') as success_count FROM wasp_user w WHERE w.email = '{EMAIL}'",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+---
+
+## Tool Execution Analytics
+
+### Key Tables
+
+| Table | Purpose | Key Columns |
+|-------|---------|-------------|
+| `fastapi_tool_executions` | Every tool call | user_id, tool_name, tool_type, tool_provider, status, execution_duration_ms, error_message, created_at |
+| `wasp_agentexecution` | Agent-level runs | agent_id, status, entry_prompt, result, duration_ms, started_at |
+
+### Tool Execution Overview (all users)
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT COUNT(*) as total_tool_executions, COUNT(DISTINCT user_id) as unique_users, COUNT(DISTINCT tool_name) as unique_tools, ROUND(AVG(execution_duration_ms)) as avg_duration_ms, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures FROM fastapi_tool_executions",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Top Tools by Usage (with success rate)
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT tool_name, tool_provider, COUNT(*) as total, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures, ROUND(100.0 * COUNT(CASE WHEN status = 'success' THEN 1 END) / COUNT(*), 1) as success_rate, ROUND(AVG(execution_duration_ms)) as avg_ms FROM fastapi_tool_executions GROUP BY tool_name, tool_provider ORDER BY total DESC LIMIT 25",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### User-Level Tool Usage Summary
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT w.email, COUNT(t.id) as total_executions, COUNT(DISTINCT t.tool_name) as unique_tools, COUNT(CASE WHEN t.status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN t.status = 'failed' THEN 1 END) as failures, ROUND(AVG(t.execution_duration_ms)) as avg_duration_ms, MIN(t.created_at) as first_use, MAX(t.created_at) as last_use FROM fastapi_tool_executions t JOIN fastapi_user f ON t.user_id::integer = f.id JOIN wasp_user w ON f.wasp_user_id = w.id GROUP BY w.email ORDER BY total_executions DESC",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Per-User Tool Breakdown (replace {EMAIL})
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT t.tool_name, t.tool_provider, COUNT(*) as uses, COUNT(CASE WHEN t.status = 'success' THEN 1 END) as successes, ROUND(100.0 * COUNT(CASE WHEN t.status = 'success' THEN 1 END) / COUNT(*), 1) as success_rate, MIN(t.created_at)::date as first_use, MAX(t.created_at)::date as last_use FROM fastapi_tool_executions t JOIN fastapi_user f ON t.user_id::integer = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email = '{EMAIL}' GROUP BY t.tool_name, t.tool_provider ORDER BY uses DESC LIMIT 20",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Tool Failure Analysis (most failing tools)
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT tool_name, tool_provider, COUNT(*) as failures, ROUND(AVG(execution_duration_ms)) as avg_ms, COUNT(DISTINCT user_id) as affected_users, MIN(created_at)::date as first_failure, MAX(created_at)::date as last_failure FROM fastapi_tool_executions WHERE status = 'failed' GROUP BY tool_name, tool_provider ORDER BY failures DESC LIMIT 15",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Tool Error Details (replace {TOOL_NAME})
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT error_type, LEFT(error_message, 200) as error_preview, COUNT(*) as occurrences, MAX(created_at) as latest FROM fastapi_tool_executions WHERE tool_name = '{TOOL_NAME}' AND status = 'failed' GROUP BY error_type, error_preview ORDER BY occurrences DESC LIMIT 10",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Agent Execution Overview
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT status, COUNT(*) as total, ROUND(AVG(duration_ms)) as avg_duration_ms, MIN(started_at) as earliest, MAX(completed_at) as latest FROM wasp_agentexecution GROUP BY status ORDER BY total DESC",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### Daily Tool Execution Trend (last 14 days)
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT created_at::date as day, COUNT(*) as total, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures, COUNT(DISTINCT user_id) as unique_users FROM fastapi_tool_executions WHERE created_at > NOW() - INTERVAL '14 days' GROUP BY day ORDER BY day DESC",
+    "databaseName": "datagen",
+    "projectId": "rough-base-02149126"
+  }
+}
+```
+
+### MCP Provider Usage Summary
+```json
+{
+  "tool_alias_name": "mcp_Neon_run_sql",
+  "parameters": {
+    "sql": "SELECT tool_provider, COUNT(*) as total_calls, COUNT(DISTINCT tool_name) as unique_tools, COUNT(DISTINCT user_id) as unique_users, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures, ROUND(AVG(execution_duration_ms)) as avg_ms FROM fastapi_tool_executions WHERE tool_type = 'mcp' GROUP BY tool_provider ORDER BY total_calls DESC",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
