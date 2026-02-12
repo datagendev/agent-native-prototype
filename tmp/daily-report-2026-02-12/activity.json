@@ -1,0 +1,25 @@
+{
+  "date": "2026-02-12",
+  "overview": {
+    "total_users": 82,
+    "new_users_7d": 2,
+    "users_with_usage": 25,
+    "avg_credits": 509.2
+  },
+  "tool_executions": {
+    "total": 13654,
+    "unique_users": 7,
+    "unique_tools": 111,
+    "avg_duration_ms": 2685,
+    "successes": 10889,
+    "failures": 2765,
+    "success_rate": 79.7
+  },
+  "dau_30d": {
+    "avg": 10.1,
+    "peak": 21,
+    "today": 11
+  },
+  "signups_30d": 1,
+  "mcp_connects_30d": 38
+}
