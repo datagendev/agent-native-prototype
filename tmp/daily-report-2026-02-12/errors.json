@@ -1,0 +1,26 @@
+[
+  {
+    "tool": "mcp_Posthog_query_run",
+    "error": "Tool adapter not available",
+    "timestamp": "2026-02-12T00:00:00Z",
+    "query": "Event overview (7 days)"
+  },
+  {
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool adapter not available",
+    "timestamp": "2026-02-12T00:00:00Z",
+    "query": "User overview stats"
+  },
+  {
+    "tool": "mcp_Posthog_query_run",
+    "error": "Tool adapter not available",
+    "timestamp": "2026-02-12T00:00:00Z",
+    "query": "MCP connect clicks"
+  },
+  {
+    "tool": "mcp_Neon_run_sql",
+    "error": "Tool adapter not available",
+    "timestamp": "2026-02-12T00:00:00Z",
+    "query": "Users with run activity"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "report_date": "2026-02-12",
+  "status": "partial",
+  "data_sources": {
+    "posthog": "unavailable",
+    "neon": "unavailable"
+  },
+  "email_delivery": {
+    "status": "success",
+    "message_id": "19c522943f25d871",
+    "recipient": "yusheng.kuo@datagen.dev",
+    "timestamp": "2026-02-12T00:00:00Z"
+  },
+  "notes": "MCP adapters for PostHog and Neon were not available during report generation. Report generated with fallback messaging and sent via email."
+}
