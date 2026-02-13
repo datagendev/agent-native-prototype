@@ -1,0 +1,9 @@
+{
+  "errors": [
+    "accounts: GET /accounts failed after 3 retries: 401 Client Error: Unauthorized for url: https://api.instantly.ai/api/v2/accounts?limit=100",
+    "account_analytics: GET /accounts/analytics/daily failed after 3 retries: 401 Client Error: Unauthorized for url: https://api.instantly.ai/api/v2/accounts/analytics/daily?start_date=2026-01-14&end_date=2026-02-13",
+    "campaign_analytics: GET /campaigns/analytics failed after 3 retries: 401 Client Error: Unauthorized for url: https://api.instantly.ai/api/v2/campaigns/analytics?exclude_total_leads_count=true",
+    "replies: GET /emails failed after 3 retries: 401 Client Error: Unauthorized for url: https://api.instantly.ai/api/v2/emails?email_type=received&mode=emode_focused&limit=100&preview_only=true"
+  ],
+  "timestamp": "2026-02-13T20:59:04.087626"
+}
