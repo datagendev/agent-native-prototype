@@ -1,0 +1,29 @@
+{
+  "signups_30d": {
+    "total": 1,
+    "date": "2026-01-30"
+  },
+  "mcp_clicks_30d": {
+    "total_clicks": 38,
+    "top_mcps": [
+      {"name": "Gmail", "clicks": 10},
+      {"name": "Linear", "clicks": 5},
+      {"name": "Google Calendar", "clicks": 5},
+      {"name": "Notion", "clicks": 3},
+      {"name": "Supabase", "clicks": 3}
+    ]
+  },
+  "mcp_users": [
+    {"email": "david@automatedemand.com", "mcp": "Notion", "clicks": 3},
+    {"email": "david@automatedemand.com", "mcp": "Gmail", "clicks": 3},
+    {"email": "jeremy.scott.ross@gmail.com", "mcp": "Gmail", "clicks": 3},
+    {"email": "david@automatedemand.com", "mcp": "Supabase", "clicks": 2},
+    {"email": "andriyvovchak15@gmail.com", "mcp": "Linear", "clicks": 2},
+    {"email": "gillybolton.302090@gmail.com", "mcp": "Google Calendar", "clicks": 2}
+  ],
+  "dau_30d": {
+    "avg": 10,
+    "recent_7d_avg": 9,
+    "today": 3
+  }
+}
