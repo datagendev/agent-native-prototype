@@ -12,42 +12,55 @@
 
 ## Process
 
-1. Read `/tmp/heyreach-summary-{date}/digest.json`
-2. Analyze conversation content across all conversations with replies
-3. Write analysis to `/tmp/heyreach-summary-{date}/analysis.md`
+1. **Determine today's date** from the output directory name (`/tmp/heyreach-summary-{YYYY-MM-DD}/`). All "days ago" calculations are relative to this date.
+2. Read `/tmp/heyreach-summary-{date}/digest.json`
+3. Analyze conversation content across all conversations with replies
+4. Write analysis to `/tmp/heyreach-summary-{date}/analysis.md`
+
+## Recency Rules
+
+**Focus on the reporting window (last 14 days).** Old conversation history is context, not the story.
+
+- **Weight recent messages heavily.** A reply from 2 days ago matters more than 30 messages exchanged 3 months ago.
+- **Judge engagement by the reporting window**, not lifetime totals. Someone with 2 replies this week is more relevant than someone with 40 replies all from last quarter.
+- **For themes and signals**, only cite messages from within the reporting window. Use older messages only to explain context (e.g., "has been engaged since December, but this week specifically mentioned...").
+- **For ghost patterns**, a ghost is someone who was active in a *prior* window but silent in *this* window despite having an open thread. Don't flag someone as a ghost if their last activity was 3+ months ago with no recent outreach.
+- **For Today's Contact List**, only include people with activity in the last 30 days. Conversations that went cold months ago need a different reactivation strategy, not a daily nudge.
 
 ## Analysis Framework
 
 Your analysis should cover these sections:
 
 ### Conversation Themes
-- Group conversations by topic/theme
-- What subjects come up repeatedly?
-- Which value props or features generate the most interest?
+- Group conversations by topic/theme based on **messages exchanged in the reporting window**
+- What subjects come up repeatedly in recent exchanges?
+- Which value props or features generate the most interest right now?
 
 ### Noteworthy Signals
-- Who showed the strongest buying signals?
+- Who showed the strongest buying signals **in this window**?
 - Any explicit meeting requests or demo interest?
-- Conversations with high engagement (3+ replies)
-- Positive sentiment or enthusiasm indicators
+- Conversations with high engagement (3+ replies **in this window**)
+- Positive sentiment or enthusiasm indicators from recent messages
 
 ### Objections & Patterns
 - Common reasons for not engaging
 - Pushback themes (timing, budget, already have solution, etc.)
-- Ghost patterns (replied once then went silent)
+- Ghost patterns: people who were active recently but went silent in this window
 
 ### Today's Contact List
 - **Who to message today**: A prioritized list of 3-7 people to contact right now
+- **Today = the date from the output directory.** User is in **Austin, TX (CST/CDT)**. Factor in timezone when judging "days since last message."
+- **Only include people with activity in the last 30 days**
 - For each person, provide:
   - **Name & company**
-  - **Last message date** and who sent it (you or them)
+  - **Last message date** and **days since** (e.g., "Feb 9 -- 4 days ago") and who sent it (you or them)
   - **Why today**: What makes today the right time (e.g., promised follow-up window expired, they went quiet after high engagement, time-sensitive opportunity, meeting not yet booked)
-  - **Suggested message**: A ready-to-send 2-3 sentence message tailored to where the conversation left off
-- Prioritize: (1) people who replied but you haven't followed up, (2) promised follow-ups whose window is now, (3) high-engagement ghosts ripe for reactivation, (4) meeting logistics that need closing
+  - **Suggested message**: A ready-to-send 2-3 sentence message tailored to where the **recent** conversation left off (not rehashing old threads)
+- Prioritize: (1) people who replied but you haven't followed up, (2) promised follow-ups whose window is now, (3) recent high-engagement ghosts, (4) meeting logistics that need closing
 
 ### Recommended Actions
-- **Priority follow-ups**: Name specific people to follow up with and why
-- **Messaging adjustments**: What's resonating vs. what's falling flat
+- **Priority follow-ups**: Name specific people to follow up with and why, based on recent activity
+- **Messaging adjustments**: What's resonating vs. what's falling flat in recent exchanges
 - **Campaign suggestions**: Which campaigns to iterate on, pause, or double down on
 
 ## Output Format
