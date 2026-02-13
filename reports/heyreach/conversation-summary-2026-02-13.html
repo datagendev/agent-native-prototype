@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyReach Conversation Summary</title>
+  <style>
+    /* DataGen Brand Colors */
+    :root {
+      --primary: #005047;
+      --secondary: #00795e;
+      --success: #219653;
+      --danger: #D34053;
+      --warning: #FFA70B;
+      --boxdark: #24303F;
+      --boxdark-2: #1A222C;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header .date {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .summary-card {
+      padding: 24px 16px;
+      text-align: center;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .summary-card:last-child {
+      border-right: none;
+    }
+
+    .summary-card .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .summary-card .label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section {
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .section-icon.action { background: rgba(211, 64, 83, 0.1); color: var(--danger); }
+    .section-icon.active { background: rgba(33, 150, 83, 0.1); color: var(--success); }
+    .section-icon.warning { background: rgba(255, 167, 11, 0.1); color: var(--warning); }
+    .section-icon.info { background: rgba(0, 80, 71, 0.1); color: var(--primary); }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    tr:hover {
+      background: var(--gray-50);
+    }
+
+    .email-cell {
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-action {
+      background: rgba(211, 64, 83, 0.1);
+      color: var(--danger);
+    }
+
+    .badge-success {
+      background: rgba(33, 150, 83, 0.1);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background: rgba(255, 167, 11, 0.1);
+      color: #b45309;
+    }
+
+    .badge-primary {
+      background: rgba(0, 80, 71, 0.1);
+      color: var(--primary);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 32px;
+      color: var(--gray-500);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 24px 40px;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-card {
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>HeyReach Conversation Summary</h1>
+      <p class="date">2026-01-30 to 2026-02-13 | DataGen Analytics</p>
+    </div>
+
+    <!-- Content sections go here -->
+    
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="number">20</div>
+        <div class="label">Active Conversations</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">275</div>
+        <div class="label">Replies Received</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">9</div>
+        <div class="label">Meeting Signals</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">0</div>
+        <div class="label">Active Campaigns</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon action">!</div>
+        <div>
+          <h2>Noteworthy Conversations</h2>
+          <p class="section-subtitle">Meeting signals and high engagement</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Person</th><th>Campaign</th><th>Signals</th></tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/gtm-engineer-mathew" style="color: var(--primary); text-decoration: none;">Mathew 🤔</a><br><span style="font-size: 12px; color: var(--gray-500);">GTM Engineer | Clay Expert | I build the lead pipelines that drive revenue | RevOps | AI Automation | n8n | HubSpot</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">40 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/jacob-dietle" style="color: var(--primary); text-decoration: none;">Jacob Dietle</a><br><span style="font-size: 12px; color: var(--gray-500);">🟠 Context Operating Systems for GTM | Amplify Your Taste &amp; Scale Expertise</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">9 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/davidkwint" style="color: var(--primary); text-decoration: none;">David Kwint</a><br><span style="font-size: 12px; color: var(--gray-500);">Agentic GTM Systems for B2B companies with $1-5M+ ARR - building predictable pipeline without adding headcount | Clay Partner</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">41 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/robin-schmidt-mannheim" style="color: var(--primary); text-decoration: none;">Robin Schmidt</a><br><span style="font-size: 12px; color: var(--gray-500);">B2B-Termine, die aus ‘interessant’ ein ‘Woher wissen Sie das?’ machen.</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">31 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/adamandrewjeski" style="color: var(--primary); text-decoration: none;">Adam Andrewjeski</a><br><span style="font-size: 12px; color: var(--gray-500);">Find Prospects Where They Answer w/ Niche Multi-Channel Outreach 🚀 Outbound Architect @ Stellar | Clay Partner | Bootcamp Mentor</span></td>
+          <td></td>
+          <td><span class="badge badge-primary">3 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/andrewbruceosborne" style="color: var(--primary); text-decoration: none;">Andrew Osborne</a><br><span style="font-size: 12px; color: var(--gray-500);">AI GTM</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">20 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/misterbrady" style="color: var(--primary); text-decoration: none;">Steven Brady</a><br><span style="font-size: 12px; color: var(--gray-500);">Sales needs more “AI” (Authentic Interactions) | Taking your MRR from WTF -​&gt; LFG</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">32 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/ACoAABgxzYABeP14AZ-S3zAHJygqetm2ei3KM4c" style="color: var(--primary); text-decoration: none;">Shane Firek</a><br><span style="font-size: 12px; color: var(--gray-500);">Growth &amp; GTM Systems Engineer</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">45 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/tanay-mishra-ai-automation" style="color: var(--primary); text-decoration: none;">Tanay 🥾</a><br><span style="font-size: 12px; color: var(--gray-500);">Coach @ Clay Bootcamp | GTM Engineer | Clay Operator | AI &amp; Business Automation</span></td>
+          <td></td>
+          <td><span class="badge badge-primary">5 replies</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/yourvibeguy" style="color: var(--primary); text-decoration: none;">Lohit 🔥</a><br><span style="font-size: 12px; color: var(--gray-500);">Co-founder @Twoclickit | GTM Engineer, I talk about top Ai Outbound Systems using tools like Clay, n8n, Cursor, Claude Code.</span></td>
+          <td></td>
+          <td><span class="badge badge-success">Meeting Signal</span><span class="badge badge-primary">3 replies</span></td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">i</div>
+        <div>
+          <h2>AI Analysis</h2>
+          <p class="section-subtitle">Themes, patterns, and recommendations</p>
+        </div>
+      </div>
+      <h2 style='margin-top: 20px; margin-bottom: 10px;'>Conversation Themes</h2><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>1. Agent-Native GTM Infrastructure (7 conversations)</h3><p style='color: var(--gray-600); margin-bottom: 8px;'>The dominant theme across conversations is building AI agent infrastructure for GTM workflows. Multiple prospects are actively exploring how Claude Code, MCP tools, and agent architectures replace or extend Clay-based workflows.</p><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Mathew (GTM Wizard)</strong> -- Deep discussion on turning service provider expertise into "context repos" with Claude Code as the agent OS. Explored multi-channel sequencing with agents instead of siloed tools, and the concept of agent-as-a-service for GTM engineers.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint (AutomateDemand)</strong> -- Actively building outreach tables for clients (e.g., Heycare). Discussed replacing Clay column-by-column API configuration with a Claude Code agent that encapsulates enrichment logic, using Clay only as a parallel runner.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Andrew Osborne (Understory)</strong> -- Interested in automating Fireflies transcript processing via deployed agents. Booked a call and is already seeing ROI from Claude Code but struggles with MCP context overload.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Shane Firek</strong> -- Has real infrastructure now and is considering using DataGen to deploy his audit agent to run daily.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Tanay (Clay Bootcamp)</strong> -- Frequently asked by his cohort how to trigger Claude Code remotely. Sees DataGen as a potential answer to the trigger.dev/modal complexity.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Josh (Slingshot GTM)</strong> -- 95% of his work is done in Claude Code, using it to iteratively build Claygents. Interesting use pattern where Claude Code creates Clay automation rather than replacing it.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Jordan Crawford (Blueprint)</strong> -- Question posed about why Claygent prompts need optimization vs. using Claude Code agent natively in Clay.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>2. MCP and Tool Integration (4 conversations)</h3><p style='color: var(--gray-600); margin-bottom: 8px;'>Several conversations revolve around MCP server availability, integration challenges, and tool connectivity.</p><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Jacob Dietle</strong> -- Extended collaboration around MCP, DataGen SDK, and context-as-a-service. Gave extensive product feedback, including suggestions around demo video and evaluation. Actively using the product.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Steven Brady</strong> -- Exploring Trigify MCP integration with Claude Code. Mentioned the founder is likely launching MCP support.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Daniel (Ocean.io)</strong> -- Reached out to include Yu-Sheng in Ocean.io's MCP server beta.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>George Rekouts (DiscoLike)</strong> -- Two conversations about testing DiscoLike's MCP. Confirmed it works in Claude Code but untested in other clients.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>3. Clay Ecosystem Commoditization (3 conversations)</h3><p style='color: var(--gray-600); margin-bottom: 8px;'>A recurring question: is the Clay agency market becoming commoditized?</p><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Robin Schmidt (BuyingMachine)</strong> -- Confirmed "there is still a market" for Clay-based GTM services. Discussion about bottlenecks and scaling bespoke work.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Adam Andrewjeski (Clay Partner)</strong> -- Asked directly about commoditization and differentiation strategies.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint</strong> -- Implicitly addressed this through his interest in moving beyond Clay's column-by-column approach to agent-driven enrichment.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>4. Referrals and Network Effects (3 conversations)</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Leo Prodz (The Deal Lab)</strong> -- Came via referral from Jeremy Ross, interested in the Clay MCP that Jeremy was building.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Lohit (TwoClickIt)</strong> -- Reconnecting, wants to schedule a follow-up call.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint</strong> -- Introduced Frederik from Automindz Solutions who is switching from Clay + n8n to Claude Code + trigger.dev.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>5. Recruiter/Spam (2 conversations)</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Sumera Patan (NVIDIA)</strong> -- Recruiting outreach for hardware engineering roles.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>HAIZHEN LU</strong> -- China talent program invitation. Not relevant.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Preetirekha J. (TCS)</strong> -- IT recruitment outreach. Not relevant.</li></ul><br><p style='color: var(--gray-600); margin-bottom: 8px;'>---</p><br><h2 style='margin-top: 20px; margin-bottom: 10px;'>Noteworthy Signals</h2><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Hot Leads -- Meeting Booked or Requested</h3><br><p style='color: var(--gray-600); margin-bottom: 8px;'>1. **Mathew (GTM Wizard)** -- Shared his Calendly link and booked a meeting. Extremely engaged (40 replies, 80 total messages). Strong resonance with the &quot;repo as service&quot; and agent-native sequencing concepts. Said he would prepare ideas for the meeting.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>2. **David Kwint (AutomateDemand)** -- Most active conversation (99 messages, 41 replies). Has a live client use case (Heycare) and is actively working through enrichment agent development. Connected us with Frederik at Automindz Solutions who is moving to Claude Code + trigger.dev. Booked multiple calls.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>3. **Lohit (TwoClickIt)** -- Explicitly asked to reconnect. Said he would book for next week.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>4. **Andrew Osborne (Understory)** -- Booked and completed a call. Provided feedback that MCP context overload is the main challenge. Is seeing ROI and plans to give agent deployment a shot.</p><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>High Engagement (3+ replies in period)</h3><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint</strong> -- 41 total replies, active across the full 2-week window.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Mathew</strong> -- 40 total replies, extremely deep product and strategy discussions.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Andrew Osborne</strong> -- 20 total replies, consistent engagement.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Shane Firek</strong> -- 45 total replies historically, re-engaged in this period about DataGen deployment.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Steven Brady</strong> -- 32 total replies historically, engaged on Trigify MCP topic.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Product Interest Signals</h3><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Tanay</strong> said "this is important for me as well, I always get asked how do you trigger Claude Code remotely, maybe this is the answer instead of modal ai or trigger dev." This is a strong signal that remote agent deployment is a pain point for the Claude Code educator community.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint</strong> said "That would be incredible honestly" when discussing a Claude Code agent that encapsulates enrichment logic with Clay as parallel runner.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Jacob Dietle</strong> provided 797 characters of detailed product feedback including suggestions for evaluation, demo video, and API documentation.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Shane Firek</strong> said "I should probably look into utilizing Datagen now that I actually have some real infra."</li></ul><br><p style='color: var(--gray-600); margin-bottom: 8px;'>---</p><br><h2 style='margin-top: 20px; margin-bottom: 10px;'>Objections and Patterns</h2><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Tool Reliability Concerns</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'>David Kwint's conversation revealed that the `linkedin_person_search` tool is seeing increasing failure rates. This was proactively communicated but represents a real reliability concern that could impact trust.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Complexity and Setup Friction</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Tanay</strong> mentioned having to do "complex agent sdk setups" and "config my own tools" as pain points. This is exactly what DataGen solves but indicates the message may not have fully landed before the product conversation.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Andrew Osborne</strong> noted "sometimes I have issues with MCPs pulling way too much information into the context, which can mess things up." This is a product issue rather than objection, but needs addressing.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Time Constraints</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Tanay</strong> is "super slammed for 2 weeks leading a cohort on Claude code" -- timing, not disinterest.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>David Kwint</strong> is "packed until Friday" -- high demand from his own clients.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Imran Izham</strong> said he would "look through all this and get back to you as soon as I can" -- polite deferral, may need a nudge.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Ghost Patterns</h3><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Robin Schmidt</strong> -- Replied to the commoditization question but went quiet after the follow-up about scaling bottlenecks.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Adam Andrewjeski</strong> -- No reply to the commoditization question in the last 2 weeks.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Steven Brady</strong> -- No reply to the follow-up about deploying the HeyReach agent.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Josh (Slingshot GTM)</strong> -- Conversation ended with an unanswered question about Claygent vs. Claude Code roles.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Jordan Crawford</strong> -- No reply to the question about Claygent optimization vs. native Claude Code agent.</li></ul><br><p style='color: var(--gray-600); margin-bottom: 8px;'>---</p><br><h2 style='margin-top: 20px; margin-bottom: 10px;'>Recommended Actions</h2><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Priority Follow-Ups</h3><br><p style='color: var(--gray-600); margin-bottom: 8px;'>1. **Mathew (GTM Wizard)** -- Meeting is booked. Prepare a concrete demo showing how a service provider can package expertise into a Claude Code context repo with agents and skills. He is primed for this exact pitch.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>2. **David Kwint (AutomateDemand)** -- Continue the Heycare enrichment agent buildout. Follow up on the Frederik/Automindz introduction to learn about their trigger.dev usage. Address the linkedin_person_search reliability issue with a concrete timeline or alternative.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>3. **Tanay (Clay Bootcamp)** -- Follow up in ~1 week after his cohort ends. Position DataGen as the answer to &quot;how do you trigger Claude Code remotely&quot; -- he said this himself. He could be a powerful distribution channel given his educator role.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>4. **Lohit (TwoClickIt)** -- He said he would book next week. If no booking by Feb 17, send a gentle reminder.</p><br><p style='color: var(--gray-600); margin-bottom: 8px;'>5. **Imran Izham (oneaway)** -- Has been quiet since Jan 30. Send a lightweight follow-up with a specific hook (e.g., a relevant use case or new feature) rather than a generic check-in.</p><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Messaging Adjustments</h3><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>"Remote agent deployment" is resonating strongly.</strong> Tanay, Shane, and Andrew all independently expressed interest in running Claude Code agents remotely without dealing with infrastructure complexity. Lead with this in outreach.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>"Clay as parallel runner, Claude Code as brain" is a powerful frame.</strong> David's "that would be incredible honestly" reaction validates this positioning. Use this framing for Clay agency prospects.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>The commoditization question gets responses but no depth.</strong> Robin and Adam both engaged initially but did not continue. Consider making the question more specific or following up with a concrete example of differentiation.</li></ul><br><h3 style='margin-top: 16px; margin-bottom: 8px; font-size: 15px; color: var(--gray-700);'>Campaign Suggestions</h3><br><ul style='margin: 8px 0; padding-left: 20px;'><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Create a follow-up sequence for ghost replies.</strong> Robin, Adam, Steven, Josh, and Jordan all showed initial interest but went quiet. A value-add follow-up (share a relevant post, case study, or feature update) would be more effective than a generic bump.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Recruiter filtering.</strong> Sumera (NVIDIA), HAIZHEN LU, and Preetirekha (TCS) are all recruiter outreach. Consider filtering these out earlier or having a standard redirect response.</li><li style='margin-bottom: 6px; color: var(--gray-600);'><strong>Referral tracking.</strong> Leo came via Jeremy Ross's referral, and David introduced Frederik at Automindz. Document these referral chains -- they indicate which relationships are generating organic growth.</li></ul>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon active">+</div>
+        <div>
+          <h2>All Conversations</h2>
+          <p class="section-subtitle">Conversations with replies in this period</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Person</th>
+              <th>Campaign</th>
+              <th style="text-align: center;">Messages</th>
+              <th style="text-align: center;">Replies</th>
+              <th>Last Active</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/gtm-engineer-mathew" style="color: var(--primary); text-decoration: none;">Mathew 🤔</a><br><span style="font-size: 12px; color: var(--gray-500);">GTM Engineer | Clay Expert | I build the lead pipe</span></td>
+          <td></td>
+          <td style="text-align: center;">80</td>
+          <td style="text-align: center;">40</td>
+          <td>2026-02-13</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/jacob-dietle" style="color: var(--primary); text-decoration: none;">Jacob Dietle</a><br><span style="font-size: 12px; color: var(--gray-500);">🟠 Context Operating Systems for GTM | Amplify Your</span></td>
+          <td></td>
+          <td style="text-align: center;">29</td>
+          <td style="text-align: center;">9</td>
+          <td>2026-02-13</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/davidkwint" style="color: var(--primary); text-decoration: none;">David Kwint</a><br><span style="font-size: 12px; color: var(--gray-500);">Agentic GTM Systems for B2B companies with $1-5M+ </span></td>
+          <td></td>
+          <td style="text-align: center;">99</td>
+          <td style="text-align: center;">41</td>
+          <td>2026-02-12</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/sumera-patan-a731152" style="color: var(--primary); text-decoration: none;">Sumera Patan</a><br><span style="font-size: 12px; color: var(--gray-500);">Director @ NVIDIA | System Level Product Developme</span></td>
+          <td></td>
+          <td style="text-align: center;">1</td>
+          <td style="text-align: center;">1</td>
+          <td>2026-02-12</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/ACoAAD7OgO8BjUALvT_UVn0_bCbpmgF5nfOK9F8" style="color: var(--primary); text-decoration: none;">HAIZHEN LU</a><br><span style="font-size: 12px; color: var(--gray-500);">人才战略总监</span></td>
+          <td></td>
+          <td style="text-align: center;">1</td>
+          <td style="text-align: center;">1</td>
+          <td>2026-02-12</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/leoprodz" style="color: var(--primary); text-decoration: none;">Leo Prodz</a><br><span style="font-size: 12px; color: var(--gray-500);">Looking to increase your sales and consistently ge</span></td>
+          <td></td>
+          <td style="text-align: center;">5</td>
+          <td style="text-align: center;">2</td>
+          <td>2026-02-11</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/preetirekha-j-b14113195" style="color: var(--primary); text-decoration: none;">Preetirekha J.</a><br><span style="font-size: 12px; color: var(--gray-500);">Global Talent Acquisition - North America @ Tata C</span></td>
+          <td></td>
+          <td style="text-align: center;">1</td>
+          <td style="text-align: center;">1</td>
+          <td>2026-02-10</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/robin-schmidt-mannheim" style="color: var(--primary); text-decoration: none;">Robin Schmidt</a><br><span style="font-size: 12px; color: var(--gray-500);">B2B-Termine, die aus ‘interessant’ ein ‘Woher wiss</span></td>
+          <td></td>
+          <td style="text-align: center;">72</td>
+          <td style="text-align: center;">31</td>
+          <td>2026-02-10</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/adamandrewjeski" style="color: var(--primary); text-decoration: none;">Adam Andrewjeski</a><br><span style="font-size: 12px; color: var(--gray-500);">Find Prospects Where They Answer w/ Niche Multi-Ch</span></td>
+          <td></td>
+          <td style="text-align: center;">12</td>
+          <td style="text-align: center;">3</td>
+          <td>2026-02-10</td>
+          <td><span class="badge badge-primary">Engaged</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/andrewbruceosborne" style="color: var(--primary); text-decoration: none;">Andrew Osborne</a><br><span style="font-size: 12px; color: var(--gray-500);">AI GTM</span></td>
+          <td></td>
+          <td style="text-align: center;">41</td>
+          <td style="text-align: center;">20</td>
+          <td>2026-02-10</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/misterbrady" style="color: var(--primary); text-decoration: none;">Steven Brady</a><br><span style="font-size: 12px; color: var(--gray-500);">Sales needs more “AI” (Authentic Interactions) | T</span></td>
+          <td></td>
+          <td style="text-align: center;">77</td>
+          <td style="text-align: center;">32</td>
+          <td>2026-02-09</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/ACoAABgxzYABeP14AZ-S3zAHJygqetm2ei3KM4c" style="color: var(--primary); text-decoration: none;">Shane Firek</a><br><span style="font-size: 12px; color: var(--gray-500);">Growth &amp; GTM Systems Engineer</span></td>
+          <td></td>
+          <td style="text-align: center;">83</td>
+          <td style="text-align: center;">45</td>
+          <td>2026-02-09</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/tanay-mishra-ai-automation" style="color: var(--primary); text-decoration: none;">Tanay 🥾</a><br><span style="font-size: 12px; color: var(--gray-500);">Coach @ Clay Bootcamp | GTM Engineer | Clay Operat</span></td>
+          <td></td>
+          <td style="text-align: center;">12</td>
+          <td style="text-align: center;">5</td>
+          <td>2026-02-06</td>
+          <td><span class="badge badge-primary">Engaged</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/danieldoesgtm" style="color: var(--primary); text-decoration: none;">Daniel 🐨</a><br><span style="font-size: 12px; color: var(--gray-500);">Head (shoulders, knees &amp; toes) of Marketing @ </span></td>
+          <td></td>
+          <td style="text-align: center;">4</td>
+          <td style="text-align: center;">2</td>
+          <td>2026-02-06</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/yourvibeguy" style="color: var(--primary); text-decoration: none;">Lohit 🔥</a><br><span style="font-size: 12px; color: var(--gray-500);">Co-founder @Twoclickit | GTM Engineer, I talk abou</span></td>
+          <td></td>
+          <td style="text-align: center;">5</td>
+          <td style="text-align: center;">3</td>
+          <td>2026-02-06</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/grekouts" style="color: var(--primary); text-decoration: none;">George Rekouts</a><br><span style="font-size: 12px; color: var(--gray-500);">CEO Discolike.com | Search Target Accounts with En</span></td>
+          <td></td>
+          <td style="text-align: center;">2</td>
+          <td style="text-align: center;">1</td>
+          <td>2026-02-05</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/ACoAAA3A04UBUMI04aRayQdIb5VP9euEihZUyuo" style="color: var(--primary); text-decoration: none;">Josh 🕵🏻</a><br><span style="font-size: 12px; color: var(--gray-500);">I give you a list of prospects in pain + messaging</span></td>
+          <td></td>
+          <td style="text-align: center;">5</td>
+          <td style="text-align: center;">2</td>
+          <td>2026-02-05</td>
+          <td><span class="badge badge-warning">Replied</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/jordancrawford" style="color: var(--primary); text-decoration: none;">Jordan Crawford</a><br><span style="font-size: 12px; color: var(--gray-500);">Teach + Deploy GTM teams Claude Code</span></td>
+          <td></td>
+          <td style="text-align: center;">65</td>
+          <td style="text-align: center;">29</td>
+          <td>2026-02-03</td>
+          <td><span class="badge badge-primary">Engaged</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/grekouts" style="color: var(--primary); text-decoration: none;">George Rekouts</a><br><span style="font-size: 12px; color: var(--gray-500);">CEO Discolike.com | Search Target Accounts with En</span></td>
+          <td></td>
+          <td style="text-align: center;">7</td>
+          <td style="text-align: center;">3</td>
+          <td>2026-01-30</td>
+          <td><span class="badge badge-primary">Engaged</span></td>
+        </tr>
+        <tr>
+          <td class="email-cell"><a href="https://www.linkedin.com/in/imran-izham-01b4742ab" style="color: var(--primary); text-decoration: none;">Imran Izham</a><br><span style="font-size: 12px; color: var(--gray-500);">Head of GTM Strategy @ &lt;​oneaway​&gt; | Top 5 C</span></td>
+          <td></td>
+          <td style="text-align: center;">9</td>
+          <td style="text-align: center;">4</td>
+          <td>2026-01-30</td>
+          <td><span class="badge badge-success">Hot</span></td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Generated by <a href="https://datagen.dev">DataGen</a></p>
+      <p style="margin-top: 8px;"><a href="https://datagen.dev/signalgen/agents">View Dashboard</a></p>
+    </div>
+  </div>
+</body>
+</html>
