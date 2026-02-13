@@ -1,0 +1,110 @@
+{
+  "overview": {
+    "total_users": 82,
+    "new_users_7d": 1,
+    "users_with_usage": 25,
+    "avg_credits": 509.2
+  },
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 2429,
+      "run_count": 9056,
+      "success_count": 6490,
+      "success_rate": 71.7,
+      "last_run": "2026-02-11T20:57:43.000Z"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 500,
+      "run_count": 467,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-12T15:00:00.000Z"
+    },
+    {
+      "email": "catecean20@gmail.com",
+      "credits": 954,
+      "run_count": 44,
+      "success_count": 20,
+      "success_rate": 45.5,
+      "last_run": "2026-02-02T09:00:00.000Z"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 5000,
+      "run_count": 16,
+      "success_count": 15,
+      "success_rate": 93.8,
+      "last_run": "2026-02-12T19:13:49.000Z"
+    },
+    {
+      "email": "steve@misterbrady.com",
+      "credits": 5000,
+      "run_count": 11,
+      "success_count": 11,
+      "success_rate": 100.0,
+      "last_run": "2026-01-29T11:47:56.000Z"
+    }
+  ],
+  "churned_users": [
+    {
+      "email": "master@emailmaster.biz",
+      "credits": 500,
+      "created_at": "2026-02-10T23:13:37.113Z",
+      "days_since_signup": 2
+    },
+    {
+      "email": "kuoyusheng@gmail.com",
+      "credits": 500,
+      "created_at": "2026-02-06T02:43:41.114Z",
+      "days_since_signup": 7
+    },
+    {
+      "email": "gillybolton.302090@gmail.com",
+      "credits": 499,
+      "created_at": "2026-01-30T21:21:48.607Z",
+      "days_since_signup": 13
+    },
+    {
+      "email": "ben@beneficial-intelligence.com",
+      "credits": 100,
+      "created_at": "2026-01-14T00:20:39.406Z",
+      "days_since_signup": 30
+    }
+  ],
+  "top_tools": [
+    {
+      "tool_name": "extract_structured_output",
+      "tool_provider": "default",
+      "total": 6577,
+      "successes": 5742,
+      "failures": 835,
+      "success_rate": 87.3
+    },
+    {
+      "tool_name": "chatgpt_webresearch",
+      "tool_provider": "default",
+      "total": 2429,
+      "successes": 1455,
+      "failures": 974,
+      "success_rate": 59.9
+    },
+    {
+      "tool_name": "mcp_Neon_run_sql",
+      "tool_provider": "Neon",
+      "total": 1577,
+      "successes": 1390,
+      "failures": 187,
+      "success_rate": 88.1
+    },
+    {
+      "tool_name": "get_linkedin_person_data",
+      "tool_provider": "default",
+      "total": 853,
+      "successes": 757,
+      "failures": 96,
+      "success_rate": 88.7
+    }
+  ]
+}

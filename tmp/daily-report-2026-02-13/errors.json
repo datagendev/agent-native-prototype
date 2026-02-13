@@ -1,0 +1,18 @@
+{
+  "errors": [
+    {
+      "tool": "mcp_Neon_run_sql",
+      "query": "fastapi_tool_executions overview query",
+      "error": "MCP tool call 'run_sql' timed out after 25 seconds waiting for server response",
+      "timestamp": "2026-02-13T10:00:00Z",
+      "impact": "Unable to fetch detailed tool execution statistics; used fallback data"
+    },
+    {
+      "tool": "mcp_Neon_run_sql",
+      "query": "High-intent prospect cross-reference",
+      "error": "MCP tool call 'run_sql' timed out after 25 seconds waiting for server response",
+      "timestamp": "2026-02-13T10:05:00Z",
+      "impact": "Unable to verify MCP clicks vs usage; using existing power_users and churned_users data"
+    }
+  ]
+}
