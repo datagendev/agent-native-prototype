@@ -1,0 +1,246 @@
+{
+  "generated_at": "2026-02-14T16:18:30.047402",
+  "period_days": 30,
+  "totals": {
+    "campaigns": 8,
+    "total_sent": 17103,
+    "total_replied": 68,
+    "total_opportunities": 22,
+    "overall_reply_rate": 0.4
+  },
+  "campaigns": [
+    {
+      "campaign_id": "c150620a-0561-41d9-95c8-e9c97473f9d6",
+      "campaign_name": "US SaaS - 18m funding",
+      "status": 2,
+      "sent": 9051,
+      "contacted": 0,
+      "replied": 26,
+      "reply_rate": 0.29,
+      "unique_replies": 0,
+      "bounced": 73,
+      "bounce_rate": 0.81,
+      "opportunities": 7,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.08,
+      "reply_sentiment": {
+        "unknown": 29,
+        "negative": 7,
+        "positive": 5
+      },
+      "top_replying_domains": [
+        {
+          "domain": "getautodemand.com",
+          "replies": 15
+        },
+        {
+          "domain": "automatedemandhq.com",
+          "replies": 5
+        },
+        {
+          "domain": "getautomatedemand.com",
+          "replies": 4
+        },
+        {
+          "domain": "openautomatedemand.com",
+          "replies": 4
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 3
+        }
+      ],
+      "email_attributed_replies": 41
+    },
+    {
+      "campaign_id": "91043d18-b7b8-4547-a254-31adb92cfec6",
+      "campaign_name": "EU SaaS - 18m funding",
+      "status": 2,
+      "sent": 4581,
+      "contacted": 0,
+      "replied": 33,
+      "reply_rate": 0.72,
+      "unique_replies": 0,
+      "bounced": 16,
+      "bounce_rate": 0.35,
+      "opportunities": 13,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.28,
+      "reply_sentiment": {
+        "unknown": 4,
+        "positive": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "autodemandlabs.com",
+          "replies": 2
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 2
+        },
+        {
+          "domain": "getautodemand.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 5
+    },
+    {
+      "campaign_id": "b56458b2-eb0c-4063-9f4a-3fd813d0c3d4",
+      "campaign_name": "EU SaaS - open jobs",
+      "status": 1,
+      "sent": 1885,
+      "contacted": 0,
+      "replied": 3,
+      "reply_rate": 0.16,
+      "unique_replies": 0,
+      "bounced": 12,
+      "bounce_rate": 0.64,
+      "opportunities": 1,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.05,
+      "reply_sentiment": {
+        "negative": 1,
+        "unknown": 2,
+        "positive": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "autodemandworld.com",
+          "replies": 2
+        },
+        {
+          "domain": "automatedemandlabs.com",
+          "replies": 1
+        },
+        {
+          "domain": "meetautodemand.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 4
+    },
+    {
+      "campaign_id": "8dcc8835-2e3a-4854-9a09-12b0ddc9d726",
+      "campaign_name": "EU SaaS - new hire",
+      "status": 3,
+      "sent": 839,
+      "contacted": 0,
+      "replied": 3,
+      "reply_rate": 0.36,
+      "unique_replies": 0,
+      "bounced": 5,
+      "bounce_rate": 0.6,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {
+        "negative": 2,
+        "unknown": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "autodemandlabs.com",
+          "replies": 1
+        },
+        {
+          "domain": "openautomatedemand.com",
+          "replies": 1
+        },
+        {
+          "domain": "autodemandworld.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 3
+    },
+    {
+      "campaign_id": "c334ff00-fdb7-416e-ace5-7d7df31e6dae",
+      "campaign_name": "US SaaS - new hire",
+      "status": 1,
+      "sent": 435,
+      "contacted": 0,
+      "replied": 1,
+      "reply_rate": 0.23,
+      "unique_replies": 0,
+      "bounced": 2,
+      "bounce_rate": 0.46,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {
+        "negative": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "autodemandworld.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 1
+    },
+    {
+      "campaign_id": "af412433-52cc-42df-b7e7-384bed22e430",
+      "campaign_name": "US SaaS - open jobs",
+      "status": 1,
+      "sent": 235,
+      "contacted": 0,
+      "replied": 0,
+      "reply_rate": 0.0,
+      "unique_replies": 0,
+      "bounced": 2,
+      "bounce_rate": 0.85,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {},
+      "top_replying_domains": [],
+      "email_attributed_replies": 0
+    },
+    {
+      "campaign_id": "ce37a289-5d84-4411-9fee-2fad0648305f",
+      "campaign_name": "EU SaaS - new hire + open jobs",
+      "status": 3,
+      "sent": 45,
+      "contacted": 0,
+      "replied": 2,
+      "reply_rate": 4.44,
+      "unique_replies": 0,
+      "bounced": 0,
+      "bounce_rate": 0.0,
+      "opportunities": 1,
+      "opportunity_value": 0,
+      "opportunity_rate": 2.22,
+      "reply_sentiment": {
+        "unknown": 1,
+        "positive": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "autodemandhub.com",
+          "replies": 2
+        }
+      ],
+      "email_attributed_replies": 2
+    },
+    {
+      "campaign_id": "8e32e988-d817-495e-9c17-d6a5481a4d2a",
+      "campaign_name": "US SaaS - new hire + open jobs",
+      "status": 1,
+      "sent": 32,
+      "contacted": 0,
+      "replied": 0,
+      "reply_rate": 0.0,
+      "unique_replies": 0,
+      "bounced": 1,
+      "bounce_rate": 3.12,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {},
+      "top_replying_domains": [],
+      "email_attributed_replies": 0
+    }
+  ]
+}
