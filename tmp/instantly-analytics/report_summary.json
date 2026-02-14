@@ -1,0 +1,31 @@
+{
+  "period": {
+    "start": "2026-01-15T09:02:56.935984",
+    "end": "2026-02-14T09:02:56.935984",
+    "days": 30
+  },
+  "totals": {
+    "accounts": 1,
+    "domains": 1,
+    "campaigns": 0,
+    "sent": 0,
+    "replied": 0,
+    "bounced": 0,
+    "reply_rate": 0,
+    "bounce_rate": 0,
+    "recent_replies_30d": 0
+  },
+  "domains": {
+    "unknown": {
+      "accounts": null,
+      "total_accounts": 1,
+      "active_accounts": 0,
+      "errored_accounts": 0,
+      "warmup_accounts": 0,
+      "daily_limit_capacity": 0,
+      "avg_warmup_score": 0.0
+    }
+  },
+  "campaigns": [],
+  "daily_analytics": []
+}

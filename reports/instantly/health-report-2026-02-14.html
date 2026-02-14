@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Infrastructure Health Report</title>
+  <style>
+    /* DataGen Brand Colors */
+    :root {
+      --primary: #005047;
+      --secondary: #00795e;
+      --success: #219653;
+      --danger: #D34053;
+      --warning: #FFA70B;
+      --boxdark: #24303F;
+      --boxdark-2: #1A222C;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header .date {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+    }
+
+    /* Alert Banner */
+    .alert {
+      padding: 20px 40px;
+      background: rgba(255, 167, 11, 0.1);
+      border-left: 4px solid var(--warning);
+      margin: 0;
+    }
+
+    .alert h3 {
+      color: #b45309;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .alert p {
+      color: var(--gray-700);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .summary-card {
+      padding: 24px 16px;
+      text-align: center;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .summary-card:last-child {
+      border-right: none;
+    }
+
+    .summary-card .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .summary-card .label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section {
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .section-icon.action { background: rgba(211, 64, 83, 0.1); }
+    .section-icon.active { background: rgba(33, 150, 83, 0.1); }
+    .section-icon.warning { background: rgba(255, 167, 11, 0.1); }
+    .section-icon.info { background: rgba(0, 80, 71, 0.1); }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    tr:hover {
+      background: var(--gray-50);
+    }
+
+    .email-cell {
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-action {
+      background: rgba(211, 64, 83, 0.1);
+      color: var(--danger);
+    }
+
+    .badge-success {
+      background: rgba(33, 150, 83, 0.1);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background: rgba(255, 167, 11, 0.1);
+      color: #b45309;
+    }
+
+    .badge-primary {
+      background: rgba(0, 80, 71, 0.1);
+      color: var(--primary);
+    }
+
+    /* Metrics Bar */
+    .metrics-bar {
+      display: flex;
+      gap: 24px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .metric-dot.green { background: var(--success); }
+    .metric-dot.red { background: var(--danger); }
+    .metric-dot.yellow { background: var(--warning); }
+    .metric-dot.blue { background: #3b82f6; }
+
+    .metric-value {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .metric-label {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 32px;
+      color: var(--gray-500);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 24px 40px;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Recommendations */
+    .recommendations {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recommendations li {
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .recommendations strong {
+      color: var(--gray-900);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-card {
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+
+      .metrics-bar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Email Infrastructure Health Report</h1>
+      <p class="date">February 14, 2026 | Last 30 Days</p>
+    </div>
+
+    <!-- Data Warning Alert -->
+    <div class="alert">
+      <h3>⚠ Data Collection Issue Detected</h3>
+      <p>API returned limited data (1 account visible vs 742 expected from infrastructure inventory). This report shows available data and includes strategic recommendations based on infrastructure documentation. Recommend verifying API credentials and access permissions.</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="number">21</div>
+        <div class="label">Total Domains</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">742</div>
+        <div class="label">Total Accounts</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">3,260</div>
+        <div class="label">Daily Capacity</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">0%</div>
+        <div class="label">Data Visibility</div>
+      </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">🔍</div>
+        <div>
+          <h2>Executive Summary</h2>
+          <p class="section-subtitle">Infrastructure assessment and key findings</p>
+        </div>
+      </div>
+      <p style="color: var(--gray-700); line-height: 1.6; font-size: 14px;">
+        Infrastructure health cannot be fully assessed due to API data access limitations - only 1 of 742 accounts visible via API calls. Based on infrastructure documentation (last updated Feb 13), the email infrastructure consists of 21 domains across 5 groups with total capacity of 3,260 daily emails. The most critical action is resolving API access to enable proper monitoring of deliverability metrics (bounce rates, warmup health, utilization) across all sending domains. Without visibility into active campaign performance, warmup progression, and account health status, the infrastructure is operating without proper monitoring safeguards.
+      </p>
+    </div>
+
+    <!-- Infrastructure Overview -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">🏗</div>
+        <div>
+          <h2>Infrastructure Overview</h2>
+          <p class="section-subtitle">Current configuration based on documentation</p>
+        </div>
+      </div>
+
+      <div class="metrics-bar">
+        <div class="metric">
+          <div class="metric-dot green"></div>
+          <span class="metric-value">10</span>
+          <span class="metric-label">Sending Domains</span>
+        </div>
+        <div class="metric">
+          <div class="metric-dot yellow"></div>
+          <span class="metric-value">11</span>
+          <span class="metric-label">Warmup Domains</span>
+        </div>
+        <div class="metric">
+          <div class="metric-dot blue"></div>
+          <span class="metric-value">224</span>
+          <span class="metric-label">Sending Accounts</span>
+        </div>
+        <div class="metric">
+          <div class="metric-dot blue"></div>
+          <span class="metric-value">518</span>
+          <span class="metric-label">Warmup Accounts</span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Domains</th>
+            <th>Accounts</th>
+            <th>Daily Limit</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="email-cell">AutoDemand Sending</td>
+            <td>8</td>
+            <td>24</td>
+            <td>310</td>
+            <td><span class="badge badge-success">Active</span></td>
+          </tr>
+          <tr>
+            <td class="email-cell">AutoDemand Scaled</td>
+            <td>2</td>
+            <td>200</td>
+            <td>1,300</td>
+            <td><span class="badge badge-success">Active</span></td>
+          </tr>
+          <tr>
+            <td class="email-cell">AutoDemand Warmup</td>
+            <td>6</td>
+            <td>18</td>
+            <td>270</td>
+            <td><span class="badge badge-warning">Ready to Activate</span></td>
+          </tr>
+          <tr>
+            <td class="email-cell">GTM Brand Warmup</td>
+            <td>4</td>
+            <td>400</td>
+            <td>400</td>
+            <td><span class="badge badge-primary">Building Rep</span></td>
+          </tr>
+          <tr>
+            <td class="email-cell">Neutral Brand Warmup</td>
+            <td>1</td>
+            <td>100</td>
+            <td>980</td>
+            <td><span class="badge badge-primary">Building Rep</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Domain Health Status -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon active">⚡</div>
+        <div>
+          <h2>Domain Health Status</h2>
+          <p class="section-subtitle">Benchmarked deliverability metrics (requires API access)</p>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">📊</div>
+        <p><strong>No deliverability data available</strong></p>
+        <p style="margin-top: 8px;">Resolve API access to monitor bounce rates, reply rates, and sending performance across all domains.</p>
+      </div>
+
+      <div style="margin-top: 20px; padding: 16px; background: var(--gray-50); border-radius: 8px; font-size: 13px; color: var(--gray-600);">
+        <strong style="color: var(--gray-900);">Benchmark Reference:</strong>
+        <ul style="margin-top: 8px; margin-left: 20px; line-height: 1.8;">
+          <li>Bounce Rate: &lt;2% healthy, 2-5% warning, &gt;5% critical</li>
+          <li>Reply Rate: 1-5% average, &lt;1% below average</li>
+          <li>Warmup Health: ≥95 healthy, &lt;95 needs attention</li>
+          <li>Utilization: 20-60% optimal, &lt;10% or &gt;80% review needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Campaign Performance -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">📈</div>
+        <div>
+          <h2>Campaign Performance</h2>
+          <p class="section-subtitle">Funnel metrics and conversion tracking</p>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">📬</div>
+        <p><strong>No campaign data available</strong></p>
+        <p style="margin-top: 8px;">API access required to track sent volume, reply rates, opportunities, and sentiment analysis.</p>
+      </div>
+    </div>
+
+    <!-- Inbox Status -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon warning">📥</div>
+        <div>
+          <h2>Inbox Status & Utilization</h2>
+          <p class="section-subtitle">Account health and capacity usage</p>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">💼</div>
+        <p><strong>No account health data available</strong></p>
+        <p style="margin-top: 8px;">Need API access to monitor errored accounts, warmup progression, and utilization rates.</p>
+      </div>
+    </div>
+
+    <!-- Strategic Recommendations -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon action">🎯</div>
+        <div>
+          <h2>Strategic Recommendations</h2>
+          <p class="section-subtitle">Prioritized action items</p>
+        </div>
+      </div>
+
+      <ul class="recommendations">
+        <li>
+          <strong>P0: Resolve API Data Access Immediately</strong>
+          The Instantly API returned only 1 account when 742 are expected according to infrastructure documentation. Verify API key permissions and workspace access. Without proper monitoring, you're operating blind on deliverability health, warmup status, and account errors across 21 domains and 742 accounts.
+        </li>
+        <li>
+          <strong>P1: Activate AutoDemand Warmup Domains (Ready for Production)</strong>
+          Six domains in Group C (automatedemandme.com, automatedemands.com, automatemydemand.com, automatethedemand.com, automateyourdemand.com, automationdemand.com) have completed warmup as of Dec 29, 2025. These 18 accounts with 270 daily capacity are ready to add to campaigns. Activating them would increase sending capacity by 16% immediately.
+        </li>
+        <li>
+          <strong>P1: Monitor GTM Brand Warmup Progression</strong>
+          The 4 GTM brand domains (getagenticgtm.com, getgtmagents.com, myagentgtm.com, yourcontextgtm.com) with 400 accounts total were created Jan 20, 2026 (25 days ago). Check warmup health scores to determine if they're ready for low-volume campaign activation. Conservative daily limits (1/account) suggest they're being warmed carefully - verify progression before scaling.
+        </li>
+        <li>
+          <strong>P2: Audit High-Volume Domains for Deliverability</strong>
+          autodemandworld.com (100 accounts, highest sender at 2,290 emails/30d) and meetautodemand.com (100 accounts, 817 emails/30d) carry most sending volume. Once API access is restored, prioritize monitoring these two domains for bounce rates, reply rates, and any errored accounts to protect infrastructure reputation.
+        </li>
+        <li>
+          <strong>P2: Assess easyinboxpro.com Warmup Completion</strong>
+          This neutral brand domain has 100 accounts with warmup score 100 and 980 daily limit capacity (created Jan 18). If warmup is complete, this domain provides brand-neutral sending capacity ideal for general outreach that doesn't require AutoDemand or GTM branding.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">✅</div>
+        <div>
+          <h2>Next Steps</h2>
+          <p class="section-subtitle">Immediate actions required</p>
+        </div>
+      </div>
+
+      <ol style="margin-left: 20px; color: var(--gray-700); line-height: 1.8; font-size: 14px;">
+        <li><strong>Week 1:</strong> Resolve API access issue and re-run this health report with full data visibility</li>
+        <li><strong>Week 1:</strong> Activate Group C warmup domains (6 domains, 18 accounts, 270 daily capacity)</li>
+        <li><strong>Week 2:</strong> Audit deliverability metrics for autodemandworld.com and meetautodemand.com (high-volume domains)</li>
+        <li><strong>Week 2:</strong> Review GTM brand warmup progression and plan activation timeline</li>
+        <li><strong>Ongoing:</strong> Schedule weekly health reports to monitor bounce rates, warmup health, and utilization</li>
+      </ol>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Generated by <a href="https://datagen.dev">DataGen</a> Email Infrastructure Health Agent</p>
+      <p style="margin-top: 8px;">Report Date: February 14, 2026 | Period: Jan 15 - Feb 14, 2026 (30 days)</p>
+    </div>
+  </div>
+</body>
+</html>
