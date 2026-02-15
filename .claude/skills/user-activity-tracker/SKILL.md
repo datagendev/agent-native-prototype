@@ -46,13 +46,18 @@ PostHog (Behavior)              Neon (State + Execution)
 
 ### Key Tables
 
-| Table | Purpose | Key Columns |
-|-------|---------|-------------|
-| `wasp_user` | User accounts | id, email, credits, subscription_status, last_active_timestamp, created_at |
-| `fastapi_user` | Backend link | wasp_user_id, id (for joins) |
-| `fastapi_run` | Execution history | user_id, run_state, created_at, run_error_log |
-| `fastapi_code_execution` | Code runs | user_id, status, execution_time_ms, script_name |
-| `fastapi_deployment` | Custom tools | user_id, name, final_code |
+| Table | Purpose | Key Columns | What It Shows |
+|-------|---------|-------------|---------------|
+| `wasp_user` | User accounts | id, email, credits, subscription_status, last_active_timestamp, created_at | User metadata |
+| `fastapi_user` | Backend link | wasp_user_id, id (for joins) | Join table |
+| `fastapi_tool_executions` | **Individual tool calls** | user_id, tool_name, tool_type, status, error_type, error_message, created_at | **Granular tool-level success/failure** |
+| `fastapi_run` | **Workflow executions** | user_id, run_state, created_at, run_error_log | **Workflow-level failures (includes infrastructure)** |
+| `fastapi_code_execution` | Code runs | user_id, status, execution_time_ms, script_name | Code sandbox issues |
+| `fastapi_deployment` | Custom tools | user_id, name, final_code | User-created tools |
+
+**CRITICAL:** `fastapi_tool_executions` vs `fastapi_run` tell different stories:
+- **Tool level** = individual tool call failures (user code, tool bugs)
+- **Workflow level** = complete run failures (infrastructure, Modal, API timeouts)
 
 ### PostHog Events
 
@@ -441,6 +446,90 @@ After running queries, classify users into these segments:
 
 ---
 
+## Failure Investigation Process
+
+### Critical: Query Multiple Data Sources
+
+**Don't build analysis from single table.** User failures show differently across tables:
+
+```sql
+-- 1. Tool-level failures (granular)
+SELECT tool_name, error_type, COUNT(*) as failures
+FROM fastapi_tool_executions t
+JOIN fastapi_user f ON t.user_id::integer = f.id
+JOIN wasp_user w ON f.wasp_user_id = w.id
+WHERE w.email = '{EMAIL}' AND t.status = 'failed'
+GROUP BY tool_name, error_type
+ORDER BY failures DESC;
+
+-- 2. Workflow-level failures (infrastructure)
+SELECT LEFT(run_error_log, 200) as error, COUNT(*) as failures
+FROM fastapi_run r
+JOIN fastapi_user f ON r.user_id = f.id
+JOIN wasp_user w ON f.wasp_user_id = w.id
+WHERE w.email = '{EMAIL}' AND r.run_state = 'failed'
+GROUP BY error
+ORDER BY failures DESC;
+```
+
+### Verify Assumptions
+
+**Before diagnosing "User has X issue":**
+
+```sql
+-- Check if user actually uses suspected tool
+SELECT tool_name, COUNT(*) as uses
+FROM fastapi_tool_executions t
+JOIN fastapi_user f ON t.user_id::integer = f.id
+JOIN wasp_user w ON f.wasp_user_id = w.id
+WHERE w.email = '{EMAIL}'
+  AND tool_name LIKE '%suspected_tool%';
+
+-- If 0 results: User doesn't use this tool!
+```
+
+### Categorize Failures
+
+**Separate platform issues from user issues:**
+
+| Category | Indicators | Owner |
+|----------|-----------|-------|
+| **Infrastructure** | API timeouts, Modal OOM (rc=137), sandbox rate limits | Platform |
+| **Platform Bug** | False credit checks (user has credits), missing env vars in Modal | Platform |
+| **Missing Feature** | Rate limits without retry, no error recovery | Platform |
+| **User Code** | Invalid params in custom code, logic errors | User |
+| **Third-party** | External API errors (HubSpot, LinkedIn) | Mixed |
+
+### Common Mistakes to Avoid
+
+1. ❌ **Assuming your debugging errors = user's production errors**
+   - You hitting Neon MCP failures while analyzing ≠ User hitting same failures
+   - Always verify: Does user even use this tool?
+
+2. ❌ **Building narrative before checking all data sources**
+   - Tool level success ≠ Workflow level success
+   - Workflows can fail from infrastructure even if tools succeed
+
+3. ❌ **Using vague error categories**
+   - Not "Modal failure" (could be 20 different things)
+   - Use "API timeout" or "Modal OOM (rc=137)" (specific)
+
+4. ❌ **Ignoring timeline patterns**
+   - If user has days with 100% success → likely platform issue, not user code
+   - Check: Does failure cluster around specific dates?
+
+### Analysis Checklist
+
+- [ ] Query `fastapi_tool_executions` for tool-level failures
+- [ ] Query `fastapi_run` for workflow-level failures
+- [ ] Verify tool usage before diagnosing issues
+- [ ] Check MCP vs default tool ratio
+- [ ] Categorize failures by root cause (infrastructure/platform/user)
+- [ ] Look for timeline patterns (clustered failures = platform issue)
+- [ ] Read actual error messages (not assumptions)
+
+---
+
 ## Notes
 
 - Always exclude `@datagen.dev` emails from analysis
@@ -448,3 +537,4 @@ After running queries, classify users into these segments:
 - Neon project ID: `rough-base-02149126`, database: `datagen`
 - User ID links: `wasp_user.id` = `fastapi_user.wasp_user_id`
 - Replace `{EMAIL}` placeholder in deep dive queries with actual email
+- **See `product-analysis` skill for detailed failure investigation process**
