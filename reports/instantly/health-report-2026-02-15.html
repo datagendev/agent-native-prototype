@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Infrastructure Health Report</title>
+  <style>
+    /* DataGen Brand Colors */
+    :root {
+      --primary: #005047;
+      --secondary: #00795e;
+      --success: #219653;
+      --danger: #D34053;
+      --warning: #FFA70B;
+      --boxdark: #24303F;
+      --boxdark-2: #1A222C;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--gray-100);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header .date {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .summary-card {
+      padding: 24px 16px;
+      text-align: center;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .summary-card:last-child {
+      border-right: none;
+    }
+
+    .summary-card .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .summary-card .label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section {
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .section-icon.action { background: rgba(211, 64, 83, 0.1); }
+    .section-icon.active { background: rgba(33, 150, 83, 0.1); }
+    .section-icon.warning { background: rgba(255, 167, 11, 0.1); }
+    .section-icon.info { background: rgba(0, 80, 71, 0.1); }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    tr:hover {
+      background: var(--gray-50);
+    }
+
+    .email-cell {
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-action {
+      background: rgba(211, 64, 83, 0.1);
+      color: var(--danger);
+    }
+
+    .badge-success {
+      background: rgba(33, 150, 83, 0.1);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background: rgba(255, 167, 11, 0.1);
+      color: #b45309;
+    }
+
+    .badge-primary {
+      background: rgba(0, 80, 71, 0.1);
+      color: var(--primary);
+    }
+
+    /* Metrics Bar */
+    .metrics-bar {
+      display: flex;
+      gap: 24px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .metric-dot.green { background: var(--success); }
+    .metric-dot.red { background: var(--danger); }
+    .metric-dot.yellow { background: var(--warning); }
+    .metric-dot.blue { background: #3b82f6; }
+
+    .metric-value {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .metric-label {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    /* Action Button */
+    .action-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .action-btn:hover {
+      background: var(--secondary);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 32px;
+      color: var(--gray-500);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 24px 40px;
+      background: var(--gray-50);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Trend Indicator */
+    .trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .trend.up { color: var(--success); }
+    .trend.down { color: var(--danger); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-card {
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+
+      .metrics-bar {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Email Infrastructure Health Report</h1>
+      <p class="date">2026-02-15 | Last 30 Days | DataGen Analytics</p>
+    </div>
+
+    <!-- Content sections go here -->
+    
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="number">10 / 21</div>
+        <div class="label">Sending Domains</div>
+      </div>
+      <div class="summary-card">
+        <div class="number" style="color: var(--warning)">0.49%</div>
+        <div class="label">Reply Rate</div>
+      </div>
+      <div class="summary-card">
+        <div class="number" style="color: var(--success)">0.75%</div>
+        <div class="label">Bounce Rate</div>
+      </div>
+      <div class="summary-card">
+        <div class="number">742</div>
+        <div class="label">Total Accounts</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">&#128202;</div>
+        <div>
+          <h2>Executive Summary</h2>
+        </div>
+      </div>
+      <p style="color: var(--gray-600); line-height: 1.7;">Infrastructure is healthy with 10 of 21 domains actively sending and zero account errors. EU campaigns are outperforming US campaigns by 2.5x on reply rate (0.72% vs 0.29%), indicating stronger market fit or messaging resonance with European SaaS audiences. The most urgent issue is getautodemand.com, which generates the highest reply rate (1.49%) but has a critical bounce rate of 2.69%, accounting for 33% of all infrastructure bounces. Additionally, 11 warmup domains with 518 accounts are fully warmed and ready for activation, offering significant untapped capacity to scale sending volume.</p>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon action">&#127919;</div>
+        <div>
+          <h2>Action Items</h2>
+          <p class="section-subtitle">1 critical / 7 this week / 3 monitor</p>
+        </div>
+      </div>
+      <div style="margin-bottom: 20px;"><div style="margin-bottom: 12px;"><span style="display: inline-block; padding: 4px 12px; background: rgba(211,64,83,0.1); color: var(--danger); border-radius: 100px; font-size: 13px; font-weight: 600;">P0 - Act Now</span></div><div style="padding: 12px 16px; background: rgba(211,64,83,0.04); border-left: 3px solid var(--danger); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;"><strong><a href='#' style='color: var(--danger);'>getautodemand.com</a> bounce rate at 2.69%</strong> -- exceeds 2% threshold. This domain drives the most replies (1.49%) but its deliverability is degrading. Investigate: is it list quality on specific campaigns, or domain reputation? 33% of bounces in your infrastructure come from this single domain (27 of 81).</div></div><div style="margin-bottom: 20px;"><div style="margin-bottom: 12px;"><span style="display: inline-block; padding: 4px 12px; background: rgba(255,167,11,0.1); color: #b45309; border-radius: 100px; font-size: 13px; font-weight: 600;">P1 - This Week</span></div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;"><strong>6 domains with sub-0.5% reply rates.</strong> Worst performers: autodemandme.com, automatedemandlabs.com, meetautodemand.com. Review copy/targeting or redistribute volume to higher-performing domains.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;"><strong>autodemandworld.com</strong> using only 0% of 1000 daily capacity. Ramp up or reassign.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;"><strong>meetautodemand.com</strong> using only 1% of 300 daily capacity. Ramp up or reassign.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;"><strong>11 warmup domains ready to activate.</strong> easyinboxpro.com, getagenticgtm.com, getgtmagents.com, myagentgtm.com, yourcontextgtm.com, automatedemandme.com, automatedemands.com, automatemydemand.com, automatethedemand.com, automateyourdemand.com, automationdemand.com (518 accounts total, all at 99.5%+ warmup health). Assign to campaigns to increase sending capacity.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">Campaign <strong>US SaaS - 18m funding</strong> has 0.29% reply rate across 9051 sent. Review copy and targeting.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">Campaign <strong>EU SaaS - open jobs</strong> has 0.16% reply rate across 1885 sent. Review copy and targeting.</div><div style="padding: 12px 16px; background: rgba(255,167,11,0.04); border-left: 3px solid var(--warning); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">Campaign <strong>EU SaaS - new hire</strong> has 0.36% reply rate across 839 sent. Review copy and targeting.</div></div><div style="margin-bottom: 20px;"><div style="margin-bottom: 12px;"><span style="display: inline-block; padding: 4px 12px; background: rgba(0,80,71,0.1); color: var(--primary); border-radius: 100px; font-size: 13px; font-weight: 600;">P2 - Monitor</span></div><div style="padding: 12px 16px; background: rgba(0,80,71,0.04); border-left: 3px solid var(--primary); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">Campaign <strong>US SaaS - 18m funding</strong> has more negative (6) than positive (5) sentiment. Monitor closely.</div><div style="padding: 12px 16px; background: rgba(0,80,71,0.04); border-left: 3px solid var(--primary); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">Reply rate spread is 12x between top (getautodemand.com at 1.49%) and bottom (autodemandme.com at 0.12%). Investigate what makes top domains perform better.</div><div style="padding: 12px 16px; background: rgba(0,80,71,0.04); border-left: 3px solid var(--primary); margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 14px; color: var(--gray-700); line-height: 1.6;">11 domain(s) still in warmup. Monitor progress toward activation threshold.</div></div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">&#128200;</div>
+        <div>
+          <h2>Domain Performance</h2>
+          <p class="section-subtitle">11 sending domains, sorted by reply rate</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th style="text-align:right">Sent</th>
+              <th style="text-align:right">Replies</th>
+              <th style="text-align:right">Reply %</th>
+              <th style="text-align:right">Bounced</th>
+              <th style="text-align:right">Bounce %</th>
+              <th style="text-align:right">Accounts</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="email-cell">getautodemand.com</td>
+          <td style="text-align:right">1,004</td>
+          <td style="text-align:right">15</td>
+          <td style="text-align:right"><span class="badge badge-primary">1.5%</span></td>
+          <td style="text-align:right">27</td>
+          <td style="text-align:right"><span class="badge badge-warning">2.7%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">autodemandhub.com</td>
+          <td style="text-align:right">652</td>
+          <td style="text-align:right">6</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.92%</span></td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right"><span class="badge badge-success">0.00%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">autodemandlabs.com</td>
+          <td style="text-align:right">1,005</td>
+          <td style="text-align:right">6</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.60%</span></td>
+          <td style="text-align:right">7</td>
+          <td style="text-align:right"><span class="badge badge-success">0.70%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">openautomatedemand.com</td>
+          <td style="text-align:right">972</td>
+          <td style="text-align:right">5</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.51%</span></td>
+          <td style="text-align:right">5</td>
+          <td style="text-align:right"><span class="badge badge-success">0.51%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">getautomatedemand.com</td>
+          <td style="text-align:right">987</td>
+          <td style="text-align:right">4</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.41%</span></td>
+          <td style="text-align:right">8</td>
+          <td style="text-align:right"><span class="badge badge-success">0.81%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">automatedemandhq.com</td>
+          <td style="text-align:right">1,006</td>
+          <td style="text-align:right">4</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.40%</span></td>
+          <td style="text-align:right">4</td>
+          <td style="text-align:right"><span class="badge badge-success">0.40%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">autodemandworld.com</td>
+          <td style="text-align:right">2,190</td>
+          <td style="text-align:right">7</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.32%</span></td>
+          <td style="text-align:right">7</td>
+          <td style="text-align:right"><span class="badge badge-success">0.32%</span></td>
+          <td style="text-align:right">100</td>
+        </tr>
+        <tr>
+          <td class="email-cell">meetautodemand.com</td>
+          <td style="text-align:right">702</td>
+          <td style="text-align:right">2</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.28%</span></td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right"><span class="badge badge-success">0.14%</span></td>
+          <td style="text-align:right">100</td>
+        </tr>
+        <tr>
+          <td class="email-cell">tryautomatedemand.com</td>
+          <td style="text-align:right">417</td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.24%</span></td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right"><span class="badge badge-success">0.24%</span></td>
+          <td style="text-align:right">0</td>
+        </tr>
+        <tr>
+          <td class="email-cell">automatedemandlabs.com</td>
+          <td style="text-align:right">1,004</td>
+          <td style="text-align:right">2</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.20%</span></td>
+          <td style="text-align:right">7</td>
+          <td style="text-align:right"><span class="badge badge-success">0.70%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">autodemandme.com</td>
+          <td style="text-align:right">856</td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.12%</span></td>
+          <td style="text-align:right">14</td>
+          <td style="text-align:right"><span class="badge badge-success">1.64%</span></td>
+          <td style="text-align:right">3</td>
+        </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon active">&#9889;</div>
+        <div>
+          <h2>Campaign Performance</h2>
+          <p class="section-subtitle">8 campaigns / 17,103 sent / 22 opportunities</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Status</th>
+              <th style="text-align:right">Sent</th>
+              <th style="text-align:right">Replied</th>
+              <th style="text-align:right">Reply %</th>
+              <th style="text-align:right">Opps</th>
+              <th style="text-align:right">Opp %</th>
+              <th style="text-align:center">Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td class="email-cell">US SaaS - 18m funding</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">9,051</td>
+          <td style="text-align:right">26</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.29%</span></td>
+          <td style="text-align:right">7</td>
+          <td style="text-align:right">0.08%</td>
+          <td style="text-align:center; font-size:12px">+5 / -6 / ?28</td>
+        </tr>
+        <tr>
+          <td class="email-cell">EU SaaS - 18m funding</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">4,581</td>
+          <td style="text-align:right">33</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.72%</span></td>
+          <td style="text-align:right">13</td>
+          <td style="text-align:right">0.28%</td>
+          <td style="text-align:center; font-size:12px">+1 / -0 / ?3</td>
+        </tr>
+        <tr>
+          <td class="email-cell">EU SaaS - open jobs</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">1,885</td>
+          <td style="text-align:right">3</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.16%</span></td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right">0.05%</td>
+          <td style="text-align:center; font-size:12px">+1 / -1 / ?2</td>
+        </tr>
+        <tr>
+          <td class="email-cell">EU SaaS - new hire</td>
+          <td><span class="badge badge-warning">Paused</span></td>
+          <td style="text-align:right">839</td>
+          <td style="text-align:right">3</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.36%</span></td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right">0.00%</td>
+          <td style="text-align:center; font-size:12px">+0 / -2 / ?1</td>
+        </tr>
+        <tr>
+          <td class="email-cell">US SaaS - new hire</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">435</td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.23%</span></td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right">0.00%</td>
+          <td style="text-align:center; font-size:12px">+0 / -1 / ?0</td>
+        </tr>
+        <tr>
+          <td class="email-cell">US SaaS - open jobs</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">235</td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.00%</span></td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right">0.00%</td>
+          <td style="text-align:center; font-size:12px">--</td>
+        </tr>
+        <tr>
+          <td class="email-cell">EU SaaS - new hire + open jobs</td>
+          <td><span class="badge badge-warning">Paused</span></td>
+          <td style="text-align:right">45</td>
+          <td style="text-align:right">2</td>
+          <td style="text-align:right"><span class="badge badge-primary">4.4%</span></td>
+          <td style="text-align:right">1</td>
+          <td style="text-align:right">2.22%</td>
+          <td style="text-align:center; font-size:12px">+1 / -0 / ?1</td>
+        </tr>
+        <tr>
+          <td class="email-cell">US SaaS - new hire + open jobs</td>
+          <td><span class="badge badge-primary">Active</span></td>
+          <td style="text-align:right">32</td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right"><span class="badge badge-warning">0.00%</span></td>
+          <td style="text-align:right">0</td>
+          <td style="text-align:right">0.00%</td>
+          <td style="text-align:center; font-size:12px">--</td>
+        </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon warning">&#9888;&#65039;</div>
+        <div>
+          <h2>Infrastructure Status</h2>
+          <p class="section-subtitle">21 domains / 742 accounts / 0 errored</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th style="text-align:right">Accounts</th>
+              <th style="text-align:right">Active</th>
+              <th style="text-align:right">Errored</th>
+              <th style="text-align:right">Avg Daily</th>
+              <th style="text-align:right">Capacity</th>
+              <th style="text-align:right">Util %</th>
+              <th style="text-align:right">Warmup</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="8" style="background: var(--gray-50); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-700); padding: 8px 16px;">Sending (10)</td></tr>
+            
+            <tr>
+              <td class="email-cell">autodemandworld.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">3.8</td>
+              <td style="text-align:right">1,000</td>
+              <td style="text-align:right">0%</td>
+              <td style="text-align:right">99.8</td>
+            </tr>
+            <tr>
+              <td class="email-cell">meetautodemand.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">1.8</td>
+              <td style="text-align:right">300</td>
+              <td style="text-align:right">1%</td>
+              <td style="text-align:right">99.9</td>
+            </tr>
+            <tr>
+              <td class="email-cell">autodemandhub.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">8.7</td>
+              <td style="text-align:right">30</td>
+              <td style="text-align:right">29%</td>
+              <td style="text-align:right">99.3</td>
+            </tr>
+            <tr>
+              <td class="email-cell">autodemandlabs.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.8</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">31%</td>
+              <td style="text-align:right">99.3</td>
+            </tr>
+            <tr>
+              <td class="email-cell">autodemandme.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">11.4</td>
+              <td style="text-align:right">30</td>
+              <td style="text-align:right">38%</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatedemandhq.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.6</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">30%</td>
+              <td style="text-align:right">99.7</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatedemandlabs.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.8</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">31%</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">getautodemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.8</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">31%</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">getautomatedemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.9</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">31%</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">openautomatedemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">13.7</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">30%</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr><td colspan="8" style="background: var(--gray-50); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-700); padding: 8px 16px;">Active Warmup (11)</td></tr>
+            
+            <tr>
+              <td class="email-cell">easyinboxpro.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">980</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">getagenticgtm.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">99.9</td>
+            </tr>
+            <tr>
+              <td class="email-cell">getgtmagents.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">99.8</td>
+            </tr>
+            <tr>
+              <td class="email-cell">myagentgtm.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">yourcontextgtm.com</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">100</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatedemandme.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatedemands.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatemydemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">99.7</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automatethedemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">99.7</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automateyourdemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+            <tr>
+              <td class="email-cell">automationdemand.com</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">3</td>
+              <td style="text-align:right">0</td>
+              <td style="text-align:right">0.0</td>
+              <td style="text-align:right">45</td>
+              <td style="text-align:right">Warmup</td>
+              <td style="text-align:right">100.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon info">&#128161;</div>
+        <div>
+          <h2>Recommendations</h2>
+          <p class="section-subtitle">Strategic recommendations based on current data</p>
+        </div>
+      </div>
+      <ol style="padding-left: 20px; color: var(--gray-600); line-height: 1.8; font-size: 14px;">
+        <li><strong>Investigate getautodemand.com bounce spike immediately</strong> -- This domain delivers your best reply rate (1.49%) but bounce rate hit 2.69%, well into the warning zone. With 27 bounces from just 1,004 sends, this represents 33% of your entire infrastructure's bounces. Run a DNS health check, verify SPF/DKIM/DMARC records, and audit the contact list for data quality issues. If bounce rate continues climbing, pause this domain to protect sender reputation.</li>
+        <li><strong>Double down on EU campaigns and redirect US volume</strong> -- EU SaaS campaigns are crushing it with 0.72% reply rate and 0.28% opportunity conversion, while US campaigns languish at 0.29%. The "EU SaaS - new hire + open jobs" campaign achieved a 4.4% reply rate on small volume (45 sends). Scale EU campaigns by activating warmup domains (easyinboxpro.com, GTM brand domains) and redirect some US volume to test EU messaging on US audiences.</li>
+        <li><strong>Activate 5 high-capacity warmup domains this week</strong> -- easyinboxpro.com (100 accounts, 980 daily capacity, 100 warmup score), getagenticgtm.com (100 accounts, 100 warmup score), getgtmagents.com (100 accounts, 99.8 warmup score), myagentgtm.com (100 accounts, 100 warmup score), and yourcontextgtm.com (100 accounts, 100 warmup score) are fully warmed. Assign them to your top-performing EU campaigns to increase daily sending capacity by 1,380 emails without adding new infrastructure.</li>
+        <li><strong>Fix underutilization on 100-account domains</strong> -- autodemandworld.com has 1,000 daily capacity but only sent 3.8 emails/day (0% utilization), and meetautodemand.com has 300 capacity but only 1.8/day (1% utilization). These domains represent 2,600 emails/day of idle capacity. Either ramp up campaigns using these domains or redistribute accounts to higher-performing domains to improve ROI on infrastructure spend.</li>
+        <li><strong>Audit and iterate US campaign messaging</strong> -- The US SaaS - 18m funding campaign has more negative sentiment (6) than positive (5) across 26 replies. Review the negative responses for common objections and refine messaging. Consider A/B testing the EU campaign messaging on a US segment to see if the performance gap is audience-based or message-based.</li>
+      </ol>
+    </div>
+    <div class="section" style="background: var(--gray-50);">
+      <div class="section-header">
+        <div class="section-icon info">&#128218;</div>
+        <div>
+          <h2>Benchmark Reference</h2>
+          <p class="section-subtitle">Cold email industry standards</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; font-size: 13px;">
+        <div>
+          <div style="font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Bounce Rate</div>
+          <div style="color: var(--success);">&lt; 2% Healthy</div>
+          <div style="color: #b45309;">2-5% Warning</div>
+          <div style="color: var(--danger);">&gt; 5% Critical</div>
+        </div>
+        <div>
+          <div style="font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Reply Rate</div>
+          <div style="color: #b45309;">&lt; 1% Below Avg</div>
+          <div style="color: var(--primary);">1-5% Average</div>
+          <div style="color: var(--success);">5-10% Good</div>
+        </div>
+        <div>
+          <div style="font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Utilization</div>
+          <div style="color: #b45309;">&lt; 10% Under</div>
+          <div style="color: var(--success);">20-60% Healthy</div>
+          <div style="color: var(--danger);">&gt; 80% Over</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Generated by <a href="https://datagen.dev">DataGen</a></p>
+      <p style="margin-top: 8px;"><a href="https://datagen.dev/signalgen/agents">View Dashboard</a></p>
+    </div>
+  </div>
+</body>
+</html>
