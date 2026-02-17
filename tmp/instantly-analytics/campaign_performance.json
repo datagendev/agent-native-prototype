@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-02-14T16:18:30.047402",
+  "generated_at": "2026-02-17T09:01:11.262427",
   "period_days": 30,
   "totals": {
     "campaigns": 8,
-    "total_sent": 17103,
-    "total_replied": 68,
+    "total_sent": 17434,
+    "total_replied": 69,
     "total_opportunities": 22,
     "overall_reply_rate": 0.4
   },
@@ -24,18 +24,14 @@
       "opportunity_value": 0,
       "opportunity_rate": 0.08,
       "reply_sentiment": {
-        "unknown": 29,
-        "negative": 7,
-        "positive": 5
+        "unknown": 26,
+        "negative": 4,
+        "positive": 4
       },
       "top_replying_domains": [
         {
           "domain": "getautodemand.com",
-          "replies": 15
-        },
-        {
-          "domain": "automatedemandhq.com",
-          "replies": 5
+          "replies": 13
         },
         {
           "domain": "getautomatedemand.com",
@@ -46,11 +42,15 @@
           "replies": 4
         },
         {
-          "domain": "autodemandhub.com",
+          "domain": "automatedemandhq.com",
           "replies": 3
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 2
         }
       ],
-      "email_attributed_replies": 41
+      "email_attributed_replies": 34
     },
     {
       "campaign_id": "91043d18-b7b8-4547-a254-31adb92cfec6",
@@ -67,7 +67,7 @@
       "opportunity_value": 0,
       "opportunity_rate": 0.28,
       "reply_sentiment": {
-        "unknown": 4,
+        "unknown": 2,
         "positive": 1
       },
       "top_replying_domains": [
@@ -77,26 +77,22 @@
         },
         {
           "domain": "autodemandhub.com",
-          "replies": 2
-        },
-        {
-          "domain": "getautodemand.com",
           "replies": 1
         }
       ],
-      "email_attributed_replies": 5
+      "email_attributed_replies": 3
     },
     {
       "campaign_id": "b56458b2-eb0c-4063-9f4a-3fd813d0c3d4",
       "campaign_name": "EU SaaS - open jobs",
-      "status": 1,
-      "sent": 1885,
+      "status": 3,
+      "sent": 1923,
       "contacted": 0,
       "replied": 3,
       "reply_rate": 0.16,
       "unique_replies": 0,
       "bounced": 12,
-      "bounce_rate": 0.64,
+      "bounce_rate": 0.62,
       "opportunities": 1,
       "opportunity_value": 0,
       "opportunity_rate": 0.05,
@@ -159,13 +155,13 @@
       "campaign_id": "c334ff00-fdb7-416e-ace5-7d7df31e6dae",
       "campaign_name": "US SaaS - new hire",
       "status": 1,
-      "sent": 435,
+      "sent": 529,
       "contacted": 0,
       "replied": 1,
-      "reply_rate": 0.23,
+      "reply_rate": 0.19,
       "unique_replies": 0,
       "bounced": 2,
-      "bounce_rate": 0.46,
+      "bounce_rate": 0.38,
       "opportunities": 0,
       "opportunity_value": 0,
       "opportunity_rate": 0.0,
@@ -184,13 +180,43 @@
       "campaign_id": "af412433-52cc-42df-b7e7-384bed22e430",
       "campaign_name": "US SaaS - open jobs",
       "status": 1,
-      "sent": 235,
+      "sent": 396,
+      "contacted": 0,
+      "replied": 1,
+      "reply_rate": 0.25,
+      "unique_replies": 0,
+      "bounced": 4,
+      "bounce_rate": 1.01,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {
+        "negative": 1,
+        "unknown": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "automatedemandlabs.com",
+          "replies": 1
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 2
+    },
+    {
+      "campaign_id": "8e32e988-d817-495e-9c17-d6a5481a4d2a",
+      "campaign_name": "US SaaS - new hire + open jobs",
+      "status": 1,
+      "sent": 70,
       "contacted": 0,
       "replied": 0,
       "reply_rate": 0.0,
       "unique_replies": 0,
       "bounced": 2,
-      "bounce_rate": 0.85,
+      "bounce_rate": 2.86,
       "opportunities": 0,
       "opportunity_value": 0,
       "opportunity_rate": 0.0,
@@ -223,24 +249,6 @@
         }
       ],
       "email_attributed_replies": 2
-    },
-    {
-      "campaign_id": "8e32e988-d817-495e-9c17-d6a5481a4d2a",
-      "campaign_name": "US SaaS - new hire + open jobs",
-      "status": 1,
-      "sent": 32,
-      "contacted": 0,
-      "replied": 0,
-      "reply_rate": 0.0,
-      "unique_replies": 0,
-      "bounced": 1,
-      "bounce_rate": 3.12,
-      "opportunities": 0,
-      "opportunity_value": 0,
-      "opportunity_rate": 0.0,
-      "reply_sentiment": {},
-      "top_replying_domains": [],
-      "email_attributed_replies": 0
     }
   ]
 }
