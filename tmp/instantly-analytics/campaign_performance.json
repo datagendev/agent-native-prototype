@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-14T16:18:30.047402",
+  "generated_at": "2026-02-18T09:01:06.538347",
   "period_days": 30,
   "totals": {
     "campaigns": 8,
-    "total_sent": 17103,
-    "total_replied": 68,
-    "total_opportunities": 22,
+    "total_sent": 17764,
+    "total_replied": 71,
+    "total_opportunities": 23,
     "overall_reply_rate": 0.4
   },
   "campaigns": [
@@ -15,42 +15,42 @@
       "status": 2,
       "sent": 9051,
       "contacted": 0,
-      "replied": 26,
-      "reply_rate": 0.29,
+      "replied": 27,
+      "reply_rate": 0.3,
       "unique_replies": 0,
-      "bounced": 73,
-      "bounce_rate": 0.81,
+      "bounced": 76,
+      "bounce_rate": 0.84,
       "opportunities": 7,
       "opportunity_value": 0,
       "opportunity_rate": 0.08,
       "reply_sentiment": {
-        "unknown": 29,
-        "negative": 7,
-        "positive": 5
+        "negative": 5,
+        "unknown": 22,
+        "positive": 4
       },
       "top_replying_domains": [
         {
           "domain": "getautodemand.com",
-          "replies": 15
-        },
-        {
-          "domain": "automatedemandhq.com",
-          "replies": 5
+          "replies": 12
         },
         {
           "domain": "getautomatedemand.com",
-          "replies": 4
+          "replies": 5
         },
         {
           "domain": "openautomatedemand.com",
           "replies": 4
         },
         {
-          "domain": "autodemandhub.com",
+          "domain": "automatedemandhq.com",
           "replies": 3
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 2
         }
       ],
-      "email_attributed_replies": 41
+      "email_attributed_replies": 31
     },
     {
       "campaign_id": "91043d18-b7b8-4547-a254-31adb92cfec6",
@@ -67,36 +67,27 @@
       "opportunity_value": 0,
       "opportunity_rate": 0.28,
       "reply_sentiment": {
-        "unknown": 4,
-        "positive": 1
+        "unknown": 1
       },
       "top_replying_domains": [
         {
           "domain": "autodemandlabs.com",
-          "replies": 2
-        },
-        {
-          "domain": "autodemandhub.com",
-          "replies": 2
-        },
-        {
-          "domain": "getautodemand.com",
           "replies": 1
         }
       ],
-      "email_attributed_replies": 5
+      "email_attributed_replies": 1
     },
     {
       "campaign_id": "b56458b2-eb0c-4063-9f4a-3fd813d0c3d4",
       "campaign_name": "EU SaaS - open jobs",
-      "status": 1,
-      "sent": 1885,
+      "status": 3,
+      "sent": 1923,
       "contacted": 0,
       "replied": 3,
       "reply_rate": 0.16,
       "unique_replies": 0,
       "bounced": 12,
-      "bounce_rate": 0.64,
+      "bounce_rate": 0.62,
       "opportunities": 1,
       "opportunity_value": 0,
       "opportunity_rate": 0.05,
@@ -127,25 +118,26 @@
       "status": 3,
       "sent": 839,
       "contacted": 0,
-      "replied": 3,
-      "reply_rate": 0.36,
+      "replied": 4,
+      "reply_rate": 0.48,
       "unique_replies": 0,
       "bounced": 5,
       "bounce_rate": 0.6,
-      "opportunities": 0,
+      "opportunities": 1,
       "opportunity_value": 0,
-      "opportunity_rate": 0.0,
+      "opportunity_rate": 0.12,
       "reply_sentiment": {
+        "positive": 1,
         "negative": 2,
         "unknown": 1
       },
       "top_replying_domains": [
         {
-          "domain": "autodemandlabs.com",
-          "replies": 1
+          "domain": "openautomatedemand.com",
+          "replies": 2
         },
         {
-          "domain": "openautomatedemand.com",
+          "domain": "autodemandlabs.com",
           "replies": 1
         },
         {
@@ -153,19 +145,19 @@
           "replies": 1
         }
       ],
-      "email_attributed_replies": 3
+      "email_attributed_replies": 4
     },
     {
       "campaign_id": "c334ff00-fdb7-416e-ace5-7d7df31e6dae",
       "campaign_name": "US SaaS - new hire",
-      "status": 1,
-      "sent": 435,
+      "status": 2,
+      "sent": 727,
       "contacted": 0,
       "replied": 1,
-      "reply_rate": 0.23,
+      "reply_rate": 0.14,
       "unique_replies": 0,
-      "bounced": 2,
-      "bounce_rate": 0.46,
+      "bounced": 8,
+      "bounce_rate": 1.1,
       "opportunities": 0,
       "opportunity_value": 0,
       "opportunity_rate": 0.0,
@@ -183,14 +175,44 @@
     {
       "campaign_id": "af412433-52cc-42df-b7e7-384bed22e430",
       "campaign_name": "US SaaS - open jobs",
-      "status": 1,
-      "sent": 235,
+      "status": 2,
+      "sent": 528,
+      "contacted": 0,
+      "replied": 1,
+      "reply_rate": 0.19,
+      "unique_replies": 0,
+      "bounced": 4,
+      "bounce_rate": 0.76,
+      "opportunities": 0,
+      "opportunity_value": 0,
+      "opportunity_rate": 0.0,
+      "reply_sentiment": {
+        "negative": 1,
+        "unknown": 1
+      },
+      "top_replying_domains": [
+        {
+          "domain": "automatedemandlabs.com",
+          "replies": 1
+        },
+        {
+          "domain": "autodemandhub.com",
+          "replies": 1
+        }
+      ],
+      "email_attributed_replies": 2
+    },
+    {
+      "campaign_id": "8e32e988-d817-495e-9c17-d6a5481a4d2a",
+      "campaign_name": "US SaaS - new hire + open jobs",
+      "status": 2,
+      "sent": 70,
       "contacted": 0,
       "replied": 0,
       "reply_rate": 0.0,
       "unique_replies": 0,
       "bounced": 2,
-      "bounce_rate": 0.85,
+      "bounce_rate": 2.86,
       "opportunities": 0,
       "opportunity_value": 0,
       "opportunity_rate": 0.0,
@@ -223,24 +245,6 @@
         }
       ],
       "email_attributed_replies": 2
-    },
-    {
-      "campaign_id": "8e32e988-d817-495e-9c17-d6a5481a4d2a",
-      "campaign_name": "US SaaS - new hire + open jobs",
-      "status": 1,
-      "sent": 32,
-      "contacted": 0,
-      "replied": 0,
-      "reply_rate": 0.0,
-      "unique_replies": 0,
-      "bounced": 1,
-      "bounce_rate": 3.12,
-      "opportunities": 0,
-      "opportunity_value": 0,
-      "opportunity_rate": 0.0,
-      "reply_sentiment": {},
-      "top_replying_domains": [],
-      "email_attributed_replies": 0
     }
   ]
 }
