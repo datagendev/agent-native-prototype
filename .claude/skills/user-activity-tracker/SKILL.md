@@ -187,7 +187,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT COUNT(*) as total_users, COUNT(CASE WHEN created_at > NOW() - INTERVAL '7 days' THEN 1 END) as new_users_7d, COUNT(CASE WHEN credits < 100 THEN 1 END) as users_with_usage, ROUND(AVG(credits)::numeric, 1) as avg_credits FROM wasp_user WHERE email NOT LIKE '%@datagen.dev'",
+    "sql": "SELECT COUNT(*) as total_users, COUNT(CASE WHEN created_at > NOW() - INTERVAL '7 days' THEN 1 END) as new_users_7d, COUNT(CASE WHEN credits < 100 THEN 1 END) as users_with_usage, ROUND(AVG(credits)::numeric, 1) as avg_credits FROM wasp_user WHERE email NOT LIKE '%@datagen.dev' AND email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com')",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -199,7 +199,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, w.credits, COUNT(r.id) as run_count, COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) as success_count, ROUND(100.0 * COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) / NULLIF(COUNT(r.id), 0), 1) as success_rate, MAX(r.created_at) as last_run FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' GROUP BY w.email, w.credits HAVING COUNT(r.id) > 0 ORDER BY run_count DESC LIMIT 20",
+    "sql": "SELECT w.email, w.credits, COUNT(r.id) as run_count, COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) as success_count, ROUND(100.0 * COUNT(CASE WHEN r.run_state = 'completed' THEN 1 END) / NULLIF(COUNT(r.id), 0), 1) as success_rate, MAX(r.created_at) as last_run FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') GROUP BY w.email, w.credits HAVING COUNT(r.id) > 0 ORDER BY run_count DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -211,7 +211,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, w.credits, w.created_at, w.last_active_timestamp, EXTRACT(DAY FROM NOW() - w.created_at) as days_since_signup FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' AND r.id IS NULL ORDER BY w.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, w.credits, w.created_at, w.last_active_timestamp, EXTRACT(DAY FROM NOW() - w.created_at) as days_since_signup FROM wasp_user w LEFT JOIN fastapi_user f ON w.id = f.wasp_user_id LEFT JOIN fastapi_run r ON f.id = r.user_id WHERE w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') AND r.id IS NULL ORDER BY w.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -223,7 +223,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, r.run_state, r.created_at, LEFT(r.run_error_log, 200) as error_preview FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE r.run_state = 'failed' AND w.email NOT LIKE '%@datagen.dev' ORDER BY r.created_at DESC LIMIT 10",
+    "sql": "SELECT w.email, r.run_state, r.created_at, LEFT(r.run_error_log, 200) as error_preview FROM fastapi_run r JOIN fastapi_user f ON r.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE r.run_state = 'failed' AND w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') ORDER BY r.created_at DESC LIMIT 10",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -235,7 +235,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, ce.name, ce.status, ce.execution_time_ms, ce.created_at FROM fastapi_code_execution ce JOIN fastapi_user f ON ce.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY ce.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, ce.name, ce.status, ce.execution_time_ms, ce.created_at FROM fastapi_code_execution ce JOIN fastapi_user f ON ce.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') ORDER BY ce.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -247,7 +247,7 @@ SELECT properties.$pathname as page, count() as views, count(DISTINCT person_id)
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT w.email, d.description, d.created_at, LENGTH(d.final_code) as code_length FROM fastapi_deployment d JOIN fastapi_user f ON d.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' ORDER BY d.created_at DESC LIMIT 20",
+    "sql": "SELECT w.email, d.description, d.created_at, LENGTH(d.final_code) as code_length FROM fastapi_deployment d JOIN fastapi_user f ON d.user_id = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') ORDER BY d.created_at DESC LIMIT 20",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -346,7 +346,7 @@ SELECT properties.template_name as mcp_server, properties.template_id, count() a
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT tool_name, tool_provider, COUNT(*) as failures, ROUND(AVG(execution_duration_ms)) as avg_ms, COUNT(DISTINCT user_id) as affected_users, MIN(created_at)::date as first_failure, MAX(created_at)::date as last_failure FROM fastapi_tool_executions WHERE status = 'failed' GROUP BY tool_name, tool_provider ORDER BY failures DESC LIMIT 15",
+    "sql": "SELECT t.tool_name, t.tool_provider, COUNT(*) as failures, ROUND(AVG(t.execution_duration_ms)) as avg_ms, COUNT(DISTINCT t.user_id) as affected_users, MIN(t.created_at)::date as first_failure, MAX(t.created_at)::date as last_failure FROM fastapi_tool_executions t JOIN fastapi_user f ON t.user_id::integer = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE t.status = 'failed' AND w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') GROUP BY t.tool_name, t.tool_provider ORDER BY failures DESC LIMIT 15",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -382,7 +382,7 @@ SELECT properties.template_name as mcp_server, properties.template_id, count() a
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT created_at::date as day, COUNT(*) as total, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures, COUNT(DISTINCT user_id) as unique_users FROM fastapi_tool_executions WHERE created_at > NOW() - INTERVAL '14 days' GROUP BY day ORDER BY day DESC",
+    "sql": "SELECT t.created_at::date as day, COUNT(*) as total, COUNT(CASE WHEN t.status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN t.status = 'failed' THEN 1 END) as failures, COUNT(DISTINCT t.user_id) as unique_users FROM fastapi_tool_executions t JOIN fastapi_user f ON t.user_id::integer = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE t.created_at > NOW() - INTERVAL '14 days' AND w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') GROUP BY day ORDER BY day DESC",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -394,7 +394,7 @@ SELECT properties.template_name as mcp_server, properties.template_id, count() a
 {
   "tool_alias_name": "mcp_Neon_run_sql",
   "parameters": {
-    "sql": "SELECT tool_provider, COUNT(*) as total_calls, COUNT(DISTINCT tool_name) as unique_tools, COUNT(DISTINCT user_id) as unique_users, COUNT(CASE WHEN status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN status = 'failed' THEN 1 END) as failures, ROUND(AVG(execution_duration_ms)) as avg_ms FROM fastapi_tool_executions WHERE tool_type = 'mcp' GROUP BY tool_provider ORDER BY total_calls DESC",
+    "sql": "SELECT t.tool_provider, COUNT(*) as total_calls, COUNT(DISTINCT t.tool_name) as unique_tools, COUNT(DISTINCT t.user_id) as unique_users, COUNT(CASE WHEN t.status = 'success' THEN 1 END) as successes, COUNT(CASE WHEN t.status = 'failed' THEN 1 END) as failures, ROUND(AVG(t.execution_duration_ms)) as avg_ms FROM fastapi_tool_executions t JOIN fastapi_user f ON t.user_id::integer = f.id JOIN wasp_user w ON f.wasp_user_id = w.id WHERE t.tool_type = 'mcp' AND w.email NOT LIKE '%@datagen.dev' AND w.email NOT IN ('ravi@fulllist.ai', 'catecean20@gmail.com') GROUP BY t.tool_provider ORDER BY total_calls DESC",
     "databaseName": "datagen",
     "projectId": "rough-base-02149126"
   }
@@ -533,6 +533,7 @@ WHERE w.email = '{EMAIL}'
 ## Notes
 
 - Always exclude `@datagen.dev` emails from analysis
+- **Ghost users excluded**: `ravi@fulllist.ai` and `catecean20@gmail.com` are test/ghost accounts and excluded from all queries
 - PostHog has `filterTestAccounts: true` option for trend queries
 - Neon project ID: `rough-base-02149126`, database: `datagen`
 - User ID links: `wasp_user.id` = `fastapi_user.wasp_user_id`
