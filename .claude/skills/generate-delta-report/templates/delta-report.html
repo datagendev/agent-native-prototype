@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24h Delta Report - {{DATE}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background-color: #f9fafb;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 3px solid #005047;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #005047;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Summary Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #005047;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005047;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-delta {
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .stat-delta.improving { color: #219653; }
+        .stat-delta.worsening { color: #D34053; }
+        .stat-delta.unchanged { color: #6b7280; }
+
+        /* Section Headers */
+        h2 {
+            color: #111827;
+            font-size: 20px;
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 16px;
+            margin: 20px 0 10px;
+        }
+
+        /* Category Badges */
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-infrastructure { background: #FFA70B; color: white; }
+        .badge-platform { background: #D34053; color: white; }
+        .badge-mcp { background: #00795e; color: white; }
+        .badge-user { background: #6b7280; color: white; }
+        .badge-thirdparty { background: #005047; color: white; }
+
+        /* Cards */
+        .card {
+            background: #f9fafb;
+            border-left: 4px solid #e5e7eb;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .card.error-card { border-left-color: #D34053; }
+        .card.signup-card { border-left-color: #219653; }
+        .card.agent-card { border-left-color: #005047; }
+
+        .card-header {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: #374151;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        th {
+            background: #005047;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        /* Email Link */
+        a {
+            color: #005047;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .footer-logo {
+            color: #005047;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 24h Delta Report</h1>
+            <p class="subtitle">{{DATE}} • Showing only NEW activity from last 24 hours</p>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="stats-grid">
+            <div class="stat">
+                <span class="stat-value">{{NEW_SIGNUPS_COUNT}}</span>
+                <span class="stat-label">New Signups</span>
+                <span class="stat-delta {{SIGNUPS_DELTA_CLASS}}">{{SIGNUPS_DELTA}}</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">{{NEW_DEPLOYMENTS_COUNT}}</span>
+                <span class="stat-label">New Deployments</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">{{TOTAL_ERRORS_COUNT}}</span>
+                <span class="stat-label">Total Errors</span>
+                <span class="stat-delta {{ERRORS_DELTA_CLASS}}">{{ERRORS_DELTA}}</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">{{TOOL_EXECUTIONS_COUNT}}</span>
+                <span class="stat-label">Tool Executions</span>
+            </div>
+        </div>
+
+        <!-- New Signups Section -->
+        <h2>👋 New Signups & Behavior</h2>
+        {{#NEW_SIGNUPS}}
+        <div class="card signup-card">
+            <div class="card-header">{{EMAIL}}</div>
+            <div class="card-meta">
+                First seen: {{FIRST_SEEN}} • Session: {{SESSION_DURATION}} min • Pageviews: {{PAGEVIEWS}}
+            </div>
+            <div class="card-content">
+Pages visited: {{PAGES_VISITED}}
+MCP servers clicked: {{MCP_SERVERS_CLICKED}}
+            </div>
+        </div>
+        {{/NEW_SIGNUPS}}
+        {{^NEW_SIGNUPS}}
+        <div class="empty-state">No new signups in the last 24 hours</div>
+        {{/NEW_SIGNUPS}}
+
+        <!-- UI Blockers Section -->
+        <h2>🚨 UI Blockers (Last 24h)</h2>
+        {{#UI_BLOCKERS}}
+        <div class="card error-card">
+            <div class="card-header">{{EVENT_TYPE}} on {{PAGE}}</div>
+            <div class="card-meta">
+                User: <a href="mailto:{{EMAIL}}">{{EMAIL}}</a> • {{TIMESTAMP}}
+            </div>
+            {{#ERROR_MESSAGE}}
+            <div class="card-content">{{ERROR_MESSAGE}}</div>
+            {{/ERROR_MESSAGE}}
+        </div>
+        {{/UI_BLOCKERS}}
+        {{^UI_BLOCKERS}}
+        <div class="empty-state">✅ No UI blockers detected</div>
+        {{/UI_BLOCKERS}}
+
+        <!-- Error Analysis by Category -->
+        <h2>🔍 Error Analysis (24h)</h2>
+
+        <h3>🔥 Infrastructure Issues ({{INFRA_ERROR_COUNT}})</h3>
+        {{#INFRASTRUCTURE_ERRORS}}
+        <div class="card error-card">
+            <div class="card-header">
+                <span class="category-badge badge-infrastructure">INFRASTRUCTURE</span>
+                {{#EMAIL}}<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>{{/EMAIL}}
+                {{#DEPLOYMENT_NAME}}• {{DEPLOYMENT_NAME}}{{/DEPLOYMENT_NAME}}
+                {{#TOOL_NAME}}• {{TOOL_NAME}}{{/TOOL_NAME}}
+            </div>
+            <div class="card-meta">{{CREATED_AT}}</div>
+            <div class="card-content">{{ERROR_PREVIEW}}</div>
+        </div>
+        {{/INFRASTRUCTURE_ERRORS}}
+        {{^INFRASTRUCTURE_ERRORS}}
+        <div class="empty-state">✅ No infrastructure errors</div>
+        {{/INFRASTRUCTURE_ERRORS}}
+
+        <h3>🐛 Platform Bugs ({{PLATFORM_BUG_COUNT}})</h3>
+        {{#PLATFORM_BUGS}}
+        <div class="card error-card">
+            <div class="card-header">
+                <span class="category-badge badge-platform">PLATFORM BUG</span>
+                {{#EMAIL}}<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>{{/EMAIL}}
+                {{#DEPLOYMENT_NAME}}• {{DEPLOYMENT_NAME}}{{/DEPLOYMENT_NAME}}
+                {{#TOOL_NAME}}• {{TOOL_NAME}}{{/TOOL_NAME}}
+            </div>
+            <div class="card-meta">{{CREATED_AT}}</div>
+            <div class="card-content">{{ERROR_PREVIEW}}</div>
+        </div>
+        {{/PLATFORM_BUGS}}
+        {{^PLATFORM_BUGS}}
+        <div class="empty-state">✅ No platform bugs</div>
+        {{/PLATFORM_BUGS}}
+
+        <h3>🔌 MCP Issues ({{MCP_ISSUE_COUNT}})</h3>
+        {{#MCP_ISSUES}}
+        <div class="card error-card">
+            <div class="card-header">
+                <span class="category-badge badge-mcp">MCP ISSUE</span>
+                {{#EMAIL}}<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>{{/EMAIL}}
+                {{#TOOL_NAME}}• {{TOOL_NAME}}{{/TOOL_NAME}}
+            </div>
+            <div class="card-meta">{{CREATED_AT}}</div>
+            <div class="card-content">{{ERROR_PREVIEW}}</div>
+        </div>
+        {{/MCP_ISSUES}}
+        {{^MCP_ISSUES}}
+        <div class="empty-state">✅ No MCP issues</div>
+        {{/MCP_ISSUES}}
+
+        <h3>👤 User Code Errors ({{USER_CODE_COUNT}})</h3>
+        {{#USER_CODE_ERRORS}}
+        <div class="card error-card">
+            <div class="card-header">
+                <span class="category-badge badge-user">USER CODE</span>
+                {{#EMAIL}}<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>{{/EMAIL}}
+                {{#DEPLOYMENT_NAME}}• {{DEPLOYMENT_NAME}}{{/DEPLOYMENT_NAME}}
+            </div>
+            <div class="card-meta">{{CREATED_AT}}</div>
+            <div class="card-content">{{ERROR_PREVIEW}}</div>
+        </div>
+        {{/USER_CODE_ERRORS}}
+        {{^USER_CODE_ERRORS}}
+        <div class="empty-state">No user code errors</div>
+        {{/USER_CODE_ERRORS}}
+
+        <h3>🌐 Third-party Issues ({{THIRD_PARTY_COUNT}})</h3>
+        {{#THIRD_PARTY_ERRORS}}
+        <div class="card error-card">
+            <div class="card-header">
+                <span class="category-badge badge-thirdparty">THIRD-PARTY</span>
+                {{#EMAIL}}<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>{{/EMAIL}}
+                {{#TOOL_NAME}}• {{TOOL_NAME}} ({{TOOL_PROVIDER}}){{/TOOL_NAME}}
+            </div>
+            <div class="card-meta">{{CREATED_AT}}</div>
+            <div class="card-content">{{ERROR_PREVIEW}}</div>
+        </div>
+        {{/THIRD_PARTY_ERRORS}}
+        {{^THIRD_PARTY_ERRORS}}
+        <div class="empty-state">No third-party errors</div>
+        {{/THIRD_PARTY_ERRORS}}
+
+        <!-- Week-over-Week Comparison -->
+        {{#HAS_COMPARISON}}
+        <h2>📈 Week-over-Week Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Yesterday</th>
+                    <th>Today</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#COMPARISON_ROWS}}
+                <tr>
+                    <td>{{CATEGORY}}</td>
+                    <td>{{YESTERDAY}}</td>
+                    <td>{{TODAY}}</td>
+                    <td>{{STATUS}}</td>
+                </tr>
+                {{/COMPARISON_ROWS}}
+            </tbody>
+        </table>
+        {{/HAS_COMPARISON}}
+
+        <!-- New Agents Deployed -->
+        <h2>🤖 New Agents Deployed ({{NEW_AGENTS_COUNT}})</h2>
+        {{#NEW_AGENTS}}
+        <div class="card agent-card">
+            <div class="card-header">Agent {{AGENT_ID}} • {{STATUS}}</div>
+            <div class="card-meta">Started: {{STARTED_AT}} • Duration: {{DURATION_MS}}ms</div>
+            <div class="card-content">
+Prompt: {{ENTRY_PROMPT_PREVIEW}}
+Result: {{RESULT_PREVIEW}}
+            </div>
+        </div>
+        {{/NEW_AGENTS}}
+        {{^NEW_AGENTS}}
+        <div class="empty-state">No new agents deployed</div>
+        {{/NEW_AGENTS}}
+
+        <!-- Tool Execution Trends -->
+        <h2>🛠️ Tool Execution Trends (Top 10)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tool</th>
+                    <th>User</th>
+                    <th>Executions</th>
+                    <th>Success Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#TOOL_TRENDS}}
+                <tr>
+                    <td>{{TOOL_NAME}}</td>
+                    <td><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></td>
+                    <td>{{EXECUTION_COUNT}}</td>
+                    <td>{{SUCCESS_RATE}}%</td>
+                </tr>
+                {{/TOOL_TRENDS}}
+            </tbody>
+        </table>
+        {{^TOOL_TRENDS}}
+        <div class="empty-state">No tool executions in the last 24 hours</div>
+        {{/TOOL_TRENDS}}
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-logo">DataGen</p>
+            <p>Generated on {{DATE}} • <a href="https://datagen.dev">datagen.dev</a></p>
+        </div>
+    </div>
+</body>
+</html>
