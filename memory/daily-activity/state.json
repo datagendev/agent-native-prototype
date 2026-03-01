@@ -1,0 +1,146 @@
+{
+  "last_updated": "2026-02-10",
+  "run_count": 4,
+  "users": {
+    "jeremy.scott.ross@gmail.com": {
+      "segment": "power_user",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-02-10",
+      "times_reported": 4,
+      "last_snapshot": {
+        "credits": 2429,
+        "run_count": 2087,
+        "success_rate": 92.5,
+        "last_run": "2026-02-09"
+      },
+      "notes": []
+    },
+    "david@automatedemand.com": {
+      "segment": "high_intent",
+      "first_seen": "2026-02-10",
+      "segment_since": "2026-02-10",
+      "last_reported": "2026-02-10",
+      "times_reported": 1,
+      "last_snapshot": {
+        "credits": 2751,
+        "run_count": 3,
+        "success_rate": 100.0,
+        "mcp_servers_clicked": ["HubSpot", "Gmail", "Heyreach", "Instantly", "Apify", "Notion", "Slack", "Firecrawl", "Supabase"]
+      },
+      "notes": ["Clicked 16 MCP servers across 9 providers — highest breadth seen"]
+    },
+    "steve@misterbrady.com": {
+      "segment": "active",
+      "first_seen": "2026-02-10",
+      "segment_since": "2026-02-10",
+      "last_reported": "2026-02-10",
+      "times_reported": 1,
+      "last_snapshot": {
+        "credits": 5000,
+        "run_count": 11,
+        "success_rate": 100.0,
+        "last_run": "2026-01-29"
+      },
+      "notes": []
+    },
+    "gillybolton.302090@gmail.com": {
+      "segment": "high_intent",
+      "first_seen": "2026-02-10",
+      "segment_since": "2026-02-10",
+      "last_reported": "2026-02-10",
+      "times_reported": 1,
+      "last_snapshot": {
+        "credits": 499,
+        "run_count": 0,
+        "mcp_servers_clicked": ["Google Calendar", "Gmail"]
+      },
+      "notes": []
+    },
+    "ben@beneficial-intelligence.com": {
+      "segment": "at_risk",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-02-10",
+      "times_reported": 4,
+      "last_snapshot": {
+        "credits": 100,
+        "run_count": 0,
+        "days_since_signup": 27
+      },
+      "notes": ["Flagged at-risk since Jan 25 — no action taken"]
+    },
+    "andriyvovchak15@gmail.com": {
+      "segment": "at_risk",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-02-10",
+      "times_reported": 4,
+      "last_snapshot": {
+        "credits": 5000,
+        "run_count": 0,
+        "days_since_signup": 27,
+        "mcp_servers_clicked": ["Supabase", "Firecrawl", "Linear"]
+      },
+      "notes": ["Has 5000 credits and clicked 3 MCPs but never ran anything"]
+    },
+    "akil@leadle.in": {
+      "segment": "at_risk",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-02-10",
+      "times_reported": 4,
+      "last_snapshot": {
+        "credits": 100,
+        "run_count": 0,
+        "days_since_signup": 28
+      },
+      "notes": []
+    },
+    "anand.mridul3@gmail.com": {
+      "segment": "at_risk",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-01-25",
+      "times_reported": 1,
+      "last_snapshot": {
+        "credits": 100,
+        "run_count": 0,
+        "days_since_signup": 13
+      },
+      "notes": []
+    },
+    "team@oneaway.io": {
+      "segment": "at_risk",
+      "first_seen": "2026-01-25",
+      "segment_since": "2026-01-25",
+      "last_reported": "2026-01-25",
+      "times_reported": 1,
+      "last_snapshot": {
+        "credits": 100,
+        "run_count": 0,
+        "days_since_signup": 13
+      },
+      "notes": []
+    }
+  },
+  "actions_log": [],
+  "metrics_history": [
+    {
+      "date": "2026-01-25",
+      "total_users": 78,
+      "new_users_7d": 0,
+      "users_with_usage": 26,
+      "avg_credits": 317.3,
+      "mcp_connect_clicks_7d": 14
+    },
+    {
+      "date": "2026-02-10",
+      "total_users": 81,
+      "new_users_7d": 1,
+      "users_with_usage": 25,
+      "avg_credits": 509.3,
+      "mcp_connect_clicks_7d": 2
+    }
+  ]
+}
