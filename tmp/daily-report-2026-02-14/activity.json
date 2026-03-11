@@ -1,0 +1,74 @@
+{
+  "report_date": "2026-02-14",
+  "overview": {
+    "total_users": 83,
+    "new_users_7d": 2,
+    "users_with_usage": 25,
+    "avg_credits": 509.1
+  },
+  "tool_execution_stats": {
+    "total_executions": 17112,
+    "unique_users": 7,
+    "unique_tools": 122,
+    "avg_duration_ms": 2903,
+    "successes": 14296,
+    "failures": 2816,
+    "overall_success_rate": 83.5
+  },
+  "daily_trend_last_14d": [
+    {"day": "2026-02-13", "total": 1459, "successes": 1436, "failures": 23, "unique_users": 3},
+    {"day": "2026-02-12", "total": 400, "successes": 372, "failures": 28, "unique_users": 3},
+    {"day": "2026-02-11", "total": 6039, "successes": 5217, "failures": 822, "unique_users": 3},
+    {"day": "2026-02-10", "total": 659, "successes": 646, "failures": 13, "unique_users": 3},
+    {"day": "2026-02-09", "total": 597, "successes": 440, "failures": 157, "unique_users": 4}
+  ],
+  "power_users": [
+    {
+      "email": "jeremy.scott.ross@gmail.com",
+      "credits": 2429,
+      "run_count": 9143,
+      "success_count": 6563,
+      "success_rate": 71.8,
+      "last_run": "2026-02-13"
+    },
+    {
+      "email": "ravi@fulllist.ai",
+      "credits": 500,
+      "run_count": 470,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "last_run": "2026-02-13"
+    },
+    {
+      "email": "andriyvovchak15@gmail.com",
+      "credits": 5000,
+      "run_count": 41,
+      "success_rate": 95.1,
+      "last_run": "2026-02-13"
+    }
+  ],
+  "top_tools": [
+    {"name": "extract_structured_output", "total": 6577, "success_rate": 87.3, "avg_ms": 2055},
+    {"name": "chatgpt_webresearch", "total": 2754, "success_rate": 64.6, "avg_ms": 1326},
+    {"name": "mcp_Neon_run_sql", "total": 1589, "success_rate": 88.0, "avg_ms": 3357},
+    {"name": "get_linkedin_person_data", "total": 853, "success_rate": 88.7, "avg_ms": 6186},
+    {"name": "mcp_Instantly_list_emails", "total": 481, "success_rate": 99.6, "avg_ms": 5156}
+  ],
+  "top_mcp_providers": [
+    {"provider": "Neon", "total_calls": 1628, "success_rate": 87.7, "unique_tools": 6},
+    {"provider": "Instantly", "total_calls": 884, "success_rate": 99.2, "unique_tools": 8},
+    {"provider": "Gmail_Yusheng", "total_calls": 600, "success_rate": 96.8, "unique_tools": 6},
+    {"provider": "Posthog", "total_calls": 293, "success_rate": 89.8, "unique_tools": 10},
+    {"provider": "Supabase", "total_calls": 139, "success_rate": 100.0, "unique_tools": 6}
+  ],
+  "failing_tools": [
+    {"name": "chatgpt_webresearch", "failures": 974, "affected_users": 2},
+    {"name": "extract_structured_output", "failures": 835, "affected_users": 2},
+    {"name": "search_linkedin_person", "failures": 374, "affected_users": 4},
+    {"name": "mcp_Neon_run_sql", "failures": 190, "affected_users": 1}
+  ],
+  "new_signups_last_30d": [
+    {"day": "2026-02-13", "signups": 1},
+    {"day": "2026-01-30", "signups": 1}
+  ]
+}
