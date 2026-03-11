@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-14T16:18:30.047402",
+  "generated_at": "2026-02-15T09:01:34.588235",
   "period_days": 30,
   "totals": {
     "campaigns": 8,
@@ -24,18 +24,14 @@
       "opportunity_value": 0,
       "opportunity_rate": 0.08,
       "reply_sentiment": {
-        "unknown": 29,
-        "negative": 7,
+        "unknown": 28,
+        "negative": 6,
         "positive": 5
       },
       "top_replying_domains": [
         {
           "domain": "getautodemand.com",
-          "replies": 15
-        },
-        {
-          "domain": "automatedemandhq.com",
-          "replies": 5
+          "replies": 14
         },
         {
           "domain": "getautomatedemand.com",
@@ -46,11 +42,15 @@
           "replies": 4
         },
         {
+          "domain": "automatedemandhq.com",
+          "replies": 4
+        },
+        {
           "domain": "autodemandhub.com",
           "replies": 3
         }
       ],
-      "email_attributed_replies": 41
+      "email_attributed_replies": 39
     },
     {
       "campaign_id": "91043d18-b7b8-4547-a254-31adb92cfec6",
@@ -67,7 +67,7 @@
       "opportunity_value": 0,
       "opportunity_rate": 0.28,
       "reply_sentiment": {
-        "unknown": 4,
+        "unknown": 3,
         "positive": 1
       },
       "top_replying_domains": [
@@ -77,14 +77,14 @@
         },
         {
           "domain": "autodemandhub.com",
-          "replies": 2
+          "replies": 1
         },
         {
           "domain": "getautodemand.com",
           "replies": 1
         }
       ],
-      "email_attributed_replies": 5
+      "email_attributed_replies": 4
     },
     {
       "campaign_id": "b56458b2-eb0c-4063-9f4a-3fd813d0c3d4",
